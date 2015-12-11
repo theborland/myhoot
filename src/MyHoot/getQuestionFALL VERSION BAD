@@ -1,0 +1,111 @@
+<?php
+session_start();
+
+require 'dbsettings.php';
+echo "Game".$_SESSION["game_id"]."Status";
+    //SOCKET SENDING MESSAGE
+    $entryData = array(
+        'category' => "Game".$_SESSION["game_id"]."Status"
+      , 'title'    => "Q1"
+    );
+    $context = new ZMQContext();
+    $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+    $socket->connect("tcp://localhost:5555");
+    $socket->send(json_encode($entryData));
+    //END SOCKET SENDING
+
+$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
+$lines = explode(PHP_EOL, $csvData);
+$array = array();
+foreach ($lines as $line) {
+    $array[] = str_getcsv($line);
+}
+//print_r($array);
+$randEntry=rand(1,sizeof($array));
+
+$city=urlencode($array[$randEntry][1].', '.$array[$randEntry][0]);
+$url='http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q='.$city.'&imgsz=xlarge';
+$url='https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch='.$city;
+$url='https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch='.$city.'&gsrlimit=1&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max';
+//echo $url;
+$jsonData=json_decode(file_get_contents( $url),true);
+$wikiCity= findSource($jsonData["query"]["pages"],"title");
+//echo "city is $wikiCity";
+//foreach (json_decode(file_get_contents( $url)) as $person_name => $person_a) {
+//    echo print_r($person_a)."<br>";
+//}
+//echo $url;
+$url='https://en.wikipedia.org/w/api.php?action=query&format=json&titles='.$wikiCity.'&prop=pageimages&pithumbsize=1200';
+//echo $url;
+$jsonData =file_get_contents( $url);
+$phpArray = json_decode($jsonData);
+//print_r($phpArray);
+$image=findSource($phpArray,"source");
+
+//echo $image;
+$sql = "UPDATE `games` SET round = round + .5 WHERE game_id ='".$_SESSION["game_id"]."'";
+$result = $conn->query($sql);
+$sql = "SELECT * FROM `games` WHERE game_id ='".$_SESSION["game_id"]."'";
+$result = $conn->query($sql);
+if ($result)
+{
+   $row = $result->fetch_assoc();
+   $round = $row["round"];
+}
+if ($round==.5)
+{
+  $sql = "UPDATE `games` SET round = round + .5 WHERE game_id ='".$_SESSION["game_id"]."'";
+  $result = $conn->query($sql);
+  $round=1;
+}
+
+
+//echo $image . "is";
+
+function findSource ($phpArray,$match)
+{
+//	print_r($phpArray);
+  foreach ($phpArray as $key => $value) {
+      if (is_object($value) || is_array($value))
+          return findSource($value,$match);
+      else {
+          //echo "<br>".$key."~".$value."~".$match;
+          if ($key==$match)
+		  {
+			  echo "<br>returning ".$value . "@";
+              return $value;
+		  }
+      }
+
+  }
+}
+
+
+?>
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+var counter = 60;
+var interval = setInterval(function() {
+    counter--;
+  $('#timeLeft').html(counter);
+    if (counter == 0) {
+        // Display a login box
+        clearInterval(interval);
+    }
+}, 1000);
+</script>
+</head>
+<body>
+
+Round <?php echo $round ?>
+What are the coordinates of <?php echo $array[$randEntry][1] ?>, <?php echo $array[$randEntry][0] ?> ?
+<image src="<?php echo $image ?>"></image>
+Time left  <div id="timeLeft"></div>
+<a href="showAnswer.php?city=<?php echo $city ?>">Show Answer
+</a>
+
+</body>
+</html>
