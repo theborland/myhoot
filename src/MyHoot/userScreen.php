@@ -6,53 +6,113 @@ require 'dbsettings.php';
 if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
    header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
 
-/*
-$sql = "SELECT * FROM `games` WHERE game_id ='".$_SESSION["game_id"]."'";
-$result = $conn->query($sql);
-if ($result)
-{
-   $row = $result->fetch_assoc();
-   $round = $row["round"];
-  $type=$row["type"];
-}
-$conn->close();
-*/
 ?>
  <html>
  <head>
- <script>
- var conn = new ab.Session('ws://<?php echo $pusherIP ?>:8080',
-        function() {
-            conn.subscribe('Game<?php echo $_SESSION["game_id"] ?>Status', function(topic, data) {
-                console.log('Waiting for users:"' + topic + '" : ' + data.title);
-            	var container = document.getElementById("waitingDiv");
-				container.innerHTML = container.innerHTML  + "<br>"+data.title;
-				if (data.title.substring(0,1)=="done")
-					window.location.href='waitingScreen.php';
-            });
-        },
-        function() {
-            console.warn('WebSocket connection closed');
-        },
-        {'skipSubprotocolCheck': true}
-    );
 
- </script>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+var map;
+var worldCenter = new google.maps.LatLng(20.6743890, -3.9455);
+var inputMarker;
+
+var MY_MAPTYPE_ID = 'custom_style';
+
+
+function initialize() {
+
+
+  var featureOpts = [
+    { 
+      elementType: 'labels',
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
+      stylers: [{ visibility: 'off' }]
+    },
+    {
+      featureType: 'water',
+      stylers: [
+        { color: '#57AAC5' }
+      ]
+    }
+
+
+  ];
+
+  var styledMapOptions = {
+    name: 'Custom Style'
+  };
+
+  var mapOptions = {
+    zoom: 3,
+    center: worldCenter,
+    mapTypeControl: false,
+    streetViewControl: false,
+    mapTypeId: MY_MAPTYPE_ID
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var styledMapOptions = {
+    name: 'Custom Style'
+  };
+
+  inputMarker = new google.maps.Marker({
+    position: worldCenter,
+    map: map
+  });
+
+
+  google.maps.event.addListener(map, 'click', function(e) {
+    document.getElementById('lat').value = e.latLng.lat();
+    document.getElementById('long').value = e.latLng.lng();
+    inputMarker.setPosition(e.latLng);
+  });
+
+
+
+
+  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+}
+
+function moveMarker(position) {
+  inputMarker.setPosition(position);
+}
+
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+
+
  </head>
  <body>
 
    <p>Round <?php echo $_GET["question"] ?>
-<img src="http://www.isobudgets.com/wp-content/uploads/2014/03/latitude-longitude.jpg">
-   </p>
    <form name="form1" method="post" action="submitAnswer.php">
    <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
-     <label for="lat">lat</label>
-     <input type="text" name="lat" id="lat">
-          <label for="long">long</label>
-     <input type="text" name="long" id="long">
-   submit
+    <input type="hidden" id="lat" name="lat">
+    <input type="hidden" id="long" name="long">
+
    <input type="submit" name="submit" id="submit" value="Submit">
    </form>
+
+   </p>
+
+    <div id="map-canvas"></div>
+
+
    <p>&nbsp;</p>
  </body>
  </html>
