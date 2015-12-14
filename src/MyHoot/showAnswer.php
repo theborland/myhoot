@@ -1,13 +1,9 @@
 <?php
 session_start();
-
+//echo "sdfsdf";
 require 'dbsettings.php';
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
-
-
-
-
 ?>
 
 <html>
@@ -20,18 +16,8 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
 function initialize() {
 
-  var locations = [
-  <?php
-  $i=0;
-  foreach($allAnswers->allAnswers as $key=>$answer){
+  var locations = <?php echo $allAnswers->getLocations(); ?>;
 
-      echo "['".$answer->name."', ".$answer->location->lat.", ".$answer->location->longg.", 4]";
-      if (++$i!= count($allAnswers->allAnswers))
-          echo ",";
-}
-  ?>  ];
-
-  //var myLatlng2 = new google.maps.LatLng(0,0);
   var myLatlng = new google.maps.LatLng(<?php echo $allAnswers->correctAns->location->lat; ?>,<?php echo $allAnswers->correctAns->location->longg; ?>);//ll.lat(),ll.lng());
   var mapOptions = {
     zoom: 4,
@@ -60,51 +46,23 @@ function initialize() {
 
 }
 google.maps.event.addDomListener(window, 'load', initialize);
-
-
 </script>
 </head>
 <body>
 
 Answer:
 <div id="map-canvas"></div>
+<a href="showScoreBoard.php">ScoreBoard
+</a>
 <a href="getQuestion.php">Next Question
 </a>
 <?php
 
 foreach ($allAnswers->allAnswers as $key => $value) {
-  echo $value->name . ":".$value->distanceAway . " miles away. Total miles: ".$value->totalMiles."<br>";
+  echo $value->name . ":".$value->distanceAway . " miles away. <br>";
   # code...
 }
-/*
-$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."'";
-//echo $sql;
-$result = $conn->query($sql);
-if ($result)
-{
-   while($row = $result->fetch_assoc()){
-     $lat1 = $row["lat"];
-     $long1 = $row["longg"];
-     $user_id = $row["user_id"];
-     $submitTime= $row["submitTime"];
-     $miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
-     echo "<bR>user: ".getUserName($user_id) . " was : ".$miles ." miles away.  Submitted at time " . $submitTime ;
-   }
-}
-*/
 
-function getUserName($id)
-{
-  global $conn;
-  $sql = "SELECT * FROM `users` WHERE user_id ='".$id."'";
-  //echo $sql;
-  $result = $conn->query($sql);
-  if ($result)
-  {
-     $row = $result->fetch_assoc();
-     return $row["name"];
-   }
-}
  ?>
 </body>
 </html>

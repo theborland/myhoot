@@ -5,11 +5,9 @@ require 'dbsettings.php';
 
 if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
    header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
-
 ?>
  <html>
  <head>
-
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -22,15 +20,10 @@ if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
 var map;
 var worldCenter = new google.maps.LatLng(20.6743890, -3.9455);
 var inputMarker;
-
 var MY_MAPTYPE_ID = 'custom_style';
-
-
 function initialize() {
-
-
   var featureOpts = [
-    { 
+    {
       elementType: 'labels',
       mapTypeId: google.maps.MapTypeId.TERRAIN,
       stylers: [{ visibility: 'off' }]
@@ -75,26 +68,15 @@ function initialize() {
     document.getElementById('long').value = e.latLng.lng();
     inputMarker.setPosition(e.latLng);
   });
-
-
-
-
   var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
-
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 }
 
 function moveMarker(position) {
   inputMarker.setPosition(position);
 }
-
-
-
 google.maps.event.addDomListener(window, 'load', initialize);
-
     </script>
-
-
 
  </head>
  <body>

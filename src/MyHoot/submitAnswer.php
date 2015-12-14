@@ -1,26 +1,14 @@
 <?php
 session_start();
-require 'dbsettings.php';
-
-// An array of $_POST keys that are acceptable
 $whitelist = array('lat','long','questionNumber');
-
-foreach($whitelist as $key) {
-   if (isset($_POST[$key])) {
-     $$key = $conn->real_escape_string($_POST[$key]);
-   }
-   else if (isset($_GET[$key])) {
-     $$key = $conn->real_escape_string($_GET[$key]);
-   }
-   else $$key = "";
-}
+require 'dbsettings.php';
 
 $questionNumber=substr($questionNumber,1);
 $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`) VALUES ('$_SESSION[game_id]', '$_SESSION[user_id]','$questionNumber','$lat','$long')";
-//echo $sql;
 
 $result = $conn->query($sql);
-
+//echo $sql;
+//die();
 //SOCKET SENDING MESSAGE
     $entryData = array(
         'category' => "Game".$_SESSION['game_id'].$questionNumber

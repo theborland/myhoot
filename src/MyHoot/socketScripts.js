@@ -32,16 +32,20 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
     {'skipSubprotocolCheck': true}
     );
   }
-  function loadWaitingForQuestion(ip){
+  function loadWaitingForQuestion(ip,gameID){
     var conn = new ab.Session('ws://'+ip+':8080',
     function() {
-      conn.subscribe('Game<?php echo $_SESSION["game_id"] ?>Status', function(topic, data) {
+      conn.subscribe('Game'+gameID+'Status', function(topic, data) {
         console.log('Waiting for users:"' + topic + '" : ' + data.title);
         var container = document.getElementById("waitingDiv");
         container.innerHTML = container.innerHTML  + "<br>"+data.title;
+        /* not sure why this is here?
         if (data.title.substring(0,1)=="done")
-        window.location.href='waitingScreen.php';
-      });
+        window.location.href='waitingScreen.php'; */
+        if (data.title.substring(0,1)=="Q")
+          window.location.href='userScreen.php?question='+data.title;
+            });
+
     },
     function() {
       console.warn('WebSocket connection closed');
@@ -49,3 +53,20 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
     {'skipSubprotocolCheck': true}
   );
 }
+/*
+var conn = new ab.Session('ws://<?php echo $pusherIP ?>:8080',
+function() {
+    conn.subscribe('Game<?php echo $_SESSION["game_id"] ?>Status', function(topic, data) {
+        console.log('Waiting for users:"' + topic + '" : ' + data.title);
+      var container = document.getElementById("waitingDiv");
+container.innerHTML = container.innerHTML  + "<br>"+data.title;
+if (data.title.substring(0,1)=="Q")
+  window.location.href='userScreen.php?question='+data.title;
+    });
+},
+function() {
+    console.warn('WebSocket connection closed');
+},
+{'skipSubprotocolCheck': true}
+);
+*/

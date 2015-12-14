@@ -1,6 +1,7 @@
 <?php
 $pusherIP='172.24.18.10';
-//$pusherIP='192.168.0.103';
+$pusherIP='192.168.0.106';
+$pusherIP='172.24.21.20';
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -13,6 +14,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 include ("siteFunctions.php");
+
+// An array of $_POST keys that are acceptable
+if (isset($whitelist))
+{
+    foreach($whitelist as $key) {
+       if (isset($_POST[$key])) {
+         $$key = $conn->real_escape_string($_POST[$key]);
+       }
+       else if (isset($_GET[$key])) {
+         $$key = $conn->real_escape_string($_GET[$key]);
+       }
+       else $$key = "";
+    }
+}
 
 /*
 //Key:

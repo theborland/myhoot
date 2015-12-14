@@ -1,6 +1,6 @@
 <?php
 session_start();
-     $_SESSION["questionNumber"]++;
+     
 require 'dbsettings.php';
 //echo "Game".$_SESSION["game_id"]."Status";
 $theQuestion=new Question();
