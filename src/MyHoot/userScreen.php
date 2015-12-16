@@ -28,6 +28,8 @@ function initialize() {
       mapTypeId: google.maps.MapTypeId.TERRAIN,
       stylers: [{ visibility: 'off' }]
     },
+      { featureType: "administrative.province", stylers: [ { visibility: "off" } ] },
+    { featureType: "road", stylers: [ { visibility: "off" } ] },
     {
       featureType: 'water',
       stylers: [

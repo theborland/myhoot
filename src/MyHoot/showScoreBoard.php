@@ -19,6 +19,7 @@ foreach ($allAnswers->allAnswers as $key => $value) {  ?>
   Distance away:  <?php echo $value->distanceAway; ?> miles away.
   Total miles: <?php echo $value->totalMiles; ?>
   Total points:  <?php echo $value->totalPoints; ?>
+  <br>
   <?php
 }
 
