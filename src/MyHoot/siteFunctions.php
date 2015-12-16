@@ -19,7 +19,8 @@ class AllAnswers
 				$long1 = $row["longg"];
 				$user_id = $row["user_id"];
 				$qID=$row["id"];
-				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$user_id,$this->correctAns);
+				$points=$row["points"];
+				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$user_id,$this->correctAns,$points);
 
 				//$submitTime= $row["submitTime"];
 				//$miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
@@ -74,6 +75,7 @@ class Answer
 	public $distanceAway;
 	var $totalMiles;
 	var $totalPoints;
+	var $roundPoints;
 	public static function loadCorrect($questionNum){
 
 		global $conn;
@@ -111,7 +113,7 @@ class Answer
 		return false;
 	}
 
-	public static function addUser($qID,$loc,$userID,$correct)
+	public static function addUser($qID,$loc,$userID,$correct,$points)
 	{
 		$answer=new self();
 		$answer->user_id = $userID;
@@ -120,6 +122,7 @@ class Answer
 		$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
 		$answer->getUserInfo();
 		$answer->updateUser();
+		$answer->roundPoints=$points;
 		return $answer;
 	}
 

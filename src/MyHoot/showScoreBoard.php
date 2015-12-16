@@ -17,6 +17,7 @@ $allAnswers->getTP();
 foreach ($allAnswers->allAnswers as $key => $value) {  ?>
   User: <?php echo $value->name; ?>
   Distance away:  <?php echo $value->distanceAway; ?> miles away.
+  Points this round: <?php echo $value->roundPoints; ?> 
   Total miles: <?php echo $value->totalMiles; ?>
   Total points:  <?php echo $value->totalPoints; ?>
   <br>
