@@ -8,6 +8,8 @@ if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
 ?>
  <html>
  <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/global.css">
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -83,20 +85,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
  </head>
  <body>
 
-   <p>Round <?php echo $_GET["question"] ?>
-   <form name="form1" method="post" action="submitAnswer.php">
-   <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
-    <input type="hidden" id="lat" name="lat">
-    <input type="hidden" id="long" name="long">
+  <div id="mapOverlayWrap">
+    <h3>Round <?php echo $_GET["question"] ?></h3>
+      <form name="form1" method="post" action="submitAnswer.php">
+        <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
+        <input type="hidden" id="lat" name="lat">
+        <input type="hidden" id="long" name="long">
+        <input type="submit" name="submit" id="userMapSubmit" value="Submit">
+      </form>
 
-   <input type="submit" name="submit" id="submit" value="Submit">
-   </form>
-
-   </p>
+  </div>
 
     <div id="map-canvas"></div>
-
-
-   <p>&nbsp;</p>
  </body>
  </html>
