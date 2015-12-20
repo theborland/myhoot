@@ -4,7 +4,7 @@ $pusherIP='192.168.0.106';
 $pusherIP='172.24.18.40';
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 $dbname = "myhoot";
 
 // Create connection
