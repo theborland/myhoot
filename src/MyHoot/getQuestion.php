@@ -82,11 +82,11 @@ var interval = setInterval(function() {
 			<div id="qInfoWrap">
 				<div class="qInfoBlock" id="qInfoNumber">
 					<div class="qInfoLabel">Question</div>
-					<div class="qInfoMain"><?php echo $_SESSION["questionNumber"] ?>3</div>
+					<div class="qInfoMain"><?php echo $_SESSION["questionNumber"] ?></div>
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
 					<div class="qInfoLabel">Where is</div>
-					<div class="qInfoMain">New York<?php echo $theQuestion->city ?>, US<?php echo $theQuestion->country ?></div>
+					<div class="qInfoMain"><?php echo $theQuestion->city ?>, <?php echo $theQuestion->country ?></div>
 				</div>
 				<div class="qInfoBlock" id="qInfoTime">
 					<div class="qInfoLabel">Time left</div>
