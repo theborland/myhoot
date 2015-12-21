@@ -23,7 +23,7 @@ var interval = setInterval(function() {
 </script>
 <style>
 	body{
-	background: url('paris.jpeg<?php //echo $theQuestion->getImage() ?>');
+	background: url('<?php echo $theQuestion->getImage() ?>');
 	background-size: cover;
 	background-repeat: no-repeat;
 
