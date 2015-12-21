@@ -1,7 +1,7 @@
 <?php
 $pusherIP='172.24.18.10';
-$pusherIP='192.168.0.106';
-$pusherIP='172.24.18.40';
+$pusherIP='192.168.0.105';
+$pusherIP='172.24.17.194';
 $servername = "localhost";
 $username = "root";
 $password = "root";

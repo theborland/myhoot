@@ -99,9 +99,9 @@ class Answer
 
 	public static function checkUserSubmitted($questionNum,$user_id){
 		global $conn;
-		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".substr($questionNum,1)."' AND user_id='".$user_id."'";
+		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".substr($questionNum,0)."' AND user_id='".$user_id."'";
 		$result = $conn->query($sql);
-		//   echo $sql;
+    //echo $sql;
 		if ($result)
 		if($row = $result->fetch_assoc()){
 			//echo "here";

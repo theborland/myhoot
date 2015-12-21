@@ -43,7 +43,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
         if (data.title.substring(0,1)=="done")
         window.location.href='waitingScreen.php'; */
         if (data.title.substring(0,1)=="Q")
-          window.location.href='userScreen.php?question='+data.title;
+          window.location.href='userScreen.php?question='+data.title.substring(1);
             });
 
     },

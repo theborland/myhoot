@@ -3,7 +3,7 @@ session_start();
 $whitelist = array('lat','long','questionNumber');
 require 'dbsettings.php';
 
-$questionNumber=substr($questionNumber,1);
+
 $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`) VALUES ('$_SESSION[game_id]', '$_SESSION[user_id]','$questionNumber','$lat','$long')";
 
 $result = $conn->query($sql);
@@ -22,5 +22,5 @@ $result = $conn->query($sql);
     $correct=Answer::loadCorrect($questionNumber);
     $message= "Distance away : ". LatLong::findDistance($correct->location,new LatLong($lat,$long)). " miles away.";
     //echo $correct->location->longg;
-    header( 'Location: waitingScreen.php?message='.$message ) ;
+   header( 'Location: waitingScreen.php?message='.$message ) ;
  ?>

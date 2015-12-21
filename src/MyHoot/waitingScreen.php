@@ -20,5 +20,7 @@ if ($submit=="Join")
  <body><?php echo $message . "<br>"; ?>
    <div id="waitingDiv">We are waiting</div>
    <a href="checkQuestion.php">Everybody else playing - try joining here</a>
+   <p>Game id:<?php echo $_SESSION["game_id"]; ?>
+   </P>
  </body>
  </html>
