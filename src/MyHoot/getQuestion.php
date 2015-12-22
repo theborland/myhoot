@@ -11,13 +11,12 @@ $theQuestion=new Question();
     <link rel="stylesheet" href="style/global.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
-var counter = 60;
+var counter = 30;
 var interval = setInterval(function() {
     counter--;
   $('#timeLeft').html(counter);
     if (counter == 0) {
-        // Display a login box
-        clearInterval(interval);
+        window.location.replace("showAnswer.php");
     }
 }, 1000);
 </script>
@@ -40,7 +39,7 @@ var interval = setInterval(function() {
 	}
 	#overlayWrap #userMapSubmit{
 		top:34px;
-		right: 20px;		
+		right: 20px;
 	}
 	#qInfoWrap{
 		display: inline-block;
@@ -86,7 +85,7 @@ var interval = setInterval(function() {
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
 					<div class="qInfoLabel">Where is</div>
-					<div class="qInfoMain"><?php echo $theQuestion->city ?>, <?php echo $theQuestion->country ?></div>
+					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
 				<div class="qInfoBlock" id="qInfoTime">
 					<div class="qInfoLabel">Time left</div>

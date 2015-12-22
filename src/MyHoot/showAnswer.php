@@ -28,8 +28,7 @@ function initialize() {
   var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      animation: google.maps.Animation.BOUNCE,
-      title: '<?php echo $allAnswers->correctAns->name; ?>'
+      animation: google.maps.Animation.BOUNCE
   });
 
 
