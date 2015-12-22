@@ -219,8 +219,8 @@ class Question
 	$city=explode(",",$lines[$randEntry]);
 	//echo "city ".$city[1] . "sdf";
 	if (sizeof($city)>1){
-		$this->city=preg_replace( "/\r|\n/", "", ($city[1]));//.','.$array[$randEntry][0]);
-		$this->country=($city[0]);//.','.$array[$randEntry][0]);
+		$this->city=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
+		$this->country=preg_replace( "/\r|\n/", "", ($city[1]));
 	}
 	else if (sizeof($city)>0){
 		$this->country=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);

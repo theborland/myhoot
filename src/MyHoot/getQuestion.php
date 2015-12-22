@@ -89,7 +89,7 @@ var interval = setInterval(function() {
 				</div>
 				<div class="qInfoBlock" id="qInfoTime">
 					<div class="qInfoLabel">Time left</div>
-					<div class="qInfoMain" id="timeLeft">60</div>
+					<div class="qInfoMain" id="timeLeft">30</div>
 				</div>
 				<div class="qInfoBlock" id="qInfoAnswers">
 					<div class="qInfoLabel">Number of anwers</div>
@@ -98,5 +98,8 @@ var interval = setInterval(function() {
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
 	</div>
+  <div  id="userAnswers">
+    User answers:
+  </div>
 </body>
 </html>

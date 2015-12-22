@@ -24,6 +24,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
             console.log('Getting answers:"' + topic + '" : ' + data.title);
             var numAnswers = document.getElementById("numAnswers");
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
+            var userAnswers = document.getElementById("userAnswers");
+            userAnswers.innerHTML = userAnswers.innerHTML  + "<Br>"+data.title;
         });
     },
     function() {
