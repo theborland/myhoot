@@ -10,8 +10,20 @@ $theQuestion=new Question();
 <head>
     <link rel="stylesheet" href="style/global.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
 var counter = 60;
+$(document).ready(function(){
+$('#qTimer').animate({
+	left: "+=50%",
+	right: "+=50%",
+	backgroundColor: "#ff0000"
+}, 60000, "linear");
+
+})
+
+
+
 var interval = setInterval(function() {
     counter--;
   $('#timeLeft').html(counter);
@@ -20,6 +32,7 @@ var interval = setInterval(function() {
         clearInterval(interval);
     }
 }, 1000);
+
 </script>
 <style>
 	body{
@@ -30,7 +43,8 @@ var interval = setInterval(function() {
 	}
 	#overlayWrap{
 		height: 130px;
-		text-align: center;
+		text-align: left;
+		box-shadow: 0px;
 	}
 
 	#overlayWrap #logo{
@@ -42,9 +56,11 @@ var interval = setInterval(function() {
 		top:34px;
 		right: 20px;		
 	}
+
 	#qInfoWrap{
 		display: inline-block;
-		padding: 15px 10px;
+		padding: 20px 10px;
+		margin-left:170px;
 	}
 
 	.qInfoBlock{
@@ -58,15 +74,67 @@ var interval = setInterval(function() {
 	}
 
 	.qInfoLabel{
-		font-weight: bold;
+		font-weight: 500;
 		font-size:20px;
-		display: block;
 		color:rgba(255, 255, 255, .7);
 		text-align: left;
+		display: block;
 	}
 	.qInfoMain{
-		font-size: 40px;
+		font-size: 35px;
+		font-size: 2.5vw;
 		font-weight: 100;
+		text-align: center;
+	}
+
+	#qInfoLocation .qInfoMain{
+		text-align: left;
+
+	}
+
+	#qTimer{
+		position: fixed;
+		top: 130px;
+		height: 15px;
+		background-color: #66ff66;
+		left:0px;
+		right: 0px;
+		z-index: 4;
+	}
+	#qTimerBG{
+		position: fixed;
+		top: 130px;
+		height: 15px;
+		background: rgba(0,0,0,.5);
+		left:0px;
+		right: 0px;
+		z-index: 3;		
+		box-shadow: 0px 0px 20px rgba(0,0,0,.7);
+		text-align: center;
+	}
+
+	#qAnswersWrap{
+		font-size: 16px;
+		font-weight: 300;
+		color: rgba(255,255,255,.7);
+		position: fixed;
+		top: 95px;
+		right: 10px;
+		width: 200px;
+		border: 0px solid red;
+		text-align: center;
+	}
+	#qAnswersWrap #numAnswers{
+		display: inline-block;
+		color: #fff;
+		font-weight: bold;
+		font-size: 15px;
+	}
+
+	#overlayWrap #userMapSubmit{
+		font-size: 20px;
+		padding:8px 25px;
+
 	}
 </style>
 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
@@ -82,22 +150,19 @@ var interval = setInterval(function() {
 			<div id="qInfoWrap">
 				<div class="qInfoBlock" id="qInfoNumber">
 					<div class="qInfoLabel">Question</div>
-					<div class="qInfoMain"><?php echo $_SESSION["questionNumber"] ?></div>
+					<div class="qInfoMain">#4<?php echo $_SESSION["questionNumber"] ?></div>
+
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
 					<div class="qInfoLabel">Where is</div>
-					<div class="qInfoMain"><?php echo $theQuestion->city ?>, <?php echo $theQuestion->country ?></div>
+					<div class="qInfoMain">Somewhere With a<?php echo $theQuestion->city ?>, Really Long Name<?php echo $theQuestion->country ?></div>
 				</div>
-				<div class="qInfoBlock" id="qInfoTime">
-					<div class="qInfoLabel">Time left</div>
-					<div class="qInfoMain" id="timeLeft">60</div>
-				</div>
-				<div class="qInfoBlock" id="qInfoAnswers">
-					<div class="qInfoLabel">Number of anwers</div>
-					<div class="qInfoMain" id="numAnswers">0</div>
-				</div>
+
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
+		 <div id="qAnswersWrap"> <div id="numAnswers">0/10 </div> answers so far</div>
 	</div>
+	<div id="qTimer">&nbsp;</div>
+	<div id="qTimerBG">&nbsp;</div>
 </body>
 </html>
