@@ -165,12 +165,11 @@ var interval = setInterval(function() {
 
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
-		 <div id="qAnswersWrap"> <div id="numAnswers"></div> answers so far</div>of  <div id="numPlayers"></div> answers so far</div>
+		 <div id="qAnswersWrap"> <div id="numAnswers">0</div> answers so far</div>of  <div id="numPlayers">0</div> num players</div>
 	</div>
 	<div id="qTimer">&nbsp;</div>
 	<div id="qTimerBG">&nbsp;</div>
-  <div  id="userAnswers">
-    User answers:
+  User Answers<div  id="userAnswers">
   </div>
 </body>
 </html>

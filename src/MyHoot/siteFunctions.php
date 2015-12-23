@@ -175,9 +175,10 @@ class Question
 	public static function InQuestion($questionNum){
 		//SOCKET SENDING MESSAGE
 				$entryData = array(
-						'category' => "InGame".$_SESSION['game_id'].$questionNumber
+						'category' => "InGame".$_SESSION['game_id'].$questionNum
 					, 'title'    => "Unnec"
 				);
+				//print_r($entryData);
 				$context = new ZMQContext();
 				$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
 				$socket->connect("tcp://localhost:5555");

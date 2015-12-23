@@ -5,7 +5,10 @@ if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
   else
+  {
+      sleep(1);
       Question::InQuestion($_GET["question"]);
+  }
 ?>
  <html>
  <head>

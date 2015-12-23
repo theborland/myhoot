@@ -1,11 +1,11 @@
 <?php
 $pusherIP='172.24.18.10';
-$pusherIP='192.168.0.105';
-$pusherIP='172.24.16.13';
+$pusherIP='192.168.0.106';
+$pusherIP='52.90.77.67';
 $servername = "localhost";
 $username = "root";
-$password = "root";
-$dbname = "myhoot";
+$password = "myhoot";
+$dbname = "MyHoot";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
