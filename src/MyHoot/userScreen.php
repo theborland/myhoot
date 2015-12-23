@@ -102,7 +102,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
     </script>
-
+    <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+    <script src="socketScripts.js"></script>
+    <script>
+      loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
+    </script>
  </head>
  <body>
 
@@ -113,7 +117,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
         <input type="hidden" id="lat" name="lat">
         <input type="hidden" id="long" name="long">
-        <input type="submit" name="submit" id="userMapSubmit" value="Go!">
+        <input type="submit" name="submit" id="userMapSubmit" value="Submit!">
       </form>
 
   </div>

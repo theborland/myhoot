@@ -12,7 +12,7 @@ $theQuestion=new Question();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 60;
+var counter = 30;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
@@ -24,12 +24,12 @@ $('#qTimer').animate({
 
 
 
+
 var interval = setInterval(function() {
     counter--;
   $('#timeLeft').html(counter);
     if (counter == 0) {
-        // Display a login box
-        clearInterval(interval);
+        window.location.replace("showAnswer.php");
     }
 }, 1000);
 
@@ -54,7 +54,7 @@ var interval = setInterval(function() {
 	}
 	#overlayWrap #userMapSubmit{
 		top:34px;
-		right: 20px;		
+		right: 20px;
 	}
 
 	#qInfoWrap{
@@ -108,7 +108,11 @@ var interval = setInterval(function() {
 		background: rgba(0,0,0,.5);
 		left:0px;
 		right: 0px;
-		z-index: 3;		
+<<<<<<< HEAD
+		z-index: 3;
+=======
+		z-index: 3;
+>>>>>>> d019771b6be1b8ad4bd0388e2bb62c8d32fd2a27
 		box-shadow: 0px 0px 20px rgba(0,0,0,.7);
 		text-align: center;
 	}
@@ -155,13 +159,27 @@ var interval = setInterval(function() {
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
 					<div class="qInfoLabel">Where is</div>
-					<div class="qInfoMain">Somewhere With a<?php echo $theQuestion->city ?>, Really Long Name<?php echo $theQuestion->country ?></div>
+
+					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
+				<div class="qInfoBlock" id="qInfoTime">
+					<div class="qInfoLabel">Time left</div>
+					<div class="qInfoMain" id="timeLeft">30</div>
+				</div>
+				<div class="qInfoBlock" id="qInfoAnswers">
+					<div class="qInfoLabel">Number of anwers</div>
+					<div class="qInfoMain" id="numAnswers">0</div>
+				</div>
+
 
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
 		 <div id="qAnswersWrap"> <div id="numAnswers">0/10 </div> answers so far</div>
 	</div>
+
+  <div  id="userAnswers">
+    User answers:
+  </div>
 	<div id="qTimer">&nbsp;</div>
 	<div id="qTimerBG">&nbsp;</div>
 </body>

@@ -24,6 +24,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
             console.log('Getting answers:"' + topic + '" : ' + data.title);
             var numAnswers = document.getElementById("numAnswers");
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
+            var userAnswers = document.getElementById("userAnswers");
+            userAnswers.innerHTML = userAnswers.innerHTML  + "<Br>"+data.title;
         });
     },
     function() {
@@ -38,12 +40,14 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
       conn.subscribe('Game'+gameID+'Status', function(topic, data) {
         console.log('Waiting for users:"' + topic + '" : ' + data.title);
         var container = document.getElementById("waitingDiv");
-        container.innerHTML = container.innerHTML  + "<br>"+data.title;
+        //container.innerHTML = container.innerHTML  + "<br>"+data.title;
         /* not sure why this is here?
         if (data.title.substring(0,1)=="done")
         window.location.href='waitingScreen.php'; */
-        if (data.title.substring(0,1)=="Q")
-          window.location.href='userScreen.php?question='+data.title.substring(1);
+        if (data.title.substring(1)=="-1")
+          window.location.href='waitingScreen.php';
+        else if (data.title.substring(0,1)=="Q")
+            window.location.href='userScreen.php?question='+data.title.substring(1);
             });
 
     },
@@ -53,6 +57,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
     {'skipSubprotocolCheck': true}
   );
 }
+
+
 /*
 var conn = new ab.Session('ws://<?php echo $pusherIP ?>:8080',
 function() {

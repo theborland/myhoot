@@ -29,19 +29,22 @@ class AllAnswers
 		}
 
 		$this->awardPoints();
-
+    Question::alertUsers(-1);
 
 		//echo "loc is ".$this->correctAns->location->lat;
 	}
 
+
+
+
 	public function awardPoints(){
 		if (Game::findRound()!=-1){
-				usort($this->allAnswers, array("Answer", "sortMiles"));
-				$totalPoints=count($this->allAnswers);
-				foreach ($this->allAnswers as $key=>$answer){
-					$answer->updateAnswer($totalPoints--);
-				}
-				//Game::updateRound(-1);
+			usort($this->allAnswers, array("Answer", "sortMiles"));
+			$totalPoints=count($this->allAnswers);
+			foreach ($this->allAnswers as $key=>$answer){
+				$answer->updateAnswer($totalPoints--);
+			}
+			Game::updateRound(-1);
 		}
 	}
 
@@ -49,7 +52,7 @@ class AllAnswers
 		usort($this->allAnswers, array("Answer", "sortMiles"));
 		foreach ($this->allAnswers as $key=>$answer){
 			//echo "<br>".$answer->name. " has " . User::getTP($answer->user_id) . " total Points";
-				$answer->totalPoints=User::getTP($answer->user_id) ;
+			$answer->totalPoints=User::getTP($answer->user_id) ;
 		}
 	}
 
@@ -101,7 +104,7 @@ class Answer
 		global $conn;
 		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".substr($questionNum,0)."' AND user_id='".$user_id."'";
 		$result = $conn->query($sql);
-    //echo $sql;
+		//echo $sql;
 		if ($result)
 		if($row = $result->fetch_assoc()){
 			//echo "here";
@@ -163,17 +166,17 @@ class Question
 	var $country;
 	function __construct(){
 		$_SESSION["questionNumber"]++;
-		$this->alertUsers();
+		$this->alertUsers($_SESSION["questionNumber"]);
 		$this->getLocation();
 		$this->addAnswer();
 		Game::updateRound($_SESSION["questionNumber"]);
 	}
 
-	function alertUsers(){
+	public static function alertUsers($message){
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$_SESSION["game_id"]."Status"
-			, 'title'    => "Q".$_SESSION["questionNumber"]
+			, 'title'    => "Q".$message
 		);
 		$context = new ZMQContext();
 		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
@@ -182,35 +185,69 @@ class Question
 		//END SOCKET SENDING
 	}
 
+	function getLabel(){
+		if ($this->city!="")
+			return $this->city . ", ".$this->country;
+		else
+			return $this->country;
+	}
+
 	function getLocation(){
-		$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
+		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
+		$csvData = file_get_contents("http://myonlinegrades.com/stats/la.csv");
 		$lines = explode(PHP_EOL, $csvData);
+		//	$my=str_getcsv($lines);
+		//print_r($lines);
 		$array = array();
+		/*
 		foreach ($lines as $line) {
-			$array[] = str_getcsv($line);
-		}
-		$randEntry=rand(1,sizeof($array));
-		$this->city=urlencode($array[$randEntry][1]);//.','.$array[$randEntry][0]);
-		$this->country=urlencode($array[$randEntry][0]);//.','.$array[$randEntry][0]);
+		$array[] = str_getcsv($line);
 	}
 
-	function getImage(){
-		$url='http://en.wikipedia.org/w/api.php?action=query&titles='.$this->city.'&prop=pageimages&format=json&pithumbsize=1000';
-		//echo $url;
-		$jsonData =file_get_contents( $url);
-		$phpArray = json_decode($jsonData);
-		//print_r($phpArray);
-		$image=findSource($phpArray);
-		return $image;
-	}
+	//print_r($array);
+	$randEntry=rand(1,sizeof($array));
+	$this->city=urlencode($array[$randEntry][1]);//.','.$array[$randEntry][0]);
+	$this->country=urlencode($array[$randEntry][0]);//.','.$array[$randEntry][0]);
+	//	echo "city is ".$this->city;
+	*/
 
-	function addAnswer(){
-		global $conn;
-		//$latLong=new LatLong();
-		$latLong=LatLong::findLatLong($this->city);
-		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`, `wording`, `lat`, `longg`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','$this->city', '".$latLong->lat."', '".$latLong->longg."')";
-		$result = $conn->query($sql);
+
+	//print_r($array);
+	//echo "lines " . sizeof($lines);
+	$randEntry=rand(1,sizeof($lines)-1);
+	//$randEntry=7;
+	$city=explode(",",$lines[$randEntry]);
+	//echo "city ".$city[1] . "sdf";
+	if (sizeof($city)>1){
+		$this->city=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
+		$this->country=preg_replace( "/\r|\n/", "", ($city[1]));
 	}
+	else if (sizeof($city)>0){
+		$this->country=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
+		$this->city="";//.','.$array[$randEntry][0]);
+	}
+	else
+		$this->getLocation();
+}
+
+function getImage(){
+	$url='http://en.wikipedia.org/w/api.php?action=query&titles='.$this->city.'&prop=pageimages&format=json&pithumbsize=1000';
+	//echo $url;
+	$jsonData =file_get_contents( $url);
+	$phpArray = json_decode($jsonData);
+	//print_r($phpArray);
+	$image=findSource($phpArray);
+	return $image;
+}
+
+function addAnswer(){
+	global $conn;
+	//$latLong=new LatLong();
+	$latLong=LatLong::findLatLong($this->city,$this->country);
+	$cityName=$this->city . ",".$this->country;
+	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`, `wording`, `lat`, `longg`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','$cityName', '".$latLong->lat."', '".$latLong->longg."')";
+	$result = $conn->query($sql);
+}
 }
 class User{
 	var $name;
@@ -243,30 +280,30 @@ class User{
 		//END SOCKET SENDING
 	}
 
-		public function getTotalPoints(){
-				global $conn;
-				$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`=".$this->id."'";
-				//echo $sql;
-				$result = $conn->query($sql);
-				if ($result)
-				{
-					$row = $result->fetch_assoc();
-					$this->totalPoints = $row['sum(points)'];
-				}
+	public function getTotalPoints(){
+		global $conn;
+		$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`=".$this->id."'";
+		//echo $sql;
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			$row = $result->fetch_assoc();
+			$this->totalPoints = $row['sum(points)'];
 		}
+	}
 
-		public static function getTP($id){
-				global $conn;
-				$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`='".$id."'";
-				//echo $sql;
-				$result = $conn->query($sql);
-				if ($result)
-				{
-					$row = $result->fetch_assoc();
-					return $row['sum(`points`)'];
+	public static function getTP($id){
+		global $conn;
+		$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`='".$id."'";
+		//echo $sql;
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			$row = $result->fetch_assoc();
+			return $row['sum(`points`)'];
 
-				}
 		}
+	}
 
 }
 
@@ -299,7 +336,7 @@ class Game
 	{
 		global $conn;
 		$sql = "SELECT * FROM `games` WHERE `game_id` = '".$_SESSION["game_id"]."'";
-    //echo $sql;
+		//echo $sql;
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -308,85 +345,97 @@ class Game
 		}
 	}
 }
-	class LatLong
-	{
-		public $lat;
-		public $longg;
+class LatLong
+{
+	public $lat;
+	public $longg;
 
-		public function __construct($lat,$longg) {
-			$this->lat=$lat;
-			$this->longg=$longg;
-		}
-
-
-		public static function findLatLong ($address)
-		{
-
-			$prepAddr = str_replace(' ','+',$address);
-			$geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
-			$output= json_decode($geocode);
-			$instance = new self($output->results[0]->geometry->location->lat,$output->results[0]->geometry->location->lng);
-			return $instance;
-		}
-
-		/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-		/*::                                                                         :*/
-		/*::  This routine calculates the distance between two points (given the     :*/
-		/*::  latitude/longitude of those points). It is being used to calculate     :*/
-		/*::  the distance between two locations using GeoDataSource(TM) Products    :*/
-		/*::                                                                         :*/
-		/*::  Definitions:                                                           :*/
-		/*::    South latitudes are negative, east longitudes are positive           :*/
-		/*::                                                                         :*/
-		/*::  Passed to function:                                                    :*/
-		/*::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  :*/
-		/*::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  :*/
-		/*::    unit = the unit you desire for results                               :*/
-		/*::           where: 'M' is statute miles (default)                         :*/
-		/*::                  'K' is kilometers                                      :*/
-		/*::                  'N' is nautical miles                                  :*/
-		/*::  Worldwide cities and other features databases with latitude longitude  :*/
-		/*::  are available at http://www.geodatasource.com                          :*/
-		/*::                                                                         :*/
-		/*::  For enquiries, please contact sales@geodatasource.com                  :*/
-		/*::                                                                         :*/
-		/*::  Official Web site: http://www.geodatasource.com                        :*/
-		/*::                                                                         :*/
-		/*::         GeoDataSource.com (C) All Rights Reserved 2015		   		     :*/
-		/*::                                                                         :*/
-		/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-		public static function findDistance($loc1,$loc2){
-			return LatLong::distance($loc1->lat,$loc1->longg,$loc2->lat,$loc2->longg,"M");
-		}
-		public static function distance($lat1, $lon1, $lat2, $lon2, $unit) {
-
-			$theta = $lon1 - $lon2;
-			$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-			$dist = acos($dist);
-			$dist = rad2deg($dist);
-			$miles = $dist * 60 * 1.1515;
-			$unit = strtoupper($unit);
-
-			if ($unit == "K") {
-				return ($miles * 1.609344);
-			} else if ($unit == "N") {
-				return ($miles * 0.8684);
-			} else {
-				return round($miles);
-			}
-		}
+	public function __construct($lat,$longg) {
+		$this->lat=$lat;
+		$this->longg=$longg;
 	}
 
-	function findSource ($phpArray)
-	{
-		foreach ($phpArray as $key => $value) {
-			if (is_object($value))
-			return findSource($value);
-			else {
-				if ($key=="source")
-				return $value;
-			}
 
+	public static function findLatLong ($address,$country)
+	{
+	//	$prepAddr=LatLong::removeAccents($address. " ".$country);
+	//	$prepAddr = urlencode(str_replace(' ','+',$prepAddr));
+		//echo "p".$prepAddr. " a ". ($address. " ".$country);
+		$prepAddr=remove_accents($address. " ".$country);
+	//	$prepAddr = urlencode(str_replace(' ','+',$prepAddr));
+		$geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
+		//echo 'http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false';
+		$output= json_decode($geocode);
+		//print_r($output);
+		$instance = new self($output->results[0]->geometry->location->lat,$output->results[0]->geometry->location->lng);
+		return $instance;
+	}
+
+	public static function removeAccents($str) {
+		return strtr(utf8_decode($str),
+         utf8_decode(
+         'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ'),
+         'SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy');
+	//return str_replace($a, $b, $str);
+}
+	/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	/*::                                                                         :*/
+	/*::  This routine calculates the distance between two points (given the     :*/
+	/*::  latitude/longitude of those points). It is being used to calculate     :*/
+	/*::  the distance between two locations using GeoDataSource(TM) Products    :*/
+	/*::                                                                         :*/
+	/*::  Definitions:                                                           :*/
+	/*::    South latitudes are negative, east longitudes are positive           :*/
+	/*::                                                                         :*/
+	/*::  Passed to function:                                                    :*/
+	/*::    lat1, lon1 = Latitude and Longitude of point 1 (in decimal degrees)  :*/
+	/*::    lat2, lon2 = Latitude and Longitude of point 2 (in decimal degrees)  :*/
+	/*::    unit = the unit you desire for results                               :*/
+	/*::           where: 'M' is statute miles (default)                         :*/
+	/*::                  'K' is kilometers                                      :*/
+	/*::                  'N' is nautical miles                                  :*/
+	/*::  Worldwide cities and other features databases with latitude longitude  :*/
+	/*::  are available at http://www.geodatasource.com                          :*/
+	/*::                                                                         :*/
+	/*::  For enquiries, please contact sales@geodatasource.com                  :*/
+	/*::                                                                         :*/
+	/*::  Official Web site: http://www.geodatasource.com                        :*/
+	/*::                                                                         :*/
+	/*::         GeoDataSource.com (C) All Rights Reserved 2015		   		     :*/
+	/*::                                                                         :*/
+	/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+	public static function findDistance($loc1,$loc2){
+		return LatLong::distance($loc1->lat,$loc1->longg,$loc2->lat,$loc2->longg,"M");
+	}
+	public static function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+
+		$theta = $lon1 - $lon2;
+		$dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+		$dist = acos($dist);
+		$dist = rad2deg($dist);
+		$miles = $dist * 60 * 1.1515;
+		$unit = strtoupper($unit);
+
+		if ($unit == "K") {
+			return ($miles * 1.609344);
+		} else if ($unit == "N") {
+			return ($miles * 0.8684);
+		} else {
+			return round($miles);
 		}
 	}
-	?>
+}
+
+function findSource ($phpArray)
+{
+	foreach ($phpArray as $key => $value) {
+		if (is_object($value))
+		return findSource($value);
+		else {
+			if ($key=="source")
+			return $value;
+		}
+
+	}
+}
+?>
