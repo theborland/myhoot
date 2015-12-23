@@ -1,16 +1,15 @@
 <?php
 session_start();
 require 'dbsettings.php';
-
+//create game
 Game::createGame();
-
  ?>
  <html>
  <head>
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
-  loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);    
+  loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
 </script>
  </head>
  <body>
