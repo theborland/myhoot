@@ -24,6 +24,7 @@ $('#qTimer').animate({
 
 
 
+
 var interval = setInterval(function() {
     counter--;
   $('#timeLeft').html(counter);
@@ -107,7 +108,11 @@ var interval = setInterval(function() {
 		background: rgba(0,0,0,.5);
 		left:0px;
 		right: 0px;
+<<<<<<< HEAD
 		z-index: 3;
+=======
+		z-index: 3;
+>>>>>>> d019771b6be1b8ad4bd0388e2bb62c8d32fd2a27
 		box-shadow: 0px 0px 20px rgba(0,0,0,.7);
 		text-align: center;
 	}
@@ -154,6 +159,7 @@ var interval = setInterval(function() {
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
 					<div class="qInfoLabel">Where is</div>
+
 					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
 				<div class="qInfoBlock" id="qInfoTime">
@@ -165,12 +171,16 @@ var interval = setInterval(function() {
 					<div class="qInfoMain" id="numAnswers">0</div>
 				</div>
 
+
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
 		 <div id="qAnswersWrap"> <div id="numAnswers">0/10 </div> answers so far</div>
 	</div>
+
   <div  id="userAnswers">
     User answers:
   </div>
+	<div id="qTimer">&nbsp;</div>
+	<div id="qTimerBG">&nbsp;</div>
 </body>
 </html>
