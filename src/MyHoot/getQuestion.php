@@ -18,7 +18,7 @@ $('#qTimer').animate({
 	left: "+=50%",
 	right: "+=50%",
 	backgroundColor: "#ff0000"
-}, 60000, "linear");
+}, 30000, "linear");
 
 })
 
@@ -36,7 +36,7 @@ var interval = setInterval(function() {
 </script>
 <style>
 	body{
-	background: url('<?php echo $theQuestion->getImage() ?>');
+	background: url('paris.jpeg<?php //echo $theQuestion->getImage() ?>');
 	background-size: cover;
 	background-repeat: no-repeat;
 
@@ -108,12 +108,8 @@ var interval = setInterval(function() {
 		background: rgba(0,0,0,.5);
 		left:0px;
 		right: 0px;
-<<<<<<< HEAD
 		z-index: 3;
-=======
-		z-index: 3;
->>>>>>> d019771b6be1b8ad4bd0388e2bb62c8d32fd2a27
-		box-shadow: 0px 0px 20px rgba(0,0,0,.7);
+		box-shadow: 0px 0px 20px rgba(0,0,0,.5);
 		text-align: center;
 	}
 
@@ -128,16 +124,51 @@ var interval = setInterval(function() {
 		border: 0px solid red;
 		text-align: center;
 	}
-	#qAnswersWrap #numAnswers{
+	#qAnswersWrap #numAnswers, #numPlayers{
 		display: inline-block;
 		color: #fff;
 		font-weight: bold;
 		font-size: 15px;
 	}
 
+
+
 	#overlayWrap #userMapSubmit{
 		font-size: 20px;
 		padding:8px 25px;
+
+	}
+
+	#userAnswers{
+		position: fixed;
+		top: 150px;
+		left: 20px;
+		display: table;
+	}
+
+	#userAnswers .uaItem{
+		padding:3px 10px;
+		background: rgba(0,0,0,.5);
+		box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+		margin-top: 5px;
+		border-radius: 5px;
+		display: inline-block;
+		clear: left;
+		float: left;
+	}
+
+	#userAnswers .uLabel{
+		font-size: 16px;
+		font-weight: 300;
+		color: #fff;
+		display: inline-block;
+		margin-right: 3px;
+	}
+	#userAnswers .uScore{
+		font-size: 15px;
+		font-weight: bold;
+		color: #fff;
+		display: inline-block;
 
 	}
 </style>
@@ -165,11 +196,15 @@ var interval = setInterval(function() {
 
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
-		 <div id="qAnswersWrap"> <div id="numAnswers">0</div> answers so far</div>of  <div id="numPlayers">0</div> num players</div>
+		 <div id="qAnswersWrap"> <div id="numAnswers">0</div>/<div id="numPlayers">0</div> answers so far</div>
 	</div>
 	<div id="qTimer">&nbsp;</div>
 	<div id="qTimerBG">&nbsp;</div>
-  User Answers<div  id="userAnswers">
-  </div>
+	<div  id="userAnswers">
+		<div class="uaItem">
+			<div class="uLabel">Kimothy</div>
+			<div class="uScore">9800</div>
+		</div>
+	</div>
 </body>
 </html>
