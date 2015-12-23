@@ -154,33 +154,22 @@ var interval = setInterval(function() {
 			<div id="qInfoWrap">
 				<div class="qInfoBlock" id="qInfoNumber">
 					<div class="qInfoLabel">Question</div>
-					<div class="qInfoMain">#4<?php echo $_SESSION["questionNumber"] ?></div>
+					<div class="qInfoMain">#<?php echo $_SESSION["questionNumber"] ?></div>
 
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
 					<div class="qInfoLabel">Where is</div>
-
 					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
-				<div class="qInfoBlock" id="qInfoTime">
-					<div class="qInfoLabel">Time left</div>
-					<div class="qInfoMain" id="timeLeft">30</div>
-				</div>
-				<div class="qInfoBlock" id="qInfoAnswers">
-					<div class="qInfoLabel">Number of anwers</div>
-					<div class="qInfoMain" id="numAnswers">0</div>
-				</div>
-
 
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
-		 <div id="qAnswersWrap"> <div id="numAnswers">0/10 </div> answers so far</div>
+		 <div id="qAnswersWrap"> <div id="numAnswers"></div> answers so far</div>
 	</div>
-
+	<div id="qTimer">&nbsp;</div>
+	<div id="qTimerBG">&nbsp;</div>
   <div  id="userAnswers">
     User answers:
   </div>
-	<div id="qTimer">&nbsp;</div>
-	<div id="qTimerBG">&nbsp;</div>
 </body>
 </html>
