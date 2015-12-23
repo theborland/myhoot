@@ -6,6 +6,14 @@
 
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/joinQuiz.css">
+    <style>
+	body{
+		background: url('paris.jpeg');
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	</style>
 	<title>Join a Quiz</title>
 </head>
 <body>
@@ -19,7 +27,7 @@
 			<label for="name" class="jqLabel">YOUR NAME</label>
 			<input type="text" name="name" id="name"class="jqInput">
 
-			<input type="submit" name="submit" value="Join" id="jqJoin">
+			<Center><input type="submit" name="submit" value="Join" id="jqJoin"></Center>
 		</form>
 	</div>
 	<div id="footer">
