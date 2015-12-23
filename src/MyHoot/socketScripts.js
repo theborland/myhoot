@@ -34,6 +34,21 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
     {'skipSubprotocolCheck': true}
     );
   }
+  function findingNumberOfUsers(ip,gameID,questionNumber){
+      var conn = new ab.Session('ws://'+ip+':8080',
+      function() {
+          conn.subscribe('InGame'+gameID+''+questionNumber, function(topic, data) {
+              console.log('Getting answers:"' + topic + '" : ' + data.title);
+              var numPlayers = document.getElementById("numPlayers");
+              numPlayers.innerHTML = parseInt(numPlayers.innerHTML)  + 1;
+          });
+      },
+      function() {
+          console.warn('WebSocket connection closed');
+      },
+      {'skipSubprotocolCheck': true}
+      );
+    }
   function loadWaitingForQuestion(ip,gameID){
     var conn = new ab.Session('ws://'+ip+':8080',
     function() {

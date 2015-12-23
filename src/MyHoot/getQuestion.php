@@ -145,6 +145,7 @@ var interval = setInterval(function() {
  <script src="socketScripts.js"></script>
 <script>
   loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
+  findingNumberOfUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
 </script>
 </head>
 <body>
@@ -164,7 +165,7 @@ var interval = setInterval(function() {
 
 		 	</div>
 		 <a href="showAnswer.php" id="userMapSubmit">Show Answer</a>
-		 <div id="qAnswersWrap"> <div id="numAnswers"></div> answers so far</div>
+		 <div id="qAnswersWrap"> <div id="numAnswers"></div> answers so far</div>of  <div id="numPlayers"></div> answers so far</div>
 	</div>
 	<div id="qTimer">&nbsp;</div>
 	<div id="qTimerBG">&nbsp;</div>

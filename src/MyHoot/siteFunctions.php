@@ -172,6 +172,20 @@ class Question
 		Game::updateRound($_SESSION["questionNumber"]);
 	}
 
+	public static function InQuestion($questionNum){
+		//SOCKET SENDING MESSAGE
+				$entryData = array(
+						'category' => "InGame".$_SESSION['game_id'].$questionNumber
+					, 'title'    => "Unnec"
+				);
+				$context = new ZMQContext();
+				$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+				$socket->connect("tcp://localhost:5555");
+				$socket->send(json_encode($entryData));
+				//END SOCKET SENDING
+	}
+
+
 	public static function alertUsers($message){
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
