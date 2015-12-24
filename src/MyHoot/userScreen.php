@@ -6,8 +6,8 @@ if (isset($_GET["question"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
   else
   {
-      sleep(1);
-      Question::InQuestion($_GET["question"]);
+   //   sleep(2);
+      
   }
 ?>
  <html>
@@ -24,6 +24,13 @@ if (isset($_GET["question"]))
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 
+	setTimeout( function(){ 
+   if(XMLHttpRequest) var x = new XMLHttpRequest();
+else var x = new ActiveXObject("Microsoft.XMLHTTP");
+x.open("GET", 'inQuestion.php?question=<?php echo $_GET["question"]; ?>', true);
+x.send();
+
+  }  , 1500 );
 
 
 

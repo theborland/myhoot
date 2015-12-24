@@ -29,7 +29,7 @@ class AllAnswers
 		}
 
 		$this->awardPoints();
-    Question::alertUsers(-1);
+        Question::alertUsers(-1);
 
 		//echo "loc is ".$this->correctAns->location->lat;
 	}
@@ -175,7 +175,7 @@ class Question
 	public static function InQuestion($questionNum){
 		//SOCKET SENDING MESSAGE
 				$entryData = array(
-						'category' => "InGame".$_SESSION['game_id'].$questionNum
+						'category' => "InGame".$_SESSION['game_id']."-".$questionNum
 					, 'title'    => "Unnec"
 				);
 				//print_r($entryData);
@@ -377,9 +377,10 @@ class LatLong
 	//	$prepAddr = urlencode(str_replace(' ','+',$prepAddr));
 		//echo "p".$prepAddr. " a ". ($address. " ".$country);
 		$prepAddr=remove_accents($address. " ".$country);
-	//	$prepAddr = urlencode(str_replace(' ','+',$prepAddr));
+  	$prepAddr = urlencode(str_replace(' ','+',$prepAddr));
+		//$geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
 		$geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
-		//echo 'http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false';
+	//	echo 'http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false';
 		$output= json_decode($geocode);
 		//print_r($output);
 		$instance = new self($output->results[0]->geometry->location->lat,$output->results[0]->geometry->location->lng);

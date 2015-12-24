@@ -237,10 +237,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <div class="scoresGraphNew" style="width:40;">&nbsp;</div><div class="scoresGraphNewLabel">+40</div>
     </div>-->
    <?php
-
+$allAnswers->getTP();
     foreach ($allAnswers->allAnswers as $key => $value) {
         ?><div class="scoresLine"><?php echo $value->name; ?>:
-          <div class="scoresGraphScore"><?php echo $value->distanceAway; ?></div>
+          <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
         </div><?php
     }
  ?>

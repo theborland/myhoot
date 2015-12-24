@@ -25,7 +25,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
             var numAnswers = document.getElementById("numAnswers");
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
             var userAnswers = document.getElementById("userAnswers");
-            userAnswers.innerHTML = userAnswers.innerHTML  + "<Br>"+data.title;
+            userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
         });
     },
     function() {
@@ -37,7 +37,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
   function findingNumberOfUsers(ip,gameID,questionNumber){
       var conn = new ab.Session('ws://'+ip+':8080',
       function() {
-          conn.subscribe('InGame'+gameID+''+questionNumber, function(topic, data) {
+          conn.subscribe('InGame'+gameID+'-'+questionNumber, function(topic, data) {
               console.log('Getting answers:"' + topic + '" : ' + data.title);
               var numPlayers = document.getElementById("numPlayers");
               numPlayers.innerHTML = parseInt(numPlayers.innerHTML)  + 1;

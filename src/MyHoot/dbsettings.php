@@ -1,11 +1,15 @@
 <?php
+//echo getHostName();
 $pusherIP='172.24.18.10';
 $pusherIP='192.168.0.106';
-$pusherIP='52.90.77.67';
+$pusherIP=getHostByName(getHostName()); //'52.90.77.67';
 $servername = "localhost";
 $username = "root";
 $password = "myhoot";
 $dbname = "MyHoot";
+//mysqladmin -u root -p'MyHoot' password myhoot
+
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

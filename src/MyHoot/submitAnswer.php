@@ -15,7 +15,8 @@ $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
 //SOCKET SENDING MESSAGE
     $entryData = array(
         'category' => "Game".$_SESSION['game_id'].$questionNumber
-      , 'title'    => $_SESSION["name"].":".$distanceAway
+      , 'title'    => $_SESSION["name"]
+      , 'miles'    =>$distanceAway
     );
     $context = new ZMQContext();
     $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
