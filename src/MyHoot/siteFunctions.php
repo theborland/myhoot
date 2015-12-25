@@ -169,6 +169,7 @@ class Question
 		$this->alertUsers($_SESSION["questionNumber"]);
 		$this->getLocation();
 		$this->addAnswer();
+		//echo "in here again";
 		Game::updateRound($_SESSION["questionNumber"]);
 	}
 
@@ -230,12 +231,16 @@ class Question
 	//print_r($array);
 	//echo "lines " . sizeof($lines);
 	$randEntry=rand(1,sizeof($lines)-1);
-	//$randEntry=7;
+//	$randEntry=245;
+	//echo "rand is ".$randEntry;
+	//$randEntry=168;
 	$city=explode(",",$lines[$randEntry]);
 	//echo "city ".$city[1] . "sdf";
 	if (sizeof($city)>1){
 		$this->city=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
 		$this->country=preg_replace( "/\r|\n/", "", ($city[1]));
+		if (strlen($this->country)==2)
+				$this->country=state_abbr($this->country,"name");
 	}
 	else if (sizeof($city)>0){
 		$this->country=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
@@ -246,9 +251,25 @@ class Question
 }
 
 function getImage(){
-	$url='http://en.wikipedia.org/w/api.php?action=query&titles='.$this->city.'&prop=pageimages&format=json&pithumbsize=1000';
-	//echo $url;
+  if ($this->city==$this->country)
+	    $name=$this->city;
+	else
+	    $name=$this->city.', '.$this->country;
+	$url='http://en.wikipedia.org/w/api.php?action=query&titles='.urlencode($name).'&prop=pageimages&format=json&pithumbsize=1000';
 	$jsonData =file_get_contents( $url);
+  //echo "u".$url;
+	if (strlen($jsonData)<150)
+	{
+		$url='http://en.wikipedia.org/w/api.php?action=query&titles='.$this->city.'&prop=pageimages&format=json&pithumbsize=1000';
+		$jsonData =file_get_contents( $url);
+    //echo "u".$url."jjj".strpos($jsonData,"missing");
+	}
+	if (strlen($jsonData)<150 || strlen($jsonData)>3000)
+	{
+		$url='http://en.wikipedia.org/w/api.php?action=query&titles=earth&prop=pageimages&format=json&pithumbsize=1000';
+		$jsonData =file_get_contents( $url);
+
+	}
 	$phpArray = json_decode($jsonData);
 	//print_r($phpArray);
 	$image=findSource($phpArray);
@@ -453,5 +474,73 @@ function findSource ($phpArray)
 		}
 
 	}
+}
+
+function state_abbr($name, $get = 'abbr') {
+//make sure the state name has correct capitalization:
+    if($get != 'name') {
+    $name = strtolower($name);
+    $name = ucwords($name);
+    }else{
+    $name = strtoupper($name);
+    }
+$states = array(
+'Alabama'=>'AL',
+'Alaska'=>'AK',
+'Arizona'=>'AZ',
+'Arkansas'=>'AR',
+'California'=>'CA',
+'Colorado'=>'CO',
+'Connecticut'=>'CT',
+'Delaware'=>'DE',
+'Florida'=>'FL',
+'Georgia'=>'GA',
+'Hawaii'=>'HI',
+'Idaho'=>'ID',
+'Illinois'=>'IL',
+'Indiana'=>'IN',
+'Iowa'=>'IA',
+'Kansas'=>'KS',
+'Kentucky'=>'KY',
+'Louisiana'=>'LA',
+'Maine'=>'ME',
+'Maryland'=>'MD',
+'Massachusetts'=>'MA',
+'Michigan'=>'MI',
+'Minnesota'=>'MN',
+'Mississippi'=>'MS',
+'Missouri'=>'MO',
+'Montana'=>'MT',
+'Nebraska'=>'NE',
+'Nevada'=>'NV',
+'New Hampshire'=>'NH',
+'New Jersey'=>'NJ',
+'New Mexico'=>'NM',
+'New York'=>'NY',
+'North Carolina'=>'NC',
+'North Dakota'=>'ND',
+'Ohio'=>'OH',
+'Oklahoma'=>'OK',
+'Oregon'=>'OR',
+'Pennsylvania'=>'PA',
+'Rhode Island'=>'RI',
+'South Carolina'=>'SC',
+'South Dakota'=>'SD',
+'Tennessee'=>'TN',
+'Texas'=>'TX',
+'Utah'=>'UT',
+'Vermont'=>'VT',
+'Virginia'=>'VA',
+'Washington'=>'WA',
+'West Virginia'=>'WV',
+'Wisconsin'=>'WI',
+'Wyoming'=>'WY'
+);
+    if($get == 'name') {
+    // in this case $name is actually the abbreviation of the state name and you want the full name
+    $states = array_flip($states);
+    }
+
+return $states[$name];
 }
 ?>

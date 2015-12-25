@@ -67,9 +67,13 @@ if ($submit=="Join")
 		<img src="logo.png" id="logo">
 		<h4>Waiting</h4>
 		<hr>
+    <?php if (is_numeric($message)){ ?>
 	 	<div id="score"><div style="font-size:18px;font-weight:bold;">Your answer was</div> <?php echo $message . "<br>"; ?> miles away.</div>
-		<hr>
-		<div id="waitingDiv">We are waiting... </div><div id="everyonePlaying">Everybody else playing? <a href="checkQuestion.php" id="joinHere">Try joining here.</a></div>
+<?php } else { ?>
+  <div id="score"><div style="font-size:18px;font-weight:bold;"> <?php echo $message . "<br>"; ?> </div>
+<?php }  ?>
+  	<hr>
+		<div id="waitingDiv">We are waiting... </div><div id="everyonePlaying">Everybody else playing? <a href="checkQuestion.php" id="joinHere">Try here.</a></div>
 		<br><br>
 		<div id="gameID">Game id: <?php echo $_SESSION["game_id"]; ?></div>
 	</div>
