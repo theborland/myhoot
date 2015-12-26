@@ -4,6 +4,8 @@ require 'dbsettings.php';
 //echo "Game".$_SESSION["game_id"]."Status";
 $theQuestion=new Question();
 
+if (isset($_GET["auto"]))
+    $_SESSION["auto"]=$_GET["auto"];
 ?>
 
 <html>

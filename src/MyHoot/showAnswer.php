@@ -11,7 +11,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
       <link rel="stylesheet" href="style/global.css">
       <style type="text/css">
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-          
+
 
           #overlayWrap{
             left:400px;
@@ -45,7 +45,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             width: 350px;
             padding-right: 10px;
           }
-          
+
           .scoresGraphLabel{
             display: block;
             font-size: 16px;
@@ -89,11 +89,11 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
           #scoresGraphWrap::-webkit-scrollbar {
               width: 10px;
           }
-           
+
           #scoresGraphWrap::-webkit-scrollbar-track {
              display: none;
           }
-           
+
           #scoresGraphWrap::-webkit-scrollbar-thumb {
               border-radius: 2px;
               background:rgba(255,255,255,0);
@@ -128,6 +128,18 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
       <script>
+
+<?php
+if ($_SESSION["auto"]=='yes')
+{
+?>
+//automatically forward if automode on
+setTimeout( function(){
+      window.location.href='getQuestion.php';
+}  , 10000 );
+<?php
+}
+?>
 
 function initialize() {
 

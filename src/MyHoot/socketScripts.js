@@ -26,6 +26,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
             var userAnswers = document.getElementById("userAnswers");
             userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
+            if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) )
+                 window.location.href='showAnswer.php';
         });
     },
     function() {

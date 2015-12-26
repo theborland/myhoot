@@ -17,6 +17,7 @@ Game::createGame();
 
    The number of users is <div id="numUsers">0</div>
       The names of users: <div id="nameUsers"></div>
-      <a href="getQuestion.php">Start
+      <a href="getQuestion.php">Start</a><br>
+      <a href="getQuestion.php?auto=yes">Auto</a>
  </body>
  </html>
