@@ -2,10 +2,12 @@
 session_start();
 require 'dbsettings.php';
 //echo "Game".$_SESSION["game_id"]."Status";
-$theQuestion=new Question();
-
 if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
+if (isset($_GET["type"]))
+            $_SESSION["type"]=$_GET["type"];
+
+$theQuestion=new Question("pop");
 ?>
 
 <html>
@@ -14,7 +16,7 @@ if (isset($_GET["auto"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 30;
+var counter = 330;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
@@ -192,7 +194,7 @@ var interval = setInterval(function() {
 
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
-					<div class="qInfoLabel">Where is</div>
+					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?></div>
 					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
 

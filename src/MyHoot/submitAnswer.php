@@ -1,15 +1,24 @@
 <?php
 session_start();
-$whitelist = array('lat','long','questionNumber');
+$whitelist = array('lat','long','answer','questionNumber');
 require 'dbsettings.php';
 
-
-$sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`) VALUES ('$_SESSION[game_id]', '$_SESSION[user_id]','$questionNumber','$lat','$long')";
-
+if ($lat=="")$lat=0;
+if ($long=="")$long=0;
+$sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`answer`) VALUES ('$_SESSION[game_id]', '$_SESSION[user_id]','$questionNumber','$lat','$long','$answer')";
+//echo $sql;
+//die();
 $result = $conn->query($sql);
-
+$game=Game::findGame();
 $correct=Answer::loadCorrect($questionNumber);
-$distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
+if ($game->type=="pop"){
+  $distanceAway=abs($answer-$correct->value);
+}
+else {
+
+  $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
+}
+
 //echo $sql;
 //die();
 //SOCKET SENDING MESSAGE
@@ -23,7 +32,10 @@ $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
     $socket->connect("tcp://localhost:5555");
     $socket->send(json_encode($entryData));
     //END SOCKET SENDING
-    $message= "Distance away : ". $distanceAway. " miles away.";
+    if ($game->type=="pop")
+      $message= "Off by: ". $distanceAway. " people";
+    else
+      $message= "Distance away : ". $distanceAway. " miles away";
     //echo $correct->location->longg;
    header( 'Location: waitingScreen.php?message='.$message ) ;
  ?>

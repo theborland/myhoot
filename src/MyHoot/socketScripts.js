@@ -64,7 +64,12 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
         if (data.title.substring(1)=="-1")
           window.location.href='waitingScreen.php';
         else if (data.title.substring(0,1)=="Q")
-            window.location.href='userScreen.php?question='+data.title.substring(1);
+        {
+            if (data.type=="geo")
+              window.location.href='userScreen.php?question='+data.title.substring(1);
+            if (data.type=="pop")
+              window.location.href='userScreenPop.php?question='+data.title.substring(1);
+        }
             });
 
     },

@@ -17,10 +17,11 @@ class AllAnswers
 			while($row = $result->fetch_assoc()){
 				$lat1 = $row["lat"];
 				$long1 = $row["longg"];
+				$ans = $row["answer"];
 				$user_id = $row["user_id"];
 				$qID=$row["id"];
 				$points=$row["points"];
-				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$user_id,$this->correctAns,$points);
+				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points);
 
 				//$submitTime= $row["submitTime"];
 				//$miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
@@ -38,7 +39,7 @@ class AllAnswers
 
 
 	public function awardPoints(){
-		if (Game::findRound()!=-1){
+		if (Game::findGame()->round!=-1){
 			usort($this->allAnswers, array("Answer", "sortMiles"));
 			$totalPoints=count($this->allAnswers);
 			foreach ($this->allAnswers as $key=>$answer){
@@ -79,6 +80,7 @@ class Answer
 	var $totalMiles;
 	var $totalPoints;
 	var $roundPoints;
+	var $value;
 	public static function loadCorrect($questionNum){
 
 		global $conn;
@@ -93,6 +95,7 @@ class Answer
 				$answer->location=new LatLong($row["lat"],$row["longg"]);
 				$answer->questionNum=$questionNum;
 				$answer->name=$row["wording"];
+				$answer->value=$row["answer"];
 				return $answer;
 			}
 		}
@@ -116,13 +119,16 @@ class Answer
 		return false;
 	}
 
-	public static function addUser($qID,$loc,$userID,$correct,$points)
+	public static function addUser($qID,$loc,$ans,$userID,$correct,$points)
 	{
 		$answer=new self();
 		$answer->user_id = $userID;
 		$answer->location=$loc;
 		$answer->qID=$qID;
-		$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
+		if (Game::findGame()->type=="geo")
+			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
+		else
+		  $answer->distanceAway=abs($ans-$correct->value);
 		$answer->getUserInfo();
 		$answer->updateUser();
 		$answer->roundPoints=$points;
@@ -164,13 +170,21 @@ class Question
 {
 	var $city;
 	var $country;
-	function __construct(){
+	var $type;
+	var $answer;
+	function __construct($type){
 		$_SESSION["questionNumber"]++;
-		$this->alertUsers($_SESSION["questionNumber"]);
-		$this->getLocation();
+		$this->alertUsers($_SESSION["questionNumber"],$type);
+		$this->type=$type;
+		if ($type=="geo")
+		{
+			$this->getLocation();
+		}
+	  if ($type=="pop")
+				$this->getPopulation();
 		$this->addAnswer();
 		//echo "in here again";
-		Game::updateRound($_SESSION["questionNumber"]);
+		Game::updateRound($_SESSION["questionNumber"],$type);
 	}
 
 	public static function InQuestion($questionNum){
@@ -188,11 +202,12 @@ class Question
 	}
 
 
-	public static function alertUsers($message){
+	public static function alertUsers($message,$type=NULL){
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$_SESSION["game_id"]."Status"
 			, 'title'    => "Q".$message
+			, 'type'    => $type
 		);
 		$context = new ZMQContext();
 		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
@@ -202,11 +217,36 @@ class Question
 	}
 
 	function getLabel(){
-		if ($this->city!="")
+		if ($this->city!="" && $this->city != $this->country)
 			return $this->city . ", ".$this->country;
 		else
 			return $this->country;
 	}
+
+	function getQuestionText(){
+		if ($this->type=="geo")
+			return "Where is ";
+			if ($this->type=="pop")
+				return "What is the population of ";
+	}
+
+	function getPopulation(){
+		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
+		$csvData = file_get_contents("data/populations.csv");
+		$lines = explode(PHP_EOL, $csvData);
+		//	$my=str_getcsv($lines);
+		//print_r($lines);
+		$array = array();
+		$randEntry=rand(1,sizeof($lines)-1);
+		$city=explode(",",$lines[$randEntry]);
+		//echo "city ".$city[1] . "sdf";
+		if (sizeof($city)>1){
+			$this->city=preg_replace( "/\r|\n/", "", ($city[0]));
+			$this->country=preg_replace( "/\r|\n/", "", ($city[0]));
+			$this->answer=preg_replace( "/\r|\n/", "", ($city[1]));
+		}
+
+}
 
 	function getLocation(){
 		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
@@ -215,18 +255,6 @@ class Question
 		//	$my=str_getcsv($lines);
 		//print_r($lines);
 		$array = array();
-		/*
-		foreach ($lines as $line) {
-		$array[] = str_getcsv($line);
-	}
-
-	//print_r($array);
-	$randEntry=rand(1,sizeof($array));
-	$this->city=urlencode($array[$randEntry][1]);//.','.$array[$randEntry][0]);
-	$this->country=urlencode($array[$randEntry][0]);//.','.$array[$randEntry][0]);
-	//	echo "city is ".$this->city;
-	*/
-
 
 	//print_r($array);
 	//echo "lines " . sizeof($lines);
@@ -280,8 +308,11 @@ function addAnswer(){
 	global $conn;
 	//$latLong=new LatLong();
 	$latLong=LatLong::findLatLong($this->city,$this->country);
-	$cityName=$this->city . ",".$this->country;
-	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`, `wording`, `lat`, `longg`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','$cityName', '".$latLong->lat."', '".$latLong->longg."')";
+	if ($this->city!="")
+		$cityName=$this->city . ",".$this->country;
+  else
+		$cityName=$this->country;
+	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`, `wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','$cityName', '".$latLong->lat."', '".$latLong->longg."', '".$this->answer."')";
 	$result = $conn->query($sql);
 }
 }
@@ -345,6 +376,8 @@ class User{
 
 class Game
 {
+	var $type;
+	var $round;
 	public static function createGame()
 	{
 		global $conn;
@@ -361,14 +394,14 @@ class Game
 		Game::updateRound(-1);
 	}
 
-	public static function  updateRound($val)
+	public static function  updateRound($val, $type=NULL)
 	{
 		global $conn;
-		$sql = "UPDATE `games` SET `round`='$val' WHERE `game_id` = '".$_SESSION["game_id"]."'";
+		$sql = "UPDATE `games` SET `round`='$val', `type`='$type' WHERE `game_id` = '".$_SESSION["game_id"]."'";
 		$result = $conn->query($sql);
 	}
 
-	public static function findRound()
+	public static function findGame()
 	{
 		global $conn;
 		$sql = "SELECT * FROM `games` WHERE `game_id` = '".$_SESSION["game_id"]."'";
@@ -377,7 +410,10 @@ class Game
 		if ($result)
 		{
 			$row = $result->fetch_assoc();
-			return $row["round"];
+			$game=new self();
+			$game->round= $row["round"];
+			$game->type=$row["type"];
+			return $game;
 		}
 	}
 }

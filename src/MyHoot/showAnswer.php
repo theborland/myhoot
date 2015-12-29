@@ -2,6 +2,8 @@
 session_start();
 //echo "sdfsdf";
 require 'dbsettings.php';
+if (Game::findGame()->type=="pop")
+      header( 'Location: showAnswerPop.php') ;
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
