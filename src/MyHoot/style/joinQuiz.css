@@ -11,7 +11,7 @@ body{
 	background: rgba(0,0,0,.5);
 	border:0px;
 	border-radius: 10px;
-	box-shadow: 0px 0px 50px rgba(0,0,0,.5);
+	box-shadow: 0px 0px 50px rgba(0,0,0,.6);
 }
 
 #logo{
@@ -33,6 +33,7 @@ body{
 	font-weight: 500;
 	font-size: 13px;
 	color:rgba(255,255,255,.7);
+	cursor:pointer;
 }
 
 .jqInput{
@@ -85,8 +86,6 @@ body{
 }
 #jqJoin:active{
 	background:#F79B00;
-	top:13px;
-
 }
 
 
