@@ -18,7 +18,7 @@ Game::createGame();
 		background-repeat: no-repeat;
 		padding:0px;
 		padding-top: 5%;
-	}
+}
 	#jqWrap{
 		width:600px;
 	}
@@ -48,6 +48,7 @@ Game::createGame();
 		border-radius: 5px;
 		background:rgba(0,0,0,.3);
 	}
+
 	input[type="checkbox"]{
 		-webkit-appearance:none;
 		width: 18px;
@@ -91,17 +92,23 @@ Game::createGame();
 		color:#fff;
 		padding:10px 20px;
 	}
+
 	#nameUsers::-webkit-scrollbar {
 		width: 10px;
 	}
+
 	#nameUsers::-webkit-scrollbar-track {
 		display: none;
 	}
+
+
 	#nameUsers::-webkit-scrollbar-thumb {
 		border-radius: 2px;
 		background:rgba(255,255,255,.4);
 		cursor: pointer;
 	}
+
+
 	#colsWrap{
 		border-top:1px solid rgba(255,255,255,.5);
 		padding-top:20px;
@@ -116,6 +123,7 @@ Game::createGame();
 		padding-left:15px;
 		vertical-align: top;
 	}
+
 	</style>
 
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
