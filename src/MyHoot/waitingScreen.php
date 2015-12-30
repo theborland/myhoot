@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 $whitelist = array('message','submit','name','game_id');
 require 'dbsettings.php';

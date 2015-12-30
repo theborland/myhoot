@@ -37,5 +37,6 @@ else {
     else
       $message= "Distance away : ". $distanceAway. " miles away";
     //echo $correct->location->longg;
+  //  die ($message);
    header( 'Location: waitingScreen.php?message='.$message ) ;
  ?>
