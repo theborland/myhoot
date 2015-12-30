@@ -6,7 +6,7 @@ if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
-
+$_SESSION["type"]="pop";
 $theQuestion=new Question("pop");
 ?>
 
