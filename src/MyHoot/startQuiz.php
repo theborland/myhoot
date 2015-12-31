@@ -161,6 +161,10 @@ Game::createGame();
 						<label for="autoplayCB" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:7px;">
 							AUTOPLAY
 							<input type="checkbox" id="autoplayCB" name="auto" value="yes"></label>
+              <select name="type">
+  <option value="geo" selected>Geo</option>
+  <option value="pop">Pop</option>
+</select>
 						<input type="submit" id="jqJoin" value="Start">
 					</Center>
 				</form>
