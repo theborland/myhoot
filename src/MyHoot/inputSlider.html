@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<title>Input Slider</title>
+    <link rel="stylesheet" href="style/inputSlider.css">
+	<script>
+		var nf = new Intl.NumberFormat();
+
+		function changeValue() {
+			var range = document.getElementById("isRange");
+			var valbox = document.getElementById("isValue");
+
+		 valbox.value = (Math.round(Math.pow(2, (parseInt(range.value)/100))/100000)*100000).toLocaleString();
+		 		    //Math.round(value/100)*100
+		    //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+		}
+
+	</script>
+
+</head>
+<body>
+	<div id="isWrap">
+		<form>
+			<input type="text" id="isValue" name="isValue" value="1060000" readonly>
+			<input type="range" id="isRange" name="isRange" for="isValue" min="1900" max="3100" value="2000" oninput="changeValue()">
+		</form>
+
+
+	</div>
+</body>
+</html>

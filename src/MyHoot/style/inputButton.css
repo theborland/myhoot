@@ -1,0 +1,11 @@
+#controlWrap{
+	background:#f1f1f1;
+	border:1px solid #f1f1f1;
+}
+
+.cButton{
+	border:2px solid #CF000F;
+	background: #fff;
+	font-size: 20px;
+	margin:-4px;
+}
