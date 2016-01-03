@@ -228,6 +228,6 @@ $allAnswers->getTP();
   </div>
 
 </div>
-Correct Answer: <?php echo $allAnswers->correctAns->value; ?>
+Correct Answer: <?php echo number_format($allAnswers->correctAns->value); ?>
 </body>
 </html>

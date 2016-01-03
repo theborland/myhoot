@@ -32,6 +32,8 @@ else {
     $socket->connect("tcp://localhost:5555");
     $socket->send(json_encode($entryData));
     //END SOCKET SENDING
+    if ($distanceAway>1000)
+      $distanceAway=number_format($distanceAway);
     if ($game->type=="pop")
       $message= "Off by: ". $distanceAway. " people";
     else
