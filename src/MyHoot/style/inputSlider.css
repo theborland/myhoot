@@ -2,7 +2,7 @@
 	width: 90%;
 	margin:auto;
 	margin-top: 10%;
-	background:#e1e1e1;
+	background:#333;
 	padding:20px;
 	border:1px solid #b1b1b1;
 	border-radius: 10px;
@@ -14,29 +14,45 @@
 }
 
 #isValue{
-	border:0px;
-	font-size: 30px;
+	font-size: 35px;
 	background:transparent;
 	text-align: center;
+	color:#fff;
+	font-family: Overpass;
+	font-weight: 100;
+	margin-top: 90px;
+	width:330px;
+	padding:0px;
+	border:1px solid #fff;
+	border-radius: 3px;
+	padding:5px 0px;
 }
 
 
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 100%; /* Specific width is required for Firefox. */
-  height: 3px;
-  border:1px solid #999;
-  background: #a0a0a0;
+  height: 10px;
+  border:1px solid #fff;
+  background: transparent;
+  border-top:0px;
+  border-radius: 0px;
 }
 
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #333;
-  border-radius: 200px;
-  border:2px solid #fff;
-  box-shadow: 0px 0px 10px rgba(0,0,0,.8);
+  width: 15px;
+  height: 30px;
+  background: #F76116;
+  border-radius: 3px;
+  border:0px solid #fff;
+  border-bottom:5px solid #BB3B08;
+  box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+}
+
+input[type=range]::-webkit-slider-thumb:hover{
+  background: #F77C27;
+  cursor:pointer;
 }
 
 input[type=range]:focus {
@@ -51,4 +67,33 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
+#rangeLineWrap{
+	width: 90%;
+	text-align: center;
+	margin:auto;
+	margin-bottom: -15px;
+	background: transparent;
+	padding:0px;
+	white-space: nowrap;
+}
 
+.rangeLine{
+	display: inline-block;
+	width: 19%;
+	height: 3px;
+	background:transparent;
+	border:0px;
+	border-left:3px solid #fff;
+	box-sizing:border-box;
+}
+.rangeLine:first-child{
+	border-left:0px;
+}
+
+#relativeWrap{
+	display: inline-block;
+	position: relative;
+	width: 90%;
+	margin:auto;
+	margin-top:10px;
+}
