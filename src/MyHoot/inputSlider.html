@@ -12,19 +12,31 @@
 			var range = document.getElementById("isRange");
 			var valbox = document.getElementById("isValue");
 
-		 valbox.value = (Math.round(Math.pow(2, (parseInt(range.value)/100))/100000)*100000).toLocaleString();
+			if(parseInt(range.value) > 2140){
+				valbox.value = "2,000,000,000";
+			}else{
+				valbox.value = (Math.round(Math.pow(Math.E, (parseInt(range.value)/100))/100000)*100000).toLocaleString();
+			}
 		 		    //Math.round(value/100)*100
 		    //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 		}
-
 	</script>
 
 </head>
 <body>
 	<div id="isWrap">
 		<form>
-			<input type="text" id="isValue" name="isValue" value="1060000" readonly>
-			<input type="range" id="isRange" name="isRange" for="isValue" min="1900" max="3100" value="2000" oninput="changeValue()">
+			<div id="relativeWrap">
+				<input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
+				<div id="rangeLineWrap">
+					<div class="rangeLine"></div>
+					<div class="rangeLine"></div>
+					<div class="rangeLine"></div>
+					<div class="rangeLine"></div>
+					<div class="rangeLine"></div>
+				</div>
+				<input type="range" id="isRange" name="isRange" for="isValue" min="1320" max="2141.64130" value="1541" oninput="changeValue()">
+			</div>
 		</form>
 
 

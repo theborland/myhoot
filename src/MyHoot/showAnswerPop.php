@@ -9,12 +9,14 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 <html>
 <head>
       <link rel="stylesheet" href="style/global.css">
+      <link rel="stylesheet" href="style/inputButton.css">
       <style type="text/css">
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
 
           #overlayWrap{
             left:400px;
+            height:140px;
           }
 
           #scoresWrap{
@@ -123,11 +125,59 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             border-bottom: 0px;
           }
 
-
+          #overlayWrap #userMapSubmit{
+            top:45px;
+            right:30px;
+          }
+          
+          #answerLabel{
+            font-weight: 500;
+            color:rgba(255,255,255,.8);
+            font-size: 20px;
+            font-family: overpass;
+            margin-left: 40px;
+            margin-top:20px;
+          }
+          #answer{
+            display: none;
+          }
     </style>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
       <script>
+
+
+window.onload = function() {
+
+
+
+function animateNum(i, n, fin, finNum, time){
+      setTimeout( function(){
+        if(fin)
+          document.getElementById("answerNum" + n).innerHTML = finNum;
+        else
+          document.getElementById("answerNum" + n).innerHTML = Math.round(Math.random() * 9);
+    }, Math.pow(i, 1.05) * time);
+
+}
+
+answer = document.getElementById("answer").innerHTML;
+answer = answer.length >= 10 ? answer :new Array(10 - answer.length + 1).join("x") + answer;
+
+setTimeout( function(){
+
+  for(n=0; n < answer.length; n++){
+    time = 50 + Math.round(Math.random() * 50);
+    for(i=0; i < 40; i++){
+        val = (answer.charAt(n) == "x".charAt(0)) ? "&nbsp;" : answer.charAt(n) + "";
+        animateNum(i, n, (i==39), val, time);
+    }
+  }
+}, 500);
+}
+
+
+
 
 <?php
 if ($_SESSION["auto"]=='yes')
@@ -137,6 +187,9 @@ if ($_SESSION["auto"]=='yes')
 setTimeout( function(){
       window.location.href='getQuestion.php';
 }  , 100000 );
+
+
+
 <?php
 }
 ?>
@@ -147,6 +200,23 @@ setTimeout( function(){
 
 <div id="map-canvas"></div>
 <div id="overlayWrap">
+  <div id="answerLabel">Correct Answer</div>
+  <div id="answerWrap">
+    <div class="answerNum" id="answerNum0">0</div>
+    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
+    <div class="answerNum" id="answerNum1">0</div>
+    <div class="answerNum" id="answerNum2">0</div>
+    <div class="answerNum" id="answerNum3">0</div>
+    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
+    <div class="answerNum" id="answerNum4">0</div>
+    <div class="answerNum" id="answerNum5">0</div>
+    <div class="answerNum" id="answerNum6">0</div>
+    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
+    <div class="answerNum" id="answerNum7">0</div>
+    <div class="answerNum" id="answerNum8">0</div>
+    <div class="answerNum" id="answerNum9">0</div>
+  </div>
+
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
   <a href="getQuestion.php" id="userMapSubmit">Next Question</a>
 </div>
@@ -155,61 +225,6 @@ setTimeout( function(){
   <div id="scoresGraphWrap">
 
 <!--
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Joe</div>
-      <div class="scoresGraphAll" style="width:260;">285</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Jim</div>
-      <div class="scoresGraphAll" style="width:245;">275</div>
-      <div class="scoresGraphNew" style="width:30;">&nbsp;</div><div class="scoresGraphNewLabel">+30</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Tim</div>
-      <div class="scoresGraphAll" style="width:235;">245</div>
-      <div class="scoresGraphNew" style="width:10;">&nbsp;</div><div class="scoresGraphNewLabel">+10</div>
-    </div>
-        <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Ben</div>
-      <div class="scoresGraphAll" style="width:230;">235</div>
-      <div class="scoresGraphNew" style="width:5;">&nbsp;</div><div class="scoresGraphNewLabel">+5</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Jan</div>
-      <div class="scoresGraphAll" style="width:210;">230</div>
-      <div class="scoresGraphNew" style="width:20;">&nbsp;</div><div class="scoresGraphNewLabel">+20</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Ken</div>
-      <div class="scoresGraphAll" style="width:195;">200</div>
-      <div class="scoresGraphNew" style="width:5;">&nbsp;</div><div class="scoresGraphNewLabel">+5</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Dan</div>
-      <div class="scoresGraphAll" style="width:160;">185</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Ron</div>
-      <div class="scoresGraphAll" style="width:140;">170</div>
-      <div class="scoresGraphNew" style="width:30;">&nbsp;</div><div class="scoresGraphNewLabel">+30</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Pan</div>
-      <div class="scoresGraphAll" style="width:130;">140</div>
-      <div class="scoresGraphNew" style="width:10;">&nbsp;</div><div class="scoresGraphNewLabel">+10</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Kim</div>
-      <div class="scoresGraphAll" style="width:110;">135</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Yan</div>
-      <div class="scoresGraphAll" style="width:100;">125</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
     <div class="scoresGraphBar">
       <div class="scoresGraphLabel">Lin</div>
       <div class="scoresGraphAll" style="width:80;">120</div>
@@ -228,6 +243,6 @@ $allAnswers->getTP();
   </div>
 
 </div>
-Correct Answer: <?php echo number_format($allAnswers->correctAns->value); ?>
+<div id="answer"><?php echo number_format($allAnswers->correctAns->value); ?></div>
 </body>
 </html>
