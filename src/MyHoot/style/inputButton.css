@@ -34,11 +34,6 @@
 
 }
 
-.answerNum:empty::after {
-    content: ".";
-
-}
-
 
 .noB{
 	border:0px;

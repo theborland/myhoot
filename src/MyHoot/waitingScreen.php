@@ -37,7 +37,7 @@ if ($submit=="Join")
 			color: #a1a1a1;
 			font-size: 15px;
 		}
-		#joinHere:link{
+		#joinHere:link, #joinHere:visited{
 			color:#fff;
 		}
 		#everyonePlaying{
