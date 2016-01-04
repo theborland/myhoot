@@ -129,7 +129,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             top:45px;
             right:30px;
           }
-          
+
           #answerLabel{
             font-weight: 500;
             color:rgba(255,255,255,.8);
@@ -230,14 +230,15 @@ setTimeout( function(){
       <div class="scoresGraphAll" style="width:80;">120</div>
       <div class="scoresGraphNew" style="width:40;">&nbsp;</div><div class="scoresGraphNewLabel">+40</div>
     </div>-->
-   <?php
-$allAnswers->getTP();
-    foreach ($allAnswers->allAnswers as $key => $value) {
-        ?><div class="scoresLine"><?php echo $value->name; ?>:
-          <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
-        </div><?php
-    }
- ?>
+    <?php
+  $allAnswers->getTP();
+     foreach ($allAnswers->allAnswers as $key => $value) {
+         ?><div class="scoresLine"><?php echo $value->name; ?>:
+           + <?php echo $value->roundPoints; ?>
+           <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
+         </div><?php
+     }
+  ?>
 
 
   </div>

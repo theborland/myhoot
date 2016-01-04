@@ -254,6 +254,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $allAnswers->getTP();
     foreach ($allAnswers->allAnswers as $key => $value) {
         ?><div class="scoresLine"><?php echo $value->name; ?>:
+          + <?php echo $value->roundPoints; ?>
           <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
         </div><?php
     }

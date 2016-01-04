@@ -163,7 +163,7 @@ class Answer
 	}
 
 	static function sortMiles($a,$b){
-		return $a->distanceAway-$b->distanceAway;
+		return $a->totalPoints-$b->totalPoints;
 	}
 }
 class Question
