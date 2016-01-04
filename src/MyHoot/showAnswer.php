@@ -132,10 +132,10 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
       <script>
 
 <?php
-if ($_SESSION["auto"]=='yes')
+if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
 {
 ?>
-//automatically forward if automode on
+//automatically forward if automode is on
 setTimeout( function(){
       window.location.href='getQuestion.php';
 }  , 10000 );
@@ -254,6 +254,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $allAnswers->getTP();
     foreach ($allAnswers->allAnswers as $key => $value) {
         ?><div class="scoresLine"><?php echo $value->name; ?>:
+          + <?php echo $value->roundPoints; ?>
           <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
         </div><?php
     }

@@ -50,11 +50,13 @@ class AllAnswers
 	}
 
 	public function getTP(){
-		usort($this->allAnswers, array("Answer", "sortMiles"));
+    //usort($this->allAnswers, array("Answer", "sortMiles"));
 		foreach ($this->allAnswers as $key=>$answer){
 			//echo "<br>".$answer->name. " has " . User::getTP($answer->user_id) . " total Points";
 			$answer->totalPoints=User::getTP($answer->user_id) ;
 		}
+		usort($this->allAnswers, array("Answer", "sortTotalMiles"));
+
 	}
 
 	public function getLocations(){
@@ -145,6 +147,7 @@ class Answer
 			$row = $result->fetch_assoc();
 			$this->name= $row["name"];
 			$this->totalMiles= $row["score"]+$this->distanceAway;
+	  	//$this->totalPoints= $row["totalPoints"];
 		}
 	}
 
@@ -152,6 +155,7 @@ class Answer
 	{
 		global $conn;
 		$sql = "UPDATE `answers` SET points='".$points."' WHERE id='".$this->qID."'";
+		$this->roundPoints=$points;
 		$result = $conn->query($sql);
 	}
 
@@ -164,6 +168,9 @@ class Answer
 
 	static function sortMiles($a,$b){
 		return $a->distanceAway-$b->distanceAway;
+	}
+	static function sortTotalMiles($a,$b){
+		return $b->totalPoints-$a->totalPoints;
 	}
 }
 class Question
@@ -259,6 +266,7 @@ class Question
 	//print_r($array);
 	//echo "lines " . sizeof($lines);
 	$randEntry=rand(1,sizeof($lines)-1);
+	//	$randEntry=rand(1,3);
 //	$randEntry=245;
 	//echo "rand is ".$randEntry;
 	//$randEntry=168;
@@ -276,6 +284,19 @@ class Question
 	}
 	else
 		$this->getLocation();
+	if (Question::checkForRepeats($this->country))
+		$this->getLocation();
+}
+
+public static function checkForRepeats($country){
+	   global $conn;
+		 $sql = "SELECT * FROM `questions` WHERE gameID='".$_SESSION["game_id"]."' AND wording LIKE '%$country%'";
+	 	$result = $conn->query($sql);
+		//echo $sql;
+		if ($result->num_rows>0)
+		   return true;
+	   return false;
+
 }
 
 function getImage(){

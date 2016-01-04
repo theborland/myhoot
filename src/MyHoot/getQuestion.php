@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'dbsettings.php';
-//echo "Game".$_SESSION["game_id"]."Status";
+
 if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
 if (isset($_GET["type"]))
