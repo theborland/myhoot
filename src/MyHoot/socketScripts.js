@@ -27,7 +27,10 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
             var userAnswers = document.getElementById("userAnswers");
             userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
             if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) )
-                 window.location.href='showAnswer.php';
+              setTimeout(function (){
+                    window.location.href='showAnswer.php';
+                  }, 2000);
+
         });
     },
     function() {
