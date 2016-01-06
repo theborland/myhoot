@@ -76,6 +76,9 @@ class Question
 		$phpArray = json_decode($jsonData,true);
 		//echo $url;
 		$this->answer=$phpArray["almanac"]["temp_high"]["normal"]["F"];
+		if ($this->answer=="" || $this->answer==0);
+			$this->getWeather();
+
   }
 	function getAge(){
 
