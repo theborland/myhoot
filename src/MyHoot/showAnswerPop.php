@@ -244,6 +244,6 @@ setTimeout( function(){
   </div>
 
 </div>
-<div id="answer"><?php echo number_format($allAnswers->correctAns->value); ?></div>
+<div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
 </body>
 </html>

@@ -32,7 +32,10 @@ if (isset($_GET["question"]))
       var range = document.getElementById("isRange");
       var valbox = document.getElementById("isValue");
       var answer = document.getElementById("answer");
-
+      var afterScale = range.value;//Math.round(Math.pow(Math.E, (parseInt(range.value)/1))/1)*1
+      valbox.value = afterScale.toLocaleString();
+      answer.value = afterScale;
+/*
       if(parseInt(range.value) > 2140){
         valbox.value = "2,000,000,000";
         answer.value = "2000000000";
@@ -41,6 +44,7 @@ if (isset($_GET["question"]))
         valbox.value = afterScale.toLocaleString();
         answer.value = afterScale;
       }
+      */
             //Math.round(value/100)*100
         //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
@@ -79,7 +83,7 @@ x.send();
         <input type="hidden" id="answer" name="answer">
 
       <center>
-        <input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
+        <input type="text" id="isValue" name="isValue" value="50" readonly>
         <div id="relativeWrap">
           <div id="rangeLineWrap">
             <div class="rangeLine"></div>
@@ -88,7 +92,7 @@ x.send();
             <div class="rangeLine"></div>
             <div class="rangeLine"></div>
           </div>
-          <input type="range" id="isRange" name="isRange" for="isValue" min="1320" max="2141.64130" value="1541" oninput="changeValue()">
+          <input type="range" id="isRange" name="isRange" for="isValue" min="0" max="100" value="50" oninput="changeValue()">
         </div>
       </center>
 
