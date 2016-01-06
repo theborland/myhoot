@@ -17,7 +17,7 @@ function loadWaitingForUsers(ip,gameID){
     );
 
 }
-function loadWaitingForAnswers(ip,gameID,questionNumber){
+function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
     var conn = new ab.Session('ws://'+ip+':8080',
     function() {
         conn.subscribe('Game'+gameID+''+questionNumber+'', function(topic, data) {
@@ -26,7 +26,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber){
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
             var userAnswers = document.getElementById("userAnswers");
             userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
-            if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) )
+            if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<23 && auto=="yes")
               setTimeout(function (){
                     window.location.href='showAnswer.php';
                   }, 2000);

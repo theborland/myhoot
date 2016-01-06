@@ -266,7 +266,7 @@ class Question
 	//print_r($array);
 	//echo "lines " . sizeof($lines);
 	$randEntry=rand(1,sizeof($lines)-1);
-	//	$randEntry=rand(1,3);
+	//	$randEntry=rand(1,5);
 //	$randEntry=245;
 	//echo "rand is ".$randEntry;
 	//$randEntry=168;

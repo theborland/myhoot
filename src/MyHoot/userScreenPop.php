@@ -56,7 +56,7 @@ else var x = new ActiveXObject("Microsoft.XMLHTTP");
 x.open("GET", 'inQuestion.php?question=<?php echo $_GET["question"]; ?>', true);
 x.send();
 
-  }  , 1500 );
+  }  , 2500 );
 
 
 
@@ -92,7 +92,7 @@ x.send();
         </div>
       </center>
 
-        
+
 
         <input type="submit" name="submit" id="userMapSubmit" value="Submit!">
       </form>

@@ -3,7 +3,7 @@ session_start();
 require 'dbsettings.php';
 
 global $conn;
-$sql = "SELECT * FROM `data-geo` WHERE `id`='3'";
+$sql = "SELECT * FROM `data-geo`";//" WHERE `id`='3'";
 $result = $conn->query($sql);
 if ($result)
 {
@@ -15,4 +15,9 @@ if ($result)
     echo $splits[rand(0,sizeof($splits))];
   }
 }
+echo "<br>";
+$url='http://api.wunderground.com/api/766deb6baf5fc335/almanac/conditions/forecast/q/Georgia/Atlanta.json';
+$jsonData =file_get_contents( $url);
+$phpArray = json_decode($jsonData,true);
+print_r($phpArray["almanac"]["temp_high"]["normal"]["F"]);
 ?>

@@ -16,7 +16,7 @@ $theQuestion=new Question($_SESSION["type"]);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 30;
+var counter = 300;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
@@ -179,7 +179,7 @@ var interval = setInterval(function() {
 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
-  loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
+  loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>');
   findingNumberOfUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
 </script>
 </head>
