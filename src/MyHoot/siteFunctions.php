@@ -1,4 +1,5 @@
 <?php
+include ("Question.php");
 class AllAnswers
 {
 	public $allAnswers;
