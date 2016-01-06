@@ -11,11 +11,10 @@ $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`
 $result = $conn->query($sql);
 $game=Game::findGame();
 $correct=Answer::loadCorrect($questionNumber);
-if ($game->type=="pop"){
+if ($game->type!="geo"){
   $distanceAway=abs($answer-$correct->value);
 }
 else {
-
   $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
 }
 
@@ -36,7 +35,11 @@ else {
       $distanceAway=number_format($distanceAway);
     if ($game->type=="pop")
       $message= "Off by: ". $distanceAway. " people";
-    else
+    if ($game->type=="weather")
+        $message= "Off by: ". $distanceAway. " degrees";
+    if ($game->type=="age")
+          $message= "Off by: ". $distanceAway. " years";
+    if ($game->type=="geo")
       $message= "Distance away : ". $distanceAway. " miles away";
     //echo $correct->location->longg;
   //  die ($message);

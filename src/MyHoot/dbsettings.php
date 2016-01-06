@@ -18,7 +18,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 include ("siteFunctions.php");
-
+include ("Question.php");
 // An array of $_POST keys that are acceptable
 if (isset($whitelist))
 {

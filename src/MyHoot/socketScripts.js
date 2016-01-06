@@ -68,6 +68,10 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
               window.location.href='userScreen.php?question='+data.title.substring(1);
             if (data.type=="pop")
               window.location.href='userScreenPop.php?question='+data.title.substring(1);
+            if (data.type=="weather")
+                window.location.href='userScreenWeather.php?question='+data.title.substring(1);
+                if (data.type=="age")
+                    window.location.href='userScreenAge.php?question='+data.title.substring(1);
         }
             });
 

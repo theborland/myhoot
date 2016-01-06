@@ -166,6 +166,8 @@ Game::createGame();
               <select name="type">
   <option value="geo" selected>Geo</option>
   <option value="pop">Pop</option>
+  <option value="weather">Weather</option>
+  <option value="age">People</option>
 </select>
 						<input type="submit" id="jqJoin" value="Start">
 					</Center>
