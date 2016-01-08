@@ -124,7 +124,8 @@ class Question
 			$this->country=preg_replace( "/\r|\n/", "", ($city[0]));
 			$this->answer=preg_replace( "/\r|\n/", "", ($city[1]));
 		}
-
+		if (Question::checkForRepeats($this->country))
+			$this->getUserQuestion();
 
 }
 
