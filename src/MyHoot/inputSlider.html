@@ -6,38 +6,29 @@
 	<title>Input Slider</title>
     <link rel="stylesheet" href="style/inputSlider.css">
 	<script>
-		var nf = new Intl.NumberFormat();
+		var takePicture = document.querySelector("#take-picture");
+		takePicture.onchange = function (event) {
+	    // Get a reference to the taken picture or chosen file
+	    var files = event.target.files,
+	        file;
+	    if (files && files.length > 0) {
+	        file = files[0];
+	    }
+};
 
-		function changeValue() {
-			var range = document.getElementById("isRange");
-			var valbox = document.getElementById("isValue");
 
-			if(parseInt(range.value) > 2140){
-				valbox.value = "2,000,000,000";
-			}else{
-				valbox.value = (Math.round(Math.pow(Math.E, (parseInt(range.value)/100))/100000)*100000).toLocaleString();
-			}
-		 		    //Math.round(value/100)*100
-		    //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-		}
 	</script>
 
 </head>
 <body>
 	<div id="isWrap">
 		<form>
-			<div id="relativeWrap">
-				<input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
-				<div id="rangeLineWrap">
-					<div class="rangeLine"></div>
-					<div class="rangeLine"></div>
-					<div class="rangeLine"></div>
-					<div class="rangeLine"></div>
-					<div class="rangeLine"></div>
-				</div>
-				<input type="range" id="isRange" name="isRange" for="isValue" min="1320" max="2141.64130" value="1541" oninput="changeValue()">
-			</div>
 		</form>
+
+
+		<br><hr><br>
+
+ <input type="file" accept="image/*" capture="camera">
 
 
 	</div>

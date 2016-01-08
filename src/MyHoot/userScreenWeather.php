@@ -83,7 +83,6 @@ x.send();
 
 
 
-
     </script>
     <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
     <script src="socketScripts.js"></script>
@@ -103,7 +102,7 @@ x.send();
 
 
           <center id="submitWrap">
-            <input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
+            <input type="text" id="isValue" name="isValue" value="5,000,000" readonly formenctype="multipart/form-data" >
             <div id="newSlider"></div>
           </center>
                       <input type="submit" name="submit" id="userMapSubmit" value="Submit!">
@@ -142,16 +141,16 @@ window.onload = function(){
   var answer = document.getElementById("answer");
 
   noUiSlider.create(slider, {
-    start: [50],
+    start: [60],
     connect: "lower",
     orientation: "vertical",
     direction: 'rtl',
     range: {
-      'min': [10],
-      '25%': [25],
-      '50%': [50],
-      '75%': [75],
-      'max': [100]
+      'min': [0],
+      '25%': [30],
+      '50%': [60],
+      '75%': [90],
+      'max': [120]
     },pips: { // Show a scale with the slider
       mode: 'steps',
       density: 2
@@ -161,7 +160,7 @@ window.onload = function(){
 
   slider.noUiSlider.on('update', function( values, handle ) {
       a = Math.round(values[handle]);
-      valbox.value = a + " degrees";
+      valbox.value = a + "\u00B0F";
       answer.value = a;
       //changeValue(values[handle]);
   });
