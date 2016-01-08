@@ -132,8 +132,8 @@ class Question
 	function getLocation(){
 
 		global $conn;
-		$sql = "SELECT * FROM `data-geo`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
-		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$sql = "SELECT * FROM `data-geo` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Iowa'";
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -142,8 +142,9 @@ class Question
 				$this->city=$row["city"];
 				$this->answer=$row["population"];
 		    $url= $row["url"];
-		    $url=substr($url,2,strlen($url)-3);
+		    $url=substr($url,2,strlen($url)-4);
 		    $splits=explode("', '",$url);
+
 		    //echo $url;
 			//echo sizeof($splits). "<br>";
 			//	print_r($splits);
@@ -153,6 +154,7 @@ class Question
 				    return $this->getLocation();
 					}
 		    $this->image=$splits[rand(0,sizeof($splits)-1)];
+					//echo $this->image;
 		  }
 		}
 		if (Question::checkForRepeats($this->country))

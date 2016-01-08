@@ -1,0 +1,4 @@
+kill control c
+lsof -n -i4TCP:5555 | grep LISTEN  #whats listen on port 5555
+kill -9 processid
+ssh -i borland.pem ec2-user@ec2-52-90-77-67.compute-1.amazonaws.com
