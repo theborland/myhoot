@@ -11,12 +11,16 @@ $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`
 $result = $conn->query($sql);
 $game=Game::findGame();
 $correct=Answer::loadCorrect($questionNumber);
-if ($game->type!="geo"){
-  $distanceAway=abs($answer-$correct->value);
-}
-else {
-  $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
-}
+if ($game->type=="geo")
+    $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
+/*else if ($game->type=="age"){
+  $datetime1 = date_create($answer-$correct->value);
+
+}*/
+
+else
+   $distanceAway=abs($answer-$correct->value);
+//die ($distanceAway);
 
 //echo $sql;
 //die();

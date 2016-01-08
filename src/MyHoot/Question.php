@@ -53,10 +53,12 @@ class Question
 	}
 
 	function getLabel(){
-		if ($this->city!="" && $this->city != $this->country)
+		if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
-		else
+		//if ($this->type=="pop" )
+	  else
 			return $this->country;
+
 	}
 
 	function getQuestionText(){
@@ -66,7 +68,7 @@ class Question
 				return "What is the population of ";
 		if ($this->type=="weather")
 				return "What is the normal high temp today in ";
-		if ($this->type=="weather")
+		if ($this->type=="age")
 				return "How old is ";
 	}
 	function getWeather(){
@@ -82,11 +84,32 @@ class Question
 
   }
 	function getAge(){
-
+		global $conn;
+		$sql = "SELECT * FROM `data-people`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//echo $sql;
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			if($row = $result->fetch_assoc()){
+				$this->country=$row["name"];
+				//$this->city=$row["city"];
+				//echo $this->country;
+				date_default_timezone_set('America/Los_Angeles');
+				$now = new DateTime("now");
+				$bday = date_create($row["birthday"]);
+				$age=date_diff($now, $bday);
+				$this->answer=$age->format('%y');
+				$this->image="http://thumbs.dreamstime.com/z/ages-woman-editable-vector-silhouettes-different-stages-womans-life-32780321.jpg";
+			}
+		}
+		if (Question::checkForRepeats($this->country))
+			$this->getAge();
 	}
 
 	function getPopulation(){
 		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
+    /*
 		$csvData = file_get_contents("data/populations.csv");
 		$lines = explode(PHP_EOL, $csvData);
 		//	$my=str_getcsv($lines);
@@ -100,6 +123,7 @@ class Question
 			$this->country=preg_replace( "/\r|\n/", "", ($city[0]));
 			$this->answer=preg_replace( "/\r|\n/", "", ($city[1]));
 		}
+		*/
 
 }
 
@@ -208,7 +232,10 @@ function getImage(){
 function addAnswer(){
 	global $conn;
 	//$latLong=new LatLong();
-	$latLong=LatLong::findLatLong($this->city,$this->country);
+	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop")
+	    $latLong=LatLong::findLatLong($this->city,$this->country);
+  else
+		  $latLong=new LatLong(0,0);
 	if ($this->city!="")
 		$cityName=$this->city . ",".$this->country;
   else

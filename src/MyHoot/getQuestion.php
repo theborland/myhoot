@@ -6,8 +6,21 @@ if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
-
-$theQuestion=new Question($_SESSION["type"]);
+if ($_SESSION["type"]=="random")
+{
+  $r=rand(1,10);
+  if ($r<=4)
+      $current="geo";
+  else if ($r<=6)
+      $current="pop";
+  else if ($r<=8)
+      $current="age";
+  else if ($r<=10)
+          $current="weather";
+}
+else
+    $current=$_SESSION["type"];
+$theQuestion=new Question($current);
 ?>
 
 <html>
@@ -16,7 +29,7 @@ $theQuestion=new Question($_SESSION["type"]);
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 300;
+var counter = 30;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
