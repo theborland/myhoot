@@ -24,7 +24,7 @@ else {
     $entryData = array(
         'category' => "Game".$_SESSION['game_id'].$questionNumber
       , 'title'    => $_SESSION["name"]
-      , 'miles'    =>$distanceAway
+      , 'miles'    => number_format($distanceAway)
     );
     $context = new ZMQContext();
     $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');

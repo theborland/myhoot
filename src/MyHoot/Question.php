@@ -5,6 +5,7 @@ class Question
 	var $country;
 	var $type;
 	var $answer;
+	var $image;
 	function __construct($type){
 		$_SESSION["questionNumber"]++;
 		$this->alertUsers($_SESSION["questionNumber"],$type);
@@ -12,7 +13,7 @@ class Question
 		if ($type=="geo")
 			  $this->getLocation();
 	  if ($type=="pop")
-				$this->getPopulation();
+				$this->getLocation();
 		if ($type=="weather")
 				$this->getWeather();
 		if ($type=="age")
@@ -103,7 +104,35 @@ class Question
 }
 
 	function getLocation(){
+
+		global $conn;
+		$sql = "SELECT * FROM `data-geo`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$result = $conn->query($sql);
+		if ($result)
+		{
+		  if($row = $result->fetch_assoc()){
+				$this->country=$row["country"];
+				$this->city=$row["city"];
+				$this->answer=$row["population"];
+		    $url= $row["url"];
+		    $url=substr($url,2,strlen($url)-3);
+		    $splits=explode("', '",$url);
+		    //echo $url;
+			//echo sizeof($splits). "<br>";
+			//	print_r($splits);
+				if (sizeof($splits)==0)
+				{
+				//	echo "going in again";
+				    return $this->getLocation();
+					}
+		    $this->image=$splits[rand(0,sizeof($splits)-1)];
+		  }
+		}
+		if (Question::checkForRepeats($this->country))
+			$this->getLocation();
 		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
+/*
 		$csvData = file_get_contents("http://myonlinegrades.com/stats/la.csv");
 		$lines = explode(PHP_EOL, $csvData);
 		//	$my=str_getcsv($lines);
@@ -131,8 +160,9 @@ class Question
 	}
 	else
 		$this->getLocation();
-	if (Question::checkForRepeats($this->country))
-		$this->getLocation();
+		*/
+	//if (Question::checkForRepeats($this->country))
+	//	$this->getLocation();
 }
 
 public static function checkForRepeats($country){
@@ -147,6 +177,7 @@ public static function checkForRepeats($country){
 }
 
 function getImage(){
+	/*
   if ($this->city==$this->country)
 	    $name=$this->city;
 	else
@@ -170,6 +201,8 @@ function getImage(){
 	//print_r($phpArray);
 	$image=findSource($phpArray);
 	return $image;
+	*/
+	return $this->image;
 }
 
 function addAnswer(){
