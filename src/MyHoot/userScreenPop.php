@@ -169,6 +169,15 @@ window.onload = function(){
       labels[i].className = labels[i].className + " smallLabel";
   }
 
+  markers = document.getElementsByClassName("noUi-marker-large");
+  for(var i=0; i<markers.length;i++){
+    //val = parseInt(markers[i].innerHTML);
+    //markers[i].innerHTML = comma(val);
+    if(i%5 != 0)
+      markers[i].className = markers[i].className + " smallMarker";
+  }
+
+
 
 };
 

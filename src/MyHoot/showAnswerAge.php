@@ -1,6 +1,6 @@
 <?php
 session_start();
-//echo "sdfsdf";
+echo "sdfsdf";
 require 'dbsettings.php';
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
@@ -162,7 +162,7 @@ function animateNum(i, n, fin, finNum, time){
 }
 
 answer = document.getElementById("answer").innerHTML;
-answer = answer.length >= 10 ? answer :new Array(10 - answer.length + 1).join("x") + answer;
+answer = answer.length >= 2 ? answer :new Array(2 - answer.length + 1).join("x") + answer;
 
 setTimeout( function(){
 
@@ -197,24 +197,14 @@ setTimeout( function(){
 </script>
 </head>
 <body>
-<h1>Age</h1>
 <div id="map-canvas"></div>
 <div id="overlayWrap">
   <div id="answerLabel">Correct Answer</div>
   <div id="answerWrap">
     <div class="answerNum" id="answerNum0">0</div>
-    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
     <div class="answerNum" id="answerNum1">0</div>
-    <div class="answerNum" id="answerNum2">0</div>
-    <div class="answerNum" id="answerNum3">0</div>
-    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
-    <div class="answerNum" id="answerNum4">0</div>
-    <div class="answerNum" id="answerNum5">0</div>
-    <div class="answerNum" id="answerNum6">0</div>
-    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
-    <div class="answerNum" id="answerNum7">0</div>
-    <div class="answerNum" id="answerNum8">0</div>
-    <div class="answerNum" id="answerNum9">0</div>
+    <div class="answerNum noB" id="answerNumC" style="width:200px;">years old</div>
+
   </div>
 
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
@@ -244,6 +234,6 @@ setTimeout( function(){
   </div>
 
 </div>
-<div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
+<div id="answer">23<?php echo ($allAnswers->correctAns->value); ?></div>
 </body>
 </html>
