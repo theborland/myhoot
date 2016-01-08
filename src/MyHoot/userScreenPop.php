@@ -10,6 +10,7 @@ if (isset($_GET["question"]))
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  <link rel="stylesheet" href="style/global.css">
+<link href="nouislider.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style/inputSlider.css">
     <style>
       html, body, #map-canvas {
@@ -28,63 +29,6 @@ if (isset($_GET["question"]))
         background: linear-gradient(to bottom, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
               }
 
-      #newSlider{
-        height: 65%;
-        box-shadow: 0px 0px 0px;
-        border:1px solid #fff;
-        margin:auto;
-        margin-top:185px;
-        left:-50px;
-      }
-      #newSlider.noUi-background{
-        background: transparent;
-      }
-      #newSlider .noUi-connect{
-        background: #fff;
-        box-shadow: 0px 0px 0px inset;
-      }
-      #newSlider .noUi-handle{
-        border:0px;
-        background: #F76116;
-        border:2px solid #fff;
-        box-shadow: inset 0px 0px 5px  rgba(0,0,0,.1), 0px 0px 10px  rgba(0,0,0,.3);
-        cursor: pointer;
-        height: 28px;
-        width: 28px;
-        border-radius: 50px;
-      }
-      #newSlider .noUi-handle::before{
-        background: #BB3B08;
-        top:10px;
-        width: 12px;
-        box-shadow: 0px 0px 3px  rgba(0,0,0,.3);
-      }
-      #newSlider .noUi-handle::after{
-        background: #BB3B08;
-        top: 13px;
-        width: 12px;
-        box-shadow: 0px 0px 3px  rgba(0,0,0,.3);
-      }
-      #newSlider .noUi-pips{
-        color: rgba(255,255,255,.8);
-        font-size: 13px;
-
-
-      }
-      #submitWrap{
-        display: block;
-        position: fixed;
-        bottom: 30px;
-        left: 0px;
-        right: 0px;
-        top:0px;
-        text-align: center;
-
-      }
-      .smallLabel{
-        font-size: 11px;
-        color:rgba(255,255,255,.5);
-      }
     </style>
 
     <script>
@@ -114,14 +58,14 @@ if (isset($_GET["question"]))
 
 
 
-/*	setTimeout( function(){
+	setTimeout( function(){
    if(XMLHttpRequest) var x = new XMLHttpRequest();
 else var x = new ActiveXObject("Microsoft.XMLHTTP");
 x.open("GET", 'inQuestion.php?question=<?php echo $_GET["question"]; ?>', true);
 x.send();
 
   }  , 2500 );
-*/
+
 
 
 
@@ -133,7 +77,6 @@ x.send();
       loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>
 
-<link href="nouislider.min.css" rel="stylesheet">
 
  </head>
  <body>
@@ -173,21 +116,12 @@ x.send();
             -->
 
           </div>
-
-
-
-
-
       </form>
-
   </div>
-
-    <div id="map-canvas"></div>
 
 
     <script type="text/javascript">
   
-
 
 
 window.onload = function(){
