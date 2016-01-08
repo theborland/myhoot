@@ -162,7 +162,7 @@ function animateNum(i, n, fin, finNum, time){
 }
 
 answer = document.getElementById("answer").innerHTML;
-answer = answer.length >= 10 ? answer :new Array(10 - answer.length + 1).join("x") + answer;
+answer = answer.length >= 3 ? answer :new Array(3 - answer.length + 1).join("x") + answer;
 
 setTimeout( function(){
 
@@ -203,18 +203,9 @@ setTimeout( function(){
   <div id="answerLabel">Correct Answer</div>
   <div id="answerWrap">
     <div class="answerNum" id="answerNum0">0</div>
-    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
     <div class="answerNum" id="answerNum1">0</div>
     <div class="answerNum" id="answerNum2">0</div>
-    <div class="answerNum" id="answerNum3">0</div>
-    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
-    <div class="answerNum" id="answerNum4">0</div>
-    <div class="answerNum" id="answerNum5">0</div>
-    <div class="answerNum" id="answerNum6">0</div>
-    <div class="answerNum noB" id="answerNumC">&nbsp;</div>
-    <div class="answerNum" id="answerNum7">0</div>
-    <div class="answerNum" id="answerNum8">0</div>
-    <div class="answerNum" id="answerNum9">0</div>
+    <div class="answerNum noB" id="answerNumC"  style="width:200px;">&deg;F</div>
   </div>
 
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
