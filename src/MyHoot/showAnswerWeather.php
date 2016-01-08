@@ -197,7 +197,6 @@ setTimeout( function(){
 </script>
 </head>
 <body>
-<h1>Weather</h1>
 <div id="map-canvas"></div>
 <div id="overlayWrap">
   <div id="answerLabel">Correct Answer</div>
