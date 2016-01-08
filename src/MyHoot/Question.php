@@ -6,6 +6,7 @@ class Question
 	var $type;
 	var $answer;
 	var $image;
+
 	function __construct($type){
 		$_SESSION["questionNumber"]++;
 		$this->alertUsers($_SESSION["questionNumber"],$type);
@@ -18,6 +19,8 @@ class Question
 				$this->getWeather();
 		if ($type=="age")
 				$this->getAge();
+		if ($type=="user")
+				$this->getUserQuestion();
 		$this->addAnswer();
 		//echo "in here again";
 		Game::updateRound($_SESSION["questionNumber"],$type);
@@ -107,23 +110,22 @@ class Question
 			$this->getAge();
 	}
 
-	function getPopulation(){
-		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
-    /*
-		$csvData = file_get_contents("data/populations.csv");
+	function getUserQuestion(){
+			$csvData = file_get_contents("https://docs.google.com/spreadsheets/d/1fco39wut_t7dFqCQ8ZuNe7VGCupndG8UPpinlohpbXc/pub?output=csv");
+
 		$lines = explode(PHP_EOL, $csvData);
-		//	$my=str_getcsv($lines);
-		//print_r($lines);
+
 		$array = array();
-		$randEntry=rand(1,sizeof($lines)-1);
+		$randEntry=rand(0,sizeof($lines)-1);
 		$city=explode(",",$lines[$randEntry]);
 		//echo "city ".$city[1] . "sdf";
 		if (sizeof($city)>1){
-			$this->city=preg_replace( "/\r|\n/", "", ($city[0]));
+		//	$this->city=preg_replace( "/\r|\n/", "", ($city[0]));
 			$this->country=preg_replace( "/\r|\n/", "", ($city[0]));
 			$this->answer=preg_replace( "/\r|\n/", "", ($city[1]));
 		}
-		*/
+		if (Question::checkForRepeats($this->country))
+			$this->getUserQuestion();
 
 }
 

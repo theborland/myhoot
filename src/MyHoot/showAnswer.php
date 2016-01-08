@@ -8,7 +8,8 @@ if (Game::findGame()->type=="weather")
       header( 'Location: showAnswerWeather.php') ;
 if (Game::findGame()->type=="age")
       header( 'Location: showAnswerAge.php') ;
-
+if (Game::findGame()->type=="user")
+      header( 'Location: showAnswerAge.php') ;
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 
