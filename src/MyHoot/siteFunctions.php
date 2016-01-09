@@ -275,6 +275,14 @@ class Game
 			return $game;
 		}
 	}
+	public static function questionStatusRedirect(){
+		    $game=Game::findGame();
+		    $questionNumber=$game->round;
+		    if ($questionNumber==null)
+		      header( 'Location: joinquiz.php');
+		    else if ($questionNumber==-1)
+		      header( 'Location: waitingScreen.php?message='."Sorry, there is no question in progress" ) ;
+	 }
 }
 class LatLong
 {

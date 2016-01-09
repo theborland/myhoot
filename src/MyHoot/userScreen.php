@@ -4,6 +4,8 @@ require 'dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+  Game::questionStatusRedirect();
+
 ?>
  <html>
  <head>
@@ -19,7 +21,7 @@ if (isset($_GET["question"]))
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 
-	setTimeout( function(){ 
+	setTimeout( function(){
    if(XMLHttpRequest) var x = new XMLHttpRequest();
 else var x = new ActiveXObject("Microsoft.XMLHTTP");
 x.open("GET", 'inQuestion.php?question=<?php echo $_GET["question"]; ?>', true);

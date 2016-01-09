@@ -60,7 +60,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
       conn.subscribe('Game'+gameID+'Status', function(topic, data) {
         console.log('Waiting for users:"' + topic + '" : ' + data.title);
         var container = document.getElementById("waitingDiv");
-        if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")>-1)
+        if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
           window.location.href='waitingScreen.php';
         else if (data.title.substring(0,1)=="Q")
         {
