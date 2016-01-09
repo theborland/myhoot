@@ -13,6 +13,12 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
       <style type="text/css">
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
+          body{
+            background: url('<?php echo "paris.jpeg"; ?>');
+            background-size: cover;
+            background-repeat: no-repeat;
+
+          }
 
           #overlayWrap{
             left:400px;
@@ -168,9 +174,9 @@ setTimeout( function(){
 
   for(n=0; n < answer.length; n++){
     time = 50 + Math.round(Math.random() * 50);
-    for(i=0; i < 40; i++){
+    for(i=0; i < 25; i++){
         val = (answer.charAt(n) == "x".charAt(0)) ? "&nbsp;" : answer.charAt(n) + "";
-        animateNum(i, n, (i==39), val, time);
+        animateNum(i, n, (i==24), val, time);
     }
   }
 }, 500);
@@ -224,7 +230,7 @@ setTimeout( function(){
   $allAnswers->getTP();
      foreach ($allAnswers->allAnswers as $key => $value) {
          ?><div class="scoresLine"><?php echo $value->name; ?>:
-           + <?php echo $value->roundPoints; ?>
+           + <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
            <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
          </div><?php
      }

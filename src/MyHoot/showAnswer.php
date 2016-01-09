@@ -20,6 +20,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
 
+
           #overlayWrap{
             left:400px;
           }
@@ -259,7 +260,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $allAnswers->getTP();
     foreach ($allAnswers->allAnswers as $key => $value) {
         ?><div class="scoresLine"><?php echo $value->name; ?>:
-          + <?php echo $value->roundPoints; ?>
+          + <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
           <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
         </div><?php
     }

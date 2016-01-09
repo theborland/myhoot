@@ -143,6 +143,14 @@ body{
 	border: 3px solid #e1e1e1;
 }
 
+.roundPoints{
+	display: inline-block;
+	padding:0px 4px;
+	background: #22B95C;
+	color: #fff;
+	border-radius: 3px;
+	margin-left: 2px;
+}
 
 
 

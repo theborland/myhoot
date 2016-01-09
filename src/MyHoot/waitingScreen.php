@@ -39,6 +39,11 @@ if ($submit=="Join")
 		}
 		#joinHere:link, #joinHere:visited{
 			color:#fff;
+			text-decoration: none;
+			display: inline-block;
+			border:1px solid #fff;
+			padding:1px 4px;
+			border-radius: 3px;
 		}
 		#everyonePlaying{
 			color:#a1a1a1;

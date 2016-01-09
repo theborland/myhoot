@@ -24,8 +24,8 @@ if (isset($_GET["question"]))
         height: auto;
         position: fixed;
         background: #43cea2; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #43cea2 , #185a9d); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #43cea2 , #185a9d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: -webkit-linear-gradient(to bottom, #096433 , #B8CE15); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to bottom, #096433 , #B8CE15); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       }
       #newSlider .noUi-pips{
         font-size: 16px;
@@ -79,7 +79,6 @@ x.open("GET", 'inQuestion.php?question=<?php echo $_GET["question"]; ?>', true);
 x.send();
 
   }  , 2500 );
-
 
 
 
