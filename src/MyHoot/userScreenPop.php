@@ -2,8 +2,10 @@
 session_start();
 require 'dbsettings.php';
 if (isset($_GET["question"]))
-  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
+  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"])  )
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+  Game::questionStatusRedirect();
+  
 ?>
 <html>
   <head>
@@ -52,7 +54,7 @@ if (isset($_GET["question"]))
         //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
-    
+
 
 
 
@@ -107,11 +109,11 @@ x.send();
             </div>
             <input type="range" id="isRange" list="numbers" step="10" name="isRange" for="isValue" min="1320" max="2141.64130" value="1541" oninput="changeValue()">
             <datalist id="numbers">
-              <option>10</option> 
-              <option label="30">30</option> 
-              <option label="midpoint">50</option> 
+              <option>10</option>
+              <option label="30">30</option>
+              <option label="midpoint">50</option>
               <option>70</option>
-              <option>90</option> 
+              <option>90</option>
             </datalist>
             -->
 
@@ -121,7 +123,7 @@ x.send();
 
 
     <script type="text/javascript">
-  
+
 
 
 window.onload = function(){
@@ -195,7 +197,7 @@ window.onload = function(){
   }
 
 </script>
- 
+
 
 
  </body>

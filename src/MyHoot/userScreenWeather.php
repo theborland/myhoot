@@ -4,6 +4,8 @@ require 'dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+  Game::questionStatusRedirect();
+
 ?>
 <html>
   <head>

@@ -12,9 +12,9 @@ class Question
 		$this->alertUsers($_SESSION["questionNumber"],$type);
 		$this->type=$type;
 		if ($type=="geo")
-			  $this->getLocation();
+			  $this->getLocation($type);
 	  if ($type=="pop")
-				$this->getLocation();
+				$this->getLocation($type);
 		if ($type=="weather")
 				$this->getWeather();
 		if ($type=="age")
@@ -129,11 +129,11 @@ class Question
 
 }
 
-	function getLocation(){
+	function getLocation($type){
 
 		global $conn;
-		$sql = "SELECT * FROM `data-geo`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
-		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$sql = "SELECT * FROM `data-geo` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Iowa'";
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -142,8 +142,9 @@ class Question
 				$this->city=$row["city"];
 				$this->answer=$row["population"];
 		    $url= $row["url"];
-		    $url=substr($url,2,strlen($url)-3);
+		    $url=substr($url,2,strlen($url)-4);
 		    $splits=explode("', '",$url);
+
 		    //echo $url;
 			//echo sizeof($splits). "<br>";
 			//	print_r($splits);
@@ -153,42 +154,14 @@ class Question
 				    return $this->getLocation();
 					}
 		    $this->image=$splits[rand(0,sizeof($splits)-1)];
+					//echo $this->image;
 		  }
 		}
 		if (Question::checkForRepeats($this->country))
-			$this->getLocation();
-		//	$csvData = file_get_contents("https://raw.githubusercontent.com/icyrockcom/country-capitals/master/data/country-list.csv");
-/*
-		$csvData = file_get_contents("http://myonlinegrades.com/stats/la.csv");
-		$lines = explode(PHP_EOL, $csvData);
-		//	$my=str_getcsv($lines);
-		//print_r($lines);
-		$array = array();
-
-	//print_r($array);
-	//echo "lines " . sizeof($lines);
-	$randEntry=rand(1,sizeof($lines)-1);
-	//	$randEntry=rand(1,5);
-//	$randEntry=245;
-	//echo "rand is ".$randEntry;
-	//$randEntry=168;
-	$city=explode(",",$lines[$randEntry]);
-	//echo "city ".$city[1] . "sdf";
-	if (sizeof($city)>1){
-		$this->city=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
-		$this->country=preg_replace( "/\r|\n/", "", ($city[1]));
-		if (strlen($this->country)==2)
-				$this->country=state_abbr($this->country,"name");
-	}
-	else if (sizeof($city)>0){
-		$this->country=preg_replace( "/\r|\n/", "", ($city[0]));//.','.$array[$randEntry][0]);
-		$this->city="";//.','.$array[$randEntry][0]);
-	}
-	else
-		$this->getLocation();
-		*/
-	//if (Question::checkForRepeats($this->country))
-	//	$this->getLocation();
+			$this->getLocation($type);
+		if ($type=="pop"&& $this->answer=="-1")
+				    $this->getLocation($type);
+		
 }
 
 public static function checkForRepeats($country){
