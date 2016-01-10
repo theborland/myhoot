@@ -10,6 +10,8 @@ if (Game::findGame()->type=="age")
       header( 'Location: showAnswerAge.php') ;
 if (Game::findGame()->type=="user")
       header( 'Location: showAnswerAge.php') ;
+if (Game::findGame()->type=="time")
+      header( 'Location: showAnswerTime.php')
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 

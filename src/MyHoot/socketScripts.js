@@ -74,6 +74,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
                 window.location.href='userScreenAge.php?question='+data.title.substring(1);
             if (data.type=="user")
                 window.location.href='userScreenAge.php?question='+data.title.substring(1);
+            if (data.type=="time")
+                window.location.href='userScreenTime.php?question='+data.title.substring(1);
         }
             });
 

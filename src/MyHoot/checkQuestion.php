@@ -12,10 +12,14 @@ else if ($questionNumber==-1)
   header( 'Location: waitingScreen.php?message='."Sorry, there is no question in progress" ) ;
 else
 {
-    if ($game->type=="pop")
-      header( 'Location: userScreenPop.php?question='.$questionNumber ) ;
-    else
+    if ($game->type=="geo")
       header( 'Location: userScreen.php?question='.$questionNumber ) ;
+    else {
+      $type=ucwords($game->type);
+      header( 'Location: userScreen'.$type.'.php?question='.$questionNumber ) ;
+    }
+//    else
+//      header( 'Location: userScreen.php?question='.$questionNumber ) ;
 
 }
  ?>

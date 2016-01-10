@@ -168,6 +168,7 @@ Game::createGame();
   <option value="pop">Pop</option>
   <option value="weather">Weather</option>
   <option value="age">People</option>
+  <option value="time">Timeline</option>
   <option value="user">User</option>
   <option value="random">Random</option>
 </select>

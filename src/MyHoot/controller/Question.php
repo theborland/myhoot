@@ -19,6 +19,8 @@ class Question
 				$this->getWeather();
 		if ($type=="age")
 				$this->getAge();
+		if ($type=="time")
+				$this->getTime();
 		if ($type=="user")
 				$this->getUserQuestion();
 		$this->addAnswer();
@@ -67,12 +69,16 @@ class Question
 	function getQuestionText(){
 		if ($this->type=="geo")
 			return "Where is ";
+			if ($this->type=="geo")
+				return "Where is ";
 		if ($this->type=="pop")
 				return "What is the population of ";
 		if ($this->type=="weather")
 				return "What is the normal high temp today in ";
 		if ($this->type=="age")
 				return "How old is ";
+		if ($this->type=="time")
+				return "When was ";
 	}
 	function getWeather(){
 		$this->getLocation();
@@ -86,6 +92,7 @@ class Question
 			$this->getWeather();
 
   }
+
 	function getAge(){
 		global $conn;
 		$sql = "SELECT * FROM `data-people`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
@@ -108,6 +115,24 @@ class Question
 		}
 		if (Question::checkForRepeats($this->country))
 			$this->getAge();
+	}
+
+	function getTime(){
+		global $conn;
+		$sql = "SELECT * FROM `data-time`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//echo $sql;
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			if($row = $result->fetch_assoc()){
+				$this->country=$row["wording"];
+				$this->answer=$row["answer"];
+				$this->image="http://thumbs.dreamstime.com/z/ages-woman-editable-vector-silhouettes-different-stages-womans-life-32780321.jpg";
+			}
+		}
+//		if (Question::checkForRepeats($this->country))
+//			$this->getTime();
 	}
 
 	function getUserQuestion(){
@@ -161,7 +186,7 @@ class Question
 			$this->getLocation($type);
 		if ($type=="pop"&& $this->answer=="-1")
 				    $this->getLocation($type);
-		
+
 }
 
 public static function checkForRepeats($country){
