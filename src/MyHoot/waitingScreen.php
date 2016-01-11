@@ -7,9 +7,9 @@ require 'dbsettings.php';
 if ($submit=="Join"){
      $_SESSION["game_id"] =$game_id;
      if (Game::findGame()==null)
-         header( 'Location: joinquiz.php?error=Bad Game');
+         header( 'Location: joinQuiz.php?error=Bad Game');
      if (!User::createUser($game_id,$name))
-         header( 'Location: joinquiz.php?error=Bad Username');
+         header( 'Location: joinQuiz.php?error=Bad Username');
    }
 
  ?>
