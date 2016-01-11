@@ -12,7 +12,7 @@ class AllAnswers
 		$this->allAnswers=array();
 		$this->correctAns=Answer::loadCorrect($questionNum);
 		global $conn;
-		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."'";
+		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."' order by submitTime DESC";
 		//echo $sql;
 		$result = $conn->query($sql);
 		if ($result)
@@ -85,15 +85,14 @@ class User{
 	}
 	public static function createUser($game_id,$name){
 		global $conn;
-		$_SESSION["game_id"] =$game_id;
 		$_SESSION["name"] =$name;
+		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$_GET['name']."'";
+		$result = $conn->query($sql);
+		if ($result->num_rows>0 || $name=="")
+		   return false;
 		$sql = "INSERT INTO `users` (`game_id`, `name`) VALUES ('".$_GET['game_id']."','".$_GET['name']."')";
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
-		if ($result)
-		{
-			echo "joined successfully";
-		}
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$game_id
@@ -103,6 +102,7 @@ class User{
 		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
 		$socket->connect("tcp://127.0.0.1:5555");
 		$socket->send(json_encode($entryData));
+		return true;
 		//END SOCKET SENDING
 	}
 
@@ -164,16 +164,22 @@ class Game
 	{
 		global $conn;
 		$sql = "SELECT * FROM `games` WHERE `game_id` = '".$_SESSION["game_id"]."'";
-		//echo $sql;
+
 		$result = $conn->query($sql);
 		if ($result)
 		{
 			$row = $result->fetch_assoc();
-			$game=new self();
-			$game->round= $row["round"];
-			$game->type=$row["type"];
-			return $game;
+			if ($row){
+				$game=new self();
+				$game->round= $row["round"];
+				$game->type=$row["type"];
+				return $game;
+			}
+			else {
+				 return null;
+			}
 		}
+
 	}
 	public static function questionStatusRedirect(){
 		    $game=Game::findGame();

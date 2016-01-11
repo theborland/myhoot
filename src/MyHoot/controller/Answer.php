@@ -59,6 +59,8 @@ class Answer
 			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
 		else
 		  $answer->distanceAway=abs($ans-$correct->value);
+		if ($ans>100000)
+		   $answer->distanceAway=round($answer->distanceAway,-5);
 		$answer->getUserInfo();
 		$answer->updateUser();
 		$answer->roundPoints=$points;

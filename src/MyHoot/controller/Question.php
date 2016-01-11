@@ -6,10 +6,10 @@ class Question
 	var $type;
 	var $answer;
 	var $image;
+	var $timesRepeated=0;
 
 	function __construct($type){
 		$_SESSION["questionNumber"]++;
-		$this->alertUsers($_SESSION["questionNumber"],$type);
 		$this->type=$type;
 		if ($type=="geo")
 			  $this->getLocation($type);
@@ -26,6 +26,7 @@ class Question
 		$this->addAnswer();
 		//echo "in here again";
 		Game::updateRound($_SESSION["questionNumber"],$type);
+		$this->alertUsers($_SESSION["questionNumber"],$type);
 	}
 
 	public static function InQuestion($questionNum){
@@ -81,14 +82,14 @@ class Question
 				return "When was ";
 	}
 	function getWeather(){
-		$this->getLocation();
+		$this->getLocation("weather");
 		$latLong=LatLong::findLatLong($this->city,$this->country);
 		$url='http://api.wunderground.com/api/766deb6baf5fc335/almanac/conditions/forecast/q/'.$latLong->lat.','.$latLong->longg.'.json';
 		$jsonData =file_get_contents( $url);
 		$phpArray = json_decode($jsonData,true);
 		//echo $url;
 		$this->answer=$phpArray["almanac"]["temp_high"]["normal"]["F"];
-		if ($this->answer=="" || $this->answer==0)
+		if ($this->answer=="" || $this->answer<=0)
 			$this->getWeather();
 
   }
@@ -113,7 +114,7 @@ class Question
 				$this->image="http://thumbs.dreamstime.com/z/ages-woman-editable-vector-silhouettes-different-stages-womans-life-32780321.jpg";
 			}
 		}
-		if (Question::checkForRepeats($this->country))
+		if ($this->checkForRepeats($this->country))
 			$this->getAge();
 	}
 
@@ -149,7 +150,7 @@ class Question
 			$this->country=preg_replace( "/\r|\n/", "", ($city[0]));
 			$this->answer=preg_replace( "/\r|\n/", "", ($city[1]));
 		}
-		if (Question::checkForRepeats($this->country))
+		if ($this->checkForRepeats($this->country))
 			$this->getUserQuestion();
 
 }
@@ -158,7 +159,7 @@ class Question
 
 		global $conn;
 		$sql = "SELECT * FROM `data-geo` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
-		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Iowa'";
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -168,6 +169,9 @@ class Question
 				$this->answer=$row["population"];
 		    $url= $row["url"];
 		    $url=substr($url,2,strlen($url)-4);
+				$url=str_replace("', \"","', '",$url);
+				$url=str_replace("\", \"","', '",$url);
+        $url=str_replace("\", '","', '",$url);
 		    $splits=explode("', '",$url);
 
 		    //echo $url;
@@ -178,23 +182,24 @@ class Question
 				//	echo "going in again";
 				    return $this->getLocation();
 					}
-		    $this->image=$splits[rand(0,sizeof($splits)-1)];
+		    $this->image=($splits[rand(0,sizeof($splits)-1)]);
 					//echo $this->image;
 		  }
 		}
-		if (Question::checkForRepeats($this->country))
+		if ($this->checkForRepeats($this->country))
 			$this->getLocation($type);
 		if ($type=="pop"&& $this->answer=="-1")
-				    $this->getLocation($type);
+			$this->getLocation($type);
 
 }
 
-public static function checkForRepeats($country){
+function checkForRepeats($country){
 	   global $conn;
 		 $sql = "SELECT * FROM `questions` WHERE gameID='".$_SESSION["game_id"]."' AND wording LIKE '%$country%'";
 	 	$result = $conn->query($sql);
 		//echo $sql;
-		if ($result->num_rows>0)
+		$this->timesRepeated++;
+		if ($result->num_rows>0 && $this->timesRepeated<5)
 		   return true;
 	  return false;
 
@@ -240,8 +245,10 @@ function addAnswer(){
 		$cityName=$this->city . ",".$this->country;
   else
 		$cityName=$this->country;
+	$cityName=$conn->real_escape_string($cityName);
 	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`, `wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','$cityName', '".$latLong->lat."', '".$latLong->longg."', '".$this->answer."')";
 	$result = $conn->query($sql);
+	//echo $sql;
 }
 }
 

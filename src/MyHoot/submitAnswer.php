@@ -20,6 +20,9 @@ if ($game->type=="geo")
 
 else
    $distanceAway=abs($answer-$correct->value);
+
+if ($answer>100000)
+      $distanceAway=round($distanceAway,-5);
 //die ($distanceAway);
 
 //echo $sql;

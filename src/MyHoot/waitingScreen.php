@@ -4,8 +4,13 @@ session_start();
 $whitelist = array('message','submit','name','game_id');
 require 'dbsettings.php';
 
-if ($submit=="Join")
-     User::createUser($game_id,$name);
+if ($submit=="Join"){
+     $_SESSION["game_id"] =$game_id;
+     if (Game::findGame()==null)
+         header( 'Location: joinquiz.php?error=Bad Game');
+     if (!User::createUser($game_id,$name))
+         header( 'Location: joinquiz.php?error=Bad Username');
+   }
 
  ?>
  <html>
