@@ -209,7 +209,9 @@ setTimeout( function(){
   <div id="answerWrap">
     <div class="answerNum" id="answerNum0">0</div>
     <div class="answerNum" id="answerNum1">0</div>
-    <div class="answerNum noB" id="answerNumC" style="width:200px;">years old</div>
+    <div class="answerNum" id="answerNum2">0</div>
+<div class="answerNum" id="answerNum3">0</div>
+    <div class="answerNum noB" id="answerNumC" style="width:200px;"></div>
 
   </div>
 

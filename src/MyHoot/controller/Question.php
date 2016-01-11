@@ -129,7 +129,7 @@ class Question
 			if($row = $result->fetch_assoc()){
 				$this->country=$row["wording"];
 				$this->answer=$row["answer"];
-				$this->image="http://thumbs.dreamstime.com/z/ages-woman-editable-vector-silhouettes-different-stages-womans-life-32780321.jpg";
+				$this->image="http://www.freelargeimages.com/wp-content/uploads/2014/12/Black_background.jpg";
 			}
 		}
 //		if (Question::checkForRepeats($this->country))
