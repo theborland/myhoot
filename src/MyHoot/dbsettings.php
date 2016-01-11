@@ -1,8 +1,10 @@
 <?php
 //echo getHostName();
+//$pusherIP='52.90.77.67';
 $pusherIP='172.24.18.10';
 $pusherIP='192.168.0.106';
-$pusherIP='52.90.77.67';
+$pusherIP=getHostByName(getHostName());
+//$pusherIP='52.90.77.67';
 $servername = "localhost";
 $username = "root";
 $password = "myhoot";
