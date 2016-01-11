@@ -89,8 +89,8 @@ class User{
 		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$_GET['name']."'";
 		$result = $conn->query($sql);
 		//die ($sql);
-		//if ($result->num_rows>0 || $name=="")
-		//   return false;
+		if ($result->num_rows>0 || $name=="")
+		   return false;
 		$sql = "INSERT INTO `users` (`game_id`, `name`) VALUES ('".$_GET['game_id']."','".$_GET['name']."')";
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
