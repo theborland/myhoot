@@ -198,39 +198,40 @@ Game::createGame();
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
- loadWaitingForUsers('<?phpecho $pusherIP; ?>' ,<?phpecho $_SESSION["game_id"]; ?>);
 
-window.onload = function() {
-	var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp'];
+	window.onload = function() {
+		var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp'];
 
-    for(var i = 0; i < 5; i++) {
-        var gs = document.getElementById("gs"+(i+1));
-       //var c = gs.className;
-        gs.onclick = function() {
-        	var name = games[parseInt(this.id.charAt(this.id.length-1)) - 1];
-        	var cs = this.children;
-        	var check = null;
-        	for(i=0; i<cs.length; i++){
-        		if(cs[i].className == "gsCheck"){
-        			check = cs[i];
-        		}
-        	}
+	    for(var i = 0; i < 5; i++) {
+	        var gs = document.getElementById("gs"+(i+1));
+	       var c = gs.className;
+	        gs.onclick = function() {
+	        	var name = games[parseInt(this.id.charAt(this.id.length-1)) - 1];
+	        	var cs = this.children;
+	        	var check = null;
+	        	for(i=0; i<cs.length; i++){
+	        		if(cs[i].className == "gsCheck"){
+	        			check = cs[i];
+	        		}
+	        	}
 
-            if(this.className.indexOf("gsSel") >= 0){
-            	this.classList.remove("gsSel");
-            	check.style.display = "none";
-            	document.getElementById(name).value = "false";
-            	//alert(document.getElementById(name).value);
+	            if(this.className.indexOf("gsSel") >= 0){
+	            	this.classList.remove("gsSel");
+	            	check.style.display = "none";
+	            	document.getElementById(name).value = "false";
 
-            }else{
-            	this.classList.add("gsSel");
-            	check.style.display = "block";
-            	document.getElementById(name).value = "true";
-            	//alert(document.getElementById(name).value);
-            }
-        }
-    }
-}
+
+	            }else{
+	            	this.classList.add("gsSel");
+	            	check.style.display = "block";
+	            	document.getElementById(name).value = "true";
+
+	            }
+	        }
+	    }
+	}
+
+ loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
 
 </script>
  </head>
