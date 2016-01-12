@@ -20,6 +20,9 @@ if ($game->type=="geo")
 
 else
    $distanceAway=abs($answer-$correct->value);
+
+if ($answer>100000)
+      $distanceAway=round($distanceAway,-5);
 //die ($distanceAway);
 
 //echo $sql;
@@ -41,7 +44,7 @@ else
       $message= "Off by: ". $distanceAway. " people";
     if ($game->type=="weather")
         $message= "Off by: ". $distanceAway. " degrees";
-    if ($game->type=="age")
+    if ($game->type=="age" || $game->type=="time")
           $message= "Off by: ". $distanceAway. " years";
     if ($game->type=="geo")
       $message= "Distance away : ". $distanceAway. " miles away";

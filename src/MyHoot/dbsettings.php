@@ -1,8 +1,10 @@
 <?php
 //echo getHostName();
+//$pusherIP='52.90.77.67';
 $pusherIP='172.24.18.10';
 $pusherIP='192.168.0.106';
-$pusherIP=getHostByName(getHostName()); //'52.90.77.67';
+$pusherIP=getHostByName(getHostName());
+//$pusherIP='52.90.77.67';
 $servername = "localhost";
 $username = "root";
 $password = "myhoot";
@@ -17,7 +19,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-include ("siteFunctions.php");
+include ("controller/siteFunctions.php");
 
 // An array of $_POST keys that are acceptable
 if (isset($whitelist))

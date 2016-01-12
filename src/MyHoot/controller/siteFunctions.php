@@ -1,5 +1,7 @@
 <?php
 include ("Question.php");
+include ("Answer.php");
+
 class AllAnswers
 {
 	public $allAnswers;
@@ -10,7 +12,7 @@ class AllAnswers
 		$this->allAnswers=array();
 		$this->correctAns=Answer::loadCorrect($questionNum);
 		global $conn;
-		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."'";
+		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."' order by submitTime DESC";
 		//echo $sql;
 		$result = $conn->query($sql);
 		if ($result)
@@ -72,108 +74,6 @@ class AllAnswers
 		return $returnString;
 	}
 }
-class Answer
-{
-	public $location;
-	public $name;
-	var $userID;
-	var $qID;
-	var $questionNum;
-	public $distanceAway;
-	var $totalMiles;
-	var $totalPoints;
-	var $roundPoints;
-	var $value;
-	public static function loadCorrect($questionNum){
-
-		global $conn;
-		$sql = "SELECT * FROM `questions` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".$questionNum."'";
-		$result = $conn->query($sql);
-		//echo $sql;
-		if ($result)
-		{
-			if($row = $result->fetch_assoc()){
-				//echo $this->location->lat;
-				$answer=new self();
-				$answer->location=new LatLong($row["lat"],$row["longg"]);
-				$answer->questionNum=$questionNum;
-				$answer->name=$row["wording"];
-				$answer->value=$row["answer"];
-				return $answer;
-			}
-		}
-	}
-
-
-
-	public static function checkUserSubmitted($questionNum,$user_id){
-		global $conn;
-		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".substr($questionNum,0)."' AND user_id='".$user_id."'";
-		$result = $conn->query($sql);
-		//echo $sql;
-		if ($result)
-		if($row = $result->fetch_assoc()){
-			//echo "here";
-			return true;
-
-		}
-
-
-		return false;
-	}
-
-	public static function addUser($qID,$loc,$ans,$userID,$correct,$points)
-	{
-		$answer=new self();
-		$answer->user_id = $userID;
-		$answer->location=$loc;
-		$answer->qID=$qID;
-		if (Game::findGame()->type=="geo")
-			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
-		else
-		  $answer->distanceAway=abs($ans-$correct->value);
-		$answer->getUserInfo();
-		$answer->updateUser();
-		$answer->roundPoints=$points;
-		return $answer;
-	}
-
-	public function getUserInfo(){
-		global $conn;
-		$sql = "SELECT * FROM `users` WHERE user_id ='".$this->user_id."'";
-		//echo $sql;
-		$result = $conn->query($sql);
-		if ($result)
-		{
-			$row = $result->fetch_assoc();
-			$this->name= $row["name"];
-			$this->totalMiles= $row["score"]+$this->distanceAway;
-	  	//$this->totalPoints= $row["totalPoints"];
-		}
-	}
-
-	public function updateAnswer($points)
-	{
-		global $conn;
-		$sql = "UPDATE `answers` SET points='".$points."' WHERE id='".$this->qID."'";
-		$this->roundPoints=$points;
-		$result = $conn->query($sql);
-	}
-
-	public function updateUser()
-	{
-		global $conn;
-		$sql = "UPDATE `users` SET score='".$this->totalMiles."' WHERE user_id='".$this->user_id."'";
-		$result = $conn->query($sql);
-	}
-
-	static function sortMiles($a,$b){
-		return $a->distanceAway-$b->distanceAway;
-	}
-	static function sortTotalMiles($a,$b){
-		return $b->totalPoints-$a->totalPoints;
-	}
-}
 
 class User{
 	var $name;
@@ -185,15 +85,15 @@ class User{
 	}
 	public static function createUser($game_id,$name){
 		global $conn;
-		$_SESSION["game_id"] =$game_id;
 		$_SESSION["name"] =$name;
-		$sql = "INSERT INTO `users` (`game_id`, `name`) VALUES ('".$_GET['game_id']."','".$_GET['name']."')";
+		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$_GET['name']."'";
+		$result = $conn->query($sql);
+		//die ($sql);
+		if ($result->num_rows>0 || $name=="")
+		   return false;		
+                $sql = "INSERT INTO `users` (`game_id`, `name`) VALUES ('".$_GET['game_id']."','".$_GET['name']."')";
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
-		if ($result)
-		{
-			echo "joined successfully";
-		}
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$game_id
@@ -203,6 +103,7 @@ class User{
 		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
 		$socket->connect("tcp://127.0.0.1:5555");
 		$socket->send(json_encode($entryData));
+		return true;
 		//END SOCKET SENDING
 	}
 
@@ -264,16 +165,22 @@ class Game
 	{
 		global $conn;
 		$sql = "SELECT * FROM `games` WHERE `game_id` = '".$_SESSION["game_id"]."'";
-		//echo $sql;
+
 		$result = $conn->query($sql);
 		if ($result)
 		{
 			$row = $result->fetch_assoc();
-			$game=new self();
-			$game->round= $row["round"];
-			$game->type=$row["type"];
-			return $game;
+			if ($row){
+				$game=new self();
+				$game->round= $row["round"];
+				$game->type=$row["type"];
+				return $game;
+			}
+			else {
+				 return null;
+			}
 		}
+
 	}
 	public static function questionStatusRedirect(){
 		    $game=Game::findGame();
