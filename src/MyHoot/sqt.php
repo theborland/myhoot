@@ -1,10 +1,10 @@
 <?php
-session_start();
+/*session_start();
 $_SESSION = array();
 $_SESSION["auto"]="";
 require 'dbsettings.php';
 //create game
-Game::createGame();
+Game::createGame();*/
  ?>
  <html>
  <head>
@@ -198,7 +198,7 @@ Game::createGame();
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
-  loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
+  //loadWaitingForUsers('<?php //echo $pusherIP; ?>' ,<?php //echo $_SESSION["game_id"]; ?>);
 
 window.onload = function() {
 	var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp'];
@@ -220,13 +220,13 @@ window.onload = function() {
             	this.classList.remove("gsSel");
             	check.style.display = "none";
             	document.getElementById(name).value = "false";
-            	alert(document.getElementById(name).value);
+            	//alert(document.getElementById(name).value);
 
             }else{
             	this.classList.add("gsSel");
             	check.style.display = "block";
             	document.getElementById(name).value = "true";
-            	alert(document.getElementById(name).value);
+            	//alert(document.getElementById(name).value);
             }
         }
     }
@@ -284,7 +284,7 @@ window.onload = function() {
 				<label class="jqLabel" style="margin-left:50px;">QUIZ ID</label>
 				<div id="quizidWrap">
 					<div id="quizid">
-						33149<?php echo $_SESSION["game_id"] ; ?>
+						33149<?php //echo $_SESSION["game_id"] ; ?>
 					</div>
 				</div>
 				<br><Br>
