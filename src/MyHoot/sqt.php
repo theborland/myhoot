@@ -1,10 +1,10 @@
 <?php
-/*session_start();
+session_start();
 $_SESSION = array();
 $_SESSION["auto"]="";
 require 'dbsettings.php';
 //create game
-Game::createGame();*/
+Game::createGame();
  ?>
  <html>
  <head>
@@ -198,14 +198,14 @@ Game::createGame();*/
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
-  //loadWaitingForUsers('<?php //echo $pusherIP; ?>' ,<?php //echo $_SESSION["game_id"]; ?>);
+ loadWaitingForUsers('<?phpecho $pusherIP; ?>' ,<?phpecho $_SESSION["game_id"]; ?>);
 
 window.onload = function() {
 	var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp'];
 
     for(var i = 0; i < 5; i++) {
         var gs = document.getElementById("gs"+(i+1));
-        //var c = gs.className;
+       //var c = gs.className;
         gs.onclick = function() {
         	var name = games[parseInt(this.id.charAt(this.id.length-1)) - 1];
         	var cs = this.children;
@@ -284,7 +284,7 @@ window.onload = function() {
 				<label class="jqLabel" style="margin-left:50px;">QUIZ ID</label>
 				<div id="quizidWrap">
 					<div id="quizid">
-						33149<?php //echo $_SESSION["game_id"] ; ?>
+						<?php echo $_SESSION["game_id"] ; ?>
 					</div>
 				</div>
 				<br><Br>
