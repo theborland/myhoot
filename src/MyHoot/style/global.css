@@ -145,11 +145,14 @@ body{
 
 .roundPoints{
 	display: inline-block;
-	padding:0px 4px;
+	padding:0px 8px;
 	background: #22B95C;
 	color: #fff;
-	border-radius: 3px;
-	margin-left: 2px;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+.roundPoints::before{
+	content:"+";
 }
 
 
