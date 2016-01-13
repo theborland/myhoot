@@ -1,12 +1,25 @@
 <?php
 session_start();
+$whitelist = array('gsGeo','gsAge','gsHist','gsPop','gsTemp');
 require 'dbsettings.php';
-
+//echo print_r($_GET["games"]);
+if ($gsGeo=="false" || $gsGeo=="true")
+{
+  $gamesSelected=array();
+  if ($gsGeo=="true")$gamesSelected[]="geo";
+  if ($gsAge=="true")$gamesSelected[]="age";
+  if ($gsHist=="true")$gamesSelected[]="time";
+  if ($gsTemp=="true")$gamesSelected[]="weather";
+  if ($gsPop=="true")$gamesSelected[]="pop";
+  //print_r($gamesSelected);
+  $_SESSION["gamesSelected"]=$gamesSelected;
+}
 if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
-if ($_SESSION["type"]=="random")
+
+/*if ($_SESSION["type"]=="random")
 {
   $r=rand(1,10);
   if ($r<=4)
@@ -19,8 +32,12 @@ if ($_SESSION["type"]=="random")
           $current="weather";
 }
 else
-    $current=$_SESSION["type"];
-$theQuestion=new Question($current);
+  $current=$_SESSION["type"];
+*/
+    $gamesSelected=$_SESSION["gamesSelected"];
+    //print_r($gamesSelected);
+    $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+    $theQuestion=new Question($current);
 ?>
 
 <html>

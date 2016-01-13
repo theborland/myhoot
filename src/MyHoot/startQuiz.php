@@ -22,7 +22,7 @@ Game::createGame();
 		padding-top: 5%;
 }
 	#jqWrap{
-		width:600px;
+		width:900px;
 	}
 	#jqWrap h4{
 		font-size:30;
@@ -122,16 +122,117 @@ Game::createGame();
 	#col2{
 		display: inline-block;
 		width: 290px;
-		padding-left:15px;
+		padding-left:20px;
+		vertical-align: top;
+		border:0px solid red;
+	}
+	#col3{
+		display: inline-block;
+		width: 290px;
+		padding-left:0px;
 		vertical-align: top;
 	}
 
+	#gsWrap{
+		width: 280px;
+		border: 0px solid #fff;
+		text-align: left;
+		padding:2px;
+		margin-top:10px;
+	}
+	.gsItem{
+		width: 88px;
+		height: 105px;
+		border:3px solid rgba(255,255,255,0);
+		box-sizing:border-box;
+		margin:2px;
+		display: inline-block;
+		cursor:pointer;
+		position: relative;
+		float: left;
+		background-position:  center 10px;
+		text-align: center;
+		background: rgba(0,0,0,.5);
+		transition:all .1s;
+		border-radius: 2px;
+		box-shadow: 0px 0px 10px rgba(0,0,0,.3);
+	}
+	.gsItem:hover{
+		border:3px solid rgba(255,255,255,.3);
+		box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+	}
+	.gsSel{
+		border:3px solid #0DCE54;	
+		background: rgba(0,0,0,.6);
+	}
+	.gsSel:hover{
+		border:3px solid #0DF262;	
+	}
+	.gsName{
+		position: absolute;
+		bottom: 3px;
+		display: inline-block;
+		color:#fff;
+		font-size:9px;
+		right: 0px;
+		left: 0px;
+		text-align: center;
+		font-weight: 500;
+	}
+	.gsCheck{
+		position: absolute;
+		top:-3px;
+		right: -3px;
+		width: 20px;
+		height: 20px;
+		background: url('img/check1.png');
+		background-size: cover;
+		display: none;
+	}
+	.gsItem:hover .gsCheck{
+		background: url('img/check2.png');
+		background-size: cover;
+	}
 	</style>
 
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
-  loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
+
+	window.onload = function() {
+		var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp'];
+
+	    for(var i = 0; i < 5; i++) {
+	        var gs = document.getElementById("gs"+(i+1));
+	       var c = gs.className;
+	        gs.onclick = function() {
+	        	var name = games[parseInt(this.id.charAt(this.id.length-1)) - 1];
+	        	var cs = this.children;
+	        	var check = null;
+	        	for(i=0; i<cs.length; i++){
+	        		if(cs[i].className == "gsCheck"){
+	        			check = cs[i];
+	        		}
+	        	}
+
+	            if(this.className.indexOf("gsSel") >= 0){
+	            	this.classList.remove("gsSel");
+	            	check.style.display = "none";
+	            	document.getElementById(name).value = "false";
+
+
+	            }else{
+	            	this.classList.add("gsSel");
+	            	check.style.display = "block";
+	            	document.getElementById(name).value = "true";
+
+	            }
+	        }
+	    }
+	}
+
+ loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
+
 </script>
  </head>
  <body>
@@ -151,7 +252,37 @@ Game::createGame();
 
 			</div>
 			<div id="col2">
-				<label class="jqLabel" style="margin-left:25px;">QUIZ ID</label>
+				<label class="jqLabel" style="margin-left:10px;">GAME TYPES</label>
+				<div id="gsWrap">
+					<div class="gsItem gsSel" id="gs1">
+						<img src="img/map.png" class="gsImg" alt="">
+						<div class="gsCheck" style="display:block;"></div>
+						<div class="gsName">GEOGRAPHY</div>
+					</div>
+					<div class="gsItem" id="gs2">
+						<img src="img/star.png" class="gsImg" alt="">
+						<div class="gsCheck"></div>
+						<div class="gsName">CELEBRITY AGES</div>
+					</div>
+					<div class="gsItem" id="gs3">
+						<img src="img/history.png" class="gsImg" alt="">
+						<div class="gsCheck"></div>
+						<div class="gsName">HISTORY</div>
+					</div>
+					<div class="gsItem" id="gs4">
+						<img src="img/population.png" class="gsImg" alt="">
+						<div class="gsCheck"></div>
+						<div class="gsName">POPULATIONS</div>
+					</div>
+					<div class="gsItem" id="gs5">		
+						<img src="img/temp.png" class="gsImg" alt="">
+						<div class="gsCheck"></div>
+						<div class="gsName">WEATHER</div>
+					</div>
+				</div>
+			</div>
+			<div id="col3">
+				<label class="jqLabel" style="margin-left:50px;">QUIZ ID</label>
 				<div id="quizidWrap">
 					<div id="quizid">
 						<?php echo $_SESSION["game_id"] ; ?>
@@ -159,19 +290,15 @@ Game::createGame();
 				</div>
 				<br><Br>
 				<form action="getQuestion.php">
+					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
+					<input type="hidden" name="gsAge" id="gsAge" value="false">
+					<input type="hidden" name="gsHist" id="gsHist" value="false">
+					<input type="hidden" name="gsPop" id="gsPop" value="false">
+					<input type="hidden" name="gsTemp" id="gsTemp" value="false">
 					<center >
 						<label for="autoplayCB" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:7px;">
 							AUTOPLAY
 							<input type="checkbox" id="autoplayCB" name="auto" value="yes"></label>
-              <select name="type">
-  <option value="geo" selected>Geo</option>
-  <option value="pop">Pop</option>
-  <option value="weather">Weather</option>
-  <option value="age">People</option>
-  <option value="time">Timeline</option>
-  <option value="user">User</option>
-  <option value="random">Random</option>
-</select>
 						<input type="submit" id="jqJoin" value="Start">
 					</Center>
 				</form>
