@@ -111,8 +111,9 @@ class Question
 				$bday = date_create($row["birthday"]);
 				$age=date_diff($now, $bday);
 				$this->answer=$age->format('%y');
-				$this->image="http://thumbs.dreamstime.com/z/ages-woman-editable-vector-silhouettes-different-stages-womans-life-32780321.jpg";
-			}
+				$url= $row["image"];
+        $this->image=Question::getRandomUrl($url);
+				}
 		}
 		if ($this->checkForRepeats($this->country))
 			$this->getAge();
@@ -129,11 +130,12 @@ class Question
 			if($row = $result->fetch_assoc()){
 				$this->country=$row["wording"];
 				$this->answer=$row["answer"];
-				$this->image="http://www.freelargeimages.com/wp-content/uploads/2014/12/Black_background.jpg";
+				$url= $row["image"];
+				$this->image=Question::getRandomUrl($url);
 			}
 		}
-//		if (Question::checkForRepeats($this->country))
-//			$this->getTime();
+		if (Question::checkForRepeats($this->country))
+   		$this->getTime();
 	}
 
 	function getUserQuestion(){
@@ -155,6 +157,20 @@ class Question
 
 }
 
+  public static function getRandomUrl($url){
+		$url=substr($url,2,strlen($url)-4);
+		$url=str_replace("', \"","', '",$url);
+		$url=str_replace("\", \"","', '",$url);
+		$url=str_replace("\", '","', '",$url);
+		$splits=explode("', '",$url);
+		if (sizeof($splits)==0)
+		{
+		//	echo "going in again";
+				return $this->getLocation();
+			}
+		return ($splits[rand(0,sizeof($splits)-1)]);
+	}
+
 	function getLocation($type){
 
 		global $conn;
@@ -168,21 +184,7 @@ class Question
 				$this->city=$row["city"];
 				$this->answer=$row["population"];
 		    $url= $row["url"];
-		    $url=substr($url,2,strlen($url)-4);
-				$url=str_replace("', \"","', '",$url);
-				$url=str_replace("\", \"","', '",$url);
-        $url=str_replace("\", '","', '",$url);
-		    $splits=explode("', '",$url);
-
-		    //echo $url;
-			//echo sizeof($splits). "<br>";
-			//	print_r($splits);
-				if (sizeof($splits)==0)
-				{
-				//	echo "going in again";
-				    return $this->getLocation();
-					}
-		    $this->image=($splits[rand(0,sizeof($splits)-1)]);
+		    $this->image=Question::getRandomUrl($url);
 					//echo $this->image;
 		  }
 		}
