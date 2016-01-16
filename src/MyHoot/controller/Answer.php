@@ -11,6 +11,7 @@ class Answer
 	var $totalPoints;
 	var $roundPoints;
 	var $value;
+	var $color;
 	public static function loadCorrect($questionNum){
 
 		global $conn;
@@ -49,12 +50,13 @@ class Answer
 		return false;
 	}
 
-	public static function addUser($qID,$loc,$ans,$userID,$correct,$points)
+	public static function addUser($qID,$loc,$ans,$userID,$correct,$points,$color)
 	{
 		$answer=new self();
 		$answer->user_id = $userID;
 		$answer->location=$loc;
 		$answer->qID=$qID;
+		$answer->color=$color;
 		if (Game::findGame()->type=="geo")
 			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
 		else

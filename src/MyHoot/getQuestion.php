@@ -36,7 +36,7 @@ if (isset($_GET["type"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 30;
+var counter = 300;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",

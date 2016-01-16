@@ -5,8 +5,9 @@ require 'dbsettings.php';
 
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
+$color=User::getColor();
 $sql = "REPLACE INTO `answers` SET `game_id`='$_SESSION[game_id]' ,`user_id`='$_SESSION[user_id]',
-`questionNum`='$questionNumber',`lat`='$lat',`longg`='$long',`answer`='$answer'";
+`questionNum`='$questionNumber',`lat`='$lat',`longg`='$long',`answer`='$answer',`color`='$color'";
 //echo $sql;
 //die();
 $result = $conn->query($sql);

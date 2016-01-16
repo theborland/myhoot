@@ -1,6 +1,7 @@
 <?php
 include ("Question.php");
 include ("Answer.php");
+include ("User.php");
 
 class AllAnswers
 {
@@ -24,7 +25,8 @@ class AllAnswers
 				$user_id = $row["user_id"];
 				$qID=$row["id"];
 				$points=$row["points"];
-				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points);
+				$color=$row["color"];
+				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points,$color);
 
 				//$submitTime= $row["submitTime"];
 				//$miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
@@ -66,72 +68,13 @@ class AllAnswers
 		$returnString="[";
 		$i=0;
 		foreach($this->allAnswers as $key=>$answer){
-			$returnString.="['".$answer->name."', ".$answer->location->lat.", ".$answer->location->longg.", 4]";
+			$returnString.="['".$answer->name."', ".$answer->location->lat.", ".$answer->location->longg.", '".$answer->color."']";
 			if (++$i!= count($this->allAnswers))
 			$returnString.= ",";
 		}
 		$returnString.="]";
 		return $returnString;
 	}
-}
-
-class User{
-	var $name;
-	var $id;
-	var $totalPoints;
-	function __construct($name,$id){
-		$this->name=$name;
-		$this->id=$id;
-	}
-	public static function createUser($game_id,$name){
-		global $conn;
-		$_SESSION["name"] =$name;
-		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$_GET['name']."'";
-		$result = $conn->query($sql);
-		//die ($sql);
-		if ($result->num_rows>0 || $name=="")
-		   return false;		
-                $sql = "INSERT INTO `users` (`game_id`, `name`) VALUES ('".$_GET['game_id']."','".$_GET['name']."')";
-		$result = $conn->query($sql);
-		$_SESSION["user_id"] =  $conn->insert_id;
-		//SOCKET SENDING MESSAGE
-		$entryData = array(
-			'category' => "Game".$game_id
-			, 'title'    => $name
-		);
-		$context = new ZMQContext();
-		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
-		$socket->connect("tcp://127.0.0.1:5555");
-		$socket->send(json_encode($entryData));
-		return true;
-		//END SOCKET SENDING
-	}
-
-	public function getTotalPoints(){
-		global $conn;
-		$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`=".$this->id."'";
-		//echo $sql;
-		$result = $conn->query($sql);
-		if ($result)
-		{
-			$row = $result->fetch_assoc();
-			$this->totalPoints = $row['sum(points)'];
-		}
-	}
-
-	public static function getTP($id){
-		global $conn;
-		$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`='".$id."'";
-		//echo $sql;
-		$result = $conn->query($sql);
-		if ($result)
-		{
-			$row = $result->fetch_assoc();
-			return $row['sum(`points`)'];
-
-		}
-	}
-
 }
 
 class Game

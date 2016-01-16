@@ -80,7 +80,8 @@ function initialize() {
 
   inputMarker = new google.maps.Marker({
     position: worldCenter,
-    map: map
+    map: map,
+    icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" +"<?php echo User::getColor(); ?>")
   });
 
 

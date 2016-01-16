@@ -178,7 +178,8 @@ center: myLatlng
         position: new google.maps.LatLng(locations[i][1], locations[i][2]),
         map: map,
         title: locations[i][0],
-        icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" +locations[i][3])
+        //icon:  //'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
       });
     }
 
