@@ -6,11 +6,16 @@ require 'dbsettings.php';
 if ($gsGeo=="false" || $gsGeo=="true")
 {
   $gamesSelected=array();
-  if ($gsGeo=="true")$gamesSelected[]="geo";
   if ($gsAge=="true")$gamesSelected[]="age";
   if ($gsHist=="true")$gamesSelected[]="time";
   if ($gsTemp=="true")$gamesSelected[]="weather";
   if ($gsPop=="true")$gamesSelected[]="pop";
+  if ($gsGeo=="true"){
+    foreach ($gamesSelected as $key)
+          $gamesSelected[]="geo";
+    if (sizeof($gamesSelected)==0)
+       $gamesSelected[]="geo";
+  }
   //print_r($gamesSelected);
   $_SESSION["gamesSelected"]=$gamesSelected;
 }
@@ -19,21 +24,6 @@ if (isset($_GET["auto"]))
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
 
-/*if ($_SESSION["type"]=="random")
-{
-  $r=rand(1,10);
-  if ($r<=4)
-      $current="geo";
-  else if ($r<=6)
-      $current="pop";
-  else if ($r<=8)
-      $current="age";
-  else if ($r<=10)
-          $current="weather";
-}
-else
-  $current=$_SESSION["type"];
-*/
     $gamesSelected=$_SESSION["gamesSelected"];
     //print_r($gamesSelected);
     $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
