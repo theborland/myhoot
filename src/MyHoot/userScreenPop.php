@@ -66,7 +66,7 @@ else var x = new ActiveXObject("Microsoft.XMLHTTP");
 x.open("GET", 'inQuestion.php?question=<?php echo $_GET["question"]; ?>', true);
 x.send();
 
-  }  , 4000 );
+  }  , (2000+Math.random() * 2000) );
 
 
 

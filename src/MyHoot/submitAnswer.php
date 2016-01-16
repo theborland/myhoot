@@ -5,7 +5,8 @@ require 'dbsettings.php';
 
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
-$sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`answer`) VALUES ('$_SESSION[game_id]', '$_SESSION[user_id]','$questionNumber','$lat','$long','$answer')";
+$sql = "REPLACE INTO `answers` SET `game_id`='$_SESSION[game_id]' ,`user_id`='$_SESSION[user_id]',
+`questionNum`='$questionNumber',`lat`='$lat',`longg`='$long',`answer`='$answer'";
 //echo $sql;
 //die();
 $result = $conn->query($sql);
