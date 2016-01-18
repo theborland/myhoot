@@ -262,7 +262,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
    <?php
 $allAnswers->getTP();
     foreach ($allAnswers->allAnswers as $key => $value) {
-        ?><div class="scoresLine"><?php echo $value->name; ?>:
+        ?><div class="scoresLine"><font color="<?php echo $value->color; ?>"><?php echo $value->name; ?></font>:
            <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
           <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
         </div><?php

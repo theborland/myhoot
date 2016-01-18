@@ -18,6 +18,7 @@ class User{
 		   return false;
     $color=get_random_color();
     $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$_GET['game_id']."','".$_GET['name']."','".$color."')";
+		//die ($sql);
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
 		//SOCKET SENDING MESSAGE

@@ -5,12 +5,17 @@ use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\WampServerInterface;
 
 class Pusher implements WampServerInterface {
-
+    protected $clients;
+    public function __construct() {
+        $this->clients = new \SplObjectStorage;
+    }
     public function onUnSubscribe(ConnectionInterface $conn, $topic) {
     }
     public function onOpen(ConnectionInterface $conn) {
+    	$this->clients->attach($conn);
     }
     public function onClose(ConnectionInterface $conn) {
+      $this->clients->detach($conn);
       $conn->close();
       echo "closing connection";
     }
