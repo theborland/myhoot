@@ -227,7 +227,7 @@ var interval = setInterval(function() {
 
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
-					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?>What is</div>
+					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?></div>
 					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
 
@@ -242,7 +242,7 @@ var interval = setInterval(function() {
 	</div>
 	<script>
 	$(document).ready(function(){
-		alert($("#qInfoLocation").height());
+		//alert($("#qInfoLocation").height());
 		$("#overlayWrap").css("height", $("#qInfoLocation").height()+30);
 		$("#qTimer").css("top", $("#qInfoLocation").height()+30);
 		$("#qTimerBG").css("top", $("#qInfoLocation").height()+30);

@@ -79,7 +79,7 @@ class Question
 		if ($this->type=="age")
 				return "How old is ";
 		if ($this->type=="time")
-				return "When was ";
+				return "Guess the Year: ";
 	}
 	function getWeather(){
 		$this->getLocation("weather");
