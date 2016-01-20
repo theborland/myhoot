@@ -1,9 +1,9 @@
 <?php
 session_start();
 //echo "sdfsdf";
-require 'dbsettings.php';
+//require 'dbsettings.php';
 
-$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+//$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 
 <html>
@@ -48,7 +48,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
           #scoresGraphWrap{
             display: block;
-            height: 80%;
+            height: 99%;
             overflow-y:auto;
             width: 350px;
             padding-right: 10px;
@@ -119,7 +119,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             font-weight: 300;
             border:0px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding:5px 10px;
+            padding:8px 10px;
           }
 
           .scoresGraphScore{
@@ -186,7 +186,7 @@ setTimeout( function(){
 
 
 <?php
-if ($_SESSION["auto"]=='yes')
+/*if ($_SESSION["auto"]=='yes')
 {
 ?>
 //automatically forward if automode on
@@ -197,7 +197,7 @@ setTimeout( function(){
 
 
 <?php
-}
+}*/
 ?>
 
 </script>
@@ -210,36 +210,66 @@ setTimeout( function(){
     <div class="answerNum" id="answerNum0">0</div>
     <div class="answerNum" id="answerNum1">0</div>
     <div class="answerNum" id="answerNum2">0</div>
-    <div class="answerNum noB" id="answerNumC"  style="width:200px;">&deg;F</div>
+    <div class="answerNum noB" id="answerNumC"  style="width:70px;">&deg;F</div>
   </div>
 
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
   <a href="getQuestion.php" id="userMapSubmit">Next Question</a>
 </div>
 <div id="scoresWrap">
-  <h1>Scoreboard</h1>
-  <div id="scoresGraphWrap">
 
-<!--
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Lin</div>
-      <div class="scoresGraphAll" style="width:80;">120</div>
-      <div class="scoresGraphNew" style="width:40;">&nbsp;</div><div class="scoresGraphNewLabel">+40</div>
-    </div>-->
-    <?php
-  $allAnswers->getTP();
-     foreach ($allAnswers->allAnswers as $key => $value) {
-         ?><div class="scoresLine"><?php echo $value->name; ?>:
-            <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
-           <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
-         </div><?php
-     }
-  ?>
-
-
-  </div>
 
 </div>
-<div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
+  <div id="scoreMidWrap">
+    <div id="scoresGraphWrap">
+
+
+      <?php/*
+        $allAnswers->getTP();
+           foreach ($allAnswers->allAnswers as $key => $value) {
+               /*?>
+               
+               <div class="scoresLine"><?php echo $value->name; ?>:
+                  <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
+                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
+               </div>
+              <?php *//* ?>
+              <div class="scoresLine">
+                <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
+                <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
+                <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
+              </div>
+               <?php
+           }*/
+      ?>  
+      <div class="scoresLine">
+        <div class="scoresName" style="background:#199EBF">Tim</div>
+        <div class="roundPoints">1</div>
+        <div class="scoresGraphScore">2</div>
+      </div>
+      <div class="scoresLine">
+        <div class="scoresName" style="background:#BF2071">John</div>
+        <div class="roundPoints">2</div>
+        <div class="scoresGraphScore">2</div>
+      </div>
+      <div class="scoresLine">
+        <div class="scoresName" style="background:#68BF1E">Bob</div>
+        <div class="roundPoints">5</div>
+        <div class="scoresGraphScore">2</div>
+      </div>
+      <div class="scoresLine">
+        <div class="scoresName" style="background:#BF7B20">Jim</div>
+        <div class="roundPoints">3</div>
+        <div class="scoresGraphScore">2</div>
+      </div>
+      <div class="scoresLine">
+        <div class="scoresName" style="background:#6742BF">Clown</div>
+        <div class="roundPoints">4</div>
+        <div class="scoresGraphScore">2</div>
+      </div>
+    </div>
+  </div>
+
+<div id="answer">43<?php //echo ($allAnswers->correctAns->value); ?></div>
 </body>
 </html>

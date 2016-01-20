@@ -12,6 +12,9 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
       <link rel="stylesheet" href="style/inputButton.css">
       <style type="text/css">
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+            html{
+              background:#000;
+            }
 
           body{
             background: url('<?php echo "paris.jpeg"; ?>');

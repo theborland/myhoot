@@ -197,68 +197,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="scoresWrap">
   <h1>Scoreboard</h1>
   <div id="scoresGraphWrap">
-
-<!--
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Joe</div>
-      <div class="scoresGraphAll" style="width:260;">285</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Jim</div>
-      <div class="scoresGraphAll" style="width:245;">275</div>
-      <div class="scoresGraphNew" style="width:30;">&nbsp;</div><div class="scoresGraphNewLabel">+30</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Tim</div>
-      <div class="scoresGraphAll" style="width:235;">245</div>
-      <div class="scoresGraphNew" style="width:10;">&nbsp;</div><div class="scoresGraphNewLabel">+10</div>
-    </div>
-        <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Ben</div>
-      <div class="scoresGraphAll" style="width:230;">235</div>
-      <div class="scoresGraphNew" style="width:5;">&nbsp;</div><div class="scoresGraphNewLabel">+5</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Jan</div>
-      <div class="scoresGraphAll" style="width:210;">230</div>
-      <div class="scoresGraphNew" style="width:20;">&nbsp;</div><div class="scoresGraphNewLabel">+20</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Ken</div>
-      <div class="scoresGraphAll" style="width:195;">200</div>
-      <div class="scoresGraphNew" style="width:5;">&nbsp;</div><div class="scoresGraphNewLabel">+5</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Dan</div>
-      <div class="scoresGraphAll" style="width:160;">185</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Ron</div>
-      <div class="scoresGraphAll" style="width:140;">170</div>
-      <div class="scoresGraphNew" style="width:30;">&nbsp;</div><div class="scoresGraphNewLabel">+30</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Pan</div>
-      <div class="scoresGraphAll" style="width:130;">140</div>
-      <div class="scoresGraphNew" style="width:10;">&nbsp;</div><div class="scoresGraphNewLabel">+10</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Kim</div>
-      <div class="scoresGraphAll" style="width:110;">135</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Yan</div>
-      <div class="scoresGraphAll" style="width:100;">125</div>
-      <div class="scoresGraphNew" style="width:25;">&nbsp;</div><div class="scoresGraphNewLabel">+25</div>
-    </div>
-    <div class="scoresGraphBar">
-      <div class="scoresGraphLabel">Lin</div>
-      <div class="scoresGraphAll" style="width:80;">120</div>
-      <div class="scoresGraphNew" style="width:40;">&nbsp;</div><div class="scoresGraphNewLabel">+40</div>
-    </div>-->
    <?php
 $allAnswers->getTP();
     foreach ($allAnswers->allAnswers as $key => $value) {

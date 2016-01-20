@@ -59,11 +59,17 @@ var interval = setInterval(function() {
 
 </script>
 <style>
+	html{
+		background:#000;
+	}
 	body{
-	background: url("<?php echo $theQuestion->getImage() ?>");
-	background-size: cover;
-	background-repeat: no-repeat;
-
+		background: url("<?php echo $theQuestion->getImage() ?>");
+	<?php if($current == "age"){ ?>
+		background-size: contain;
+	<?php }else{ ?>
+		background-size: cover;
+	<?php } ?>
+		background-repeat: no-repeat;
 	}
 	#overlayWrap{
 		height: 130px;
