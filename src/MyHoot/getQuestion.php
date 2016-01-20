@@ -36,7 +36,7 @@ if (isset($_GET["type"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 300;
+var counter = 30;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
@@ -59,11 +59,17 @@ var interval = setInterval(function() {
 
 </script>
 <style>
+	html{
+		background:#000;
+	}
 	body{
-	background: url("<?php echo $theQuestion->getImage() ?>");
-	background-size: cover;
-	background-repeat: no-repeat;
-
+		background: url("<?php echo $theQuestion->getImage() ?>");
+	<?php if($current == "age"){ ?>
+		background-size: contain;
+	<?php }else{ ?>
+		background-size: cover;
+	<?php } ?>
+		background-repeat: no-repeat;
 	}
 	#overlayWrap{
 		height: 130px;
@@ -113,6 +119,13 @@ var interval = setInterval(function() {
 
 	#qInfoLocation .qInfoMain{
 		text-align: left;
+
+	}
+	#qInfoLocation{
+				position: absolute;
+		top:10px;
+		right: 200px;
+		left: 330px;
 
 	}
 
@@ -214,7 +227,7 @@ var interval = setInterval(function() {
 
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
-					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?></div>
+					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?>What is</div>
 					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
 
@@ -227,5 +240,16 @@ var interval = setInterval(function() {
 	<div  id="userAnswers">
 
 	</div>
+	<script>
+	$(document).ready(function(){
+		alert($("#qInfoLocation").height());
+		$("#overlayWrap").css("height", $("#qInfoLocation").height()+30);
+		$("#qTimer").css("top", $("#qInfoLocation").height()+30);
+		$("#qTimerBG").css("top", $("#qInfoLocation").height()+30);
+
+	});
+
+
+	</script>
 </body>
 </html>
