@@ -1,15 +1,16 @@
 <?php
 session_start();
-//echo "sdfsdf";
-//require 'dbsettings.php';
+echo "sdfsdf";
+require 'dbsettings.php';
 
-//$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 
 <html>
 <head>
       <link rel="stylesheet" href="style/global.css">
       <link rel="stylesheet" href="style/inputButton.css">
+      <link href="nouislider.min.css" rel="stylesheet">
       <style type="text/css">
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
@@ -147,6 +148,27 @@ session_start();
           #answer{
             display: none;
           }
+          .noUi-pips{
+            color:#fff;
+          }
+          .noUi-marker-normal{
+            background:rgba(255,255,255,.5);
+          }
+          .noUi-marker-large{
+            background:rgba(255,255,255,1);
+          }
+          .noUi-handle{
+            display: none;
+          }
+          .noUi-connect{
+            display: none;
+          }
+          .noUi-target{
+            background:rgba(255,255,255,0);
+            border:1px solid rgba(255,255,255,1);
+            box-shadow: none;
+            height:8px;
+          }
     </style>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
@@ -186,7 +208,7 @@ setTimeout( function(){
 
 
 <?php
-/*if ($_SESSION["auto"]=='yes')
+if ($_SESSION["auto"]=='yes')
 {
 ?>
 //automatically forward if automode on
@@ -197,13 +219,13 @@ setTimeout( function(){
 
 
 <?php
-}*/
+}
 ?>
 
 </script>
 </head>
 <body>
-<div id="map-canvas"></div>
+<script src="nouislider.min.js"></script>
 <div id="overlayWrap">
   <div id="answerLabel">Correct Answer</div>
   <div id="answerWrap">
@@ -217,14 +239,10 @@ setTimeout( function(){
   <a href="getQuestion.php" id="userMapSubmit">Next Question</a>
 </div>
 <div id="scoresWrap">
-
-
-</div>
-  <div id="scoreMidWrap">
     <div id="scoresGraphWrap">
 
-
-      <?php/*
+      <h1>Scoreboard</h1>
+      <?php
         $allAnswers->getTP();
            foreach ($allAnswers->allAnswers as $key => $value) {
                /*?>
@@ -233,43 +251,59 @@ setTimeout( function(){
                   <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                  <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
                </div>
-              <?php *//* ?>
+              <?php */ ?>
               <div class="scoresLine">
                 <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
                 <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
               </div>
-               <?php
-           }*/
-      ?>  
+      <?php }?>  
+      <!-- USER RESULT EXAMPLE --
       <div class="scoresLine">
         <div class="scoresName" style="background:#199EBF">Tim</div>
         <div class="roundPoints">1</div>
         <div class="scoresGraphScore">2</div>
       </div>
-      <div class="scoresLine">
-        <div class="scoresName" style="background:#BF2071">John</div>
-        <div class="roundPoints">2</div>
-        <div class="scoresGraphScore">2</div>
-      </div>
-      <div class="scoresLine">
-        <div class="scoresName" style="background:#68BF1E">Bob</div>
-        <div class="roundPoints">5</div>
-        <div class="scoresGraphScore">2</div>
-      </div>
-      <div class="scoresLine">
-        <div class="scoresName" style="background:#BF7B20">Jim</div>
-        <div class="roundPoints">3</div>
-        <div class="scoresGraphScore">2</div>
-      </div>
-      <div class="scoresLine">
-        <div class="scoresName" style="background:#6742BF">Clown</div>
-        <div class="roundPoints">4</div>
-        <div class="scoresGraphScore">2</div>
-      </div>
+      -->
     </div>
-  </div>
 
-<div id="answer">43<?php //echo ($allAnswers->correctAns->value); ?></div>
+
+</div>
+<div id="timelineWrap">
+
+  <!-- THE TEMPLATE CODE, change the % value and background color-->
+  <div class="timelineMarker" style="background:#333;margin-left:calc(0% - 5px);">&nbsp;</div>
+  <!-- end template code-->
+
+  <div id="timeline">
+
+  </div>
+</div>
+<div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
+<script>
+  
+window.onload = function(){
+
+  var timeline = document.getElementById('timeline');
+
+  noUiSlider.create(timeline, {
+    start: [60],
+    connect: "upper",
+    direction: 'ltr',
+    range: {
+      'min': [0],
+      '25%': [30],
+      '50%': [60],
+      '75%': [90],
+      'max': [120]
+    },pips: { // Show a scale with the slider
+      mode: 'steps',
+      density: 2
+    }
+  });
+
+};
+
+</script>
 </body>
 </html>

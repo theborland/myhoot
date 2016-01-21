@@ -47,8 +47,6 @@
   font-style: italic;
 }
 
-
-
 html{
 	padding:0px;
 	margin:0px;
@@ -146,20 +144,57 @@ body{
 .roundPoints{
 	display: inline-block;
 	padding:0px 8px;
-	background: #22B95C;
 	color: #fff;
 	border-radius: 5px;
 	margin-left: 5px;
+	border:1px solid #fff;
 }
 .roundPoints::before{
 	content:"+";
 }
+.scoresName{
+	display: inline-block;
+	padding:0px 10px;
+	border-radius: 5px;
+	color:white;
+	box-shadow: 0px 0px 15px rgba(0,0,0,.5);
+}
+#timelineWrap{
+    display: block;
+    position: fixed;
+    left: 400px;
+    right: 0px;
+    bottom:0px;
+    padding:50px 40px 0px 40px;
+    box-sizing:border-box;
+    height: 140px;
+    z-index: 10;
+    background: rgba(0,0,0,.5);
+    box-shadow: 0px 0px 25px rgba(0,0,0,.5);
+    color: #fff;
+}
 
+#timelineLine{
+	height: 5px;
+	border:1px solid rgba(255,255,255,.7);
+	border-radius: 2px;
+}
 
-
-
-
-
+.timelineMarker{
+	float:left;
+	margin-left:30%;
+	margin-top:-24px;
+	width:20px;
+	height:20px;
+	background:red;
+	border-radius:50% 50% 50% 0px;
+	position:absolute;
+	transform:rotate(-45deg);
+	z-index: 100;
+	box-shadow:
+			   0px 5px 5px rgba(0,0,0,.2);
+	border:2px solid #fff;
+}
 
 
 

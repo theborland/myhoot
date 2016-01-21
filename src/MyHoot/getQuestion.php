@@ -121,6 +121,13 @@ var interval = setInterval(function() {
 		text-align: left;
 
 	}
+	#qInfoLocation{
+				position: absolute;
+		top:10px;
+		right: 200px;
+		left: 330px;
+
+	}
 
 	#qTimer{
 		position: fixed;
@@ -220,7 +227,7 @@ var interval = setInterval(function() {
 
 				</div>
 				<div class="qInfoBlock" id="qInfoLocation">
-					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?></div>
+					<div class="qInfoLabel"><?php echo $theQuestion->getQuestionText(); ?>What is</div>
 					<div class="qInfoMain"><?php echo $theQuestion->getLabel(); ?></div>
 				</div>
 
@@ -233,5 +240,16 @@ var interval = setInterval(function() {
 	<div  id="userAnswers">
 
 	</div>
+	<script>
+	$(document).ready(function(){
+		alert($("#qInfoLocation").height());
+		$("#overlayWrap").css("height", $("#qInfoLocation").height()+30);
+		$("#qTimer").css("top", $("#qInfoLocation").height()+30);
+		$("#qTimerBG").css("top", $("#qInfoLocation").height()+30);
+
+	});
+
+
+	</script>
 </body>
 </html>
