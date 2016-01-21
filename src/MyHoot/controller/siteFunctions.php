@@ -129,7 +129,7 @@ class Game
 		    $game=Game::findGame();
 		    $questionNumber=$game->round;
 		    if ($questionNumber==null)
-		      header( 'Location: joinquiz.php');
+		      header( 'Location: joinQuiz.php');
 		    else if ($questionNumber==-1)
 		      header( 'Location: waitingScreen.php?message='."Sorry, there is no question in progress" ) ;
 	 }

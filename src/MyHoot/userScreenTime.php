@@ -161,7 +161,7 @@ window.onload = function(){
 
   slider.noUiSlider.on('update', function( values, handle ) {
       a = Math.round(values[handle]);
-      valbox.value = a + " years old";
+      valbox.value = a + " ";
       answer.value = a;
       //changeValue(values[handle]);
   });
