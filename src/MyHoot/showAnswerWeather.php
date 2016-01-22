@@ -174,11 +174,6 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
       <script>
 
-
-window.onload = function() {
-
-
-
 function animateNum(i, n, fin, finNum, time){
       setTimeout( function(){
         if(fin)
@@ -188,22 +183,6 @@ function animateNum(i, n, fin, finNum, time){
     }, Math.pow(i, 1.05) * time);
 
 }
-
-answer = document.getElementById("answer").innerHTML;
-answer = answer.length >= 3 ? answer :new Array(3 - answer.length + 1).join("x") + answer;
-
-setTimeout( function(){
-
-  for(n=0; n < answer.length; n++){
-    time = 50 + Math.round(Math.random() * 50);
-    for(i=0; i < 25; i++){
-        val = (answer.charAt(n) == "x".charAt(0)) ? "&nbsp;" : answer.charAt(n) + "";
-        animateNum(i, n, (i==24), val, time);
-    }
-  }
-}, 500);
-}
-
 
 
 
@@ -287,23 +266,42 @@ setTimeout( function(){
 
 window.onload = function(){
 
-  var timeline = document.getElementById('timeline');
 
-  noUiSlider.create(timeline, {
-    start: [60],
-    connect: "upper",
-    direction: 'ltr',
-    range: {
-      'min': [0],
-      '25%': [30],
-      '50%': [60],
-      '75%': [90],
-      'max': [120]
-    },pips: { // Show a scale with the slider
-      mode: 'steps',
-      density: 2
+  answer = document.getElementById("answer").innerHTML;
+  answer = answer.length >= 3 ? answer :new Array(3 - answer.length + 1).join("x") + answer;
+
+  setTimeout( function(){
+
+    for(n=0; n < answer.length; n++){
+      time = 50 + Math.round(Math.random() * 50);
+      for(i=0; i < 25; i++){
+          val = (answer.charAt(n) == "x".charAt(0)) ? "&nbsp;" : answer.charAt(n) + "";
+          animateNum(i, n, (i==24), val, time);
+      }
     }
-  });
+  }, 500);
+
+
+
+
+
+var timeline = document.getElementById('timeline');
+
+noUiSlider.create(timeline, {
+  start: [60],
+  connect: "upper",
+  direction: 'ltr',
+  range: {
+    'min': [0],
+    '25%': [30],
+    '50%': [60],
+    '75%': [90],
+    'max': [120]
+  },pips: { // Show a scale with the slider
+    mode: 'steps',
+    density: 2
+  }
+});
 
 };
 
