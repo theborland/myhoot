@@ -20,6 +20,9 @@ if (isset($_GET["question"]))
         padding: 0px
       }
 
+      #newSlider .noUi-handle {
+          background: #<?php echo User::getColor(); ?>;
+        }
       #overlayWrap{
         top:0px;
         bottom: 0px;

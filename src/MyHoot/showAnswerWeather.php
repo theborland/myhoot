@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo "sdfsdf";
+//echo "sdfsdf";
 require 'dbsettings.php';
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
@@ -15,7 +15,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
           body{
-            background: url('<?php echo "paris.jpeg"; ?>');
+            background: url('<?php echo Question::loadImage($allAnswers->correctAns->name); ?>');
             background-size: cover;
             background-repeat: no-repeat;
 
@@ -227,7 +227,7 @@ setTimeout( function(){
 <body>
 <script src="nouislider.min.js"></script>
 <div id="overlayWrap">
-  <div id="answerLabel">Correct Answer</div>
+  <div id="answerLabel">Correct Answer for <?php echo $allAnswers->correctAns->name; ?> </div>
   <div id="answerWrap">
     <div class="answerNum" id="answerNum0">0</div>
     <div class="answerNum" id="answerNum1">0</div>
@@ -246,7 +246,7 @@ setTimeout( function(){
         $allAnswers->getTP();
            foreach ($allAnswers->allAnswers as $key => $value) {
                /*?>
-               
+
                <div class="scoresLine"><?php echo $value->name; ?>:
                   <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                  <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
@@ -257,7 +257,7 @@ setTimeout( function(){
                 <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
               </div>
-      <?php }?>  
+      <?php }?>
       <!-- USER RESULT EXAMPLE --
       <div class="scoresLine">
         <div class="scoresName" style="background:#199EBF">Tim</div>
@@ -272,7 +272,10 @@ setTimeout( function(){
 <div id="timelineWrap">
 
   <!-- THE TEMPLATE CODE, change the % value and background color-->
-  <div class="timelineMarker" style="background:#333;margin-left:calc(0% - 5px);">&nbsp;</div>
+<div class="timelineMarker" style="background:#f07659;margin-left:calc(<?php echo $allAnswers->correctAns->value/120*90; ?>% - 5px);">&nbsp;</div>
+   <?php foreach ($allAnswers->allAnswers as $key => $value){  ?>
+  <div class="timelineMarker" style="background:#<?php echo $value->color ?>;margin-left:calc(<?php echo $value->ans/120*90; ?>% - 5px);">&nbsp;</div>
+  <?php } ?>
   <!-- end template code-->
 
   <div id="timeline">
@@ -281,7 +284,7 @@ setTimeout( function(){
 </div>
 <div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
 <script>
-  
+
 window.onload = function(){
 
   var timeline = document.getElementById('timeline');

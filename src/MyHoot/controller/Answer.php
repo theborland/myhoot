@@ -1,7 +1,82 @@
 <?php
+class AllAnswers
+{
+	public $allAnswers;
+	public $correctAns;
+  //public $wording;
+	function __construct($questionNum)
+	{
+		$this->allAnswers=array();
+		$this->correctAns=Answer::loadCorrect($questionNum);
+		global $conn;
+		$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."' order by submitTime DESC";
+		//echo $sql;
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			while($row = $result->fetch_assoc()){
+				$lat1 = $row["lat"];
+				$long1 = $row["longg"];
+				$ans = $row["answer"];
+				$user_id = $row["user_id"];
+				$qID=$row["id"];
+				$points=$row["points"];
+				$color=$row["color"];
+				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points,$color);
+
+				//$submitTime= $row["submitTime"];
+				//$miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
+				//echo "<bR>user: ".getUserName($user_id) . " was : ".$miles ." miles away.  Submitted at time " . $submitTime ;
+			}
+		}
+
+		$this->awardPoints();
+        Question::alertUsers(-1);
+
+		//echo "loc is ".$this->correctAns->location->lat;
+	}
+
+
+
+
+	public function awardPoints(){
+		if (Game::findGame()->round!=-1){
+			usort($this->allAnswers, array("Answer", "sortMiles"));
+			$totalPoints=count($this->allAnswers);
+			foreach ($this->allAnswers as $key=>$answer){
+				$answer->updateAnswer($totalPoints--);
+			}
+			Game::updateRound(-1);
+		}
+	}
+
+	public function getTP(){
+    //usort($this->allAnswers, array("Answer", "sortMiles"));
+		foreach ($this->allAnswers as $key=>$answer){
+			//echo "<br>".$answer->name. " has " . User::getTP($answer->user_id) . " total Points";
+			$answer->totalPoints=User::getTP($answer->user_id) ;
+		}
+		usort($this->allAnswers, array("Answer", "sortTotalMiles"));
+
+	}
+
+	public function getLocations(){
+		$returnString="[";
+		$i=0;
+		foreach($this->allAnswers as $key=>$answer){
+			$returnString.="['".$answer->name."', ".$answer->location->lat.", ".$answer->location->longg.", '".$answer->color."']";
+			if (++$i!= count($this->allAnswers))
+			$returnString.= ",";
+		}
+		$returnString.="]";
+		return $returnString;
+	}
+}
+
 class Answer
 {
 	public $location;
+	public $ans;
 	public $name;
 	var $userID;
 	var $qID;
@@ -55,6 +130,7 @@ class Answer
 		$answer=new self();
 		$answer->user_id = $userID;
 		$answer->location=$loc;
+		$answer->ans=$ans;
 		$answer->qID=$qID;
 		$answer->color=$color;
 		if (Game::findGame()->type=="geo")

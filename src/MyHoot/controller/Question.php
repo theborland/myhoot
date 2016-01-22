@@ -195,6 +195,23 @@ class Question
 
 }
 
+public static function loadImage($wording){
+	$words=explode(",",$wording);
+	$city=$words[0];
+	$country=$words[1];
+	global $conn;
+	$sql = "SELECT * FROM `data-geo` WHERE `country`='$country' AND `city`='$city' LIMIT 1";//" WHERE `id`='3'";
+	//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
+	$result = $conn->query($sql);
+	if ($result)
+	{
+		if($row = $result->fetch_assoc()){
+			$url= $row["url"];
+			return Question::getRandomUrl($url);
+		}
+	}
+}
+
 function checkForRepeats($country){
 	   global $conn;
 		 $sql = "SELECT * FROM `questions` WHERE gameID='".$_SESSION["game_id"]."' AND wording LIKE '%$country%'";
