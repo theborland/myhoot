@@ -1,9 +1,9 @@
 <?php
 session_start();
 //echo "sdfsdf";
-require 'dbsettings.php';
+//require 'dbsettings.php';
 
-$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+//$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 
 <html>
@@ -15,9 +15,9 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 
           body{
-            background: url('<?php echo Question::loadImage($allAnswers->correctAns->name); ?>');
             background-size: cover;
             background-repeat: no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<?php //echo Question::loadImage($allAnswers->correctAns->name); ?>');
 
           }
 
@@ -186,7 +186,7 @@ function animateNum(i, n, fin, finNum, time){
 
 
 
-<?php
+<?php/*
 if ($_SESSION["auto"]=='yes')
 {
 ?>
@@ -198,7 +198,7 @@ setTimeout( function(){
 
 
 <?php
-}
+}*/
 ?>
 
 </script>
@@ -206,7 +206,7 @@ setTimeout( function(){
 <body>
 <script src="nouislider.min.js"></script>
 <div id="overlayWrap">
-  <div id="answerLabel">Correct Answer for <?php echo $allAnswers->correctAns->name; ?> </div>
+  <div id="answerLabel">Correct Answer for <?php //echo $allAnswers->correctAns->name; ?> </div>
   <div id="answerWrap">
     <div class="answerNum" id="answerNum0">0</div>
     <div class="answerNum" id="answerNum1">0</div>
@@ -221,7 +221,7 @@ setTimeout( function(){
     <div id="scoresGraphWrap">
 
       <h1>Scoreboard</h1>
-      <?php
+      <?php/*
         $allAnswers->getTP();
            foreach ($allAnswers->allAnswers as $key => $value) {
                /*?>
@@ -230,38 +230,47 @@ setTimeout( function(){
                   <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                  <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
                </div>
-              <?php */ ?>
+              <?php  ?>
               <div class="scoresLine">
                 <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
                 <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
               </div>
-      <?php }?>
-      <!-- USER RESULT EXAMPLE --
+      <?php }*/?>
+
       <div class="scoresLine">
         <div class="scoresName" style="background:#199EBF">Tim</div>
+        <div class="scoresGraphScore">14</div>
         <div class="roundPoints">1</div>
-        <div class="scoresGraphScore">2</div>
       </div>
-      -->
+      <div class="scoresLine">
+        <div class="scoresName" style="background:red">Jack</div>
+        <div class="scoresGraphScore">10</div>
+        <div class="roundPoints">3</div>
+      </div>
+      <div class="scoresLine">
+        <div class="scoresName" style="background:green">Black</div>
+        <div class="scoresGraphScore">6</div>
+        <div class="roundPoints">2</div>
+      </div>
+
     </div>
 
 
 </div>
 <div id="timelineWrap">
 
-  <!-- THE TEMPLATE CODE, change the % value and background color-->
-<div class="timelineMarker" style="background:#f07659;margin-left:calc(<?php echo $allAnswers->correctAns->value/120*90; ?>% - 5px);">&nbsp;</div>
-   <?php foreach ($allAnswers->allAnswers as $key => $value){  ?>
-  <div class="timelineMarker" style="background:#<?php echo $value->color ?>;margin-left:calc(<?php echo $value->ans/120*90; ?>% - 5px);">&nbsp;</div>
-  <?php } ?>
-  <!-- end template code-->
+
 
   <div id="timeline">
+    <div class="timelineMarker" id="timelineCA" style="border-color:#f07659;margin-left:calc(95<?php //echo $allAnswers->correctAns->value/120*90; ?>% - 5px);">&nbsp;</div>
+    <?php /*foreach ($allAnswers->allAnswers as $key => $value){  ?>
+    <div class="timelineMarker" style="border-color:#<?php echo $value->color ?>;margin-left:calc(<?php echo $value->ans/120*90; ?>% - 5px);">&nbsp;</div>
+    <?php } */?>
 
   </div>
 </div>
-<div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
+<div id="answer">32<?php //echo ($allAnswers->correctAns->value); ?></div>
 <script>
 
 window.onload = function(){
