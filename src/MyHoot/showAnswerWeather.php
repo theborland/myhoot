@@ -1,9 +1,9 @@
 <?php
 session_start();
 //echo "sdfsdf";
-//require 'dbsettings.php';
+require 'dbsettings.php';
 
-//$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 
 <html>
@@ -174,19 +174,10 @@ session_start();
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
       <script>
 
-function animateNum(i, n, fin, finNum, time){
-      setTimeout( function(){
-        if(fin)
-          document.getElementById("answerNum" + n).innerHTML = finNum;
-        else
-          document.getElementById("answerNum" + n).innerHTML = Math.round(Math.random() * 9);
-    }, Math.pow(i, 1.05) * time);
-
-}
 
 
 
-<?php/*
+<?php
 if ($_SESSION["auto"]=='yes')
 {
 ?>
@@ -198,7 +189,7 @@ setTimeout( function(){
 
 
 <?php
-}*/
+}
 ?>
 
 </script>
@@ -206,7 +197,7 @@ setTimeout( function(){
 <body>
 <script src="nouislider.min.js"></script>
 <div id="overlayWrap">
-  <div id="answerLabel">Correct Answer for <?php //echo $allAnswers->correctAns->name; ?> </div>
+  <div id="answerLabel">Correct Answer for <?php echo $allAnswers->correctAns->name; ?> </div>
   <div id="answerWrap">
     <div class="answerNum" id="answerNum0">0</div>
     <div class="answerNum" id="answerNum1">0</div>
@@ -221,39 +212,15 @@ setTimeout( function(){
     <div id="scoresGraphWrap">
 
       <h1>Scoreboard</h1>
-      <?php/*
+      <?php
         $allAnswers->getTP();
-           foreach ($allAnswers->allAnswers as $key => $value) {
-               /*?>
-
-               <div class="scoresLine"><?php echo $value->name; ?>:
-                  <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
-                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
-               </div>
-              <?php  ?>
+           foreach ($allAnswers->allAnswers as $key => $value) {?>
               <div class="scoresLine">
                 <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
-                <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
+                <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
               </div>
-      <?php }*/?>
-
-      <div class="scoresLine">
-        <div class="scoresName" style="background:#199EBF">Tim</div>
-        <div class="scoresGraphScore">14</div>
-        <div class="roundPoints">1</div>
-      </div>
-      <div class="scoresLine">
-        <div class="scoresName" style="background:red">Jack</div>
-        <div class="scoresGraphScore">10</div>
-        <div class="roundPoints">3</div>
-      </div>
-      <div class="scoresLine">
-        <div class="scoresName" style="background:green">Black</div>
-        <div class="scoresGraphScore">6</div>
-        <div class="roundPoints">2</div>
-      </div>
-
+      <?php }?>
     </div>
 
 
@@ -263,18 +230,27 @@ setTimeout( function(){
 
 
   <div id="timeline">
-    <div class="timelineMarker" id="timelineCA" style="border-color:#f07659;margin-left:calc(95<?php //echo $allAnswers->correctAns->value/120*90; ?>% - 5px);">&nbsp;</div>
-    <?php /*foreach ($allAnswers->allAnswers as $key => $value){  ?>
+    <div class="timelineMarker" id="timelineCA" style="border-color:#E12027;margin-left:calc(<?php //echo $allAnswers->correctAns->value/120*90; ?>% - 5px);">&nbsp;</div>
+    <?php foreach ($allAnswers->allAnswers as $key => $value){  ?>
     <div class="timelineMarker" style="border-color:#<?php echo $value->color ?>;margin-left:calc(<?php echo $value->ans/120*90; ?>% - 5px);">&nbsp;</div>
-    <?php } */?>
+    <?php } ?>
 
   </div>
 </div>
-<div id="answer">32<?php //echo ($allAnswers->correctAns->value); ?></div>
+<div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
 <script>
 
 window.onload = function(){
 
+function animateNum(i, n, fin, finNum, time){
+      setTimeout( function(){
+        if(fin)
+          document.getElementById("answerNum" + n).innerHTML = finNum;
+        else
+          document.getElementById("answerNum" + n).innerHTML = Math.round(Math.random() * 9);
+    }, Math.pow(i, 1.05) * time);
+
+}
 
   answer = document.getElementById("answer").innerHTML;
   answer = answer.length >= 3 ? answer :new Array(3 - answer.length + 1).join("x") + answer;
