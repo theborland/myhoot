@@ -17,13 +17,14 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
           body{
             background-size: cover;
             background-repeat: no-repeat;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<?php //echo Question::loadImage($allAnswers->correctAns->name); ?>');
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('<?php echo Question::loadImage($allAnswers->correctAns->name); ?>');
 
           }
 
           #overlayWrap{
             left:400px;
             height:140px;
+            background: rgba(0,0,0,.7);
           }
 
           #scoresWrap{
@@ -36,7 +37,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
             box-sizing:border-box;
             width: 400px;
             z-index: 10;
-            background: rgba(0,0,0,.7);
+            background: rgba(0,0,0,.8);
             box-shadow: 0px 0px 25px rgba(0,0,0,.5);
             color: #fff;
           }
