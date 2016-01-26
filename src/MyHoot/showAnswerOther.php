@@ -4,6 +4,8 @@ session_start();
 require 'dbsettings.php';
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+$theQuestion=Question::loadQuestion();
+
 ?>
 
 <html>
@@ -17,7 +19,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
           body{
             background-size: cover;
             background-repeat: no-repeat;
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('<?php //echo Question::loadImage($allAnswers->correctAns->name); ?>');
+            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('<?php echo Question::loadImage($allAnswers->correctAns->name,Game::findGame()->type); ?>');
 
           }
 
@@ -198,12 +200,15 @@ setTimeout( function(){
 <body>
 <script src="nouislider.min.js"></script>
 <div id="overlayWrap">
-  <div id="answerLabel">Correct Answer for <?php echo $allAnswers->correctAns->name; ?> </div>
+  <div id="answerLabel"> <?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?></div>
   <div id="answerWrap">
-    <div class="answerNum" id="answerNum0">0</div>
-    <div class="answerNum" id="answerNum1">0</div>
-    <div class="answerNum" id="answerNum2">0</div>
-    <div class="answerNum noB" id="answerNumC"  style="width:70px;">&deg;F</div>
+    <?php for ($i=0;$i<=strlen($allAnswers->correctAns->value);$i++){  ?>
+       <div class="answerNum" id="answerNum<?php echo $i; ?>">0</div>
+       <?php if ((8-$i)%3==1 && $i!=strlen($allAnswers->correctAns->value)){   ?>
+         <div class="answerNum noB" id="answerNumC">&nbsp;</div>
+       <?php  }  ?>
+    <?php } ?>
+    <div class="answerNum noB" id="answerNumC"  style="width:70px;"><?php echo $theQuestion->getQuestionUnits(); ?></div>
   </div>
 
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
@@ -254,8 +259,9 @@ function animateNum(i, n, fin, finNum, time){
 }
 
   answer = document.getElementById("answer").innerHTML;
-  answer = answer.length >= 3 ? answer :new Array(3 - answer.length + 1).join("x") + answer;
-
+  //alert(answer);
+  answer = answer.length >= 10 ? answer :new Array(2).join("x") + answer;
+  //alert(answer);
   setTimeout( function(){
 
     for(n=0; n < answer.length; n++){

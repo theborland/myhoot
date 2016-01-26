@@ -9,24 +9,27 @@ class Question
 	var $timesRepeated=0;
 
 	function __construct($type){
-		$_SESSION["questionNumber"]++;
-		$this->type=$type;
-		if ($type=="geo")
-			  $this->getLocation($type);
-	  if ($type=="pop")
-				$this->getLocation($type);
-		if ($type=="weather")
-				$this->getWeather();
-		if ($type=="age")
-				$this->getAge();
-		if ($type=="time")
-				$this->getTime();
-		if ($type=="user")
-				$this->getUserQuestion();
-		$this->addAnswer();
-		//echo "in here again";
-		Game::updateRound($_SESSION["questionNumber"],$type);
-		$this->alertUsers($_SESSION["questionNumber"],$type);
+		if ($type!=null)
+		{
+				$_SESSION["questionNumber"]++;
+				$this->type=$type;
+				if ($type=="geo")
+					  $this->getLocation($type);
+			  if ($type=="pop")
+						$this->getLocation($type);
+				if ($type=="weather")
+						$this->getWeather();
+				if ($type=="age")
+						$this->getAge();
+				if ($type=="time")
+						$this->getTime();
+				if ($type=="user")
+						$this->getUserQuestion();
+				$this->addAnswer();
+				//echo "in here again";
+				Game::updateRound($_SESSION["questionNumber"],$type);
+				$this->alertUsers($_SESSION["questionNumber"],$type);
+			}
 	}
 
 	public static function InQuestion($questionNum){
@@ -58,6 +61,29 @@ class Question
 		//END SOCKET SENDING
 	}
 
+	public static function loadQuestion(){
+		   global $conn;
+			 $sql = "SELECT * FROM `questions` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."'";
+	 		 $result = $conn->query($sql);
+	 		//echo $sql;
+	 		if ($result)
+	 		{
+	 			if($row = $result->fetch_assoc()){
+	 				//echo $this->location->lat;
+	 				$question=new self(null);
+	 				$question->type=$row["type"];
+					$type=$question->type;
+	 				$question->country=$row["wording"];
+					if ($type=="geo" || $type=="pop" || $type=="weather"){
+						   $splits=explode(",",$question->country);
+					     $question->country=$splits[1];
+							 $question->city=$splits[0];
+					}
+	 				return $question;
+	 			}
+	 		}
+	}
+
 	function getLabel(){
 		if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
@@ -67,6 +93,20 @@ class Question
 
 	}
 
+	function getQuestionUnits(){
+		if ($this->type=="geo")
+			return "Where is ";
+			if ($this->type=="geo")
+				return "Where is ";
+		if ($this->type=="pop")
+				return "";
+		if ($this->type=="weather")
+				return "&deg;F";
+		if ($this->type=="age")
+				return "";
+		if ($this->type=="time")
+				return "";
+	}
 	function getQuestionText(){
 		if ($this->type=="geo")
 			return "Where is ";
@@ -183,7 +223,7 @@ class Question
 				$this->country=$row["country"];
 				$this->city=$row["city"];
 				$this->answer=$row["population"];
-		    $url= $row["url"];
+		    $url= $row["image"];
 		    $this->image=Question::getRandomUrl($url);
 					//echo $this->image;
 		  }
@@ -195,18 +235,27 @@ class Question
 
 }
 
-public static function loadImage($wording){
-	$words=explode(",",$wording);
-	$city=$words[0];
-	$country=$words[1];
+public static function loadImage($wording,$type){
+
 	global $conn;
-	$sql = "SELECT * FROM `data-geo` WHERE `country`='$country' AND `city`='$city' LIMIT 1";//" WHERE `id`='3'";
-	//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
+	if ($type=="geo" || $type=="pop" || $type=="weather")
+	{
+		$words=explode(",",$wording);
+		$city=$words[0];
+		$country=$words[1];
+		$sql = "SELECT * FROM `data-geo` WHERE `country`='$country' AND `city`='$city' LIMIT 1";//" WHERE `id`='3'";
+	}
+	if ($type=="age")
+		$sql = "SELECT * FROM `data-people` WHERE `name`='$wording'  LIMIT 1";//" WHERE `id`='3'";
+	if ($type=="time")
+		$sql = "SELECT * FROM `data-time` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
+
 	$result = $conn->query($sql);
+	//die($sql);
 	if ($result)
 	{
 		if($row = $result->fetch_assoc()){
-			$url= $row["url"];
+			$url= $row["image"];
 			return Question::getRandomUrl($url);
 		}
 	}

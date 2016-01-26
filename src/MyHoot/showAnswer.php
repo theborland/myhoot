@@ -2,6 +2,9 @@
 session_start();
 //echo "sdfsdf";
 require 'dbsettings.php';
+if (Game::findGame()->type!="geo")
+     header( 'Location: showAnswerOther.php') ;
+/*
 if (Game::findGame()->type=="pop")
       header( 'Location: showAnswerPop.php') ;
 if (Game::findGame()->type=="weather")
@@ -12,6 +15,7 @@ if (Game::findGame()->type=="user")
       header( 'Location: showAnswerAge.php') ;
 if (Game::findGame()->type=="time")
       header( 'Location: showAnswerTime.php');
+*/
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 

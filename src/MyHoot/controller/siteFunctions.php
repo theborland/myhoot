@@ -26,7 +26,10 @@ class Game
 	public static function  updateRound($val, $type=NULL)
 	{
 		global $conn;
-		$sql = "UPDATE `games` SET `round`='$val', `type`='$type' WHERE `game_id` = '".$_SESSION["game_id"]."'";
+		if ($type==NULL)
+			$sql = "UPDATE `games` SET `round`='$val' WHERE `game_id` = '".$_SESSION["game_id"]."'";
+		else
+			$sql = "UPDATE `games` SET `round`='$val', `type`='$type' WHERE `game_id` = '".$_SESSION["game_id"]."'";
 		$result = $conn->query($sql);
 	}
 
