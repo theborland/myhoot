@@ -15,11 +15,19 @@ $theQuestion=Question::loadQuestion();
       <link href="nouislider.min.css" rel="stylesheet">
       <style type="text/css">
             html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+          html{
+            background:#000;
+          }
 
           body{
-            background-size: cover;
+            <?php if($theQuestion->type == "age"){ ?>
+              background-size: contain;
+            <?php }else{ ?>
+              background-size: cover;
+            <?php } ?>
             background-repeat: no-repeat;
-            background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('<?php echo Question::loadImage($allAnswers->correctAns->name,Game::findGame()->type); ?>');
+            background-position:center center;
+            background: url('<?php echo Question::loadImage($allAnswers->correctAns->name,Game::findGame()->type); ?>');
 
           }
 

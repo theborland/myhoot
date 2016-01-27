@@ -65,6 +65,7 @@ var interval = setInterval(function() {
 	}
 	body{
 		background: url("<?php echo $theQuestion->getImage() ?>");
+        background-position:center center;
 	<?php if($current == "age"){ ?>
 		background-size: contain;
 	<?php }else{ ?>
