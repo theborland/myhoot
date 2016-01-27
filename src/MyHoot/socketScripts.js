@@ -31,7 +31,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
         //             window.location.href='showAnswer.php';
         //           }, 2000);
         //
-        // });
+         });
     },
     function() {
         console.warn('WebSocket connection closed');
