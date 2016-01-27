@@ -12,7 +12,8 @@ if ($gsGeo=="false" || $gsGeo=="true")
   if ($gsPop=="true")$gamesSelected[]="pop";
   if ($gsGeo=="true"){
     foreach ($gamesSelected as $key)
-          $gamesSelected[]="geo";
+        if (sizeof($gameSelected)<4)
+            $gamesSelected[]="geo";
     if (sizeof($gamesSelected)==0)
        $gamesSelected[]="geo";
   }
@@ -36,7 +37,7 @@ if (isset($_GET["type"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 300;
+var counter = 30;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
