@@ -198,21 +198,21 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
   <a href="getQuestion.php" id="userMapSubmit">Next Question</a>
 </div>
-<div id="scoresWrap">
-  <h1>Scoreboard</h1>
-  <div id="scoresGraphWrap">
-   <?php
-$allAnswers->getTP();
-    foreach ($allAnswers->allAnswers as $key => $value) {
-        ?><div class="scoresLine"><font color="<?php echo $value->color; ?>"><?php echo $value->name; ?></font>:
-           <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
-          <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
-        </div><?php
-    }
- ?>
+    <div id="scoresGraphWrap">
 
-
-  </div>
+      <h1>Scoreboard</h1>
+      <?php
+        $allAnswers->getTP();
+        //echo($allAnswers->allAnswers[0]->color);
+           foreach ($allAnswers->allAnswers as $key => $value)
+            { ?>
+              <div class="scoresLine">
+                <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
+                <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
+                <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
+              </div>
+      <?php }?>
+    </div>
 </div>
 </body>
 </html>

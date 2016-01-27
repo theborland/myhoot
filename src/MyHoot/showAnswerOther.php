@@ -172,6 +172,9 @@ $theQuestion=Question::loadQuestion();
             box-shadow: none;
             height:8px;
           }
+          .noUi-value-horizontal:last-child{
+            left: calc(100% - 50px);
+          }
     </style>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
@@ -311,6 +314,31 @@ noUiSlider.create(timeline, {
     density: 2
   }
 });
+
+  labels = document.getElementsByClassName("noUi-value-large");
+  for(var i=0; i<labels.length;i++){
+    val = parseInt(labels[i].innerHTML);
+    labels[i].innerHTML = comma(val);
+  }
+
+
+
+
+  function comma(num){
+    num = num+"";
+    arr = num.split("");
+    newS = "";
+    for(var i=0; i<arr.length; i++){
+      if((arr.length - i)%3 == 0 && i!=0)
+        newS = newS + "," + arr[i];
+      else
+        newS = newS + arr[i];
+    }
+    return newS;
+  }
+
+
+
 
 };
 
