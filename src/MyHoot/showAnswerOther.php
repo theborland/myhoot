@@ -187,7 +187,7 @@ if ($_SESSION["auto"]=='yes')
 //automatically forward if automode on
 setTimeout( function(){
       window.location.href='getQuestion.php';
-}  , 100000 );
+}  , 10000 );
 
 
 

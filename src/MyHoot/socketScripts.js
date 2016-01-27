@@ -26,12 +26,12 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
             var userAnswers = document.getElementById("userAnswers");
             userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
-            if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<-1 && auto=="yes")
-              setTimeout(function (){
-                    window.location.href='showAnswer.php';
-                  }, 2000);
-
-        });
+        //     if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<-1 && auto=="yes")
+        //       setTimeout(function (){
+        //             window.location.href='showAnswer.php';
+        //           }, 2000);
+        //
+        // });
     },
     function() {
         console.warn('WebSocket connection closed');
