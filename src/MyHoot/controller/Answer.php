@@ -60,6 +60,24 @@ class AllAnswers
 
 	}
 
+	public function getMin(){
+		$min=$this->correctAns->value;
+		foreach ($this->allAnswers as $key=>$answer){
+			if ($min>$answer->ans)
+			   $min=$answer->ans;
+		}
+		return $min;
+	}
+	public function getMax(){
+		$max=$this->correctAns->value;
+		foreach ($this->allAnswers as $key=>$answer){
+			if ($max<$answer->ans)
+			   $max=$answer->ans;
+		}
+		return $max;
+	}
+
+
 	public function getLocations(){
 		$returnString="[";
 		$i=0;

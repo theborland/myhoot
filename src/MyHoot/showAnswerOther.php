@@ -204,7 +204,7 @@ setTimeout( function(){
   <div id="answerWrap">
     <?php for ($i=0;$i<=strlen($allAnswers->correctAns->value);$i++){  ?>
        <div class="answerNum" id="answerNum<?php echo $i; ?>">0</div>
-       <?php if ((8-$i)%3==1 && $i!=strlen($allAnswers->correctAns->value)){   ?>
+       <?php if ((strlen($allAnswers->correctAns->value)+1-$i)%3==1 && $i!=strlen($allAnswers->correctAns->value)){   ?>
          <div class="answerNum noB" id="answerNumC">&nbsp;</div>
        <?php  }  ?>
     <?php } ?>
@@ -220,7 +220,9 @@ setTimeout( function(){
       <h1>Scoreboard</h1>
       <?php
         $allAnswers->getTP();
-           foreach ($allAnswers->allAnswers as $key => $value) {?>
+        //echo($allAnswers->allAnswers[0]->color);
+           foreach ($allAnswers->allAnswers as $key => $value)
+            { ?>
               <div class="scoresLine">
                 <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
@@ -233,12 +235,27 @@ setTimeout( function(){
 </div>
 <div id="timelineWrap">
 
-
+  <?php
+  $max=$allAnswers->getMax();
+  $min=$allAnswers->getMin();
+  $rounding=(strlen($max)-3)*-1;
+  if ($rounding>0)$rounding=0;
+  //echo "sdfd".$max;
+  $reg0=round($min,$rounding);
+  $reg1=round((($max-$min)*.25)+$min,$rounding);
+  $reg2=round((($max-$min)*.5)+$min,$rounding);
+  $reg3=round((($max-$min)*.75)+$min,$rounding);
+  $reg4=round($max,$rounding);
+  $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
+  ?>
 
   <div id="timeline">
-    <div class="timelineMarker" id="timelineCA" style="border-color:#E12027;margin-left:calc(<?php //echo $allAnswers->correctAns->value/120*90; ?>% - 5px);">&nbsp;</div>
-    <?php foreach ($allAnswers->allAnswers as $key => $value){  ?>
-    <div class="timelineMarker" style="border-color:#<?php echo $value->color ?>;margin-left:calc(<?php echo $value->ans/120*90; ?>% - 5px);">&nbsp;</div>
+    <div class="timelineMarker" id="timelineCA" style="border-color:#E12027;margin-left:calc(<?php echo $correctLoc*100; ?>% - 10px);">&nbsp;</div>
+    <?php foreach ($allAnswers->allAnswers as $key => $value)
+    {
+        $loc=($value->ans-$reg0)/($reg4-$reg0);
+        ?>
+    <div class="timelineMarker" style="border-color:#<?php echo $value->color ?>;margin-left:calc(<?php echo $loc*100; ?>% - 10px);">&nbsp;</div>
     <?php } ?>
 
   </div>
@@ -280,15 +297,15 @@ function animateNum(i, n, fin, finNum, time){
 var timeline = document.getElementById('timeline');
 
 noUiSlider.create(timeline, {
-  start: [60],
+  start: [<?php echo $reg2 ?>],
   connect: "upper",
   direction: 'ltr',
   range: {
-    'min': [0],
-    '25%': [30],
-    '50%': [60],
-    '75%': [90],
-    'max': [120]
+    'min': [<?php echo $reg0 ?>],
+    '25%': [<?php echo $reg1 ?>],
+    '50%': [<?php echo $reg2 ?>],
+    '75%': [<?php echo $reg3 ?>],
+    'max': [<?php echo $reg4 ?>]
   },pips: { // Show a scale with the slider
     mode: 'steps',
     density: 2
