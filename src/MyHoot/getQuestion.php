@@ -12,7 +12,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
   if ($gsPop=="true")$gamesSelected[]="pop";
   if ($gsGeo=="true"){
     foreach ($gamesSelected as $key)
-        if (sizeof($gameSelected)<4)
+        if (sizeof($gamesSelected)<4)
             $gamesSelected[]="geo";
     if (sizeof($gamesSelected)==0)
        $gamesSelected[]="geo";
