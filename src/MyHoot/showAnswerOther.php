@@ -183,6 +183,18 @@ $theQuestion=Question::loadQuestion();
           .noUi-value-horizontal:last-child{
             left: calc(100% - 50px);
           }
+
+          .nametag{    
+            position: absolute;
+            top: -63px;
+            right: -21px;
+            display: inline-block;
+            transform: rotate(45deg);
+            background: rgba(0,0,0,.7);
+            padding: 2px 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+          }
     </style>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>

@@ -198,6 +198,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>
   <a href="getQuestion.php" id="userMapSubmit">Next Question</a>
 </div>
+<div id="scoresWrap">
     <div id="scoresGraphWrap">
 
       <h1>Scoreboard</h1>
