@@ -193,6 +193,27 @@ Game::createGame();
 		background: url('img/check2.png');
 		background-size: cover;
 	}
+	#joinHere{
+		display: block;
+		width: 650px;
+	    padding: 20px 40px;
+	    margin: 20px auto;
+	    background: rgba(0,0,0,.8);
+	    border: 0px;
+	    border-radius: 10px;
+	    box-shadow: 0px 0px 50px rgba(0,0,0,.5);
+	    color:#fff;
+	    font-size:45px;
+	    font-weight: 100;
+	    text-align: center;
+	}
+
+	#joinHere #link{
+		display: inline-block;
+		font-weight: 500;
+		padding: 0px 20px;
+		background: rgba(0,0,0,0);
+	}
 	</style>
 
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
@@ -308,6 +329,9 @@ Game::createGame();
 
 
 
+	</div>
+	<div id="joinHere">
+		Join at <div id="link">myonlinegrades.com/j</div>
 	</div>
 	<div id="footer">
 		Copyright and stuff.
