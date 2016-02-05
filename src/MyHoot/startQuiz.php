@@ -162,11 +162,11 @@ Game::createGame();
 		box-shadow: 0px 0px 10px rgba(0,0,0,.5);
 	}
 	.gsSel{
-		border:3px solid #0DCE54;	
+		border:3px solid #0DCE54;
 		background: rgba(0,0,0,.6);
 	}
 	.gsSel:hover{
-		border:3px solid #0DF262;	
+		border:3px solid #0DF262;
 	}
 	.gsName{
 		position: absolute;
@@ -221,9 +221,9 @@ Game::createGame();
 <script>
 
 	window.onload = function() {
-		var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp'];
+		var games = ['gsGeo', 'gsAge', 'gsHist', 'gsPop', 'gsTemp','gsRand'];
 
-	    for(var i = 0; i < 5; i++) {
+	    for(var i = 0; i < 6; i++) {
 	        var gs = document.getElementById("gs"+(i+1));
 	       var c = gs.className;
 	        gs.onclick = function() {
@@ -295,7 +295,12 @@ Game::createGame();
 						<div class="gsCheck"></div>
 						<div class="gsName">POPULATIONS</div>
 					</div>
-					<div class="gsItem" id="gs5">		
+					<div class="gsItem" id="gs5">
+						<img src="img/temp.png" class="gsImg" alt="">
+						<div class="gsCheck"></div>
+						<div class="gsName">WEATHER</div>
+					</div>
+          <div class="gsItem" id="gs6">
 						<img src="img/temp.png" class="gsImg" alt="">
 						<div class="gsCheck"></div>
 						<div class="gsName">WEATHER</div>
@@ -316,6 +321,7 @@ Game::createGame();
 					<input type="hidden" name="gsHist" id="gsHist" value="false">
 					<input type="hidden" name="gsPop" id="gsPop" value="false">
 					<input type="hidden" name="gsTemp" id="gsTemp" value="false">
+          <input type="hidden" name="gsRand" id="gsRand" value="false">
 					<center >
 						<label for="autoplayCB" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:7px;">
 							AUTOPLAY

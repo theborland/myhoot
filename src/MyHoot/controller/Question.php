@@ -6,6 +6,8 @@ class Question
 	var $type;
 	var $answer;
 	var $image;
+	var $min;
+	var $max;
 	var $timesRepeated=0;
 
 	function __construct($type){
@@ -23,6 +25,8 @@ class Question
 						$this->getAge();
 				if ($type=="time")
 						$this->getTime();
+				if ($type=="rand")
+								$this->getRand();
 				if ($type=="user")
 						$this->getUserQuestion();
 				$this->addAnswer();
@@ -74,6 +78,8 @@ class Question
 	 				$question->type=$row["type"];
 					$type=$question->type;
 	 				$question->country=$row["wording"];
+					$question->min=$row["lat"];
+					$question->max=$row["longg"];
 					if ($type=="geo" || $type=="pop" || $type=="weather"){
 						   $splits=explode(",",$question->country);
 					     $question->country=$splits[1];
@@ -87,6 +93,7 @@ class Question
 	function getLabel(){
 		if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
+
 		//if ($this->type=="pop" )
 	  else
 			return $this->country;
@@ -106,6 +113,7 @@ class Question
 				return "";
 		if ($this->type=="time")
 				return "";
+
 	}
 	function getQuestionText(){
 		if ($this->type=="geo")
@@ -120,6 +128,8 @@ class Question
 				return "How old is ";
 		if ($this->type=="time")
 				return "Guess the Year: ";
+		if ($this->type=="rand")
+					return $this->city;
 	}
 	function getWeather(){
 		$this->getLocation("weather");
@@ -133,6 +143,28 @@ class Question
 			$this->getWeather();
 
   }
+
+	function getRand(){
+		global $conn;
+		$sql = "SELECT * FROM `data-rand`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//echo $sql;
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			if($row = $result->fetch_assoc()){
+				$this->city=$row["category"];
+				$this->country=$row["wording"];
+				$this->answer=$row["answer"];
+				$this->min=$row["min"];
+				$this->max=$row["max"];
+				$url= $row["image"];
+        $this->image="a.jpg";//Question::getRandomUrl($url);
+				}
+		}
+		if ($this->checkForRepeats($this->country))
+			$this->getRand();
+	}
 
 	function getAge(){
 		global $conn;
@@ -307,6 +339,8 @@ function addAnswer(){
 	//$latLong=new LatLong();
 	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop")
 	    $latLong=LatLong::findLatLong($this->city,$this->country);
+	else if ($this->type=="rand")  //we save min max of random as a lat just for ease
+	    $latLong=new LatLong($this->min,$this->max);
   else
 		  $latLong=new LatLong(0,0);
 	if ($this->city!="")
