@@ -209,8 +209,24 @@ var interval = setInterval(function() {
 		font-weight: bold;
 		color: #fff;
 		display: inline-block;
-
 	}
+
+	#muteButton{
+		background:url('img/mute1.png');
+		border:0px;
+		position: fixed;
+		bottom: 10px;
+		right: 10px;
+		width: 40px;
+		height: 40px;
+		outline:0px;
+		cursor:pointer;
+	}
+	#muteButton:focus{
+		outline:0px;
+		border:0px;
+	}
+
 </style>
 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
@@ -218,8 +234,37 @@ var interval = setInterval(function() {
   loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>');
   findingNumberOfUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
 </script>
+
+<script type="text/javascript">
+var playing = true;
+function mute(){
+	var music = document.getElementById("bgMusic");
+	var button = document.getElementById("muteButton");
+	if(playing==true){
+		music.volume = 0;
+		playing = false;
+		button.style.backgroundImage = "url(img/mute2.png)";
+	}else{
+		music.volume = 1;
+		playing = true;
+		button.style.backgroundImage = "url(img/mute1.png)";
+
+	}
+}
+
+</script>
+
 </head>
 <body>
+
+
+<audio autoplay id="bgMusic">
+  <source src="quiz.mp3"  type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+
+<input type="button" id="muteButton" onclick="mute()">
+
 
 	<div id="overlayWrap">
 		<img src="logo.png" id="logo">
