@@ -38,7 +38,7 @@ if (isset($_GET["type"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 30;
+var counter = 300;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
@@ -244,12 +244,25 @@ function mute(){
 		music.volume = 0;
 		playing = false;
 		button.style.backgroundImage = "url(img/mute2.png)";
+    document.cookie="playMusic=false";
 	}else{
 		music.volume = 1;
 		playing = true;
 		button.style.backgroundImage = "url(img/mute1.png)";
-
+    document.cookie="playMusic=true";
 	}
+
+  function playMusic(){
+  if (readCookie("playMusic")==true)
+  {
+    //document.getElementById("bgMusic").load();
+        document.getElementById("bgMusic").play();
+      }
+  }
+
+  onload="playMusic()";
+
+
 }
 
 </script>
@@ -258,7 +271,7 @@ function mute(){
 <body>
 
 
-<audio autoplay id="bgMusic">
+<audio id="bgMusic"  enablejavascript="yes">
   <source src="quiz.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
 </audio>
