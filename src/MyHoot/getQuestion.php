@@ -252,16 +252,6 @@ function mute(){
     document.cookie="playMusic=true";
 	}
 
-  function playMusic(){
-  if (readCookie("playMusic")==true)
-  {
-    //document.getElementById("bgMusic").load();
-        document.getElementById("bgMusic").play();
-      }
-  }
-
-  onload="playMusic()";
-
 
 }
 
@@ -271,7 +261,7 @@ function mute(){
 <body>
 
 
-<audio id="bgMusic" autoplay enablejavascript="yes">
+<audio id="bgMusic" enablejavascript="yes">
   <source src="quiz.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
 </audio>
@@ -304,6 +294,12 @@ function mute(){
 	<script>
 	$(document).ready(function(){
 		//alert($("#qInfoLocation").height());
+		if (readCookie("playMusic")==true)
+		{
+			//document.getElementById("bgMusic").load();
+			document.getElementById("bgMusic").play();
+		}
+
 		$("#overlayWrap").css("height", $("#qInfoLocation").height()+30);
 		$("#qTimer").css("top", $("#qInfoLocation").height()+30);
 		$("#qTimerBG").css("top", $("#qInfoLocation").height()+30);
