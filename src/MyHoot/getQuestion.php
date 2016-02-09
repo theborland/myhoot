@@ -306,10 +306,10 @@ function mute(){
 	<script>
 	$(document).ready(function(){
 		//alert($("#qInfoLocation").height());
-		if (readCookie("playMusic")==true)
+		if (readCookie("playMusic")==false)
 		{
 			//document.getElementById("bgMusic").load();
-			document.getElementById("bgMusic").play();
+			document.getElementById("bgMusic").pause();
 		}
 
 		$("#overlayWrap").css("height", $("#qInfoLocation").height()+30);
