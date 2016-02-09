@@ -261,7 +261,7 @@ function mute(){
 <body>
 
 
-<audio id="bgMusic" enablejavascript="yes">
+<audio id="bgMusic" autoplay enablejavascript="yes">
   <source src="quiz.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
 </audio>
