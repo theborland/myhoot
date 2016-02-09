@@ -56,26 +56,27 @@ Game::createGame();
 
 	input[type="checkbox"]{
 		-webkit-appearance:none;
-		width: 18px;
-		height: 18px;
-		border:3px solid rgba(0,0,0,0);
-		outline: 1px solid #fff;
+		width: 20px;
+		height: 20px;
+		border:1px solid #fff;
 		background:rgba(0,0,0,0);
 		border-radius: 0px;
 		cursor: pointer;
 		position: relative;
 		top:5px;
-		-moz-background-clip: padding;     /* Firefox 3.6 */
-		-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
-		background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+		box-sizing:border-box;
+	}
+	input[type='checkbox']:hover {
+		background:rgba(0,0,0,0.1);
 	}
 	input[type='checkbox']:checked {
-		border:3px solid rgba(0,0,0,0);
-		outline: 1px solid #fff;
-		background:#fff;
-		-moz-background-clip: padding;     /* Firefox 3.6 */
-		-webkit-background-clip: padding;  /* Safari 4? Chrome 6? */
-		background-clip: padding-box;      /* Firefox 4, Safari 5, Opera 10, IE 9 */
+		border:1px solid #fff;
+		outline: 0px solid #fff;
+		background:url('img/check1.png');
+		background-size: contain;
+	}
+	input[type='checkbox']:focus {
+		outline:0px;
 	}
 	#jqJoin{
 		position: relative;
@@ -223,13 +224,15 @@ Game::createGame();
 	#showMap{
 		display: inline-block;
 		border:0px solid #fff;
-		padding:4px 15px;
+		padding:6px 15px 4px;
 		margin-top: 5px;
 		border-radius: 5px;
 		color:#fff;
 		background:rgba(0,0,0,.5);
 		cursor:pointer;
 		transition:all .1s;
+		text-transform: uppercase;
+		font-size: 13px;
 	}
 	#showMap:hover{
 		background:rgba(0,0,0,.7);
@@ -265,28 +268,31 @@ Game::createGame();
 		display: none;
 		z-index: 10;
 		opacity: 0;
-		transition:1s all;
+		transition:.5s all;
 	}
 	#closeMap{
-		position:absolute;
 		display: inline-block;
-		top:10px;
-		right: 10px;
 		color:#fff;
-		border-radius: 30px;
-		width: 25px;
-		height: 25px;
+		border-radius: 10px;
+		padding:10px 20px;
 		text-align: center;
 		transition:all .1s;
 		cursor:pointer;
+		float: right;
+		margin-top:-20px;
+		font-size: 19px;
+		background: #F76116;
+		border-bottom: 3px solid #BB3B08;
+
 	}
 	#closeMap:hover{
-		background:rgba(255,255,255,.1);
+		background: #F77C27;
 	}
 	#mapFootnote{
 		color:rgba(255,255,255,.4);
-		text-align: center;
+		text-align: left;
 		font-size: 14px;
+		padding-top:20px;
 	}
 	#mapWrap h1{
 		font-size:30px;
@@ -296,6 +302,21 @@ Game::createGame();
 		font-size: 28px;
 		margin:0px;
 	}
+	#map path{
+		fill: rgba(255,255,255,.0);
+		transition:.2s all;
+	}
+	#map path:hover{
+		fill: rgba(13, 242, 98,1);
+	}
+	#map .pathSelected{
+		fill: rgba(13, 206, 84,1);
+		box-shadow:0px 0px 10px red;
+	}
+	#tt_sm{
+		display: none !important;
+	}
+
 	</style>
 
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
@@ -352,6 +373,39 @@ window.onload = function() {
             }
         }
     }
+
+
+    /*  ----   ---- */
+
+
+
+
+	var continents = ['sm_state_SA', 'sm_state_NA', 'sm_state_EU', 'sm_state_AF', 'sm_state_NS','sm_state_SS','sm_state_ME','sm_state_OC'];
+
+    setTimeout(function(){
+        for(var i = 0; i < continents.length; i++) {
+        var gs = document.getElementsByClassName(continents[i]);
+       //var c = gs.className;
+       //alert(gs.className);
+       	gs[0].classList.add("pathSelected");
+        gs[0].onclick = function() {
+            if(((String)(this.classList)).indexOf("pathSelected") >= 0){
+            	this.classList.remove("pathSelected");
+            	document.getElementById(((String)(this.classList)).split(" ")[0]).value = "false";
+
+
+            }else{
+            	this.classList.add("pathSelected");
+            	document.getElementById(((String)(this.classList)).split(" ")[0]).value = "true";
+
+            }
+        }
+    }
+
+    }, 100);
+
+
+
 }
 
  loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
@@ -363,9 +417,11 @@ window.onload = function() {
 
 <div id="mapWrap">
 	<h1>Select Regions</h1>
-	<div id="closeMap" onclick="hidemap()">X</div>
 	<div id="map"></div>
-	<div id="mapFootnote">These selections apply to Geography, Population and Weather categories.</div>
+	<div id="mapFootnote">
+		These selections apply to Geography, Population and Weather categories.
+		<div id="closeMap" onclick="hidemap()">Done</div>
+	</div>
 </div>
 
 	<div id="jqWrap" method="GET">
@@ -431,6 +487,17 @@ window.onload = function() {
 					<input type="hidden" name="gsHist" id="gsHist" value="false">
 					<input type="hidden" name="gsPop" id="gsPop" value="false">
 					<input type="hidden" name="gsTemp" id="gsTemp" value="false">
+
+					<!--regions-->
+					<input type="hidden" name="r_SA" id="sm_state_SA" value="true">
+					<input type="hidden" name="r_NA" id="sm_state_NA" value="true">
+					<input type="hidden" name="r_EU" id="sm_state_EU" value="true">
+					<input type="hidden" name="r_AF" id="sm_state_AF" value="true">
+					<input type="hidden" name="r_NS" id="sm_state_NS" value="true">
+					<input type="hidden" name="r_SS" id="sm_state_SS" value="true">
+					<input type="hidden" name="r_ME" id="sm_state_ME" value="true">
+					<input type="hidden" name="r_OC" id="sm_state_OC" value="true">
+
           <input type="hidden" name="gsRand" id="gsRand" value="false">
 					<center >
 						<label for="autoplayCB" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:7px;">
