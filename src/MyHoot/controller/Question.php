@@ -246,7 +246,15 @@ class Question
 	function getLocation($type){
 
 		global $conn;
-		$sql = "SELECT * FROM `data-geo` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		$regionsSelected=$_SESSION["regionsSelected"];
+		$sql = "SELECT * FROM `data-geo` WHERE ";
+
+    foreach ($regionsSelected as $region)
+			$sql.=" `location` = '" . $region ."' OR";
+		$sql=substr($sql,0,strlen($sql)-3);
+		$sql.=" ORDER BY rand() LIMIT 1";
+		//die ($sql);
+		//" WHERE `id`='3'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
 		$result = $conn->query($sql);
 		if ($result)
