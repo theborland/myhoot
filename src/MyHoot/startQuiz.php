@@ -307,7 +307,7 @@ Game::createGame();
 		transition:.2s all;
 	}
 	#map path:hover{
-		fill: rgba(13, 242, 98,1);
+		fill: rgba(255, 255, 255,1);
 	}
 	#map .pathSelected{
 		fill: rgba(13, 206, 84,1);
