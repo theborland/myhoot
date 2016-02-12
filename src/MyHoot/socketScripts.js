@@ -66,7 +66,9 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
         {
             if (data.type=="geo")
               window.location.href='userScreen.php?question='+data.title.substring(1);
-            if (data.type=="pop")
+          else
+              window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
+            /*if (data.type=="pop")
               window.location.href='userScreenPop.php?question='+data.title.substring(1);
             if (data.type=="weather")
                 window.location.href='userScreenWeather.php?question='+data.title.substring(1);
@@ -76,6 +78,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
                 window.location.href='userScreenAge.php?question='+data.title.substring(1);
             if (data.type=="time")
                 window.location.href='userScreenTime.php?question='+data.title.substring(1);
+            if (data.type=="rand")
+                    window.location.href='userScreenRand.php?question='+data.title.substring(1);*/
         }
             });
 
@@ -96,4 +100,7 @@ function readCookie(name) {
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
     }
     return null;
+}
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
