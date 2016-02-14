@@ -184,7 +184,7 @@ $theQuestion=Question::loadQuestion();
             left: calc(100% - 50px);
           }
 
-          .nametag{    
+          .nametag{
             position: absolute;
             top: -63px;
             right: -21px;
@@ -261,6 +261,8 @@ setTimeout( function(){
   <?php
   $max=$allAnswers->getMax();
   $min=$allAnswers->getMin();
+  if ($max-$min==0)
+      $max=($allAnswers->correctAns->value)*2;
   $rounding=(strlen($max)-3)*-1;
   if ($rounding>0)$rounding=0;
   //echo "sdfd".$max;
