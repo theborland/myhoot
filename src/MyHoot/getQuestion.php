@@ -249,6 +249,19 @@ var interval = setInterval(function() {
 
 <script type="text/javascript">
 var playing = true;
+window.onload = function() {
+  //alert (readCookie("playMusic")+"df");
+  if (readCookie("playMusic")=="false")
+  {
+      playing=false;
+  }
+  else {
+    var backgroundAudio=document.getElementById("bgMusic");
+    backgroundAudio.volume=1.0;
+  }
+
+}
+
 function mute(){
 	var music = document.getElementById("bgMusic");
 	var button = document.getElementById("muteButton");
@@ -265,6 +278,7 @@ function mute(){
 	}
 
 
+
 }
 
 </script>
@@ -276,6 +290,10 @@ function mute(){
 <audio id="bgMusic" autoplay enablejavascript="yes">
   <source src="quiz.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
+  <script>
+        var audio = document.currentScript.parentElement;
+        audio.volume = 0.0;
+        </script>
 </audio>
 
 <input type="button" id="muteButton" onclick="mute()">
