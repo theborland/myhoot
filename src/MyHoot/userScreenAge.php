@@ -12,6 +12,7 @@ if (isset($_GET["question"]))
   <link rel="stylesheet" href="style/global.css">
       <link href="nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
+  <script src="socketScripts.js"></script>
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -49,7 +50,7 @@ if (isset($_GET["question"]))
 
     <script>
 
-    var nf = new Intl.NumberFormat();
+    //var nf = new Intl.NumberFormat();
 
     function changeValue() {
       var range = document.getElementById("isRange");
@@ -86,7 +87,7 @@ x.send();
 
     </script>
     <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
-    <script src="socketScripts.js"></script>
+
     <script>
       loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>

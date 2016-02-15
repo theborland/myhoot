@@ -52,7 +52,7 @@ $max=$theQuestion->max;
 
     <script>
 
-    var nf = new Intl.NumberFormat();
+    //var nf = new Intl.NumberFormat();
 
     function changeValue() {
       var range = document.getElementById("isRange");
