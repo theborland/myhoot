@@ -78,6 +78,13 @@ Game::createGame();
 	input[type='checkbox']:focus {
 		outline:0px;
 	}
+
+	#numRounds{
+		margin-left: 10px;
+		margin-top: -5px;
+		vertical-align: middle;
+	}
+
 	#jqJoin{
 		position: relative;
 		vertical-align: middle;
@@ -540,13 +547,14 @@ window.onload = function() {
 						<?php echo $_SESSION["game_id"] ; ?>
 					</div>
 				</div>
-				<br><Br>
+				<br>
 
 					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
 					<input type="hidden" name="gsAge" id="gsAge" value="false">
 					<input type="hidden" name="gsHist" id="gsHist" value="false">
 					<input type="hidden" name="gsPop" id="gsPop" value="false">
 					<input type="hidden" name="gsTemp" id="gsTemp" value="false">
+   					<input type="hidden" name="gsRand" id="gsRand" value="false">
 
 					<!--regions-->
 					<input type="hidden" name="r_SA" id="sm_state_SA" value="true">
@@ -558,11 +566,20 @@ window.onload = function() {
 					<input type="hidden" name="r_ME" id="sm_state_ME" value="true">
 					<input type="hidden" name="r_OC" id="sm_state_OC" value="true">
 
-          <input type="hidden" name="gsRand" id="gsRand" value="false">
 					<center >
+						<label for="numRounds" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:0px;margin-bottom: 15px;margin-top:10px;">
+							NUMBER OF ROUNDS
+							<select id="numRounds" name="numRounds">
+								<option value="10">10</option>
+								<option value="15" selected="selected">15</option>
+								<option value="20">20</option>
+								<option value="infinite">infinite</option>
+							</select>
+						</label>
 						<label for="autoplayCB" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:7px;">
 							AUTOPLAY
-							<input type="checkbox" id="autoplayCB" name="auto" value="yes"></label>
+							<input type="checkbox" id="autoplayCB" name="auto" value="yes">
+						</label>
 						<input type="submit" id="jqJoin" value="Start">
 					</Center>
 			</div>
