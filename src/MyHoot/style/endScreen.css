@@ -1,0 +1,253 @@
+#overlayWrap{
+  left:400px;
+  height:140px;
+  background: rgba(0,0,0,.7);
+}
+
+#scoresWrap{
+  display: block;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  bottom:0px;
+  padding:0px 20px;
+  box-sizing:border-box;
+  width: 400px;
+  z-index: 10;
+  background: rgba(0,0,0,.8);
+  box-shadow: 0px 0px 25px rgba(0,0,0,.5);
+  color: #fff;
+}
+
+#scoresWrap h1{
+  font-size: 40px;
+  font-weight: 100;
+
+}
+
+#scoresGraphWrap{
+  display: block;
+  height: 99%;
+  overflow-y:auto;
+  width: 350px;
+  padding-right: 10px;
+}
+
+.scoresGraphLabel{
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  color: #fff;
+}
+
+.scoresGraphBar{
+  padding:0px 0px 15px;
+  margin:5px 0px;
+  border-bottom:1px solid rgba(255,255,255,0.2);ß
+}
+
+.scoresGraphAll{
+  display: inline-block;
+  box-sizing:border-box;
+  margin:0px;
+  padding:5px 0px 5px 10px;
+  background: #1D81CF;
+  font-weight: 500;
+}
+.scoresGraphNew{
+  display: inline-block;
+  box-sizing:border-box;
+  margin:0px;
+  padding:5px 0px 5px 10px;
+  background: #F76116;
+  margin-left:-4px;
+  margin-right: 5px;
+}
+.scoresGraphBar:last-child{
+  border-bottom: 0px;
+}
+
+.scoresGraphNewLabel{
+  display: inline-block;
+  font-weight: 500;
+}
+
+
+#scoresGraphWrap::-webkit-scrollbar {
+    width: 10px;
+}
+
+#scoresGraphWrap::-webkit-scrollbar-track {
+   display: none;
+}
+
+#scoresGraphWrap::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background:rgba(255,255,255,0);
+    cursor: pointer;
+}
+
+#scoresWrap:hover #scoresGraphWrap::-webkit-scrollbar-thumb {
+    background:rgba(255,255,255,.2);
+}
+
+
+.scoresLine{
+  display: block;
+  font-size: 22px;
+  font-weight: 300;
+  border:0px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding:8px 10px;
+}
+
+.scoresGraphScore{
+  display: inline-block;
+  float: right;
+  font-weight: bold;
+  border:0px;
+}
+.scoresLine:last-child{
+  border-bottom: 0px;
+}
+
+#overlayWrap #userMapSubmit{
+  top:45px;
+  right:30px;
+}
+
+#answerLabel{
+  font-weight: 500;
+  color:rgba(255,255,255,.8);
+  font-size: 20px;
+  font-family: overpass;
+  margin-left: 40px;
+  margin-top:20px;
+}
+#answer{
+  display: none;
+}
+.noUi-pips{
+  color:#fff;
+}
+.noUi-marker-normal{
+  background:rgba(255,255,255,.5);
+}
+.noUi-marker-large{
+  background:rgba(255,255,255,1);
+}
+.noUi-handle{
+  display: none;
+}
+.noUi-connect{
+  display: none;
+}
+.noUi-target{
+  background:rgba(255,255,255,0);
+  border:1px solid rgba(255,255,255,1);
+  box-shadow: none;
+  height:8px;
+}
+.noUi-value-horizontal:last-child{
+  left: calc(100% - 50px);
+}
+
+.nametag{
+  position: absolute;
+  top: -63px;
+  right: -21px;
+  display: inline-block;
+  transform: rotate(45deg);
+  background: rgba(0,0,0,.7);
+  padding: 2px 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+}
+
+#winnerStandAligner{
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  top: 100px;
+  left: 400px;
+}
+#winnerStandWrap{
+  width: 600px;
+  margin:0px auto;
+  border-radius: 10px;
+  padding:10px 20px 40px;
+
+  background-color:rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  color:#fff;
+
+  box-shadow: 0px 0px 20px rgba(0,0,0,.5);
+  border-bottom: 0px solid rgba(0,0,0,0.2);
+}
+
+#winnerStandWrap h1{
+  font-weight: 100;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  font-size:40px;
+  margin-top:10px;
+}
+
+#standsWrap{
+  height: 300px;
+  position: relative;
+}
+
+.standWrap{
+  display: inline-block;
+  margin:0px;
+  height: 300px;
+  width: 32%;
+  border:0px solid #fff;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.winnerStand{
+  background:blue;
+  position: absolute;
+  right: 0px;
+  left:0px;
+  bottom:0px;
+  font-size: 30px;
+  text-align: center;
+  box-sizing: border-box;
+  vertical-align: middle;
+  border-left:30px solid rgba(255,255,255,.2);
+  text-shadow: 0px 0px 5px rgba(0,0,0,.3);
+  box-shadow: -20px -20px 50px 0px rgba(0,0,0,.1) inset, 0px 0px 30px 0px rgba(0,0,0,.4);
+  border-radius: 0px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.winnerNameWrap{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.winnerName{
+  display: inline-block;
+  padding:5px 20px;
+  background:blue;
+  max-width: 60%;
+
+  border-radius: 5px;
+  color:white;
+  box-shadow: 0px 0px 15px rgba(0,0,0,.5), -3px -3px 10px 0px rgba(0,0,0,.3) inset;
+  font-size:25px;
+}
+
+#wn1{bottom: 210px;}
+#wn2{bottom: 160px;}
+#wn3{bottom: 110px;}
+
+#ws1{height: 200px;line-height: 200px;font-size:70px;background:#F2BC00;}
+#ws2{height: 150px;line-height: 150px;font-size:50px;background:#B2B6BA;}
+#ws3{height: 100px;line-height: 100px;font-size:40px;background:#D18709;}

@@ -241,7 +241,7 @@ Game::createGame();
 
 	#mapWrap{
 		position: fixed;
-		top:-500px;
+		top:-600px;
 		left: calc(50% - 350px);
 		width: 700;
 		box-sizing:border-box;
@@ -289,7 +289,7 @@ Game::createGame();
 		background: #F77C27;
 	}
 	#mapFootnote{
-		color:rgba(255,255,255,.4);
+		color:rgba(255,255,255,.3);
 		text-align: left;
 		font-size: 14px;
 		padding-top:20px;
@@ -317,19 +317,35 @@ Game::createGame();
 		display: none !important;
 	}
 
+	#statesWrap{
+		float: right;
+		display: inline-block;
+	}
+	#muteButton{
+		background:url('img/mute1.png');
+		border:0px;
+		position: fixed;
+		bottom: 10px;
+		right: 10px;
+		width: 40px;
+		height: 40px;
+		outline:0px;
+		cursor:pointer;
+	}
+	#muteButton:focus{
+		outline:0px;
+		border:0px;
+	}
+
 	</style>
 
  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
-var mapSet = false;
+var playing = true;
 
 
 function showmap(){
-	if(mapSet==false){
-
-		mapSet = true;
-	}
 	document.getElementById("mapBlur").style.display = "block";
 	document.getElementById("mapBlur").style.opacity = "1";
 	document.getElementById("mapWrap").style.top = 0;
@@ -339,11 +355,39 @@ function showmap(){
 function hidemap(){
 	document.getElementById("mapBlur").style.display = "none";
 	document.getElementById("mapWrap").style.top = -500;
-
 }
 
+function mute(){
+	if(playing==true)
+		muteOff();
+	else
+		muteOn();
+}
+
+function muteOn(){
+	var music = document.getElementById("bgMusic");
+	var button = document.getElementById("muteButton");
+	music.volume = 1;
+	playing = true;
+	button.style.backgroundImage = "url(img/mute1.png)";
+	document.cookie="playMusic=true";
+}
+
+function muteOff(){
+	var music = document.getElementById("bgMusic");
+	var button = document.getElementById("muteButton");
+	music.volume = 0;
+	playing = false;
+	button.style.backgroundImage = "url(img/mute2.png)";
+    document.cookie="playMusic=false";
+}
 
 window.onload = function() {
+	//alert($("#qInfoLocation").height());
+    if (readCookie("playMusic")=="false"){
+    	muteOff();
+	}
+
 	var games = ['gsGeo', 'gsPop', 'gsTemp', 'gsAge', 'gsHist', 'gsRand'];
 
     for(var i = 0; i < 6; i++) {
@@ -413,11 +457,27 @@ window.onload = function() {
 </script>
  </head>
  <body>
-<div id="mapBlur"  onclick="hidemap()"></div>
 
+<audio id="bgMusic" autoplay loop enablejavascript="yes">
+  <source src="title.mp3"  type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+
+<input type="button" id="muteButton" onclick="mute()">
+
+<form action="getQuestion.php">
+<div id="mapBlur"  onclick="hidemap()"></div>
 <div id="mapWrap">
-	<h1>Select Regions</h1>
+	<h1>
+		Select Regions
+		<div id="statesWrap">
+			<label for="statesCB" class="jqLabel" style="display:inline-block; margin-right:10px; margin: 0px 0px 0px 0px;font-size:18px;">US STATES</label>
+			<input type="checkbox" id="statesCB" name="statesCB" value="statesCB" checked>
+		</div>
+	</h1>
+
 	<div id="map"></div>
+
 	<div id="mapFootnote">
 		These selections apply to Geography, Population and Weather categories.
 		<div id="closeMap" onclick="hidemap()">Done</div>
@@ -481,7 +541,7 @@ window.onload = function() {
 					</div>
 				</div>
 				<br><Br>
-				<form action="getQuestion.php">
+
 					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
 					<input type="hidden" name="gsAge" id="gsAge" value="false">
 					<input type="hidden" name="gsHist" id="gsHist" value="false">
@@ -505,10 +565,9 @@ window.onload = function() {
 							<input type="checkbox" id="autoplayCB" name="auto" value="yes"></label>
 						<input type="submit" id="jqJoin" value="Start">
 					</Center>
-				</form>
 			</div>
 		</div>
-
+	</form>
 
 
 

@@ -250,7 +250,7 @@ var interval = setInterval(function() {
 <script type="text/javascript">
 var playing = true;
 window.onload = function() {
-  //alert (readCookie("playMusic")+"df");
+/*  //alert (readCookie("playMusic")+"df");
   if (readCookie("playMusic")=="false")
   {
       playing=false;
@@ -260,25 +260,31 @@ window.onload = function() {
     backgroundAudio.volume=1.0;
   }
 
-}
+}*/
 
 function mute(){
+	if(playing==true)
+		muteOff();
+	else
+		muteOn();
+}
+
+function muteOn(){
 	var music = document.getElementById("bgMusic");
 	var button = document.getElementById("muteButton");
-	if(playing==true){
-		music.volume = 0;
-		playing = false;
-		button.style.backgroundImage = "url(img/mute2.png)";
+	music.volume = 1;
+	playing = true;
+	button.style.backgroundImage = "url(img/mute1.png)";
+	document.cookie="playMusic=true";
+}
+
+function muteOff(){
+	var music = document.getElementById("bgMusic");
+	var button = document.getElementById("muteButton");
+	music.volume = 0;
+	playing = false;
+	button.style.backgroundImage = "url(img/mute2.png)";
     document.cookie="playMusic=false";
-	}else{
-		music.volume = 1;
-		playing = true;
-		button.style.backgroundImage = "url(img/mute1.png)";
-    document.cookie="playMusic=true";
-	}
-
-
-
 }
 
 </script>
@@ -290,10 +296,6 @@ function mute(){
 <audio id="bgMusic" autoplay enablejavascript="yes">
   <source src="quiz.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
-  <script>
-        var audio = document.currentScript.parentElement;
-        audio.volume = 0.0;
-        </script>
 </audio>
 
 <input type="button" id="muteButton" onclick="mute()">
@@ -323,11 +325,8 @@ function mute(){
 	</div>
 	<script>
 	$(document).ready(function(){
-		//alert($("#qInfoLocation").height());
-		if (readCookie("playMusic")==false)
-		{
-			//document.getElementById("bgMusic").load();
-			document.getElementById("bgMusic").pause();
+	    if (readCookie("playMusic")=="false"){
+	    	muteOff();
 		}
 
 		$("#overlayWrap").css("height", $("#qInfoLocation").height()+30);
