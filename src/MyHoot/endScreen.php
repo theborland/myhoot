@@ -2,7 +2,6 @@
 session_start();
 //echo "sdfsdf";
 require 'dbsettings.php';
-
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
 
@@ -28,7 +27,7 @@ $theQuestion=Question::loadQuestion();
             <?php } ?>
             background-repeat: no-repeat;
             background-position:center center;
-            background: url('<?php echo Question::loadImage($allAnswers->correctAns->name,Game::findGame()->type); ?>');
+            background: url('paris.jpeg');
 
           }
 
@@ -63,9 +62,10 @@ setTimeout( function(){
     <div id="scoresGraphWrap">
 
       <h1>Scoreboard</h1>
-      <?
+      <?php
         $allAnswers->getTP();
         //echo($allAnswers->allAnswers[0]->color);
+        //echo sizeof($allAnswers);
            foreach ($allAnswers->allAnswers as $key => $value)
             { ?>
               <div class="scoresLine">
@@ -85,24 +85,34 @@ setTimeout( function(){
     <h1>WINNERS</h1>
 
     <div id="standsWrap">
+      <?php if (sizeof($allAnswers->allAnswers )>=2){ ?>
       <div class="standWrap">
         <div class="winnerStand" id="ws2">2</div>
         <div class="winnerNameWrap" id="wn2">
-            <div class="winnerName" style="background:#136DD7;">Bran</div>
+            <div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[1]->color; ?>;"><?php
+            echo $allAnswers->allAnswers[1]->name;
+            ?></div>
         </div>
       </div>
+        <?php  } if (sizeof($allAnswers->allAnswers )>=1){ ?>
       <div class="standWrap">
         <div class="winnerStand" id="ws1">1</div>
         <div class="winnerNameWrap" id="wn1">
-            <div class="winnerName" style="background:#C40200;">Jon</div>
+            <div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[0]->color; ?>;"><?php
+                 echo $allAnswers->allAnswers[0]->name;
+            ?></div>
         </div>
       </div>
+      <?php  } if (sizeof($allAnswers->allAnswers )>=3){ ?>
       <div class="standWrap">
         <div class="winnerStand" id="ws3">3</div>
         <div class="winnerNameWrap" id="wn3">
-            <div class="winnerName" style="background:#0FD766;">Rob</div>
+            <div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[2]->color; ?>;"><?php
+                 echo $allAnswers->allAnswers[2]->name;
+            ?></div>
         </div>
       </div>
+      <?php } ?>
     </div>
   </div>
 </div>

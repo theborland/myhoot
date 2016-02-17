@@ -570,10 +570,11 @@ window.onload = function() {
 						<label for="numRounds" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:0px;margin-bottom: 15px;margin-top:10px;">
 							NUMBER OF ROUNDS
 							<select id="numRounds" name="numRounds">
-								<option value="10">10</option>
+	              <option value="2">2</option>
+              	<option value="10">10</option>
 								<option value="15" selected="selected">15</option>
 								<option value="20">20</option>
-								<option value="infinite">infinite</option>
+								<option value="9999">infinite</option>
 							</select>
 						</label>
 						<label for="autoplayCB" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:7px;">

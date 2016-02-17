@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$whitelist = array('gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
+$whitelist = array('statesCB','numRounds','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'dbsettings.php';
 //echo print_r($_GET["games"]);
 if ($gsGeo=="false" || $gsGeo=="true")
@@ -10,13 +10,15 @@ if ($gsGeo=="false" || $gsGeo=="true")
   $gamesSelected=array();
   $regionsSelected=array();
   if ($r_SA=="true"){$regionsSelected[]=2;$regionsSelected[]=3;$regionsSelected[]=4;}
-  if ($r_NA=="true"){$regionsSelected[]=20;$regionsSelected[]=1;}
+  if ($r_NA=="true"){$regionsSelected[]=1;}
   if ($r_EU=="true"){$regionsSelected[]=6;$regionsSelected[]=5;}
   if ($r_AF=="true"){$regionsSelected[]=8;$regionsSelected[]=13;}
   if ($r_NS=="true"){$regionsSelected[]=11;}
   if ($r_ME=="true"){$regionsSelected[]=7;}
   if ($r_SS=="true"){$regionsSelected[]=9;}
   if ($r_OC=="true"){$regionsSelected[]=10;}
+  if ($statesCB=="statesCB" && $r_NA=="true"){$regionsSelected[]=20;}
+  if ($statesCB=="statesCB" && $r_NA=="false" && sizeof($regionsSelected)==0){$regionsSelected[]=20;}
   if ($gsAge=="true")$gamesSelected[]="age";
   if ($gsHist=="true")$gamesSelected[]="time";
   if ($gsTemp=="true")$gamesSelected[]="weather";
@@ -32,16 +34,23 @@ if ($gsGeo=="false" || $gsGeo=="true")
   //die (print_r($regionsSelected));
   $_SESSION["gamesSelected"]=$gamesSelected;
   $_SESSION["regionsSelected"]=$regionsSelected;
+  $_SESSION["numRounds"]=$numRounds;
 }
 if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
 
+
+if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"])
+    header( 'Location: endScreen.php') ;
+
     $gamesSelected=$_SESSION["gamesSelected"];
     //print_r($gamesSelected);
     $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
     $theQuestion=new Question($current);
+
+
 ?>
 
 <html>
@@ -50,7 +59,7 @@ if (isset($_GET["type"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 30;
+var counter = 300;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
@@ -249,7 +258,7 @@ var interval = setInterval(function() {
 
 <script type="text/javascript">
 var playing = true;
-window.onload = function() {
+//window.onload = function() {
 /*  //alert (readCookie("playMusic")+"df");
   if (readCookie("playMusic")=="false")
   {
@@ -284,7 +293,7 @@ function muteOff(){
 	music.volume = 0;
 	playing = false;
 	button.style.backgroundImage = "url(img/mute2.png)";
-    document.cookie="playMusic=false";
+  document.cookie="playMusic=false";
 }
 
 </script>
