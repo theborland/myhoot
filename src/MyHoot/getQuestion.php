@@ -59,7 +59,7 @@ if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"])
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
 <script>
-var counter = 300;
+var counter = 30;
 $(document).ready(function(){
 $('#qTimer').animate({
 	left: "+=50%",
