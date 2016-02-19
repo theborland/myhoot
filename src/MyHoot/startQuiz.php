@@ -300,6 +300,7 @@ Game::createGame();
 		text-align: left;
 		font-size: 14px;
 		padding-top:20px;
+		position: relative;
 	}
 	#mapWrap h1{
 		font-size:30px;
@@ -338,8 +339,25 @@ Game::createGame();
 		height: 40px;
 		outline:0px;
 		cursor:pointer;
+		z-index:10;
 	}
 	#muteButton:focus{
+		outline:0px;
+		border:0px;
+	}
+	#selectAll{
+		width: 30px;
+		height: 30px;
+		background:url('img/uncheckall.png');
+		background-size: contain;
+		border:0px;
+		outline:0px;
+		cursor:pointer;
+		position: absolute;
+		top:-50px;
+		left: 10px;
+	}
+	#selectAll:focus{
 		outline:0px;
 		border:0px;
 	}
@@ -350,7 +368,8 @@ Game::createGame();
  <script src="socketScripts.js"></script>
 <script>
 var playing = true;
-
+var selected = 8;
+var continents = ['sm_state_SA', 'sm_state_NA', 'sm_state_EU', 'sm_state_AF', 'sm_state_NS','sm_state_SS','sm_state_ME','sm_state_OC'];
 
 function showmap(){
 	document.getElementById("mapBlur").style.display = "block";
@@ -389,6 +408,35 @@ function muteOff(){
     document.cookie="playMusic=false";
 }
 
+function selectall(){
+    for(var i = 0; i < continents.length; i++) {
+        var gs = document.getElementsByClassName(continents[i]);        
+        if(((String)(gs[0].classList)).indexOf("pathSelected") >= 0 && selected>4){
+        	gs[0].classList.remove("pathSelected");
+        	document.getElementById(((String)(gs[0].classList)).split(" ")[0]).value = "false";
+        }else if(((String)(gs[0].classList)).indexOf("pathSelected") < 0 && selected <= 4){
+        	gs[0].classList.add("pathSelected");
+        	document.getElementById(((String)(gs[0].classList)).split(" ")[0]).value = "true";
+        }
+    }
+
+    if(selected>4){
+    	selected = 0;
+    }else{
+    	selected = 8;
+    }
+    animateSelectAll();
+}
+
+function animateSelectAll(){
+    if(selected>4){
+    	document.getElementById('selectAll').style.backgroundImage = "url('img/uncheckall.png')";
+    }else{
+    	document.getElementById('selectAll').style.backgroundImage = "url('img/checkall.png')";
+    }
+
+}
+
 window.onload = function() {
 	//alert($("#qInfoLocation").height());
     if (readCookie("playMusic")=="false"){
@@ -414,13 +462,10 @@ window.onload = function() {
             	this.classList.remove("gsSel");
             	check.style.display = "none";
             	document.getElementById(name).value = "false";
-
-
             }else{
             	this.classList.add("gsSel");
             	check.style.display = "block";
             	document.getElementById(name).value = "true";
-
             }
         }
     }
@@ -429,9 +474,6 @@ window.onload = function() {
     /*  ----   ---- */
 
 
-
-
-	var continents = ['sm_state_SA', 'sm_state_NA', 'sm_state_EU', 'sm_state_AF', 'sm_state_NS','sm_state_SS','sm_state_ME','sm_state_OC'];
 
     setTimeout(function(){
         for(var i = 0; i < continents.length; i++) {
@@ -443,13 +485,13 @@ window.onload = function() {
             if(((String)(this.classList)).indexOf("pathSelected") >= 0){
             	this.classList.remove("pathSelected");
             	document.getElementById(((String)(this.classList)).split(" ")[0]).value = "false";
-
-
+            	selected--;
             }else{
             	this.classList.add("pathSelected");
             	document.getElementById(((String)(this.classList)).split(" ")[0]).value = "true";
-
+				selected++;
             }
+            animateSelectAll();
         }
     }
 
@@ -486,6 +528,7 @@ window.onload = function() {
 	<div id="map"></div>
 
 	<div id="mapFootnote">
+		<input type="button" id="selectAll" onclick="selectall()">
 		These selections apply to Geography, Population and Weather categories.
 		<div id="closeMap" onclick="hidemap()">Done</div>
 	</div>

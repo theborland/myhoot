@@ -251,3 +251,34 @@
 #ws1{height: 200px;line-height: 200px;font-size:70px;background:#F2BC00;}
 #ws2{height: 150px;line-height: 150px;font-size:50px;background:#B2B6BA;}
 #ws3{height: 100px;line-height: 100px;font-size:40px;background:#D18709;}
+
+
+#restart{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: inline-block;
+  padding:10px 40px;
+  background: #F76116;
+  color:#fff;
+  font-family: overpass;
+  font-weight: 500;
+  border-radius: 10px;
+  border: 0px solid #fff;
+  border-bottom: 3px solid #BB3B08;
+  font-size: 22px;
+  box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
+  -webkit-appearance: none;
+  outline:0px;
+  transition:.2s all;
+  text-decoration: none;
+}
+
+#restart:hover{
+  background: #F77C27;
+  cursor:pointer;
+  box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
+}
+#restart:active{
+  background:#F79B00;
+}

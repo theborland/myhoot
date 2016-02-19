@@ -114,6 +114,7 @@ setTimeout( function(){
       </div>
       <?php } ?>
     </div>
+      <a href="startQuiz.php" id="restart">Restart</a>
   </div>
 </div>
 
