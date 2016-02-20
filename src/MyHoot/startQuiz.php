@@ -1,10 +1,12 @@
 <?php
 session_start();
-$_SESSION = array();
-$_SESSION["auto"]="";
+//$_SESSION = array();
+//$_SESSION["auto"]="";
 require 'dbsettings.php';
 //create game
 Game::createGame();
+
+//die ($_SESSION["auto"]);
  ?>
  <html>
  <head>
@@ -410,7 +412,7 @@ function muteOff(){
 
 function selectall(){
     for(var i = 0; i < continents.length; i++) {
-        var gs = document.getElementsByClassName(continents[i]);        
+        var gs = document.getElementsByClassName(continents[i]);
         if(((String)(gs[0].classList)).indexOf("pathSelected") >= 0 && selected>4){
         	gs[0].classList.remove("pathSelected");
         	document.getElementById(((String)(gs[0].classList)).split(" ")[0]).value = "false";
@@ -443,12 +445,52 @@ window.onload = function() {
     	muteOff();
 	}
 
+  //set originally on restart
+  <?php
+  $games = array('gsGeo', 'gsPop', 'gsTemp', 'gsAge', 'gsHist', 'gsRand');
+  $match=array('geo','pop','weather','age','time','rand');
+  for ($i=0;$i<6;$i++)
+      if (isset($_SESSION["gamesSelected"]) && in_array($match[$i],$_SESSION["gamesSelected"]) ||
+         ($i==0 && !isset($_SESSION["gamesSelected"]))
+      ){
+  ?>
+        var check="<?php echo $games[$i] ?>";
+        var name="<?php echo "gs".($i+1); ?>";
+        var cs = document.getElementById(name).children;
+        var child = null;
+        for(i=0; i<cs.length; i++){
+          if(cs[i].className == "gsCheck"){
+            child = cs[i];
+          }
+        }
+        child.style.display = "block";
+        document.getElementById(name).classList.add("gsSel");
+        document.getElementById(check).value = "true";
+  <?php
+      }
+      // now autoplay
+
+      if (isset($_SESSION["auto"]) &&  $_SESSION["auto"]=="yes")
+          echo 'document.getElementById("autoplayCB").checked = "true";'."\n";
+      if (isset($_SESSION["numRounds"]))
+          echo "var rounds=".$_SESSION["numRounds"].";\n";
+      else
+          echo "var rounds=15;\n";
+          ?>
+      var allRounds = document.getElementById("numRounds");
+      for (i = 0; i < allRounds.options.length; i++) {
+          if  (allRounds.options[i].value==rounds){
+             allRounds.selectedIndex=i;
+           }
+      }
+
+
 	var games = ['gsGeo', 'gsPop', 'gsTemp', 'gsAge', 'gsHist', 'gsRand'];
 
     for(var i = 0; i < 6; i++) {
         var gs = document.getElementById("gs"+(i+1));
        var c = gs.className;
-        gs.onclick = function() {
+       gs.onclick = function() {
         	var name = games[parseInt(this.id.charAt(this.id.length-1)) - 1];
         	var cs = this.children;
         	var check = null;
@@ -550,9 +592,9 @@ window.onload = function() {
 			<div id="col2">
 				<label class="jqLabel" style="margin-left:10px;">GAME TYPES</label>
 				<div id="gsWrap">
-					<div class="gsItem gsSel" id="gs1">
+					<div class="gsItem" id="gs1">
 						<img src="img/map.png" class="gsImg" alt="">
-						<div class="gsCheck" style="display:block;"></div>
+						<div class="gsCheck" style="display:none;"></div>
 						<div class="gsName">GEOGRAPHY</div>
 					</div>
 					<div class="gsItem" id="gs2">
@@ -592,7 +634,7 @@ window.onload = function() {
 				</div>
 				<br>
 
-					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
+					<input type="hidden" name="gsGeo" id="gsGeo" value="false">
 					<input type="hidden" name="gsAge" id="gsAge" value="false">
 					<input type="hidden" name="gsHist" id="gsHist" value="false">
 					<input type="hidden" name="gsPop" id="gsPop" value="false">
@@ -615,7 +657,7 @@ window.onload = function() {
 							<select id="numRounds" name="numRounds">
 	              <option value="2">2</option>
               	<option value="10">10</option>
-								<option value="15" selected="selected">15</option>
+								<option value="15">15</option>
 								<option value="20">20</option>
 								<option value="9999">infinite</option>
 							</select>

@@ -9,6 +9,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
   //die ($r_OC);
   $gamesSelected=array();
   $regionsSelected=array();
+  
   if ($r_SA=="true"){$regionsSelected[]=2;$regionsSelected[]=3;$regionsSelected[]=4;}
   if ($r_NA=="true"){$regionsSelected[]=1;}
   if ($r_EU=="true"){$regionsSelected[]=6;$regionsSelected[]=5;}
