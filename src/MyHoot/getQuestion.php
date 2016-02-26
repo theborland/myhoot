@@ -9,7 +9,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
   //die ($r_OC);
   $gamesSelected=array();
   $regionsSelected=array();
-  
+
   if ($r_SA=="true"){$regionsSelected[]=2;$regionsSelected[]=3;$regionsSelected[]=4;}
   if ($r_NA=="true"){$regionsSelected[]=1;}
   if ($r_EU=="true"){$regionsSelected[]=6;$regionsSelected[]=5;}
@@ -304,7 +304,7 @@ function muteOff(){
 
 
 <audio id="bgMusic" autoplay enablejavascript="yes">
-  <source src="quiz.mp3"  type="audio/mpeg">
+  <source src="quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
 </audio>
 
