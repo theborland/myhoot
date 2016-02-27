@@ -1,6 +1,7 @@
 <?php
 session_start();
 //echo "sdfsdf";
+echo $_SESSION["questionNumber"];
 require 'dbsettings.php';
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);

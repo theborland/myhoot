@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+echo $_SESSION["questionNumber"];
 $whitelist = array('statesCB','numRounds','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'dbsettings.php';
 //echo print_r($_GET["games"]);
@@ -41,15 +41,21 @@ if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
-
-
-if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"])
+//die();
+//die ($_SESSION["questionNumber"]);
+if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"]){
+    //die ($_SESSION["questionNumber"]);
+    echo $_SESSION["questionNumber"];
+//die();
     header( 'Location: endScreen.php') ;
-
+    die();
+}
+else {
     $gamesSelected=$_SESSION["gamesSelected"];
     //print_r($gamesSelected);
     $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
     $theQuestion=new Question($current);
+  }
 
 
 ?>

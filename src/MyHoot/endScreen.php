@@ -1,10 +1,20 @@
 <?php
 session_start();
+//echo ($_SESSION["questionNumber"]);
+//die();
 //echo "sdfsdf";
+  //die ($_SESSION["questionNumber"]);
 require 'dbsettings.php';
+//die ($_SESSION["questionNumber"]);
+//$_SESSION["questionNumber"]=2;
+//$_SESSION["questionNumber"]--;
+//echo ($_SESSION["questionNumber"]);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
-$theQuestion=Question::loadQuestion();
-
+//$theQuestion=Question::loadQuestion();
+//$allAnswers->getTP();
+//print_r(sizeof($allAnswers->allAnswers ));
+//die();
+//die ($_SESSION["questionNumber"]);
 ?>
 
 <html>

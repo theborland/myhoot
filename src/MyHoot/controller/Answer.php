@@ -57,7 +57,7 @@ class AllAnswers
 			$answer->totalPoints=User::getTP($answer->user_id) ;
 		}
 		usort($this->allAnswers, array("Answer", "sortTotalMiles"));
-
+    
 	}
 
 	public function getMin(){
