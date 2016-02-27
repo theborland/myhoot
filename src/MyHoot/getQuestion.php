@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo $_SESSION["questionNumber"];
+//echo $_SESSION["questionNumber"];
 $whitelist = array('statesCB','numRounds','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'dbsettings.php';
 //echo print_r($_GET["games"]);
@@ -48,7 +48,7 @@ if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"]){
     echo $_SESSION["questionNumber"];
 //die();
     header( 'Location: endScreen.php') ;
-    die();
+    //die();
 }
 else {
     $gamesSelected=$_SESSION["gamesSelected"];
