@@ -21,8 +21,9 @@ class AllAnswers
 				$user_id = $row["user_id"];
 				$qID=$row["id"];
 				$points=$row["points"];
+				if ($points==null)$points=0;
 				$color=$row["color"];
-				$this->allAnswers[]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points,$color);
+				$this->allAnswers[$user_id]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points,$color);
 
 				//$submitTime= $row["submitTime"];
 				//$miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
@@ -41,6 +42,7 @@ class AllAnswers
 
 	public function awardPoints(){
 		if (Game::findGame()->round!=-1){
+			$this->fillMissingAnswers();
 			usort($this->allAnswers, array("Answer", "sortMiles"));
 			$totalPoints=count($this->allAnswers);
 			foreach ($this->allAnswers as $key=>$answer){
@@ -50,6 +52,30 @@ class AllAnswers
 		}
 	}
 
+	//in case a user does not submit on time
+	public function fillMissingAnswers()
+	{
+			 global $conn;
+		   $allUsers=array();
+			 $sql = "SELECT * from `users` WHERE `game_id`= '".$_SESSION['game_id']."'";
+	 		 $result = $conn->query($sql);
+	     //$row = $result->fetch_assoc();
+			 //echo $sql. " rea".$result;
+			 while($row = $result->fetch_assoc()){
+				// echo $sql;
+				 $name = $row["name"];
+				 $user_id = $row["user_id"];
+				 $color=$row["color"];
+				 $ans=-999;
+				 if (!array_key_exists($user_id,$this->allAnswers))
+				 {
+					  Answer::addAnswer($user_id,$_SESSION["questionNumber"],-99,-99,$ans,$color);
+				 		$this->allAnswers[]=Answer::addUser($_SESSION["questionNumber"],new LatLong(-99,-99),$ans,$user_id,0,0,$color);
+				 }
+			 }
+
+	}
+
 	public function getTP(){
     //usort($this->allAnswers, array("Answer", "sortMiles"));
 		foreach ($this->allAnswers as $key=>$answer){
@@ -57,13 +83,13 @@ class AllAnswers
 			$answer->totalPoints=User::getTP($answer->user_id) ;
 		}
 		usort($this->allAnswers, array("Answer", "sortTotalMiles"));
-    
+
 	}
 
 	public function getMin(){
 		$min=$this->correctAns->value;
 		foreach ($this->allAnswers as $key=>$answer){
-			if ($min>$answer->ans)
+			if ($min>$answer->ans && $answer->ans!=-999)
 			   $min=$answer->ans;
 		}
 		return $min;
@@ -71,7 +97,7 @@ class AllAnswers
 	public function getMax(){
 		$max=$this->correctAns->value;
 		foreach ($this->allAnswers as $key=>$answer){
-			if ($max<$answer->ans)
+			if ($max<$answer->ans  && $answer->ans!=-999)
 			   $max=$answer->ans;
 		}
 		return $max;
@@ -105,6 +131,24 @@ class Answer
 	var $roundPoints;
 	var $value;
 	var $color;
+
+	public static function addAnswer($userID,$questionNumber,$lat,$long,$answer,$color)
+	{
+			global $conn;
+			$sql=" Select 1 from `answers` WHERE `game_id`='$_SESSION[game_id]' AND `user_id`='$userID' AND `questionNum`='$questionNumber'";
+			//echo $sql;
+			//die();
+			$result = $conn->query($sql);
+			if ($result->num_rows == 0)
+			{
+			  $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`answer`,`color`) VALUES
+			   ('$_SESSION[game_id]' ,'$userID','$questionNumber','$lat','$long','$answer','$color')";
+			  //echo $sql;
+			  //die();
+			  $result = $conn->query($sql);
+			}
+	}
+
 	public static function loadCorrect($questionNum){
 
 		global $conn;
@@ -151,7 +195,9 @@ class Answer
 		$answer->ans=$ans;
 		$answer->qID=$qID;
 		$answer->color=$color;
-		if (Game::findGame()->type=="geo")
+		if ($ans==-999)//meaning they didnt submit
+			$answer->distanceAway=-999.99;
+		else if (Game::findGame()->type=="geo")
 			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
 		else
 		  $answer->distanceAway=abs($ans-$correct->value);
@@ -180,6 +226,7 @@ class Answer
 	public function updateAnswer($points)
 	{
 		global $conn;
+		if ($this->ans==-999)$points=0;//meaning they didnt submit
 		$sql = "UPDATE `answers` SET points='".$points."' WHERE id='".$this->qID."'";
 		$this->roundPoints=$points;
 		$result = $conn->query($sql);

@@ -6,18 +6,8 @@ require 'dbsettings.php';
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
 $color=User::getColor();
-$sql=" Select 1 from `answers` WHERE `game_id`='$_SESSION[game_id]' AND `user_id`='$_SESSION[user_id]' AND `questionNum`='$questionNumber'";
-//echo $sql;
-//die();
-$result = $conn->query($sql);
-if ($result->num_rows == 0)
-{
-  $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`answer`,`color`) VALUES
-   ('$_SESSION[game_id]' ,'$_SESSION[user_id]','$questionNumber','$lat','$long','$answer','$color')";
-  //echo $sql;
-  //die();
-  $result = $conn->query($sql);
-}
+Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
+
 //echo $sql;
 //die();
 $game=Game::findGame();

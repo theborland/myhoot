@@ -39,6 +39,8 @@ if ($gsGeo=="false" || $gsGeo=="true")
 }
 if (isset($_GET["auto"]))
     $_SESSION["auto"]=$_GET["auto"];
+else
+    $_SESSION["auto"]="";
 if (isset($_GET["type"]))
             $_SESSION["type"]=$_GET["type"];
 //die();

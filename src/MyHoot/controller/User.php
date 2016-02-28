@@ -4,10 +4,12 @@ class User{
 	var $name;
 	var $id;
 	var $totalPoints;
+	var $color;
 	function __construct($name,$id){
 		$this->name=$name;
 		$this->id=$id;
 	}
+
 	public static function createUser($game_id,$name){
 		global $conn;
 		$_SESSION["name"] =$name;
