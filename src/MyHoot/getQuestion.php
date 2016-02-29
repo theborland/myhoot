@@ -9,7 +9,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
   //die ($r_OC);
   $gamesSelected=array();
   $regionsSelected=array();
-
+  $_SESSION["playedGames"]=array();
   if ($r_SA=="true"){$regionsSelected[]=2;$regionsSelected[]=3;$regionsSelected[]=4;}
   if ($r_NA=="true"){$regionsSelected[]=1;}
   if ($r_EU=="true"){$regionsSelected[]=6;$regionsSelected[]=5;}
@@ -55,8 +55,23 @@ if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"]){
 else {
     $gamesSelected=$_SESSION["gamesSelected"];
     //print_r($gamesSelected);
-    $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+    $playedGames=$_SESSION["playedGames"];
+    if (sizeof($playedGames)==0)
+        $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+    else {
+        $idealArray =array_count_values($gamesSelected);
+        $currentArray =array_count_values($playedGames);
+        //print_r($currentArray);
+        //print_r($idealArray);
+        $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+        while ($currentArray[$current]/sizeof($playedGames)>$idealArray[$current]/sizeof($gamesSelected))
+                $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+        //echo "here";
+    }
     $theQuestion=new Question($current);
+    $playedGames[]=$current;
+    $_SESSION["playedGames"]=$playedGames;
+    //print_r($playedGames);
   }
 
 

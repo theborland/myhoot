@@ -33,6 +33,7 @@ if ($answer>100000)
         'category' => "Game".$_SESSION['game_id'].$questionNumber
       , 'title'    => $_SESSION["name"]
       , 'miles'    => number_format($distanceAway)
+      , 'color'    => $color
     );
     $context = new ZMQContext();
     $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');

@@ -1,6 +1,13 @@
 <?php
 //echo getHostName();
 //$pusherIP='52.90.77.67';
+
+if(auto_logout("user_time"))
+{
+    session_unset();
+    session_destroy();
+}
+
 $pusherIP='172.24.18.10';
 $pusherIP='192.168.0.106';
 $pusherIP=getHostByName(getHostName());
@@ -242,4 +249,27 @@ function remove_accents($string) {
     return $string;
 }
 
+
+function auto_logout($field)
+{
+    $t = time();
+    if (isset($_SESSION[$field]))
+    {
+
+      $t0 = $_SESSION[$field];
+      $diff = $t - $t0;
+    }
+    else $diff=0;
+    if ($diff > 1500)  //1500 seconds
+    {
+      //die("updating");
+    //  echo $_SESSION[$field];
+        return true;
+    }
+    else
+    {
+      //  die("updating");
+        $_SESSION[$field] = time();
+    }
+}
 ?>

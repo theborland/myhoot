@@ -25,7 +25,10 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
             var numAnswers = document.getElementById("numAnswers");
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
             var userAnswers = document.getElementById("userAnswers");
-            userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
+            var r=hexToRgb(data.color).r;
+            var g=hexToRgb(data.color).g;
+            var b=hexToRgb(data.color).b;
+            userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem" style="background-color: rgba('+r+','+g+','+b+',.5);"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
              if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<27 && auto=="yes")
               setTimeout(function (){
                     window.location.href='showAnswer.php';
@@ -103,4 +106,12 @@ function readCookie(name) {
 }
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
 }

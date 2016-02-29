@@ -470,7 +470,7 @@ window.onload = function() {
       }
       // now autoplay
 
-      if (isset($_SESSION["auto"]) &&  $_SESSION["auto"]=="yes")
+      if (!isset($_SESSION["auto"]) || $_SESSION["auto"]=="yes")
           echo 'document.getElementById("autoplayCB").checked = "true";'."\n";
       if (isset($_SESSION["numRounds"]))
           echo "var rounds=".$_SESSION["numRounds"].";\n";

@@ -307,7 +307,7 @@ function checkForRepeats($country){
 	 	$result = $conn->query($sql);
 		//echo $sql;
 		$this->timesRepeated++;
-		if ($result->num_rows>0 && $this->timesRepeated<5)
+		if ($result!=null && $result->num_rows>0 && $this->timesRepeated<5)
 		   return true;
 	  return false;
 
