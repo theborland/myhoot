@@ -6,12 +6,13 @@ require 'dbsettings.php';
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
 $color=User::getColor();
-Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
+$correct=Answer::loadCorrect($questionNumber);
+$place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
 
 //echo $sql;
 //die();
 $game=Game::findGame();
-$correct=Answer::loadCorrect($questionNumber);
+
 if ($game->type=="geo")
     $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
 /*else if ($game->type=="age"){
@@ -50,7 +51,8 @@ if ($answer>100000)
           $message= "Off by: ". $distanceAway. " years";
     if ($game->type=="geo")
       $message= "Distance away : ". $distanceAway. " miles away";
+    $place=
     //echo $correct->location->longg;
   //  die ($message);
-   header( 'Location: waitingScreen.php?message='.$message ) ;
+   header( 'Location: waitingScreen.php?place='.$place.'message='.$message ) ;
  ?>

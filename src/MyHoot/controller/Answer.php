@@ -147,6 +147,7 @@ class Answer
 			  //die();
 			  $result = $conn->query($sql);
 			}
+
 	}
 
 	public static function loadCorrect($questionNum){
