@@ -427,6 +427,9 @@ function selectall(){
     }else{
     	selected = 8;
     }
+
+    document.getElementById('statesCB').checked = !document.getElementById('statesCB').checked;
+
     animateSelectAll();
 }
 

@@ -192,7 +192,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
 <body>
-
+<a id="endGameLink" href="endScreen.php">end game</a>
 <div id="map-canvas"></div>
 <div id="overlayWrap">
   <a href="showScoreBoard.php" style="display:none;">ScoreBoard</a>

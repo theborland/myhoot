@@ -332,6 +332,7 @@ function muteOff(){
 </audio>
 
 <input type="button" id="muteButton" onclick="mute()">
+<a id="endGameLink" href="endScreen.php">end game</a>
 
 
 	<div id="overlayWrap">

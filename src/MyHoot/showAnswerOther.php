@@ -223,6 +223,7 @@ setTimeout( function(){
 </head>
 <body>
 <script src="nouislider.min.js"></script>
+<a id="endGameLink" href="endScreen.php">end game</a>
 <div id="overlayWrap">
   <div id="answerLabel"> <?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?></div>
   <div id="answerWrap">
