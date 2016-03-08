@@ -20,14 +20,22 @@ Game::createGame();
     <link rel="stylesheet" href="style/joinQuiz.css">
     <style>
 	body{
-		background: url('paris.jpeg');
-		background-size: cover;
-		background-repeat: no-repeat;
+		background: red; /* For browsers that do not support gradients */
+		background: -webkit-linear-gradient(top, #328DE5 , #7EC7E5); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(top, #328DE5, #7EC7E5); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(top, #328DE5, #7EC7E5); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(top, #328DE5 , #7EC7E5); /* Standard syntax */
+
+
 		padding:0px;
 		padding-top: 5%;
 	}
 	#jqWrap{
-		width:900px;
+		width:80%;
+		border:0px;
+		box-shadow: 0px 0px 0px;
+		background: transparent;
+
 	}
 	#jqWrap h4{
 		font-size:30;
@@ -42,7 +50,7 @@ Game::createGame();
 	}
 	#jqWrap #quizidWrap{
 		display: block;
-		text-align: center;
+		text-align: left;
 	}
 	#jqWrap #quizid{
 		display: inline-block;
@@ -51,7 +59,7 @@ Game::createGame();
 		font-weight: 300;
 		color:#fff;
 		padding:5px 30px;
-		border:1px solid #fff;
+		border:0px solid #fff;
 		border-radius: 5px;
 		background:rgba(0,0,0,.3);
 	}
@@ -92,7 +100,7 @@ Game::createGame();
 		vertical-align: middle;
 	}
 	#usersWrap{
-		border:1px solid #fff;
+		border:0px solid #fff;
 		border-radius: 5px;
 		background:rgba(0,0,0,.3);
 		margin-bottom: 20px;
@@ -130,39 +138,42 @@ Game::createGame();
 	}
 	#col1{
 		display: inline-block;
-		width: 290px;
+		width: 32%;
+		text-align: left;
 	}
 	#col2{
 		display: inline-block;
-		width: 290px;
+		width: 32%;
 		padding-left:20px;
 		vertical-align: top;
 		border:0px solid red;
+		text-align: left;
 	}
 	#col3{
 		display: inline-block;
-		width: 290px;
+		width: 32%;
 		padding-left:0px;
 		vertical-align: top;
+		text-align: left;
 	}
 
 	#gsWrap{
-		width: 280px;
+		width: 300px;
 		border: 0px solid #fff;
-		text-align: left;
+		text-align: center;
 		padding:2px;
 		margin-top:10px;
+		margin:10px auto 0px;
 	}
 	.gsItem{
 		width: 88px;
 		height: 105px;
 		border:3px solid rgba(255,255,255,0);
 		box-sizing:border-box;
-		margin:2px;
+		margin:3px 2px;
 		display: inline-block;
 		cursor:pointer;
 		position: relative;
-		float: left;
 		background-position:  center 10px;
 		text-align: center;
 		background: rgba(0,0,0,.5);
@@ -210,17 +221,21 @@ Game::createGame();
 	}
 	#joinHere{
 		display: block;
-		width: 650px;
-	    padding: 20px 40px;
-	    margin: 20px auto;
-	    background: rgba(0,0,0,.5);
+	    padding: 40px 40px 20px;
+	    margin: 20px auto 0px;
+	    background: #008E4C;
 	    border: 0px;
-	    border-radius: 10px;
-	    box-shadow: 0px 0px 50px rgba(0,0,0,.5);
+	    border-radius: 0px;
+	    box-shadow: 0px 0px 50px rgba(0,0,0,0);
 	    color:#fff;
 	    font-size:45px;
 	    font-weight: 100;
 	    text-align: center;
+	    position: fixed;
+	    right: 0px;
+	    bottom: 0px;
+	    left: 0px;
+	    height: 130px;
 	}
 
 	#joinHere #link{
@@ -581,7 +596,7 @@ window.onload = function() {
 
 	<div id="jqWrap" method="GET">
 		<img src="logo.png" id="logo">
-		<h4>Creating a Quiz</h4>
+		<h4>Starting a Quiz</h4>
 
 		<div id="colsWrap">
 			<div id="col1">
@@ -593,8 +608,8 @@ window.onload = function() {
 
 			</div>
 			<div id="col2">
-				<label class="jqLabel" style="margin-left:10px;">GAME TYPES</label>
 				<div id="gsWrap">
+				<label class="jqLabel" style="margin-left:10px;text-align: left;">GAME TYPES</label>
 					<div class="gsItem" id="gs1">
 						<img src="img/map.png" class="gsImg" alt="">
 						<div class="gsCheck" style="display:none;"></div>
@@ -629,7 +644,7 @@ window.onload = function() {
 				</div>
 			</div>
 			<div id="col3">
-				<label class="jqLabel" style="margin-left:50px;">QUIZ ID</label>
+				<label class="jqLabel">QUIZ ID</label>
 				<div id="quizidWrap">
 					<div id="quizid">
 						<?php echo $_SESSION["game_id"] ; ?>
@@ -654,7 +669,6 @@ window.onload = function() {
 					<input type="hidden" name="r_ME" id="sm_state_ME" value="true">
 					<input type="hidden" name="r_OC" id="sm_state_OC" value="true">
 
-					<center >
 						<label for="numRounds" class="jqLabel" style="display:inline-block; margin-right:10px;position:relative; top:0px;margin-bottom: 15px;margin-top:10px;">
 							NUMBER OF ROUNDS
 							<select id="numRounds" name="numRounds">
@@ -670,7 +684,6 @@ window.onload = function() {
 							<input type="checkbox" id="autoplayCB" name="auto" value="yes">
 						</label>
 						<input type="submit" id="jqJoin" value="Start">
-					</Center>
 			</div>
 		</div>
 	</form>
