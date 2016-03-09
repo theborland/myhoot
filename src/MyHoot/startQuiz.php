@@ -235,7 +235,7 @@ Game::createGame();
 	    right: 0px;
 	    bottom: 0px;
 	    left: 0px;
-	    height: 130px;
+	    height: 100px;
 	}
 
 	#joinHere #link{
