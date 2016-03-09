@@ -36,13 +36,15 @@ if ($gsGeo=="false" || $gsGeo=="true")
   $_SESSION["gamesSelected"]=$gamesSelected;
   $_SESSION["regionsSelected"]=$regionsSelected;
   $_SESSION["numRounds"]=$numRounds;
+
+  if (isset($_GET["auto"]))
+      $_SESSION["auto"]=$_GET["auto"];
+  else
+      $_SESSION["auto"]="";
 }
-if (isset($_GET["auto"]))
-    $_SESSION["auto"]=$_GET["auto"];
-else
-    $_SESSION["auto"]="";
-if (isset($_GET["type"]))
-            $_SESSION["type"]=$_GET["type"];
+
+//if (isset($_GET["type"]))
+//            $_SESSION["type"]=$_GET["type"];
 //die();
 //die ($_SESSION["questionNumber"]);
 if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"]){

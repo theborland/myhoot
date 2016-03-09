@@ -205,7 +205,7 @@ $theQuestion=Question::loadQuestion();
 
 
 <?php
-if ($_SESSION["auto"]=='yes')
+if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
 {
 ?>
 //automatically forward if automode on
