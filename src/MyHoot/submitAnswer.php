@@ -54,5 +54,5 @@ if ($answer>100000)
   //  $place=
     //echo $correct->location->longg;
   //  die ($message);//place='.$place.
-   header( 'Location: waitingScreen.php?'message='.$message ) ;
+   header( 'Location: waitingScreen.php?message='.$message ) ;
  ?>
