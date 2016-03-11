@@ -79,7 +79,7 @@ setTimeout( function(){
            foreach ($allAnswers->allAnswers as $key => $value)
             { ?>
               <div class="scoresLine">
-                <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
+                <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo stripslashes($value->name); ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
               </div>
       <?php }?>
@@ -100,7 +100,7 @@ setTimeout( function(){
         <div class="winnerStand" id="ws2">2</div>
         <div class="winnerNameWrap" id="wn2">
             <div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[1]->color; ?>;"><?php
-            echo $allAnswers->allAnswers[1]->name;
+            echo stripslashes($allAnswers->allAnswers[1]->name);
             ?></div>
         </div>
       </div>
@@ -109,7 +109,7 @@ setTimeout( function(){
         <div class="winnerStand" id="ws1">1</div>
         <div class="winnerNameWrap" id="wn1">
             <div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[0]->color; ?>;"><?php
-                 echo $allAnswers->allAnswers[0]->name;
+                 echo stripslashes($allAnswers->allAnswers[0]->name);
             ?></div>
         </div>
       </div>
@@ -118,7 +118,7 @@ setTimeout( function(){
         <div class="winnerStand" id="ws3">3</div>
         <div class="winnerNameWrap" id="wn3">
             <div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[2]->color; ?>;"><?php
-                 echo $allAnswers->allAnswers[2]->name;
+                 echo stripslashes($allAnswers->allAnswers[2]->name);
             ?></div>
         </div>
       </div>

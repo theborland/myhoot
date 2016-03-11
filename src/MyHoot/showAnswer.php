@@ -150,7 +150,7 @@ if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
 //automatically forward if automode is on
 setTimeout( function(){
       window.location.href='getQuestion.php';
-}  , 6000 );
+}  , 7000 );
 <?php
 }
 ?>
@@ -208,7 +208,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
            foreach ($allAnswers->allAnswers as $key => $value)
             { ?>
               <div class="scoresLine">
-                <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo $value->name; ?></div>
+                <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo stripslashes($value->name); ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
                 <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
               </div>

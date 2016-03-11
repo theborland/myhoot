@@ -13,20 +13,20 @@ class User{
 	public static function createUser($game_id,$name){
 		global $conn;
 		$_SESSION["name"] =$name;
-		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$_GET['name']."'";
+		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$name."'";
 		$result = $conn->query($sql);
 		//die ($sql);
 		if ($result->num_rows>0 || $name=="")
 		   return false;
     $color=Game::getColor();
-    $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$_GET['game_id']."','".$_GET['name']."','".$color."')";
-		//die ($sql);
+    $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$_GET['game_id']."','".$name."','".$color."')";
+		//die ($name);
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$game_id
-			, 'title'    => $name
+			, 'title'    => stripslashes($name)
 		);
 		$context = new ZMQContext();
 		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');

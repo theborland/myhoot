@@ -6,6 +6,7 @@ if(auto_logout("user_time"))
 {
     session_unset();
     session_destroy();
+    session_start();
     $_SESSION["user_time"] = time();
 }
 
@@ -261,7 +262,7 @@ function auto_logout($field)
       $diff = $t - $t0;
     }
     else $diff=0;
-    if ($diff > 6000)  //1500 seconds
+    if ($diff > 6000)  //6000 seconds
     {
       //die("updating");
     //  echo $_SESSION[$field];

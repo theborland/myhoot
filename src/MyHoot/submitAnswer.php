@@ -6,6 +6,7 @@ require 'dbsettings.php';
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
 $color=User::getColor();
+//die ($color);
 $correct=Answer::loadCorrect($questionNumber);
 $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
 
@@ -32,7 +33,7 @@ if ($answer>100000)
 //SOCKET SENDING MESSAGE
     $entryData = array(
         'category' => "Game".$_SESSION['game_id'].$questionNumber
-      , 'title'    => $_SESSION["name"]
+      , 'title'    => stripslashes($_SESSION["name"])
       , 'miles'    => number_format($distanceAway)
       , 'color'    => $color
     );

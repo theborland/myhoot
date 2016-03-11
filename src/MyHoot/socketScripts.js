@@ -21,7 +21,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
     var conn = new ab.Session('ws://'+ip+':8080',
     function() {
         conn.subscribe('Game'+gameID+''+questionNumber+'', function(topic, data) {
-            console.log('Getting answers:"' + topic + '" : ' + data.title);
+            console.log('Getting name:"' + topic + '" : ' + data.title);
+            console.log('Getting color:"' + topic + '" : ' + data.color);
             var numAnswers = document.getElementById("numAnswers");
             numAnswers.innerHTML = parseInt(numAnswers.innerHTML)  + 1;
             var userAnswers = document.getElementById("userAnswers");
