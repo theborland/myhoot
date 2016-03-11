@@ -4,6 +4,8 @@ session_start();
 $whitelist = array('statesCB','numRounds','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'dbsettings.php';
 //echo print_r($_GET["games"]);
+if ($_SESSION["game_id"]==0)
+   die("no game id");
 if ($gsGeo=="false" || $gsGeo=="true")
 {
   //die ($r_OC);

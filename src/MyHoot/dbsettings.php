@@ -260,7 +260,7 @@ function auto_logout($field)
       $diff = $t - $t0;
     }
     else $diff=0;
-    if ($diff > 1500)  //1500 seconds
+    if ($diff > 6000)  //1500 seconds
     {
       //die("updating");
     //  echo $_SESSION[$field];
