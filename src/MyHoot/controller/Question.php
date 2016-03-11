@@ -169,6 +169,7 @@ class Question
 	function getAge(){
 		global $conn;
 		$sql = "SELECT * FROM `data-people`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+			$sql = "SELECT * FROM `data-people`  WHERE `id`='169'";
 		//echo $sql;
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
 		$result = $conn->query($sql);
