@@ -6,6 +6,7 @@ if(auto_logout("user_time"))
 {
     session_unset();
     session_destroy();
+    $_SESSION["user_time"] = time();
 }
 
 $pusherIP='172.24.18.10';
