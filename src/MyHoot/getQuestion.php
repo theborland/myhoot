@@ -83,6 +83,7 @@ else {
 
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-8">
     <link rel="stylesheet" href="style/global.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script>
