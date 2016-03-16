@@ -42,14 +42,17 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
           }
 
     </style>
-
+  <script src="scripts/music.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
       <script>
 
+window.onload = function() {
+  if (readCookie("playMusic")=="false"){
+      muteOff();
+  }
+}
 
-
-
-<?php
+<?php/*
 if ($_SESSION["auto"]=='yes')
 {
 ?>
@@ -61,13 +64,20 @@ setTimeout( function(){
 
 
 <?php
-}
+}*/
 ?>
 
 </script>
 </head>
 <body>
 <script src="nouislider.min.js"></script>
+
+<audio id="bgMusic" autoplay loop enablejavascript="yes">
+  <source src="end.mp3"  type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+
   <div id="scoresWrap">
     <div id="scoresGraphWrap">
 

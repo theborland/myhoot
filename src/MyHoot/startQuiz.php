@@ -22,6 +22,7 @@ Game::createGame();
 	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 	<script src="socketScripts.js"></script>
 	<script src="scripts/startQuiz.js"></script>
+	<script src="scripts/music.js"></script>
 <script>
 
 
