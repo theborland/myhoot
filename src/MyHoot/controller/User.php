@@ -56,7 +56,10 @@ class User{
 		if ($result)
 		{
 			$row = $result->fetch_assoc();
+			//zecho $id .';'.$row['sum(`points`)']."<br>";
+			if ($row['sum(`points`)']>0)
 			return $row['sum(`points`)'];
+			else return 0;
 
 		}
 	}

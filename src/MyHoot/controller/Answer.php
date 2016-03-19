@@ -108,7 +108,7 @@ class AllAnswers
 		$returnString="[";
 		$i=0;
 		foreach($this->allAnswers as $key=>$answer){
-			$returnString.="['".$answer->name."', ".$answer->location->lat.", ".$answer->location->longg.", '".$answer->color."']";
+			$returnString.="['".addslashes($answer->name)."', ".$answer->location->lat.", ".$answer->location->longg.", '".$answer->color."']";
 			if (++$i!= count($this->allAnswers))
 			$returnString.= ",";
 		}
@@ -197,6 +197,8 @@ class Answer
 		$answer->qID=$qID;
 		$answer->color=$color;
 		if ($ans==-999)//meaning they didnt submit
+			$answer->distanceAway=-999.99;
+		else if (!is_object($correct))//meaning end of game
 			$answer->distanceAway=-999.99;
 		else if (Game::findGame()->type=="geo")
 			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);

@@ -7,6 +7,7 @@ if ($lat=="")$lat=0;
 if ($long=="")$long=0;
 $color=User::getColor();
 //die ($color);
+if ($_SESSION["user_id"]==0)die("Sorry this shouldnt happen - tell me about it...");
 $correct=Answer::loadCorrect($questionNumber);
 $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
 

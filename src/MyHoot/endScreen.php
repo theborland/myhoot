@@ -1,15 +1,17 @@
 <?php
 session_start();
-//echo ($_SESSION["questionNumber"]);
+//$_SESSION["questionNumber"]=7;
 //die();
 //echo "sdfsdf";
   //die ($_SESSION["questionNumber"]);
+  //$_SESSION["game_id"]=22922;
 require 'dbsettings.php';
 //die ($_SESSION["questionNumber"]);
 //$_SESSION["questionNumber"]=2;
 //$_SESSION["questionNumber"]--;
 //echo ($_SESSION["questionNumber"]);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+//$allAnswers->fillMissingAnswers();
 //$theQuestion=Question::loadQuestion();
 //$allAnswers->getTP();
 //print_r(sizeof($allAnswers->allAnswers ));
@@ -52,26 +54,13 @@ window.onload = function() {
   }
 }
 
-<?php/*
-if ($_SESSION["auto"]=='yes')
-{
-?>
-//automatically forward if automode on
-setTimeout( function(){
-      window.location.href='getQuestion.php';
-}  , 10000 );
 
-
-
-<?php
-}*/
-?>
 
 </script>
 </head>
 <body>
 <script src="nouislider.min.js"></script>
-
+<script src="socketScripts.js"></script>
 <audio id="bgMusic" autoplay loop enablejavascript="yes">
   <source src="end.mp3"  type="audio/mpeg">
   Your browser does not support the audio element.
