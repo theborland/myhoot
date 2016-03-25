@@ -3,7 +3,8 @@ session_start();
 //echo "sdfsdf";
 //echo $_SESSION["questionNumber"];
 require 'dbsettings.php';
-
+//  $_SESSION["game_id"]=90993;
+  //$_SESSION["questionNumber"]=7;
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
 
