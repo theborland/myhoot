@@ -1,10 +1,10 @@
 <?php
 session_start();
-//$_SESSION["questionNumber"]=7;
+$_SESSION["questionNumber"]=7;
 //die();
 //echo "sdfsdf";
   //die ($_SESSION["questionNumber"]);
-  //$_SESSION["game_id"]=90993;
+$_SESSION["game_id"]=39407;
 require 'dbsettings.php';
 //die ($_SESSION["questionNumber"]);
 //$_SESSION["questionNumber"]=2;
