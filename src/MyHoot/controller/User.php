@@ -16,20 +16,21 @@ class User{
 		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$name."'";
 		$result = $conn->query($sql);
 		//die ($sql);
-	//	if ($result->num_rows>0 || $name=="")
-	//	   return false;
+		if ($result->num_rows>0 || $name=="")
+		   return false;
 	//echo "😀";
     $color=Game::getColor();
     $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$_GET['game_id']."','".$name."','".$color."')";
 //mb_internal_encoding("UTF-8");
-//echo "😀";
+//echo "😀"; INSERT INTO `MyHoot`.`users` (`user_id`, `game_id`, `name`, `round`, `score`, `color`) VALUES ('51', '51', '😀', NULL, NULL, '')
+
 //	die ($sql);
 //	echo mb_internal_encoding();
 
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
 	 //echo mysqli_info($conn);
-		die ("s".$conn->error . " ". $sql);
+	//	die ("s".$conn->error . " ". $sql);
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$game_id
