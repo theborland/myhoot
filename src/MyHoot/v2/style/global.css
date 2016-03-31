@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-Reg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-ExtraLight.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-ExtraLightItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Overpass';
+  src: url('../fonts/overpass/Overpass-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@import "compass/css3";
+
+
+html{
+	padding: 0px;
+	margin: 0px;
+	width:100%;
+	height: 100%;
+}
+body{
+	padding: 0px;
+	margin: 0px;
+	width:100%;
+	height: 100%;
+	background: darkblue;
+	font-family: Overpass;
+}
+
+.regButton{
+	padding:13px 29px 10px;
+	border:0px solid #fff;
+	text-align: center;
+	font-size: 23px;
+	font-weight: 300;
+	color:#333;
+	border-radius: 10px;
+	box-sizing: border-box;
+	background: #FFBD98;
+	transition: .2s all;
+	cursor:pointer;
+	box-shadow: 0px 0px 30px rgba(255,255,255,.1);	
+}
+.regButton:visited{
+	background: #FFBD98;
+	color:#333;
+	box-shadow: 0px 0px 30px rgba(255,255,255,.1);	
+}
+
+.regButton:hover{
+	background: #FFCEB7;
+	color:#333;
+	box-shadow: 0px 0px 30px rgba(255,255,255,.3);	
+}
+.regButton:active{
+	background: #FFEAD7;
+	color:#000;
+	box-shadow: 0px 0px 30px rgba(255,255,255,.5);	
+}
+.regButton:focus{
+	outline:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
