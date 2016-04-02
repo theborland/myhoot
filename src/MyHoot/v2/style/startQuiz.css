@@ -1,6 +1,7 @@
 body{
 	/*background: linear-gradient(to top, #fff 0%, #16A3FF 30%, #090A0F 100%);*/
 	background:-webkit-linear-gradient(top, #3B9C99 , #A7F4EF);
+	background:linear-gradient(top, #3B9C99 , #A7F4EF);
 }
 
 #headWrap{
@@ -91,7 +92,7 @@ body{
 	background: rgba(255,255,255,0.5);
 	transition:all .1s;
 	border-radius: 3px;
-	z-index: 9;
+	z-index: 5;
 	padding:2px;
 }
 #gsWrap .gsItem:hover{
@@ -167,42 +168,7 @@ body{
 	margin:30px 0px 10px;
 	padding:0px 10px;
 }
-#sqAutoplay{
-	margin-top: 10px;
-}
-#sqNumRounds #numRounds{
-	float: right;
-	margin-top:3px;
-}
 
-#sqAutoplay #autoplayCB[type="checkbox"]{
-	-webkit-appearance:none;
-	width: 20px;
-	height: 20px;
-	border:2px solid rgba(255,255,255,0);
-	background:rgba(255,255,255,0.5);
-	border-radius: 2px;
-	cursor: pointer;
-	position: relative;
-	top:5px;
-	box-sizing:border-box;
-}
-#sqAutoplay #autoplayCB[type='checkbox']:hover {
-	background:rgba(255,255,255,0.7);
-}
-#sqAutoplay #autoplayCB[type='checkbox']:checked {
-	border:0px solid transparent;
-	outline: 0px solid #fff;
-	background:url('../img/check.svg');
-	background-size: contain;
-}
-#sqAutoplay #autoplayCB[type='checkbox']:checked:hover {
-	background:url('../img/checkHover.svg');
-}
-
-#sqAutoplay #autoplayCB[type='checkbox']:focus {
-	outline:0px;
-}
 
 .col#col3{
 	padding:0px 20px;
@@ -237,20 +203,6 @@ body{
 	text-align: left;
 }
 
-#nameUsers::-webkit-scrollbar {
-	width: 10px;
-}
-
-#nameUsers::-webkit-scrollbar-track {
-	display: none;
-}
-
-#nameUsers::-webkit-scrollbar-thumb {
-	border-radius: 2px;
-	background:rgba(255,255,255,.4);
-	cursor: pointer;
-}
-
 .sqName{
 	display: inline-block;
 	padding:2px 9px;
@@ -281,9 +233,23 @@ body{
 #sqStart{
 	padding:10px 30px;
 	font-size: 32px;
+	vertical-align: middle;
 }
 
 
+#sqSettingsButton{
+	background: url('../img/settings.svg');
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	margin:0px 10px 0px 0px;
+	vertical-align: middle;
+	cursor: pointer;
+
+}
+#sqSettingsButton:hover{
+	background: url('../img/settingsHover.svg');
+}
 
 #sqBackground{
 	position:absolute;
@@ -293,6 +259,9 @@ body{
 	height: 400px;
 	z-index: -1;
 	background: url('../img/sqBG.svg');
+	background-size: contain;
+	background-position: center bottom;
+	background-repeat: no-repeat;
 }
 
 #linkPlane{
@@ -305,13 +274,14 @@ body{
 	background: url('../img/plane.svg');
 }
 
+
 #bannerWrap{
 	position: absolute;
 	top:15px;
 	right: 300px;
 }
 .banner{
-	font-size: 40px;
+	font-size: 250%;
 	color: #fff;
 	padding:10px 30px;
 	display: inline-block;
@@ -330,3 +300,164 @@ body{
 #bannerLink{
 	top:0px;
 }
+
+
+#sun{
+	position:absolute;
+	top: 50px;
+	right: 200px;
+	height: 60px;
+	width: 60px;
+	border-radius: 100%;
+	background: #FFE592;
+	box-shadow: 0px 0px 111px 96px rgba(255,255,255,.6);
+	z-index: -3;
+}
+
+
+/* rules that only apply for canvases narrower than 1000px */
+@media only screen and (max-width: 1200px) { 
+	#linkPlane{
+		display: none;
+	}
+	#bannerWrap{
+		right:50px;
+	}
+
+}
+
+#settingWrap{
+	position: fixed;
+	top:-700px;
+	left: calc(50% - 450px);
+	width: 900px;
+	box-sizing:border-box;
+	padding:25px 50px;
+	display: block;
+	background:rgba(0,0,0,0);
+	z-index: 10;
+	transition: .7s all cubic-bezier(0, 0, 0, 1);
+	opacity: 1;
+}
+#settingBlur{
+	position: fixed;
+	z-index: 9;
+	top:0px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(233,251,240,1) 100%) ;
+	transition: .7s all cubic-bezier(0, 0, 0, 1);
+ 	display: none;
+ 	opacity: 0;
+}
+
+#settingCloseButton{
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	right: 30px;
+	top: 30px;
+	z-index: 11;
+	background: url('../img/x.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+#settingCloseButton:hover{
+	background: url('../img/xHover.svg');
+}
+
+#settingsLineWrap{
+	border-bottom: 1px solid rgba(0,0,0,.1);
+	padding-bottom: 15px;
+}
+
+.settingsHL{
+	display: inline-block;
+	width: 50%;
+	box-sizing: border-box;
+}
+
+.settingsLabel{
+	font-size: 25px;
+	font-weight: 300;
+	color:#333;
+	vertical-align: middle;
+}
+
+#settingsSelectRegionsWrap{
+	color:#333;
+	font-size: 22px;
+	font-weight: 300;
+	color:#333;
+	vertical-align: middle;
+	margin-top: 15px;
+}
+
+#statesWrap{
+	text-align: right;
+}
+
+#statesLabel{
+	text-transform: uppercase;
+	font-size: 18px;
+}
+
+#numRounds{
+	vertical-align: middle;
+	margin-left: 10px;
+}
+#settingsAutoplay{
+	text-align: right;
+}
+
+#settingsAutoplay #autoplayCB{
+	margin-left: 6px;
+}
+
+#selectRegionsLabel{
+	font-size: 40px;
+	color: #333;
+	font-weight: 100;
+}
+
+#settingFootnote{
+	color:#999;
+	font-size: 13px;
+}
+#settingFootnote #footnote{
+	float: right;
+}
+
+#settingFootnote #selectAll{
+	color:#fff;
+	font-weight: 500;
+	font-size: 13px;
+	padding:3px 10px;
+	background:#888;
+}
+#settingFootnote #selectAll:hover{
+	background:#666;
+}
+#settingFootnote #selectAll:active{
+	background:#333;
+}
+
+#map path{
+	fill: rgba(0,0,0,.2);
+	transition:.1s all;
+}
+#map path:hover{
+	fill: rgba(0, 0, 0,.3);
+}
+#map .pathSelected{
+	fill: rgba(121, 220, 185,1);
+	box-shadow:0px 0px 10px red;
+}
+#map .pathSelected:hover{
+	fill: rgba(70, 204, 155,1);
+	box-shadow:0px 0px 10px red;
+}
+
