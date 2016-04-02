@@ -10,6 +10,8 @@
 
 	<!--<script src="scripts/getQuestion.js"></script>-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="scripts/global.js"></script>
+	<script src="scripts/socketScripts.js"></script>
 
 	<script>
 		
@@ -26,6 +28,11 @@
 
 			     x++;
 			}, 50);
+
+		    if (readCookie("playMusic")=="false"){
+		    	muteOff();
+			}
+
 
 		}
 
@@ -64,5 +71,17 @@
 	<div class="userAnswer" style="background:#5291D6;">Else <div class="userResult">99,148,431</div></div>
 
 </div>
+
+
+<audio id="bgMusic" autoplay enablejavascript="yes">
+  <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+
+
+<input type="button" id="muteButton" onclick="mute()">
+<a href="#" id="endGame" class="regButton">End Game</a>
+
+
 </body>
 </html>

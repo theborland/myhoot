@@ -168,6 +168,19 @@ input[type='checkbox']:focus {
 	cursor: pointer;
 }
 
+#endGame{
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+	z-index: 12;
+	font-size: 14px;
+	padding:5px 10px;
+	background: rgba(0,0,0,0.6);
+	color:#fff;
+}
+#endGame:hover{
+	background: rgba(236,61,7,0.9);
+}
 
 
 
