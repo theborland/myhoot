@@ -81,7 +81,7 @@
 
 <input type="button" id="muteButton" onclick="mute()">
 <a href="#" id="endGame" class="regButton">End Game</a>
-
+<div id="gameID">ID:22332</div>
 
 </body>
 </html>

@@ -1,3 +1,31 @@
+<?php
+
+session_start();
+$whitelist = array('message','submit','name','game_id');
+require 'dbsettings.php';
+
+if ($submit=="Join"){
+     $name=substr($name,0,20);
+     $_SESSION["game_id"] =$game_id;
+    // User::createUser($game_id,$name);
+    if (Game::findGame()==null)
+         header( 'Location: joinQuiz.php?error=Bad Game');
+    if (!User::createUser($game_id,$name))
+         header( 'Location: joinQuiz.php?error=Bad Username');
+    $game=Game::findGame();
+    $questionNumber=$game->round;
+    if ($questionNumber!=-1){
+        if ($game->type=="geo")
+          header( 'Location: userScreen.php?question='.$questionNumber ) ;
+        else {
+          $type=ucwords($game->type);
+          header( 'Location: userScreen'.$type.'.php?question='.$questionNumber ) ;
+        }
+    }
+}
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +38,12 @@
 
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
+	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
 	<script>
-		
 		window.onload = function(){
-
+	   		loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
 		}
-
 	</script>
 </head>
 <body>
@@ -27,7 +54,15 @@
 
 </div>
 <div id="messageWrap">
-	Your answer was 3,431 miles off.
+
+
+	<?php if (is_numeric($message)){ ?>
+		<div id="score"><div style="font-size:18px;font-weight:bold;">Your answer was</div> <?php echo $message . "<br>"; ?> miles away.</div>
+	<?php } else { ?>
+		<div id="score"><div style="font-size:18px;font-weight:bold;"> <?php echo $message . "<br>"; ?> </div>
+	<?php }  ?>
+
+
 </div>
 <div id="tryContainer">
 	Everyone else playing?
