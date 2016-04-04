@@ -1,4 +1,14 @@
+<?php
+session_start();
+//echo "sdfsdf";
+//echo $_SESSION["questionNumber"];
+require 'dbsettings.php';
+//  $_SESSION["game_id"]=90993;
+  //$_SESSION["questionNumber"]=7;
+$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+$theQuestion=Question::loadQuestion();
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +24,6 @@
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="scripts/nouislider.min.js"></script>
-
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
 
 	<script>
 		

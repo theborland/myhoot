@@ -2,8 +2,8 @@ body{
 	padding:0px;
 	padding-top: 10%;
 	height: 80%;
-	background:-webkit-linear-gradient(top, #3B9C99 , #A7F4EF);
-	background:linear-gradient(top, #3B9C99 , #A7F4EF);
+	background:-webkit-linear-gradient(top, #3B9C99 , #C4FFC8);
+	background:linear-gradient(top, #3B9C99 , #C4FFC8);
 }
 
 #jqWrap{

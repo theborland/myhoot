@@ -13,17 +13,33 @@
 	<script src="scripts/continentmap.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/cloud.js"></script>
 
 	<script>
-		
+		var clouds={};
+		var numClouds=1;
+		var actClouds=1;
+
 		window.onload = function(){
 			initChecks();
 			initRegions();
+
+
+			//set up clouds
+			var docHeight = (document.height !== undefined) ? document.height : document.body.offsetHeight;
+			clouds[0] = new Cloud(0, docHeight);
 
 			//animation clock
 			var x=0;
 			var interval = setInterval(function() {
 			     animatePlane(x);
+			     animateClouds(x);
+			     
+			     if(Math.random()<0.003){
+			     	clouds[numClouds] =  new Cloud(numClouds, docHeight);
+			     	numClouds++;
+			     	actClouds++;
+			     }
 			     x++;
 			}, 50);
 
@@ -32,8 +48,14 @@
 		    	muteOff();
 			}
 
-
 		}
+
+		function animateClouds(x){
+			for(var i=0; i<actClouds; i++){
+			    clouds[i].animate(x);
+			}
+		}
+
 
 	</script>
 
@@ -192,6 +214,14 @@
 	Your browser does not support the audio element.
 </audio>
 
+<!--
+<div class="cloud" id="cloud1"></div>
+<div class="cloud" id="cloud2"></div>
+<div class="cloud" id="cloud3"></div>
+-->
+<div id="clouds">
+	
+</div>
 
 <input type="button" id="muteButton" onclick="mute()">
 <div id="sun"></div>
