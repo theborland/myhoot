@@ -1,5 +1,5 @@
 <?php
-require '../dbsettings.php';
+require '../controller/dbsettings.php';
 
 
 if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
