@@ -30,7 +30,7 @@ $outputSource .= "element.parentNode.removeChild(element);\n\t\t};\n\t\tfunction
 	$outputSource .= "\n\t\t\tvar xhttp = new XMLHttpRequest();\n\t\t\txhttp.onreadystatechange = function(){\n\t\t\t\tif(xhttp.readyState === XMLHttpRequest.DONE)";
 	$outputSource .= "\n\t\t\t\t\thandleResponse(this.reponseText);\n\t\t\t};\n\t\t\txhttp.open(\"POST\", \"Images.php\", true);\n\t\t\txhttp.setRequestHeader";
 	$outputSource .= "(\"Content-type\", \"application/x-www-form-urlencoded\");\n\t\t\txhttp.send(\"?newSource=\" + btoa(source) + \"&id=\" + id);\n\t\t};";
-	$outputSource .= "\n\t</script>\n\t<body>\n\t\t<p>" . $nameCapture [1] . ", " . $nameCapture[2]. " ".$id;
+	$outputSource .= "\n\t</script>\n\t<body>\n\t\t<p>" . $nameCapture [1] . ", " . $nameCapture[2]. " ".$id . " ,left:".numLeft();
 	$outputSource .= "</p>\n\t\t<form method='POST'><input type='hidden' id='id' name='id' value=\"".$id."\"><input type='hidden' id='url' name='url' value=\"".
   str_replace("\"","$",substr($source,strpos($source,"[")-1)).
   "\"><table border = '1' width = '100%' table-layout = 'fixed'>\n\t\t\t<tr table-layout = 'fixed'>";
@@ -43,6 +43,20 @@ $outputSource .= "element.parentNode.removeChild(element);\n\t\t};\n\t\tfunction
 
 	echo ($outputSource . "\n\t\t\t</tr>\n\t\t</table>\n\t\t<input type=\"submit\" value=\"Submit\" name=\"Submit\">>Done</submit>\n\t</form></body>\n</html>");
 
+  function numLeft()
+  {
+    	global $conn;
+    date_default_timezone_set('America/Los_Angeles');
+      $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+  		$sql = "SELECT COUNT(*) as total FROM `data-geo` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
+  		$result = $conn->query($sql);
+  		if ($result)
+  		{
+          $row = $result->fetch_assoc();
+  				return $row ['total'];
+
+  		}
+  }
 function getURL()
 {
   	global $conn;
