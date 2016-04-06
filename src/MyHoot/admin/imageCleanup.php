@@ -1,6 +1,9 @@
 <?php
 require '../controller/dbsettings.php';
-
+if (isset($_GET['db']))
+  $db=$_GET['db'];
+else
+  $db="time";
 
 if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
   updateSQL($_POST['id'],$_POST['url']);
@@ -19,6 +22,8 @@ if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
 	$outputSource .= "\n\t\t\tmax-height: 215;\n\t\t}\n\t</style>\n\t<script>\n\t\tvar source = \"";
 	$outputSource .= str_replace("\"","\\\"",(str_replace("\n", "\\n", $source))). "\";\n\t\tvar id = \"" . $id . "\"\n\t\tfunction check(element){ console.log(element.src);   \n\t\t\t";
 	$outputSource .= "document.getElementById('url').value=document.getElementById('url').value.replace(element.src,'');  \n";
+    $outputSource .= "document.getElementById('url').value=document.getElementById('url').value.replace(' ',''); ";
+    $outputSource .= "document.getElementById('url').value=document.getElementById('url').value.replace('\'\',',''); ";
   $outputSource .= "document.getElementById('url').value=document.getElementById('url').value.replace(', \'\'','');  document.getElementById('url').value=document.getElementById('url').value.replace('\'\',',''); console.log (document.getElementById('url').value); ";
   $outputSource .= "source = (source.replace (\"'\" + element.src + \"'\", \"\\\\0\").replace (\"\\\\0, \", \"\\\\0\").replace (\"\\\\0\", \"\"));";
 	$outputSource .= "\n\t\t\tremoveElement (element.parentNode)\n\t\t};\n\t\tfunction handleResponse(response){\n\t\t\talert(response);\n\t\t};\n\t\t";
@@ -45,10 +50,11 @@ $outputSource .= "element.parentNode.removeChild(element);\n\t\t};\n\t\tfunction
 
   function numLeft()
   {
+    global $db;
     	global $conn;
     date_default_timezone_set('America/Los_Angeles');
       $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
-  		$sql = "SELECT COUNT(*) as total FROM `data-geo` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
+  		$sql = "SELECT COUNT(*) as total FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
   		$result = $conn->query($sql);
   		if ($result)
   		{
@@ -61,10 +67,10 @@ function getURL()
 {
   	global $conn;
     global $id;
-
+    global $db;
   date_default_timezone_set('America/Los_Angeles');
     $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
-		$sql = "SELECT * FROM `data-geo` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
+		$sql = "SELECT * FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
     //echo $sql;
 		$result = $conn->query($sql);
 		if ($result)
@@ -72,17 +78,24 @@ function getURL()
 		  if($row = $result->fetch_assoc()){
         $id=$row ['id'];
         //echo $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
-				return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
+        //return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
+        if ($db=="geo")
+				    return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
+        if ($db=="time")
+				    return $row ['wording'] . ', ' . $row ['id'] . "\n" . $row ['image'];
+        if ($db=="people")
+    				    return $row ['name'] . ', ' . $row ['id'] . "\n" . $row ['image'];
 		  }
 		}
 }
 function updateSQL($id,$url)
 {
+  global $db;
   date_default_timezone_set('America/Los_Angeles');
   	global $conn;
     $url=addslashes(str_replace("$","\"",$url));
     $url=trim($url);
-    $sql = "UPDATE `data-geo` SET image='".$url."' , imageUpdatedDate='".date('Y-m-d')."' WHERE id='".$id."'";
+    $sql = "UPDATE `data-$db` SET image='".$url."' , imageUpdatedDate='".date('Y-m-d')."' WHERE id='".$id."'";
 //die ($sql);
   	$result = $conn->query($sql);
 
@@ -91,14 +104,21 @@ function updateSQL($id,$url)
 function getImage($name){
 
 	$url='http://en.wikipedia.org/w/api.php?action=query&titles='.urlencode($name).'&prop=pageimages&format=json&pithumbsize=1000';
+  $url='http://en.wikipedia.org/w/api.php?action=query&generator=search&gsrnamespace=0&gsrsearch='.urlencode($name).'&prop=pageimages&format=json&pithumbsize=1000';
+$url='https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrnamespace=0&gsrlimit=10&gsrsearch='.urlencode($name).'&prop=pageimages|extracts&format=json&pithumbsize=1000&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max';
 	$jsonData =file_get_contents( $url);
-  //echo "u".$url;
-
+//  echo "u".$url;
+//&generator=search&gsrnamespace=0&&gsrsearch=
 	$phpArray = json_decode($jsonData);
 //	print_r($phpArray);
 	$image=findSource($phpArray);
-  return ("Click to add:<img src = '$image' alt = '' onclick = 'add(this)' class = 'imgButton' height = '200' width = '250'>");
+$ret="";
+  foreach ($image as $k=>$img){
+    if ($k%5==0)  $ret.="<tr>";
+    $ret.=("<td>Click to add:<img src = '$img' alt = '' onclick = 'add(this)' class = 'imgButton' height = '200' width = '250'>");
 
+}
+  return $ret;
 //	return $image;
 
 }

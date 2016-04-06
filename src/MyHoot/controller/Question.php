@@ -194,8 +194,10 @@ class Question
 
 	function getTime(){
 		global $conn;
-		$sql = "SELECT * FROM `data-time`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
-		//echo $sql;
+		$sql = "SELECT * FROM `data-time` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+
+		//$sql = "SELECT * FROM `data-time` WHERE `imageUpdatedDate` IS NOT null AND `id`='28' ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//die ($sql);
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
 		$result = $conn->query($sql);
 		if ($result)
@@ -231,11 +233,17 @@ class Question
 }
 
   public static function getRandomUrl($url){
-		$url=substr($url,2,strlen($url)-4);
-		$url=str_replace("', \"","', '",$url);
-		$url=str_replace("\", \"","', '",$url);
-		$url=str_replace("\", '","', '",$url);
-		$splits=explode("', '",$url);
+	  //echo $url;
+		$url=trim(preg_replace('/\s\s+/', ' ', $url));
+		$url=str_replace(" ","",$url);
+		$url=str_replace("[ '","['",$url);
+		$url=substr($url,1,strlen($url)-4);
+		$url=str_replace("',\"","','",$url);
+		$url=str_replace("\",\"","','",$url);
+		$url=str_replace("\",'","','",$url);
+		$url=str_replace("','","','",$url);
+		$url=str_replace("','","','",$url);
+		$splits=explode("','",$url);
 		if (sizeof($splits)==0)
 		{
 		//	echo "going in again";

@@ -88,15 +88,20 @@ class LatLong
 
 function findSource ($phpArray)
 {
-	foreach ($phpArray as $key => $value) {
-		if (is_object($value))
-		return findSource($value);
-		else {
-			if ($key=="source")
-			return $value;
-		}
+	$returnVal=array();
+	foreach ($phpArray->query->pages as $key => $value) {
+		//echo ("<Br><br>");
+		//print_r($value);
+			if (isset($value->thumbnail))
+			{
 
-	}
+		      $returnVal[]= $value->thumbnail->source;
+
+				}
+		}
+		return $returnVal;
+//https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrsearch=The+Ku+Klux+Klan+was+founded.&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max
+//https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrnamespace=0&gsrlimit=10&gsrsearch=The+Ku+Klux+Klan+was+founded.&prop=pageimages&format=json
 }
 
 function state_abbr($name, $get = 'abbr') {

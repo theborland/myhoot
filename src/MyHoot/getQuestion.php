@@ -3,7 +3,7 @@ session_start();
 //echo $_SESSION["questionNumber"];
 
 include("controller/gameLogic.php");
-
+//die();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +52,7 @@ include("controller/gameLogic.php");
 
 	<style>
 		body{
-			background-image:url('img/background.jpg');
+			background-image:url("<?php echo $theQuestion->getImage() ?>");
 		}
 	</style>
 
