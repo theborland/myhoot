@@ -1,5 +1,5 @@
 <?php 
 session_start();
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
      Question::InQuestion($_GET["question"]);
 ?>

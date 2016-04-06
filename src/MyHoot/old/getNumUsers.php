@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 
 
 $sql = "SELECT COUNT(*)  FROM `users` WHERE game_id ='".$_SESSION["game_id"]."'";

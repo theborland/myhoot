@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 ?>
 <html>

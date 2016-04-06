@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
@@ -12,7 +12,7 @@ if (isset($_GET["question"]))
   <link rel="stylesheet" href="style/global.css">
       <link href="nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
-  <script src="socketScripts.js"></script>
+  <script src="scripts/socketScripts.js"></script>
     <style>
       html, body, #map-canvas {
         height: 100%;

@@ -35,6 +35,7 @@ class User{
 		$entryData = array(
 			'category' => "Game".$game_id
 			, 'title'    => stripslashes($name)
+				, 'color'    => $color
 		);
 		//print_r($entryData);
 		$context = new ZMQContext();

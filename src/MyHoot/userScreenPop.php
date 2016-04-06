@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"])  )
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
@@ -13,7 +13,7 @@ if (isset($_GET["question"]))
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  <link rel="stylesheet" href="style/global.css">
    <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
-   <script src="socketScripts.js"></script>
+   <script src="scripts/socketScripts.js"></script>
 <link href="nouislider.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style/inputSlider.css">
     <style>

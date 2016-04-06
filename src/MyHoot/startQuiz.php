@@ -2,225 +2,184 @@
 session_start();
 //$_SESSION = array();
 //$_SESSION["auto"]="";
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 //create game
 Game::createGame();
 
-//die ($_SESSION["auto"]);
- ?>
- <html>
- <head>
- 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
 
-    <link rel="stylesheet" href="style/global.css">
-    <link rel="stylesheet" href="style/joinQuiz.css">
-    <link rel="stylesheet" href="style/startQuiz.css">
+	<title>Start a Quiz</title>
 
-	<script src="mapdata.js"></script>
-	<script src="continentmap.js"></script>
+	<link rel="stylesheet" href="style/global.css">
+	<link rel="stylesheet" href="style/startQuiz.css">
 	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
-	<script src="socketScripts.js"></script>
 	<script src="scripts/startQuiz.js"></script>
-	<script src="scripts/music.js"></script>
-<script>
+	<script src="scripts/mapdata.js"></script>
+	<script src="scripts/continentmap.js"></script>
+	<script src="scripts/global.js"></script>
+	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/cloud.js"></script>
 
 
 
-window.onload = function() {
-	//alert($("#qInfoLocation").height());
-    if (readCookie("playMusic")=="false"){
-    	muteOff();
-	}
+	<script>
+		var clouds={};
+		var numClouds=1;
+		var actClouds=1;
 
-  //set originally on restart
-  <?php
-  $games = array('gsGeo', 'gsPop', 'gsTemp', 'gsAge', 'gsHist', 'gsRand');
-  $match=array('geo','pop','weather','age','time','rand');
-  for ($i=0;$i<6;$i++)
-      if (isset($_SESSION["gamesSelected"]) && in_array($match[$i],$_SESSION["gamesSelected"]) ||
-         ($i==0 && !isset($_SESSION["gamesSelected"]))
-      ){
-  ?>
-        var check="<?php echo $games[$i] ?>";
-        var name="<?php echo "gs".($i+1); ?>";
-        var cs = document.getElementById(name).children;
-        var child = null;
-        for(i=0; i<cs.length; i++){
-          if(cs[i].className == "gsCheck"){
-            child = cs[i];
-          }
-        }
-        child.style.display = "block";
-        document.getElementById(name).classList.add("gsSel");
-        document.getElementById(check).value = "true";
-  <?php
-      }
-      // now autoplay
-
-      if (!isset($_SESSION["auto"]) || $_SESSION["auto"]=="yes")
-          echo 'document.getElementById("autoplayCB").checked = "true";'."\n";
-      if (isset($_SESSION["numRounds"]))
-          echo "var rounds=".$_SESSION["numRounds"].";\n";
-      else
-          echo "var rounds=15;\n";
-          ?>
-      var allRounds = document.getElementById("numRounds");
-      for (i = 0; i < allRounds.options.length; i++) {
-          if  (allRounds.options[i].value==rounds){
-             allRounds.selectedIndex=i;
-           }
-      }
+		window.onload = function(){
+			initChecks();
+			initRegions();
 
 
-	var games = ['gsGeo', 'gsPop', 'gsTemp', 'gsAge', 'gsHist', 'gsRand'];
+			//set up clouds
+			var docHeight = (document.height !== undefined) ? document.height : document.body.offsetHeight;
+			clouds[0] = new Cloud(0, docHeight);
 
-    for(var i = 0; i < 6; i++) {
-        var gs = document.getElementById("gs"+(i+1));
-       var c = gs.className;
-       gs.onclick = function() {
-        	var name = games[parseInt(this.id.charAt(this.id.length-1)) - 1];
-        	var cs = this.children;
-        	var check = null;
-        	for(i=0; i<cs.length; i++){
-        		if(cs[i].className == "gsCheck"){
-        			check = cs[i];
-        		}
-        	}
+			//animation clock
+			var x=0;
+			var interval = setInterval(function() {
+			     animatePlane(x);
+			     animateClouds(x);
 
-            if(this.className.indexOf("gsSel") >= 0){
-            	this.classList.remove("gsSel");
-            	check.style.display = "none";
-            	document.getElementById(name).value = "false";
-            }else{
-            	this.classList.add("gsSel");
-            	check.style.display = "block";
-            	document.getElementById(name).value = "true";
-            }
-        }
-    }
+			     if(Math.random()<0.003){
+			     	clouds[numClouds] =  new Cloud(numClouds, docHeight);
+			     	numClouds++;
+			     	actClouds++;
+			     }
+			     x++;
+			}, 50);
 
+			// check and set music
+		    if (readCookie("playMusic")=="false"){
+		    	muteOff();
+			}
 
-    /*  ----   ---- */
+		}
 
+		function animateClouds(x){
+			for(var i=0; i<actClouds; i++){
+			    clouds[i].animate(x);
+			}
+		}
 
+		loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
 
-    setTimeout(function(){
-        for(var i = 0; i < continents.length; i++) {
-        var gs = document.getElementsByClassName(continents[i]);
-       //var c = gs.className;
-       //alert(gs.className);
-       	gs[0].classList.add("pathSelected");
-        gs[0].onclick = function() {
-            if(((String)(this.classList)).indexOf("pathSelected") >= 0){
-            	this.classList.remove("pathSelected");
-            	document.getElementById(((String)(this.classList)).split(" ")[0]).value = "false";
-            	selected--;
-            }else{
-            	this.classList.add("pathSelected");
-            	document.getElementById(((String)(this.classList)).split(" ")[0]).value = "true";
-				selected++;
-            }
-            animateSelectAll();
-        }
-    }
+	</script>
 
-    }, 100);
-
-
-
-}
-
- loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
-
-</script>
- </head>
- <body>
-
-<audio id="bgMusic" autoplay loop enablejavascript="yes">
-  <source src="title.mp3"  type="audio/mpeg">
-	Your browser does not support the audio element.
-</audio>
-
-<input type="button" id="muteButton" onclick="mute()">
+</head>
+<body>
 
 <form action="getQuestion.php">
-<div id="mapBlur"  onclick="hidemap()"></div>
-<div id="mapWrap">
-	<h1>
-		Select Regions
-		<div id="statesWrap">
-			<label for="statesCB" class="jqLabel" id="statesLabel">US STATES</label>
+
+
+
+<div id="settingBlur"  onclick="hideSetting()">
+	<div id="settingCloseButton" onclick="hideSetting()"></div>
+</div>
+<div id="settingWrap">
+
+
+
+	<div class="settingsLineWrap" id="settingsLineWrap">
+		<div class="settingsHL" id="settingsNumRounds">
+
+			<label class="settingsLabel" for="numRounds">NUMBER OF ROUNDS</label>
+			<select id="numRounds" name="numRounds">
+				<option value="2">2</option>
+				<option value="10" selected>10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+				<option value="9999">infinite</option>
+			</select>
+
+		</div><div class="settingsHL" id="settingsAutoplay">
+
+			<label class="settingsLabel" for="autoplayCB" checked>AUTOPLAY</label>
+			<input type="checkbox" id="autoplayCB" name="auto" value="yes">
+
+		</div>
+	</div>
+
+
+	<div class="settingsLineWrap" id="settingsSelectRegionsWrap">
+		<div class="settingsHL" id="selectRegionsLabel">
+			Select Regions
+		</div><div id="statesWrap" class="settingsHL">
+			<label for="statesCB" class="settingsLabel" id="statesLabel">US States</label>
 			<input type="checkbox" id="statesCB" name="statesCB" value="statesCB" checked>
 		</div>
-	</h1>
+	</div>
 
 	<div id="map"></div>
 
-	<div id="mapFootnote">
-		<input type="button" id="selectAll" onclick="selectall()">
-		These selections apply to Geography, Population and Weather categories.
-		<div id="closeMap" onclick="hidemap()">Done</div>
+	<div id="settingFootnote">
+		<input type="button" id="selectAll" class="regButton" onclick="selectall()" value="deselect all">
+		<div id="footnote">
+			These selections apply to Geography, Population and Weather categories.
+		</div>
 	</div>
 </div>
 
-	<div id="jqWrap" method="GET">
-		<img src="logo.png" id="logo">
-		<h4>Starting a Quiz</h4>
 
-		<div id="colsWrap">
-			<div id="col1">
-				<label class="jqLabel"><div id="numUsers" style="display:inline-block;">0</div> USERS IN THE GAME</label>
-				<div id="usersWrap">
-					<div id="nameUsers">
-					</div>
-				</div>
 
-			</div>
-			<div id="col2">
-				<div id="gsWrap">
-				<label class="jqLabel" style="margin-left:10px;text-align: left;">GAME TYPES</label>
-					<div class="gsItem" id="gs1">
-						<img src="img/map.png" class="gsImg" alt="">
-						<div class="gsCheck" style="display:none;"></div>
-						<div class="gsName">GEOGRAPHY</div>
-					</div>
-					<div class="gsItem" id="gs2">
-						<img src="img/population.png" class="gsImg" alt="">
-						<div class="gsCheck"></div>
-						<div class="gsName">POPULATIONS</div>
-					</div>
-					<div class="gsItem" id="gs3">
-						<img src="img/temp.png" class="gsImg" alt="">
-						<div class="gsCheck"></div>
-						<div class="gsName">WEATHER</div>
-					</div>
-					<div class="gsItem" id="gs4">
-						<img src="img/star.png" class="gsImg" alt="">
-						<div class="gsCheck"></div>
-						<div class="gsName">CELEBRITY AGES</div>
-					</div>
-					<div class="gsItem" id="gs5">
-						<img src="img/history.png" class="gsImg" alt="">
-						<div class="gsCheck"></div>
-						<div class="gsName">HISTORY</div>
-					</div>
-         			<div class="gsItem" id="gs6">
-						<img src="img/temp.png" class="gsImg" alt="">
-						<div class="gsCheck"></div>
-						<div class="gsName">RANDOM</div>
-					</div>
-					<div id="showMap" onclick="showmap()">Select Regions</div>
+
+
+<div id="headWrap">
+	<div id="logoWrap">
+		<img src="img/logo.png" id="logo">
+	</div>
+
+</div>
+
+<div id="bodyWrap">
+	<div id="colsWrap">
+		<div class="col" id="col1">
+
+			<div id="gsWrap">
+			<div class="sqLabel" id="sqGameTypes">GAME TYPES</div>
+				<div class="gsItem" id="gs1">
+					<img src="img/map.svg" class="gsImg" alt="">
+					<div class="gsName">GEOGRAPHY</div>
 				</div>
+				<div class="gsItem" id="gs2">
+					<img src="img/population.svg" class="gsImg" alt="">
+					<div class="gsName">POPULATIONS</div>
+				</div>
+				<div class="gsItem" id="gs3">
+					<img src="img/temp.svg" class="gsImg" alt="">
+					<div class="gsName">WEATHER</div>
+				</div>
+				<div class="gsItem" id="gs4">
+					<img src="img/star.svg" class="gsImg" alt="">
+					<div class="gsName">CELEBRITY AGES</div>
+				</div>
+				<div class="gsItem" id="gs5">
+					<img src="img/history.svg" class="gsImg" alt="">
+					<div class="gsName">HISTORY</div>
+				</div>
+	 			<div class="gsItem" id="gs6">
+					<img src="img/temp.svg" class="gsImg" alt="">
+					<div class="gsName">RANDOM</div>
+				</div>
+				<!--<div id="showMap" class="regButton" onclick="alert('sup')">Select Regions</div>-->
 			</div>
-			<div id="col3">
-				<label class="jqLabel">QUIZ ID</label>
-				<div id="quizidWrap">
-					<div id="quizid">
+
+		</div><div class="col" id="col2">
+			<div class="sqLabel" id="sqQuizLabel">QUIZ ID</div>
+			<div id="sqQuizID">
+				<div id="quizID">
 						<?php echo $_SESSION["game_id"] ; ?>
-					</div>
 				</div>
-				<br>
+			</div>
+			<div class="sqLine" id="submitLine">
+				<div id="sqSettingsButton" onclick="showSetting()"></div>
+				<input type="submit" class="regButton" id="sqStart" value="Start">
+
 
 					<input type="hidden" name="gsGeo" id="gsGeo" value="false">
 					<input type="hidden" name="gsAge" id="gsAge" value="false">
@@ -228,7 +187,6 @@ window.onload = function() {
 					<input type="hidden" name="gsPop" id="gsPop" value="false">
 					<input type="hidden" name="gsTemp" id="gsTemp" value="false">
    					<input type="hidden" name="gsRand" id="gsRand" value="false">
-
 					<!--regions-->
 					<input type="hidden" name="r_SA" id="sm_state_SA" value="true">
 					<input type="hidden" name="r_NA" id="sm_state_NA" value="true">
@@ -239,34 +197,44 @@ window.onload = function() {
 					<input type="hidden" name="r_ME" id="sm_state_ME" value="true">
 					<input type="hidden" name="r_OC" id="sm_state_OC" value="true">
 
-						<label for="numRounds" class="jqLabel" id="numRoundsLabel">
-							NUMBER OF ROUNDS
-							<select id="numRounds" name="numRounds">
-	              <option value="2">2</option>
-              	<option value="10">10</option>
-								<option value="15">15</option>
-								<option value="20">20</option>
-								<option value="9999">infinite</option>
-							</select>
-						</label>
-						<label for="autoplayCB" class="jqLabel" id="autoplayLabel">
-							AUTOPLAY
-							<input type="checkbox" id="autoplayCB" name="auto" value="yes">
-						</label>
-						<input type="submit" id="jqJoin" value="Start">
 			</div>
+
+
+		</div><div class="col" id="col3">
+			<div class="sqLabel" id="sqNumUsers"><div id="numUsers">0</div> USERS IN THE GAME</div>
+				<div id="usersWrap">
+					<div id="nameUsers" class="scrollable">
+					</div>
+				</div>
+
 		</div>
-	</form>
-
-
-
 	</div>
-	<div id="joinHere">
-		Join at <div id="link">myonlinegrades.com/j</div>
-	</div>
-	<div id="footer">
-		Copyright and stuff.
-	</div>
+</div>
 
- </body>
- </html>
+<div id="bannerWrap">
+	<div id="joinHere" class="banner"> join at
+	</div><div id="bannerLink" class="banner">
+		MyOnlineGrades.com</div>
+</div>
+
+
+<audio id="bgMusic" autoplay enablejavascript="yes" loop="yes">
+  <source src="music/title.mp3"  type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+
+<!--
+<div class="cloud" id="cloud1"></div>
+<div class="cloud" id="cloud2"></div>
+<div class="cloud" id="cloud3"></div>
+-->
+<div id="clouds">
+
+</div>
+
+<input type="button" id="muteButton" onclick="mute()">
+<div id="sun"></div>
+<div id="linkPlane"></div>
+<div id="sqBackground"></div></form>
+</body>
+</html>

@@ -5,7 +5,7 @@ function loadWaitingForUsers(ip,gameID){
         conn.subscribe('Game'+gameID, function(topic, data) {
             console.log('Waiting for users:"' + topic + '" : ' + data.title);
           var container = document.getElementById("nameUsers");
-    container.innerHTML =data.title   + "<br>"+container.innerHTML;
+    container.innerHTML =	'<div class="sqName" style="background:'+data.color +';">'+data.title+'</div>'   + "<br>"+container.innerHTML;
             var numUsers = document.getElementById("numUsers");
     numUsers.innerHTML = parseInt(numUsers.innerHTML)  + 1;
         });
@@ -29,7 +29,9 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto){
             var r=hexToRgb(data.color).r;
             var g=hexToRgb(data.color).g;
             var b=hexToRgb(data.color).b;
-            userAnswers.innerHTML = userAnswers.innerHTML  + '<div class="uaItem" style="background-color: rgba('+r+','+g+','+b+',.5);"><div class="uLabel">'+data.title+'</div><div class="uScore">'+data.miles+'</div></div>';
+            answersWrap.innerHTML = answersWrap.innerHTML  + '<div class="userAnswer" style="background-color: rgba('+r+','+g+','+b+',.5);">'+data.title+'<div class="userResult">'+data.miles+'</div></div>';
+
+//<div class="userAnswer" style="background:#38D38E;">John <div class="userResult">434,134</div></div>
              if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<27 && auto=="yes")
               setTimeout(function (){
                     window.location.href='showAnswer.php';

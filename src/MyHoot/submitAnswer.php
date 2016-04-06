@@ -1,7 +1,7 @@
 <?php
 session_start();
 $whitelist = array('lat','long','answer','questionNumber');
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;

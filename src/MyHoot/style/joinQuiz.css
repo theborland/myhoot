@@ -2,16 +2,15 @@ body{
 	padding:0px;
 	padding-top: 10%;
 	height: 80%;
+	background:-webkit-linear-gradient(top, #3B9C99 , #C4FFC8);
+	background:linear-gradient(top, #3B9C99 , #C4FFC8);
 }
 
 #jqWrap{
 	width:250px;
 	padding:20px 40px 30px;
 	margin:0px auto;
-	background: rgba(0,0,0,.5);
 	border:0px;
-	border-radius: 10px;
-	box-shadow: 0px 0px 50px rgba(0,0,0,.6);
 }
 
 #logo{
@@ -40,52 +39,28 @@ body{
 	width: 250px;
 	box-sizing:border-box;
 	padding:10px 15px;
-	background:#333;
-	border:1px solid #333;
+	background:rgba(255,255,255,.5);
+	border:0px solid #333;
 	transition:.1s all;
 	margin-bottom: 15px;
 	font-size: 20px;
-	color: #e1e1e1;
-	font-weight: 100;
+	color: #333;
+	font-weight: 300;
+	border-radius: 5px;
 }
 
 .jqInput:hover{
-	background:#444;
-	border: 1px solid #444;
+	background:rgba(255,255,255,.7);
+	border: 0px solid #444;
 }
 .jqInput:focus{
 	outline:0px;
-	border:1px solid #e1e1e1;
+	border:0px solid #e1e1e1;
 }
 
 
 #jqJoin{
-	margin:auto;
-	display: inline-block;
-	padding:10px 30px;
-	background: #F76116;
-	color:#fff;
-	font-family: overpass;
-	font-weight: 500;
-	border-radius: 10px;
-	border: 0px solid #fff;
-	border-bottom: 3px solid #BB3B08;
-	font-size: 20px;
-	box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
-	-webkit-appearance: none;
-	outline:0px;
-	transition:.2s all;
-	text-decoration: none;
-	margin-top: 10px;
-}
-
-#jqJoin:hover{
-	background: #F77C27;
-	cursor:pointer;
-	box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
-}
-#jqJoin:active{
-	background:#F79B00;
+	padding:10px 25px 12px;
 }
 
 

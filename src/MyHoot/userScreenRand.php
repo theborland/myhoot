@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'dbsettings.php';
+require 'controller/dbsettings.php';
 if (isset($_GET["question"])){
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
@@ -94,7 +94,7 @@ x.send();
 
     </script>
     <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
-    <script src="socketScripts.js"></script>
+    <script src="scripts/socketScripts.js"></script>
     <script>
       loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>
