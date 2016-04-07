@@ -42,7 +42,7 @@ $outputSource .= "element.parentNode.removeChild(element);\n\t\t};\n\t\tfunction
 	$outputSource .= "</p>\n\t\t<form method='POST'><input type='hidden' id='id' name='id' value=\"".$id."\"><input type='hidden' id='url' name='url' value=\"".
   str_replace("\"","$",substr($source,strpos($source,"[")-1)).
   "\"><table border = '1' width = '100%' table-layout = 'fixed'>\n\t\t\t<tr table-layout = 'fixed'>";
-print_r($imageCapture[0]);
+//print_r($imageCapture[0]);
   foreach ($imageCapture [0] as $index => $url) {
 		if ($index % 5 == 0)
 			$outputSource .= "\n\t\t\t</tr>\n\t\t\t<tr table-layout = 'fixed'>";
