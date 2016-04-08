@@ -196,9 +196,9 @@ class Question
 		global $conn;
 		$sql = "SELECT * FROM `data-time` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
 
-		//$sql = "SELECT * FROM `data-time` WHERE `imageUpdatedDate` IS NOT null AND `id`='28' ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		$sql = "SELECT * FROM `data-time` WHERE `imageUpdatedDate` IS NOT null  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
 		//die ($sql);
-		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		//	$sql = "SELECT * FROM `data-time`   WHERE `id`='109'";
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -237,19 +237,24 @@ class Question
 		$url=trim(preg_replace('/\s\s+/', ' ', $url));
 		$url=str_replace(" ","",$url);
 		$url=str_replace("[ '","['",$url);
-		$url=substr($url,1,strlen($url)-4);
+		$url=substr($url,1,-1);
 		$url=str_replace("',\"","','",$url);
 		$url=str_replace("\",\"","','",$url);
 		$url=str_replace("\",'","','",$url);
 		$url=str_replace("','","','",$url);
 		$url=str_replace("','","','",$url);
+
 		$splits=explode("','",$url);
+
 		if (sizeof($splits)==0)
 		{
 		//	echo "going in again";
 				return $this->getLocation();
 			}
-		return ($splits[rand(0,sizeof($splits)-1)]);
+		$url=$splits[rand(0,sizeof($splits)-1)];
+		if (substr($url,0,1)=="'")$url=substr($url,1);
+		if (substr($url,-1)=="'")$url=substr($url,0,-1);
+		return $url;
 	}
 
 	function getLocation($type){

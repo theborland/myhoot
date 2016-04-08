@@ -43,8 +43,6 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 			}
 			?>
 
-			google.maps.event.addDomListener(window, 'load', initialize);
-
 
 		}
 
@@ -82,7 +80,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
 		}
 
-
+google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
 
 

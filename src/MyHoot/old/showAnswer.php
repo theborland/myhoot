@@ -142,18 +142,27 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
       <script>
+      window.onload = function(){
+  		    if (readCookie("playMusic")=="false"){
+  		    	muteOff();
+  			}
 
-<?php
-if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
-{
-?>
-//automatically forward if automode is on
-setTimeout( function(){
-      window.location.href='getQuestion.php';
-}  , 7000 );
-<?php
-}
-?>
+  			<?php
+  			if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
+  			{
+  			?>
+  			//automatically forward if automode is on
+  			setTimeout( function(){
+  			      window.location.href='getQuestion.php';
+  			}  , 7000 );
+  			<?php
+  			}
+  			?>
+
+  			google.maps.event.addDomListener(window, 'load', initialize);
+
+
+  		}
 
 function initialize() {
 
