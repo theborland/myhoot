@@ -253,6 +253,7 @@ class Question
 			}
 		$url=$splits[rand(0,sizeof($splits)-1)];
 		if (substr($url,0,1)=="'")$url=substr($url,1);
+		if (substr($url,0,1)=="\"")$url=substr($url,1);
 		if (substr($url,-1)=="'")$url=substr($url,0,-1);
 		return $url;
 	}
