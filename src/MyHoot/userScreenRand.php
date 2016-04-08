@@ -18,7 +18,7 @@ $max=$theQuestion->max;
   <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="style/global.css">
-      <link href="nouislider.min.css" rel="stylesheet">
+      <link href="style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
     <style>
       html, body, #map-canvas {
@@ -101,7 +101,7 @@ x.send();
 
  </head>
  <body>
-  <script src="nouislider.min.js"></script>
+  <script src="scripts/nouislider.min.js"></script>
   <div id="overlayWrap">
     <img src="logo.png" id="logo">
     <h3>Round <?php echo $_GET["question"] ?></h3>

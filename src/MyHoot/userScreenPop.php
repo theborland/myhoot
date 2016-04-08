@@ -14,7 +14,7 @@ if (isset($_GET["question"]))
  <link rel="stylesheet" href="style/global.css">
    <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
    <script src="scripts/socketScripts.js"></script>
-<link href="nouislider.min.css" rel="stylesheet">
+<link href="style/nouislider.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style/inputSlider.css">
     <style>
       html, body, #map-canvas {
@@ -84,7 +84,7 @@ x.send();
 
  </head>
  <body>
- <script src="nouislider.min.js"></script>
+ <script src="scripts/nouislider.min.js"></script>
 
   <div id="overlayWrap">
     <img src="logo.png" id="logo">
