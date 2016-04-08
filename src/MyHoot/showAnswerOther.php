@@ -17,11 +17,12 @@ $theQuestion=Question::loadQuestion();
 	<title>Answer</title>
 
 	<link rel="stylesheet" href="style/global.css">
-	<link rel="stylesheet" href="style/showAnswer.css">
+	<link rel="stylesheet" href="style/showAnswerOther.css">
 	<link rel="stylesheet" href="style/nouislider.min.css">
 
 	<!--<script src="scripts/getQuestion.js"></script>-->
 	<script src="scripts/global.js"></script>
+	<script src="scripts/showAnswer.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="scripts/nouislider.min.js"></script>
 
@@ -213,7 +214,7 @@ $theQuestion=Question::loadQuestion();
 
 <input type="button" id="muteButton" onclick="mute()">
 <a href="#" id="endGame" class="regButton">End Game</a>
-<div id="gameID">ID:22332</div>
+<div id="gameID">ID:<?php echo $_SESSION["game_id"] ?></div>
 
 	
 </body>

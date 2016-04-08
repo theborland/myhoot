@@ -85,12 +85,6 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
 	</script>
 
-	<style>
-		body{
-			background-image:url('img/background.jpg');
-		}
-	</style>
-
 
 
 

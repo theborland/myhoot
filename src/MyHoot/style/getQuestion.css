@@ -58,6 +58,9 @@ body{
 #numAnswers{
 	display: inline-block;
 }
+#numPlayers{
+	display: inline-block;
+}
 
 #timerContainer{
 	width: 100%;
