@@ -8,10 +8,6 @@ class Cloud{
         document.getElementById("clouds").innerHTML = document.getElementById("clouds").innerHTML + "<div class='cloudWrap' id='cloudWrap_" + this.id + "'>";
         for(var i=0; i<this.numBoxes; i++){
             document.getElementById("clouds").innerHTML = document.getElementById("clouds").innerHTML + "<div class='cloud' id='cloud_" + this.id + "_" + i + "''></div>";
-            document.getElementById("cloud_" + this.id + "_" + i ).style.top    = Math.floor( Math.random() * 50 + this.overallTop )         + "px";
-            document.getElementById("cloud_" + this.id + "_" + i ).style.left   = Math.floor( Math.random() * -250 + i*10 + this.overallLeft)       + "px";
-            document.getElementById("cloud_" + this.id + "_" + i ).style.width  = Math.floor( Math.random() * 300 + 100)                     + "px";
-            document.getElementById("cloud_" + this.id + "_" + i ).style.height = Math.floor( Math.random() * 50  + 20)                     + "px";
         }
         document.getElementById("clouds").innerHTML = document.getElementById("clouds").innerHTML + "</div>";
     }
