@@ -8,6 +8,22 @@ require 'controller/dbsettings.php';
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
 
+
+$max=$allAnswers->getMax();
+$min=$allAnswers->getMin();
+if ($max-$min==0)
+		$max=($allAnswers->correctAns->value)*2;
+$rounding=(strlen($max)-3)*-1;
+if ($rounding>0)$rounding=0;
+//echo "sdfd".$max;
+$reg0=round($min,$rounding);
+$reg1=round((($max-$min)*.25)+$min,$rounding);
+$reg2=round((($max-$min)*.5)+$min,$rounding);
+$reg3=round((($max-$min)*.75)+$min,$rounding);
+$reg4=round($max,$rounding);
+$correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
+//die ($reg2);
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +43,7 @@ $theQuestion=Question::loadQuestion();
 	<script src="scripts/nouislider.min.js"></script>
 
 	<script>
-		
+
 		window.onload = function(){
 		    if (readCookie("playMusic")=="false"){
 		    	muteOff();
@@ -110,7 +126,10 @@ $theQuestion=Question::loadQuestion();
 
 	<style>
 		body{
-			background-image:url('img/background.jpg');
+	    background: url('<?php echo Question::loadImage($allAnswers->correctAns->name,Game::findGame()->type); ?>');
+			background-attachment : fixed;
+			background-position   : 50% 50%;     /* or: center center */
+			background-size       : cover;       /* CSS3 */
 		}
 	</style>
 
@@ -125,7 +144,7 @@ $theQuestion=Question::loadQuestion();
 	<div id="topLeftCell">
 
 
-		  <div id="answerLabel"> <?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?></div>
+		  <div id="answerLabel"> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getLabel(); ?></div>
 		  <div id="answerWrap">
 		    <?php for ($i=0;$i<=strlen($allAnswers->correctAns->value);$i++){  ?>
 		       <div class="answerNum" id="answerNum<?php echo $i; ?>">0</div>
@@ -147,7 +166,7 @@ $theQuestion=Question::loadQuestion();
 <div id="sidebarWrap">
 	<div id="sidebarHeader">Scoreboard</div>
 	<div id="scoresWrap" class="scrollable">
-    
+
 
       <?php
         $allAnswers->getTP();
@@ -171,21 +190,6 @@ $theQuestion=Question::loadQuestion();
 
 <div id="timelineWrap" style="display:none;">
 
-  <?php
-  $max=$allAnswers->getMax();
-  $min=$allAnswers->getMin();
-  if ($max-$min==0)
-      $max=($allAnswers->correctAns->value)*2;
-  $rounding=(strlen($max)-3)*-1;
-  if ($rounding>0)$rounding=0;
-  //echo "sdfd".$max;
-  $reg0=round($min,$rounding);
-  $reg1=round((($max-$min)*.25)+$min,$rounding);
-  $reg2=round((($max-$min)*.5)+$min,$rounding);
-  $reg3=round((($max-$min)*.75)+$min,$rounding);
-  $reg4=round($max,$rounding);
-  $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
-  ?>
 
   <div id="timeline">
     <div class="timelineMarker" id="timelineCA" style="border-color:#E12027;margin-left:calc(<?php echo $correctLoc*100; ?>% - 10px);">&nbsp;</div>
@@ -213,10 +217,9 @@ $theQuestion=Question::loadQuestion();
 
 
 <input type="button" id="muteButton" onclick="mute()">
-<a href="#" id="endGame" class="regButton">End Game</a>
+<a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo $_SESSION["game_id"] ?></div>
 
-	
+
 </body>
 </html>
-

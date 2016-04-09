@@ -14,10 +14,10 @@
 		<h4>Join a Quiz</h4>
 		<form action="waitingScreen.php">
 			<label for="game_id" class="jqLabel"> QUIZ ID </label>
-			<input type="text" name="game_id" id="game_id" class="jqInput">
+			<input type="text" name="game_id" id="game_id" class="jqInput" maxlength="6">
 
 			<label for="name" class="jqLabel">YOUR NAME</label>
-			<input type="text" name="name" id="name" class="jqInput">
+			<input type="text" name="name" id="name" class="jqInput"maxlength="20" >
 
 			<Center><input type="submit" name="submit" value="Join" id="jqJoin" class="regButton"></Center>
 		</form>
@@ -29,4 +29,3 @@
 
 </body>
 </html>
-

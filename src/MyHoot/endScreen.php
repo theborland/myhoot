@@ -30,7 +30,7 @@
 <div id="sidebarWrap">
 	<div id="sidebarHeader">Scoreboard</div>
 	<div id="scoresWrap" class="scrollable">
-    
+
       <?php
         $allAnswers->getTP();
         //echo($allAnswers->allAnswers[0]->color);
@@ -54,7 +54,7 @@
       		<?php if (sizeof($allAnswers->allAnswers )>=2){ ?>
 
 		<div class="winnerStand" id="winnerStand1">
-			<div class="winnerName" style="background:<?php echo $allAnswers->allAnswers[1]->color; ?>;">
+			<div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[1]->color; ?>;">
 				<?php echo stripslashes($allAnswers->allAnswers[1]->name); ?>
 			</div>
 		</div>
@@ -62,8 +62,8 @@
     		<?php  } if (sizeof($allAnswers->allAnswers )>=1){ ?>
 
 		<div class="winnerStand" id="winnerStand2">
-			<div class="winnerName" style="background:<?php echo $allAnswers->allAnswers[0]->color; ?>;">
-				<?php echo stripslashes($allAnswers->allAnswers[0]->name); ?>	
+			<div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[0]->color; ?>;">
+				<?php echo stripslashes($allAnswers->allAnswers[0]->name); ?>
 			</div>
 		</div>
 
@@ -71,7 +71,7 @@
 
 
 		<div class="winnerStand" id="winnerStand3">
-			<div class="winnerName" style="background:<?php echo $allAnswers->allAnswers[2]->color; ?>;">
+			<div class="winnerName" style="background:#<?php echo $allAnswers->allAnswers[2]->color; ?>;">
 				<?php echo stripslashes($allAnswers->allAnswers[2]->name); ?>
 			</div>
 		</div>

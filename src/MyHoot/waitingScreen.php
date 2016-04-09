@@ -5,7 +5,7 @@ $whitelist = array('message','submit','name','game_id');
 require 'controller/dbsettings.php';
 
 if ($submit=="Join"){
-     $name=substr($name,0,20);
+    // $name=substr($name,0,20);
      $_SESSION["game_id"] =$game_id;
     // User::createUser($game_id,$name);
     if (Game::findGame()==null)

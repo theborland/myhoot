@@ -34,6 +34,14 @@ include("controller/gameLogic.php");
 				width: "0%"
 			}, 30000, "linear");
 
+			var interval = setInterval(function() {
+			    counter--;
+			  $('#timeLeft').html(counter);
+			    if (counter == 0) {
+			        window.location.replace("showAnswer.php");
+			    }
+			}, 1000);
+
 			//animation clock
 			var x=0;
 			var interval = setInterval(function() {

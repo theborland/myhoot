@@ -29,9 +29,9 @@ if ($gsGeo=="false" || $gsGeo=="true")
     foreach ($gamesSelected as $key)
         if (sizeof($gamesSelected)<=7)
             $gamesSelected[]="geo";
-    if (sizeof($gamesSelected)==0)
-       $gamesSelected[]="geo";
   }
+  if (sizeof($gamesSelected)==0)
+     $gamesSelected[]="geo";
   //die (print_r($regionsSelected));
   $_SESSION["gamesSelected"]=$gamesSelected;
   $_SESSION["regionsSelected"]=$regionsSelected;

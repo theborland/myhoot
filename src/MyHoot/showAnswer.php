@@ -6,6 +6,7 @@ if (Game::findGame()->type!="geo")
      header( 'Location: showAnswerOther.php') ;
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+$theQuestion=Question::loadQuestion();
 ?>
 
 
@@ -91,8 +92,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 <div id="topBarWrap">
+  <div id="answerLabel"> <?php echo $theQuestion->getLabel(); ?></div>
+
 	<div id="topLeftCell">
 	</div><div id="topRightCell">
+
 		<a href="getQuestion.php" class="regButton" id="userMapSubmit">Next Question</a>
 
 	</div>
@@ -129,7 +133,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 <input type="button" id="muteButton" onclick="mute()">
-<a href="#" id="endGame" class="regButton">End Game</a>
+<a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo $_SESSION["game_id"] ?></div>
 
 
