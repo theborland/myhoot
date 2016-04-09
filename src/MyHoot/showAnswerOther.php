@@ -212,7 +212,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 
 <audio id="bgMusic" autoplay enablejavascript="yes" volume="0">
-  <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg">
+  <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg" volume="0">
 	Your browser does not support the audio element.
 </audio>
 

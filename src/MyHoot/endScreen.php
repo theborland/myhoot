@@ -83,7 +83,7 @@
 
 
 <audio id="bgMusic" autoplay enablejavascript="yes" volume="0">
-  <source src="music/end.mp3"  type="audio/mpeg">
+  <source src="music/end.mp3"  type="audio/mpeg" volume="0">
 	Your browser does not support the audio element.
 </audio>
 

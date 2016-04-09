@@ -222,7 +222,7 @@ Game::createGame();
 
 
 <audio id="bgMusic" autoplay enablejavascript="yes" loop="yes" volume="0">
-  <source src="music/title.mp3"  type="audio/mpeg">
+  <source src="music/title.mp3"  type="audio/mpeg" volume="0">
 	Your browser does not support the audio element.
 </audio>
 
