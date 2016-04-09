@@ -28,6 +28,14 @@ include("controller/gameLogic.php");
 	<script>
 
 		window.onload = function(){
+
+		    muteOff();
+		    if (readCookie("playMusic")=="false"){
+		    	mute();
+		    }
+
+
+
 			var counter = 30;
 
 			$('#timer').animate({
@@ -49,9 +57,6 @@ include("controller/gameLogic.php");
 			     x++;
 			}, 50);
 
-		    if (readCookie("playMusic")=="false"){
-		    	muteOff();
-			}
 
 
 		}

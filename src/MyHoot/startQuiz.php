@@ -32,6 +32,15 @@ Game::createGame();
 		var actClouds=1;
 
 		window.onload = function(){
+
+
+		    muteOff();
+		    if (readCookie("playMusic")=="false"){
+		    	mute();
+		    }
+
+
+
 			initChecks();
 			initRegions();
 
@@ -54,10 +63,6 @@ Game::createGame();
 			     x++;
 			}, 50);
 
-			// check and set music
-		    if (readCookie("playMusic")=="false"){
-		    	muteOff();
-			}
 
 		}
 
