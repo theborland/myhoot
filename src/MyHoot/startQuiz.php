@@ -34,6 +34,7 @@ Game::createGame();
 		window.onload = function(){
 			document.getElementById('bgMusic').volume = 0;
 		    if (readCookie("playMusic")!="false"){
+		    	document.getElementById('bgMusic').play();
 		    	muteOn();
 		    }
 
@@ -221,7 +222,7 @@ Game::createGame();
 </div>
 
 
-<audio id="bgMusic" autoplay enablejavascript="yes" loop="yes" volume="0">
+<audio id="bgMusic" enablejavascript="yes" loop="yes" volume="0">
   <source src="music/title.mp3"  type="audio/mpeg" volume="0">
 	Your browser does not support the audio element.
 </audio>

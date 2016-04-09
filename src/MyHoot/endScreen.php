@@ -19,7 +19,8 @@
 		window.onload = function(){
 			document.getElementById('bgMusic').volume = 0;
 		    if (readCookie("playMusic")!="false"){
-		    	muteOn();
+				document.getElementById('bgMusic').play();
+				muteOn();
 		    }
 		}
 	</script>
@@ -82,7 +83,7 @@
 </div>
 
 
-<audio id="bgMusic" autoplay enablejavascript="yes" volume="0">
+<audio id="bgMusic"  enablejavascript="yes" volume="0">
   <source src="music/end.mp3"  type="audio/mpeg" volume="0">
 	Your browser does not support the audio element.
 </audio>

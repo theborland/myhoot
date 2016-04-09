@@ -32,6 +32,7 @@ include("controller/gameLogic.php");
 
 			document.getElementById('bgMusic').volume = 0;
 		    if (readCookie("playMusic")!="false"){
+		    	document.getElementById('bgMusic').play();
 		    	muteOn();
 		    }
 
@@ -96,7 +97,7 @@ include("controller/gameLogic.php");
 </div>
 
 
-<audio id="bgMusic" autoplay enablejavascript="yes"  volume="0">
+<audio id="bgMusic" enablejavascript="yes"  volume="0">
   <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg" volume="0">
 	Your browser does not support the audio element.
 </audio>
