@@ -32,7 +32,7 @@ Game::createGame();
 		var actClouds=1;
 
 		window.onload = function(){
-
+			document.getElementById('bgMusic').volume = 0;
 		    if (readCookie("playMusic")!="false"){
 		    	muteOn();
 		    }

@@ -17,9 +17,10 @@
 
 	<script>
 		window.onload = function(){
-		    if (readCookie("playMusic")=="false"){
-		    	muteOff();
-			}
+			document.getElementById('bgMusic').volume = 0;
+		    if (readCookie("playMusic")!="false"){
+		    	muteOn();
+		    }
 		}
 	</script>
 </head>
@@ -79,6 +80,15 @@
 			<?php } ?>
 	</div>
 </div>
+
+
+<audio id="bgMusic" autoplay enablejavascript="yes" volume="0">
+  <source src="music/end.mp3"  type="audio/mpeg">
+	Your browser does not support the audio element.
+</audio>
+
+
+<input type="button" id="muteButton" onclick="mute()">
 
 <div id="winnerBackground"></div>
 

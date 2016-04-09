@@ -45,6 +45,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	<script>
 
 		window.onload = function(){
+			document.getElementById('bgMusic').volume = 0;
 		    if (readCookie("playMusic")!="false"){
 		    	muteOn();
 		    }
