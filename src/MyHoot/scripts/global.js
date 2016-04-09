@@ -11,6 +11,7 @@ function mute(){
 function muteOn(){
 	var music = document.getElementById("bgMusic");
 	var button = document.getElementById("muteButton");
+	music.play();
 	music.volume = 1;
 	playing = true;
 	button.style.backgroundImage = "url(img/mute.svg)";
