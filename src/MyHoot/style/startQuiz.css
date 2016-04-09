@@ -94,18 +94,22 @@ body{
 	border-radius: 3px;
 	z-index: 5;
 	padding:2px;
+	box-shadow:0px 0px 10px rgba(255,255,255,0);
 }
 #gsWrap .gsItem:hover{
 	background: rgba(255,255,255,0.7);
 	border:1px solid rgba(255,255,255,0);
+	box-shadow:0px 0px 10px rgba(255,255,255,0.3);
 }
 #gsWrap .gsSel{
 	border:1px solid rgba(0,0,0,0);
 	background: rgba(255,255,255,0.9);
+	box-shadow:0px 0px 10px rgba(255,255,255,0.1);
 }
 #gsWrap .gsSel:hover{
 	border:1px solid rgba(0,0,0,0);
 	background: rgba(255,255,255,1);
+	box-shadow:0px 0px 10px rgba(255,255,255,0.4);
 }
 #gsWrap .gsName{
 	position: absolute;

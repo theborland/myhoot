@@ -142,8 +142,8 @@ Game::createGame();
 
 			<div id="gsWrap">
 			<div class="sqLabel" id="sqGameTypes">GAME TYPES</div>
-				<div class="gsItem" id="gs1">
-					<img src="img/map.svg" class="gsImg gsSel" alt="">
+				<div class="gsItem gsSel" id="gs1">
+					<img src="img/map.svg" class="gsImg" alt="">
 					<div class="gsName">GEOGRAPHY</div>
 				</div>
 				<div class="gsItem" id="gs2">
