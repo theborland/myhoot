@@ -28,9 +28,9 @@ $theQuestion=Question::loadQuestion();
 	<script>
 
 		window.onload = function(){
-		    if (readCookie("playMusic")=="false"){
-		    	muteOff();
-			}
+		    if (readCookie("playMusic")!="false"){
+		    	muteOn();
+		    }
 
 			<?php
 			if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
@@ -126,7 +126,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="map-canvas"></div>
 
 
-<audio id="bgMusic" autoplay enablejavascript="yes">
+<audio id="bgMusic" autoplay enablejavascript="yes" volume="0">
   <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg">
 	Your browser does not support the audio element.
 </audio>

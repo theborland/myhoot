@@ -1,4 +1,4 @@
-var playing = true;
+var playing = false;
 
 
 function mute(){
