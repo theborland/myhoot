@@ -32,6 +32,8 @@ $theQuestion=Question::loadQuestion();
 		    if (readCookie("playMusic")!="false"){
 				document.getElementById('bgMusic').play();
 				muteOn();
+		    }else{
+		    	muteOff();
 		    }
 
 			<?php

@@ -49,6 +49,8 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 		    if (readCookie("playMusic")!="false"){
 				document.getElementById('bgMusic').play();
 				muteOn();
+		    }else{
+		    	muteOff();
 		    }
 
 			<?php

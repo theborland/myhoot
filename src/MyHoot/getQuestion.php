@@ -34,6 +34,8 @@ include("controller/gameLogic.php");
 		    if (readCookie("playMusic")!="false"){
 		    	document.getElementById('bgMusic').play();
 		    	muteOn();
+		    }else{
+		    	muteOff();
 		    }
 
 

@@ -36,6 +36,8 @@ Game::createGame();
 		    if (readCookie("playMusic")!="false"){
 		    	document.getElementById('bgMusic').play();
 		    	muteOn();
+		    }else{
+		    	muteOff();
 		    }
 
 
