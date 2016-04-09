@@ -35,7 +35,7 @@ Game::createGame();
 
 
 		    muteOff();
-		    if (readCookie("playMusic")=="false"){
+		    if (readCookie("playMusic")=="true"){
 		    	mute();
 		    }
 
