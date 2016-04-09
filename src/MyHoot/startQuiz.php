@@ -143,7 +143,7 @@ Game::createGame();
 			<div id="gsWrap">
 			<div class="sqLabel" id="sqGameTypes">GAME TYPES</div>
 				<div class="gsItem" id="gs1">
-					<img src="img/map.svg" class="gsImg" alt="">
+					<img src="img/map.svg" class="gsImg gsSel" alt="">
 					<div class="gsName">GEOGRAPHY</div>
 				</div>
 				<div class="gsItem" id="gs2">
@@ -181,7 +181,7 @@ Game::createGame();
 				<input type="submit" class="regButton" id="sqStart" value="Start">
 
 
-					<input type="hidden" name="gsGeo" id="gsGeo" value="false">
+					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
 					<input type="hidden" name="gsAge" id="gsAge" value="false">
 					<input type="hidden" name="gsHist" id="gsHist" value="false">
 					<input type="hidden" name="gsPop" id="gsPop" value="false">

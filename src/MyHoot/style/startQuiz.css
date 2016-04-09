@@ -96,7 +96,7 @@ body{
 	padding:2px;
 }
 #gsWrap .gsItem:hover{
-	background: rgba(255,255,255,0.6);
+	background: rgba(255,255,255,0.7);
 	border:1px solid rgba(255,255,255,0);
 }
 #gsWrap .gsSel{
