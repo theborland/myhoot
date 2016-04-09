@@ -29,8 +29,9 @@ include("controller/gameLogic.php");
 
 		window.onload = function(){
 
+
 		    muteOff();
-		    if (readCookie("playMusic")=="false"){
+		    if (readCookie("playMusic")=="true"){
 		    	mute();
 		    }
 
