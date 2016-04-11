@@ -44,14 +44,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 	<script>
 
-		window.onload = function(){
-			document.getElementById('bgMusic').volume = 0;
-		    if (readCookie("playMusic")!="false"){
-				document.getElementById('bgMusic').play();
-				muteOn();
-		    }else{
-		    	muteOff();
-		    }
+
 
 			<?php
 			if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
@@ -148,7 +141,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	<div id="topLeftCell">
 
 
-		  <div id="answerLabel"> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getLabel(); ?></div>
+		  <div id="answerLabel"> <?php echo $theQuestion->getLabel(); ?> </div>
 		  <div id="answerWrap">
 		    <?php for ($i=0;$i<=strlen($allAnswers->correctAns->value);$i++){  ?>
 		       <div class="answerNum" id="answerNum<?php echo $i; ?>">0</div>
@@ -163,7 +156,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 
 	</div><div id="topRightCell">
-		<a href="getQuestion.php" class="regButton" id="userMapSubmit">Next Question</a>
+		<a href="getQuestion.php" class="regButton" id="userMapSubmit"><?php if ($_SESSION["questionNumber"]<$_SESSION["numRounds"]) echo "Next Question"; else echo "Game Over"; ?></a>
 
 	</div>
 </div>
@@ -208,16 +201,6 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 </div>
 <div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
 
-
-
-
-
-
-
-<audio id="bgMusic" autoplay enablejavascript="yes" volume="0">
-  <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg" volume="0">
-	Your browser does not support the audio element.
-</audio>
 
 
 <input type="button" id="muteButton" onclick="mute()">

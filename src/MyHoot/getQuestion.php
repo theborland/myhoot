@@ -49,7 +49,7 @@ include("controller/gameLogic.php");
 			    counter--;
 			  $('#timeLeft').html(counter);
 			    if (counter == 0) {
-			        window.location.replace("showAnswer.php");
+			       window.location.replace("showAnswer.php");
 			    }
 			}, 1000);
 

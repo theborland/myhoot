@@ -8,15 +8,21 @@ if ($submit=="Join"){
     // $name=substr($name,0,20);
      $_SESSION["game_id"] =$game_id;
     // User::createUser($game_id,$name);
-    if (Game::findGame()==null)
-         header( 'Location: joinQuiz.php?error=Bad Game');
-    if (!User::createUser($game_id,$name))
-         header( 'Location: joinQuiz.php?error=Bad Username');
+
+    if (Game::findGame()==null){
+         header( 'Location: joinQuiz.php?error=Bad Game&name='.$name);
+         die();
+    }
+    if (!User::createUser($game_id,$name)){
+         header( 'Location: joinQuiz.php?error=Bad Username&game='.$game_id);
+         die();
+    }
     $game=Game::findGame();
     $questionNumber=$game->round;
     if ($questionNumber!=-1){
-        if ($game->type=="geo")
+        if ($game->type=="geo"){
           header( 'Location: userScreen.php?question='.$questionNumber ) ;
+        }
         else {
           $type=ucwords($game->type);
           header( 'Location: userScreen'.$type.'.php?question='.$questionNumber ) ;

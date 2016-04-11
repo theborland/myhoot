@@ -46,7 +46,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
 }
 
 if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"]){
-  //  header( 'Location: endScreen.php') ;
+    header( 'Location: endScreen.php') ;
 }
 else {
     $gamesSelected=$_SESSION["gamesSelected"];

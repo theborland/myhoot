@@ -27,14 +27,7 @@ $theQuestion=Question::loadQuestion();
 
 	<script>
 
-		window.onload = function(){
-			document.getElementById('bgMusic').volume = 0;
-		    if (readCookie("playMusic")!="false"){
-				document.getElementById('bgMusic').play();
-				muteOn();
-		    }else{
-		    	muteOff();
-		    }
+
 
 			<?php
 			if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
@@ -101,7 +94,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	<div id="topLeftCell">
 	</div><div id="topRightCell">
 
-		<a href="getQuestion.php" class="regButton" id="userMapSubmit">Next Question</a>
+		<a href="getQuestion.php" class="regButton" id="userMapSubmit"><?php if ($_SESSION["questionNumber"]<$_SESSION["numRounds"]) echo "Next Question"; else echo "Game Over"; ?></a>
 
 	</div>
 </div>
@@ -130,10 +123,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div id="map-canvas"></div>
 
 
-<audio id="bgMusic" enablejavascript="yes" volume="0">
-  <source src="music/quiz<?php echo rand(1,2); ?>.mp3"  type="audio/mpeg" volume="0">
-	Your browser does not support the audio element.
-</audio>
 
 
 <input type="button" id="muteButton" onclick="mute()">
