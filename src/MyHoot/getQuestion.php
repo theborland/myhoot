@@ -106,7 +106,7 @@ include("controller/gameLogic.php");
 
 
 <input type="button" id="muteButton" onclick="mute()">
-<a href="#" id="endGame" class="regButton">End Game</a>
+<a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo $_SESSION["game_id"] ?></div>
 
 </body>

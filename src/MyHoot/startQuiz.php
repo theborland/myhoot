@@ -105,8 +105,8 @@ Game::createGame();
 
 		</div><div class="settingsHL" id="settingsAutoplay">
 
-			<label class="settingsLabel" for="autoplayCB" checked>AUTOPLAY</label>
-			<input type="checkbox" id="autoplayCB" name="auto" value="yes">
+			<label class="settingsLabel" for="autoplayCB">AUTOPLAY</label>
+			<input type="checkbox" id="autoplayCB" name="auto" value="yes" checked>
 
 		</div>
 	</div>
