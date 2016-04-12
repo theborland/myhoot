@@ -52,7 +52,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			?>
 			//automatically forward if automode is on
 			setTimeout( function(){
-			      //window.location.href='getQuestion.php';
+			      window.location.href='getQuestion.php';
 			}  , 7000 );
 			<?php
 			}
