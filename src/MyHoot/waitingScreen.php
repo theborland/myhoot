@@ -55,7 +55,7 @@ if ($submit=="Join"){
 <body>
 
 <div id="headerContainer">
-	<img src="img/logo.png" id="logo">
+	<img src="img/logo.svg" id="logo">
 	<div id="waiting">Waiting...</div>
 
 </div>

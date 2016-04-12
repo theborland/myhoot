@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div id="jqWrap">
-		<img src="logo.png" id="logo">
+		<img src="logo.svg" id="logo">
 		<h4>Join a Quiz</h4>
 		<form action="waitingScreen.php">
 			<label for="game_id" class="jqLabel"> QUIZ ID </label>

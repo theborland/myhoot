@@ -137,7 +137,7 @@ Game::createGame();
 
 <div id="headWrap">
 	<div id="logoWrap">
-		<img src="img/logo.png" id="logo">
+		<img src="img/logo.svg" id="logo">
 	</div>
 
 </div>

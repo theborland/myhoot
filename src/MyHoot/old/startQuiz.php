@@ -165,7 +165,7 @@ window.onload = function() {
 </div>
 
 	<div id="jqWrap" method="GET">
-		<img src="logo.png" id="logo">
+		<img src="logo.svg" id="logo">
 		<h4>Starting a Quiz</h4>
 
 		<div id="colsWrap">

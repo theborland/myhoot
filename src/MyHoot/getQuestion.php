@@ -77,7 +77,7 @@ include("controller/gameLogic.php");
 
 	<div id="headerWrap">
 		<div id="logoWrap">
-			<img src="img/logo.png" id="logo">
+			<img src="img/logo.svg" id="logo">
 		</div>
 		<div id="roundWrap">
 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
