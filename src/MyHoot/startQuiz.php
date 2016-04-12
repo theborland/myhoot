@@ -49,6 +49,7 @@ Game::createGame();
 
 			//set up clouds
 			var docHeight = (document.height !== undefined) ? document.height : document.body.offsetHeight;
+			var docWidth = (document.width !== undefined) ? document.width : document.body.offsetWidth;
 			clouds[0] = new Cloud(0, docHeight);
 
 			//animation clock
@@ -57,8 +58,8 @@ Game::createGame();
 			     animatePlane(x);
 			     animateClouds(x);
 
-			     if(Math.random()<0.003){
-			     	clouds[numClouds] =  new Cloud(numClouds, docHeight);
+			     if(Math.random()<0.002){
+			     	clouds[numClouds] =  new Cloud(numClouds, docHeight, docWidth);
 			     	numClouds++;
 			     	actClouds++;
 			     }
@@ -71,6 +72,7 @@ Game::createGame();
 		function animateClouds(x){
 			for(var i=0; i<actClouds; i++){
 			    clouds[i].animate(x);
+			    clouds[i].destroy();
 			}
 		}
 
@@ -221,7 +223,7 @@ Game::createGame();
 <div id="bannerWrap">
 	<div id="joinHere" class="banner"> join at
 	</div><div id="bannerLink" class="banner">
-		MyOnlineGrades.com</div>
+		GameOn.World</div>
 </div>
 
 
@@ -230,11 +232,9 @@ Game::createGame();
 	Your browser does not support the audio element.
 </audio>
 
-<!--
-<div class="cloud" id="cloud1"></div>
-<div class="cloud" id="cloud2"></div>
-<div class="cloud" id="cloud3"></div>
--->
+
+
+
 <div id="clouds">
 
 </div>

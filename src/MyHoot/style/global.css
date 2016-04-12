@@ -271,3 +271,18 @@ input[type='checkbox']:focus {
 }
 
 
+
+.cloudWrap{
+	border-radius: 0px;
+	z-index: -5;
+	opacity:0.2;
+}
+.cloud{
+	position: fixed;
+	z-index: -5;
+	background: rgba(255,255,255,.6);
+	border-radius: 100%;
+	border:0px;
+	border-top:20px solid white;
+	box-sizing: border-box;
+}
