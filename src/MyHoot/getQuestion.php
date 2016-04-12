@@ -26,7 +26,7 @@ include("controller/gameLogic.php");
 	</script>
 
 	<script>
-
+    var counter = 30;
 		window.onload = function(){
 
 
@@ -39,7 +39,7 @@ include("controller/gameLogic.php");
 		    }
 
 
-			var counter = 30;
+
 
 			$('#timer').animate({
 				width: "0%"
@@ -49,7 +49,7 @@ include("controller/gameLogic.php");
 			    counter--;
 			  $('#timeLeft').html(counter);
 			    if (counter == 0) {
-			       window.location.replace("showAnswer.php");
+			      // window.location.replace("showAnswer.php");
 			    }
 			}, 1000);
 
@@ -80,7 +80,7 @@ include("controller/gameLogic.php");
 			<img src="img/logo.png" id="logo">
 		</div>
 		<div id="roundWrap">
-			#<?php echo $_SESSION["questionNumber"] ?>
+			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
 		</div>
 		<div id="questionWrap">
 			<?php echo $theQuestion->getQuestionText(); ?><?php echo $theQuestion->getLabel(); ?>?

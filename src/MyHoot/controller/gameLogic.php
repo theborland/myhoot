@@ -57,7 +57,7 @@ else {
         $idealArray =array_count_values($gamesSelected);
         $currentArray =array_count_values($playedGames);
         $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
-        while ($currentArray[$current]/sizeof($playedGames)>$idealArray[$current]/sizeof($gamesSelected))
+        while (in_array($current,$currentArray) && $currentArray[$current]/sizeof($playedGames)>$idealArray[$current]/sizeof($gamesSelected))
                 $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
     }
     $theQuestion=new Question($current);

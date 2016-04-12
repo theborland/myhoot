@@ -293,6 +293,7 @@ class Question
 public static function loadImage($wording,$type){
 
 	global $conn;
+	$wording=$conn->escape_string ($wording);
 	if ($type=="geo" || $type=="pop" || $type=="weather")
 	{
 		$words=explode(",",$wording);

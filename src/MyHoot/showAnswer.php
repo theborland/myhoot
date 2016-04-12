@@ -42,8 +42,6 @@ $theQuestion=Question::loadQuestion();
 			?>
 
 
-		}
-
 		function initialize() {
 
 		  var locations = <?php echo $allAnswers->getLocations(); ?>;
@@ -99,7 +97,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	</div>
 </div>
 <div id="sidebarWrap">
-	<div id="sidebarHeader">Scoreboard</div>
+  <div id="sidebarHeader">Scoreboard 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
+  </div>
 	<div id="scoresWrap" class="scrollable">
 
 

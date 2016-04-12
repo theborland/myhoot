@@ -52,20 +52,13 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			?>
 			//automatically forward if automode is on
 			setTimeout( function(){
-			      window.location.href='getQuestion.php';
+			      //window.location.href='getQuestion.php';
 			}  , 7000 );
 			<?php
 			}
-
-
-
-
 			?>
-
-
-
-
-			  answer = document.getElementById("answer").innerHTML;
+			window.onload = function(){
+		    answer = document.getElementById("answer").innerHTML;
 			  //alert(answer);
 			  answer = answer.length >= 10 ? answer :new Array(2).join("x") + answer;
 			  //alert(answer);
@@ -79,10 +72,6 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			      }
 			    }
 			  }, 500);
-
-
-
-
 
 			var timeline = document.getElementById('timeline');
 
@@ -107,18 +96,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			    val = parseInt(labels[i].innerHTML);
 			    labels[i].innerHTML = comma(val);
 			  }
-
-
-
-
-
-
-
-
-		}
-
-
-
+			}
 	</script>
 
 	<style>
@@ -161,7 +139,8 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	</div>
 </div>
 <div id="sidebarWrap">
-	<div id="sidebarHeader">Scoreboard</div>
+	<div id="sidebarHeader">Scoreboard 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
+</div>
 	<div id="scoresWrap" class="scrollable">
 
 
