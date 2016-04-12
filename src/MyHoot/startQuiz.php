@@ -4,9 +4,9 @@ session_start();
 //$_SESSION["auto"]="";
 require 'controller/dbsettings.php';
 //create game
-die ("all good here");
-Game::createGame();
 
+Game::createGame();
+die ("all good here");
 ?>
 <!DOCTYPE html>
 <html lang="en">
