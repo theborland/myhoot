@@ -49,7 +49,6 @@
 
 		function animateClouds(x){
 			var docWidth = screen.width;
-			alert(docWidth + " ");
 			for(var i=(numClouds-actClouds); i<numClouds; i++){
 			    clouds[i].animate(x);
 			    /*if(clouds[i].destroy(docWidth)){
