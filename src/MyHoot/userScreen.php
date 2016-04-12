@@ -120,7 +120,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
  <body>
 
   <div id="overlayWrap">
-    <img src="img/logo.png" id="logo">
+    <img src="img/logo.svg" id="logo">
     <h3>Round <?php echo $_GET["question"] ?></h3>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">

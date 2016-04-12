@@ -138,7 +138,7 @@ Game::createGame();
 
 
 	<div id="jqWrap" method="GET">
-		<img src="logo.png" id="logo">
+		<img src="logo.svg" id="logo">
 		<h4>Creating a Quiz</h4>
 
 		<div id="colsWrap">

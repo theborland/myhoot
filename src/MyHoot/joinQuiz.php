@@ -16,7 +16,7 @@ require 'controller/dbsettings.php';
 </head>
 <body>
 	<div id="jqWrap">
-		<img src="img/logo.png" id="logo">
+		<img src="img/logo.svg" id="logo">
 		<h4>Join a Quiz</h4>
 		<form action="waitingScreen.php">
 			<label for="game_id" class="jqLabel"> QUIZ ID <?php if ($error=="Bad Game") echo " Game ID is not valid"; ?></label>

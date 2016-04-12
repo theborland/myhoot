@@ -264,7 +264,7 @@ function muteOff(){
 
 
 	<div id="overlayWrap">
-		<img src="logo.png" id="logo">
+		<img src="logo.svg" id="logo">
 			<div id="qInfoWrap">
 				<div class="qInfoBlock" id="qInfoNumber">
 					<div class="qInfoLabel">Question</div>

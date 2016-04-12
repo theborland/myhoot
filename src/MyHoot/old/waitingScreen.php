@@ -87,7 +87,7 @@ if ($submit=="Join"){
  <body>
 
 	<div id="jqWrap">
-		<img src="logo.png" id="logo">
+		<img src="logo.svg" id="logo">
 		<h4>Waiting</h4>
 		<hr>
     <?php if (is_numeric($message)){ ?>
