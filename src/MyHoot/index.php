@@ -28,7 +28,7 @@
 			//set up clouds
 			var docHeight = (document.height !== undefined) ? document.height : document.body.offsetHeight;
 			var docWidth = screen.width;
-			clouds[0] = new Cloud(0, docHeight);
+			clouds[0] = new Cloud(0, docHeight, docWidth);
 
 			//animation clock
 			var x=0;
@@ -36,8 +36,7 @@
 			     animateClouds(x);
 
 			     if(Math.random()<0.002){
-			     	alert(screen.width);
-			     	clouds[numClouds] =  new Cloud(numClouds, docHeight, screen.width);
+			     	clouds[numClouds] =  new Cloud(numClouds, docHeight, docWidth);
 			     	numClouds++;
 			     	actClouds++;
 			     }
