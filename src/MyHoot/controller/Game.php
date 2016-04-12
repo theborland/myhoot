@@ -6,7 +6,6 @@ class Game
 	var $round;
 	public static function createGame()
 	{
-		die ("");
 		global $conn;
 		$game_id=rand(10000,99999);
 		$_SESSION["game_id"] =$game_id;
