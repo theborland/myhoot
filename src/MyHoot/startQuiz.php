@@ -172,7 +172,7 @@ Game::createGame();
 					<div class="gsName">HISTORY</div>
 				</div>
 	 			<div class="gsItem" id="gs6">
-					<img src="img/temp.svg" class="gsImg" alt="">
+					<img src="img/random.svg" class="gsImg" alt="">
 					<div class="gsName">RANDOM</div>
 				</div>
 				<!--<div id="showMap" class="regButton" onclick="alert('sup')">Select Regions</div>-->
