@@ -13,7 +13,7 @@ class Game
 		//$_SESSION["user_id"] =rand (0,111111111);
 		$sql = "INSERT INTO `games` (`game_id`) VALUES ('$_SESSION[game_id]')";
 		//echo $sql;
-
+		die ($sql);
 		$result = $conn->query($sql);
 
 		$_SESSION["questionNumber"]=0;

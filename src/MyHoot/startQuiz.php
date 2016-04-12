@@ -6,7 +6,7 @@ require 'controller/dbsettings.php';
 //create game
 
 Game::createGame();
-die ("all good here");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
