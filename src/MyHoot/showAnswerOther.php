@@ -112,6 +112,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			background-size       : cover;
 			background-position   : center;
 			<?php } ?>
+			background-repeat: no-repeat;
 		}
 	</style>
 
