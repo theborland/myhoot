@@ -18,7 +18,7 @@ require 'controller/dbsettings.php';
 	<?php include_once("controller/analyticstracking.php") ?>
 	<div id="jqWrap">
 		<img src="img/logo.svg" id="logo">
-		<h4>Join a Quiz</h4>
+		<h4 class="formHeader">Join a Quiz</h4>
 		<form action="waitingScreen.php">
 			<label for="game_id" class="jqLabel"> QUIZ ID <?php if ($error=="Bad Game") echo " Game ID is not valid"; ?></label>
 			<input type="text" name="game_id" id="game_id" class="jqInput" value="<?php echo $game_id ?>"  maxlength="6">

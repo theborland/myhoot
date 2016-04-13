@@ -286,3 +286,9 @@ input[type='checkbox']:focus {
 	border-top:20px solid white;
 	box-sizing: border-box;
 }
+
+#logoLink{
+	border:0px;
+	text-decoration: none;
+	outline:0px;
+}

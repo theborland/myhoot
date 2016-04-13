@@ -3,7 +3,7 @@
     $email = $_POST['email'];
     $message = $_POST['message'];
     $from = 'From: GameOn';
-    $to = 'theborland@gmail.com.com';
+    $to = 'theborland@gmail.com';
     $subject = 'Gameon.World Feedback';
 
 
@@ -21,120 +21,60 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Contact Form</title>
-<style>
-@charset "utf-8";
-/* CSS Document */
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-@font-face {
-    font-family: 'BebasRegular';
-    src: url('fonts/BEBAS___-webfont.eot');
-    src: url('fonts/BEBAS___-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/BEBAS___-webfont.woff') format('woff'),
-         url('fonts/BEBAS___-webfont.ttf') format('truetype'),
-         url('fonts/BEBAS___-webfont.svg#BebasRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+	<link rel="stylesheet" href="style/global.css">
+	<link rel="stylesheet" href="style/content.css">
+	<link rel="stylesheet" href="style/contact.css">
+	<link rel="stylesheet" href="style/form.css">
+	<script src="scripts/global.js"></script>
 
-body {
-	font-size:100%;
-	font-family:Georgia, "Times New Roman", Times, serif;
-	color:#3a3a3a;
-}
-
-.body {
-	width:576px;
-	margin:0 auto;
-	display:block;
-}
-
-h1 {
-	width:498px;
-	height:64px;
-	background:url(images/h1-bg.jpg);
-	color:#fff;
-	font-family:bebas;
-	padding:17px 0px 0px 78px;
-	letter-spacing:1px;
-	font-size:2.2em;
-	margin:0 auto;
-}
-
-form {
-	width:459px;
-	margin:0 auto;
-}
-
-label {
-	display:block;
-	margin-top:20px;
-	letter-spacing:2px;
-}
-
-input, textarea {
-	width:439px;
-	height:27px;
-	background:#efefef;
-	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	border:1px solid #dedede;
-	padding:10px;
-	margin-top:3px;
-	font-size:0.9em;
-	color:#3a3a3a;
-}
-
-	input:focus, textarea:focus {
-		border:1px solid #97d6eb;
-	}
-
-textarea {
-	height:213px;
-	font-family:Arial, Helvetica, sans-serif;
-	background:url(images/textarea-bg.jpg) right no-repeat #efefef;
-}
-
-#submit {
-	width:127px;
-	height:38px;
-	text-indent:-9999px;
-	border:none;
-	margin-top:20px;
-	cursor:pointer;
-}
-
-	#submit:hover {
-		opacity:0.9;
-	}
-
-footer a img {
-	border:none;
-	float:right;
-	margin:0px 59px 40px 0px;
-}
-</style>
+	<title>Contact Us</title>
 </head>
-
 <body>
-  We would love your feedback - issues, suggestions, anything.
-  Fill out this form and tell us what you think.
-  <form method="post">
+ 
+<div id="wholeWrap">
 
-    <label>Name</label>
-    <input name="name" placeholder="Type Here">
+	<div id="headWrap">
+		<div id="logoWrap">
+			<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+		</div>
+		<div id="menuWrap">
+			<div id="menuItemContainer">
+				<div class="menuItem"><a href="joinQuiz.php" class="menuLink">Play!</a></div>
+				<div class="menuItem"><a href="aboutUs.php" class="menuLink">About</a></div>
+				<div class="menuItem"><a href="contactUs.php" class="menuLink">Contact</a></div>
+			</div>
+		</div>
+	</div>
+	<div id="pageHeader">Contact</div>
+	<div id="bodyWrap">
+		<div id="formWrap">
+			<p>
+				We would love your feedback - issues, suggestions, anything. Fill out this form and tell us what you think.
+			</p>
+			<form method="post">
 
-    <label>Email</label>
-    <input name="email" type="email" placeholder="Type Here">
+				<label class="jqLabel" for="name">NAME</label>
+				<input class="jqInput" name="name" id="name" >
 
-    <label>Message</label>
-    <textarea name="message" placeholder="Type Here"></textarea>
+				<label class="jqLabel" for="email">EMAIL</label>
+				<input class="jqInput" name="email" id="email" type="email" >
 
-    <input id="submit" name="submit" type="submit" value="Submit">
+				<label class="jqLabel" for="message">MESSAGE</label>
+				<textarea class="jqInput" id="message" name="message" ></textarea>
 
-</form>
+				<div id="submitWrap">
+					<input class="regButton" id="submit" name="submit" type="submit" value="Submit">
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="pageFooter">
+		Copyright &copy; 2016 GameOnWorld
+	</div>
+		
+</div>
 </body>
 
 </html>
