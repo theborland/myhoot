@@ -58,3 +58,8 @@ body{
 	font-weight: 300;
 }
 
+#replayButton{
+	position: fixed;
+	right: 10px;
+	top: 10px;
+}
