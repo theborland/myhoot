@@ -69,6 +69,15 @@ include("controller/gameLogic.php");
 	<style>
 		body{
 			background-image:url("<?php echo $theQuestion->getImage() ?>");
+			<?php
+				if(Game::findGame()->type == "age"){
+			?>
+			background-size       : contain;
+			background-position   : top center;
+			<?php }else{ ?>
+			background-size       : cover;
+			background-position   : center;
+			<?php } ?>
 		}
 	</style>
 
