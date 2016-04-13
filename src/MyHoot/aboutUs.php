@@ -7,7 +7,7 @@ Enjoy playing.
 
 Who?
 Really anyone.  When we thought of GameOn.World, we imagined teachers (especially Social Studies teachers) using it for practice geography.  But we hope you find it fun enough to use anytime you want.  Maybe the next get together you have you try it out - the more people the merrier.
-
+ 
 Why?
 Well its fun but hopefully it will teach you a bit about the world too.
 
