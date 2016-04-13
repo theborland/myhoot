@@ -159,6 +159,11 @@ h3{
 	position: relative;
 }
 
+#bodyWrap{
+	max-width: 1400px;
+	margin:0px auto;
+}
+
 #pageFooter{
 	width: 100%;
 	font-weight: 300;
