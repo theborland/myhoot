@@ -4,10 +4,10 @@ to learn geography and other interesting trivia.  The site was started by Jeff B
 Orkhan Nadirli.  We believed that students need to know much more about the world and we thought that this game format would be a wonderful way to do that.  In the coming
 months we hope to add lots of new features (like the ability to create your own trivia sets), so keep checking back.  And if you have ideas or comments we would love to hear them.
 Enjoy playing.
-
+ 
 Who?
 Really anyone.  When we thought of GameOn.World, we imagined teachers (especially Social Studies teachers) using it for practice geography.  But we hope you find it fun enough to use anytime you want.  Maybe the next get together you have you try it out - the more people the merrier.
- 
+
 Why?
 Well its fun but hopefully it will teach you a bit about the world too.
 
