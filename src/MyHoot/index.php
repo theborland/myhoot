@@ -16,7 +16,7 @@
   <script type="text/javascript">
 
 		window.onload = function(){
-			
+
 			  if (screen.width <= 800)
 			    window.location = "joinQuiz.php";
 			  /*else
@@ -38,9 +38,9 @@
 	</div>
 	<div id="menuWrap">
 		<div id="menuItemContainer">
-			<div class="menuItem"><a href="" class="menuLink">Play!</a></div>
-			<div class="menuItem"><a href="" class="menuLink">About</a></div>
-			<div class="menuItem"><a href="" class="menuLink">Contact</a></div>
+			<div class="menuItem"><a href="joinQuiz.php" class="menuLink">Play!</a></div>
+			<div class="menuItem"><a href="aboutUs.php" class="menuLink">About</a></div>
+			<div class="menuItem"><a href="contactUs.php" class="menuLink">Contact</a></div>
 		</div>
 	</div>
 </div>
@@ -62,7 +62,7 @@
 
 	</div>
 	<div id="colRight">
-		
+
 		<div id="welcomeMessage">Starting a quiz is fast, easy, and doesn't require registration!</div>
 		<a href="startQuiz.php" id="startQuizButton" class="regButton">Start a Quiz!</a>
 	</div>
