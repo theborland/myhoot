@@ -179,7 +179,7 @@ Game::createGame();
 			</div>
 
 		</div><div class="col" id="col2">
-			<div class="sqLabel" id="sqQuizLabel">QUIZ ID</div>
+			<div class="sqLabel" id="sqQuizLabel">GAME ID</div>
 			<div id="sqQuizID">
 				<div id="quizID">
 						<?php echo $_SESSION["game_id"] ; ?>

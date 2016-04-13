@@ -49,9 +49,9 @@
 	<div id="bodyWrap">
 		<div id="colLeft">
 			<div id="jqWrap">
-				<h4 class="formHeader">Join a Quiz</h4>
+				<h4 class="formHeader">Join a Game</h4>
 				<form action="waitingScreen.php">
-					<label for="game_id" class="jqLabel"> QUIZ ID </label>
+					<label for="game_id" class="jqLabel"> GAME ID </label>
 					<input type="text" name="game_id" id="game_id" class="jqInput" value=""  maxlength="5">
 
 					<label for="name" class="jqLabel">YOUR NAME</label>
@@ -64,11 +64,10 @@
 		</div>
 		<div id="colRight">
 
-			<div id="welcomeMessage">Starting a quiz is fast, easy, and doesn't require registration!</div>
-			<a href="startQuiz.php" id="startQuizButton" class="regButton">Start a Quiz!</a>
+			<div id="welcomeMessage">Starting a game is fast, easy, and doesn't require registration!</div>
+			<a href="startQuiz.php" id="startQuizButton" class="regButton">Start a Game!</a>
 		</div>
 	</div>
-
 
 		<div id="pageFooter">
 			Copyright &copy; 2016 GameOnWorld
