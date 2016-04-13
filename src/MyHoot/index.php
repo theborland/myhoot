@@ -63,8 +63,8 @@
 	</div>
 	<div id="colRight">
 
-		<div id="welcomeMessage">Starting a quiz is fast, easy, and doesn't require registration!</div>
-		<a href="startQuiz.php" id="startQuizButton" class="regButton">Start a Quiz!</a>
+		<div id="welcomeMessage">Starting a game is fast, easy, and doesn't require registration!</div>
+		<a href="startQuiz.php" id="startQuizButton" class="regButton">Start a Game!</a>
 	</div>
 </div>
 
