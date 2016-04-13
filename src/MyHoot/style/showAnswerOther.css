@@ -1,3 +1,7 @@
+body{
+	background-repeat: no-repeat;
+}
+
 #topBarWrap{
 	position: fixed;
 	top: 0;
