@@ -140,7 +140,7 @@ window.onload = function(){
     orientation: "vertical",
     direction: 'rtl',
     range: {
-      'min': [500000],
+      'min': [100000],
       '10%': [2000000],
       '20%': [5000000],
       '30%': [10000000],

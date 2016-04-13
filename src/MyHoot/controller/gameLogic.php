@@ -57,12 +57,17 @@ else {
         $idealArray =array_count_values($gamesSelected);
         $currentArray =array_count_values($playedGames);
         $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
-        while (in_array($current,$currentArray) && $currentArray[$current]/sizeof($playedGames)>$idealArray[$current]/sizeof($gamesSelected))
-                $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+        while (array_key_exists($current,$currentArray) && $currentArray[$current]/sizeof($playedGames)>$idealArray[$current]/sizeof($gamesSelected))
+        {
+          //echo ("current". $current.($currentArray[$current]/sizeof($playedGames)));
+           $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+        }
+        //
     }
     $theQuestion=new Question($current);
     $playedGames[]=$current;
     $_SESSION["playedGames"]=$playedGames;
     //print_r($playedGames);
+    //print_r($gamesSelected);
   }
 ?>

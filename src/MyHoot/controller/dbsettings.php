@@ -30,7 +30,8 @@ $conn->query("SET collation_connection = utf8mb4_unicode_ci");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-include ($_SERVER['DOCUMENT_ROOT']."/controller/siteFunctions.php");
+//include ($_SERVER['DOCUMENT_ROOT']."/controller/siteFunctions.php");
+include ($_SERVER['DOCUMENT_ROOT']."/fall15/src/MyHoot/controller/siteFunctions.php");
 
 // An array of $_POST keys that are acceptable
 if (isset($whitelist))
