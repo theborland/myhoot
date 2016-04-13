@@ -12,7 +12,7 @@ require 'controller/dbsettings.php';
 
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/joinQuiz.css">
-	<title>Join a Quiz</title>
+	<title>Join a Game</title>
 </head>
 <body>
 	<?php include_once("controller/analyticstracking.php") ?>
