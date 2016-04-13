@@ -15,6 +15,7 @@ require 'controller/dbsettings.php';
 	<title>Join a Quiz</title>
 </head>
 <body>
+	<?php include_once("controller/analyticstracking.php") ?>
 	<div id="jqWrap">
 		<img src="img/logo.svg" id="logo">
 		<h4>Join a Quiz</h4>

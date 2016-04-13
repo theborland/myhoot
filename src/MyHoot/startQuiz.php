@@ -82,7 +82,7 @@ Game::createGame();
 
 </head>
 <body>
-
+<?php include_once("controller/analyticstracking.php") ?>
 <form action="getQuestion.php">
 
 
@@ -172,7 +172,7 @@ Game::createGame();
 					<div class="gsName">HISTORY</div>
 				</div>
 	 			<div class="gsItem" id="gs6">
-					<img src="img/random.svg" class="gsImg" alt=""> 
+					<img src="img/random.svg" class="gsImg" alt="">
 					<div class="gsName">RANDOM</div>
 				</div>
 				<!--<div id="showMap" class="regButton" onclick="alert('sup')">Select Regions</div>-->
