@@ -86,7 +86,7 @@ include("controller/gameLogic.php");
 
 	<div id="headerWrap">
 		<div id="logoWrap">
-			<img src="img/logo.svg" id="logo">
+						<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 		</div>
 		<div id="roundWrap">
 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>

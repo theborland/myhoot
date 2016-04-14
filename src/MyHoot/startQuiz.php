@@ -140,7 +140,7 @@ Game::createGame();
 
 <div id="headWrap">
 	<div id="logoWrap">
-		<img src="img/logo.svg" id="logo">
+					<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 	</div>
 
 </div>

@@ -18,7 +18,7 @@ require 'controller/dbsettings.php';
 <body>
 	<?php include_once("controller/analyticstracking.php") ?>
 	<div id="jqWrap">
-		<img src="img/logo.svg" id="logo">
+					<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 		<h4 class="formHeader">Join a Game</h4>
 		<form action="waitingScreen.php">
 			<label for="game_id" class="jqLabel"> GAME ID <?php if ($error=="Bad Game") echo " Game ID is not valid"; ?></label>

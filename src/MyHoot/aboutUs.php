@@ -35,7 +35,7 @@
 	<?php include_once("controller/analyticstracking.php") ?>
 	<div id="headWrap">
 		<div id="logoWrap">
-			<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+			<a href="http://GameOn.World" id="logoLink">			<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a></a>
 		</div>
 		<div id="menuWrap">
 			<div id="menuItemContainer">

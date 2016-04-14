@@ -55,7 +55,7 @@ if ($submit=="Join"){
 <body>
 
 <div id="headerContainer">
-	<img src="img/logo.svg" id="logo">
+				<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 	<div id="waiting">Waiting...</div>
 
 </div>
