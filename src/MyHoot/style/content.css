@@ -3,8 +3,11 @@ html{
 }
 body{
 	/*background: linear-gradient(to top, #fff 0%, #16A3FF 30%, #090A0F 100%);*/
-	background:-webkit-linear-gradient(top, #3B9C99, #C4FFC8);
-	background:linear-gradient(top, #3B9C99, #C4FFC8);
+		background: #3b9c99; /* Old browsers */
+		background: -moz-linear-gradient(top,  #3b9c99 0%, #c4ffc8 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top,  #3b9c99 0%,#c4ffc8 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom,  #3b9c99 0%,#c4ffc8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3b9c99', endColorstr='#c4ffc8',GradientType=0 ); /* IE6-9 */
 	background-attachment: fixed;
 	margin:0px;
 	padding:0px;
