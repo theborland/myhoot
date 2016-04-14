@@ -3,7 +3,7 @@
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
-    $from = 'From: theborland@gmail.com';
+    $from = 'From: GameOn@world.com';
     $to = 'theborland@gmail.com';
     $subject = 'Gameon.World Feedback';
 
