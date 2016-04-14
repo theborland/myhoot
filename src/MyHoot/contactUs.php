@@ -1,4 +1,5 @@
 <?php
+  if (isset($_POST['submit']) && $_POST['submit']=='Submit' ){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
@@ -9,11 +10,11 @@
 
     $body = "From: $name\n E-Mail: $email\n Message:\n $message";
 
-    if ($_POST['submit']=='submit' ) {
+
         if (mail ($to, $subject, $body, $from)) {
-	    echo '<p>Your message has been sent!</p>';
+    	    $mailResponse= '<p>Your message has been sent!</p>';
 	} else {
-	    echo '<p>Something went wrong, go back and try again!</p>';
+	        $mailResponse= '<p>Something went wrong, go back and try again!</p>';
 	}
     }
 ?>
@@ -32,7 +33,7 @@
 	<title>Contact Us</title>
 </head>
 <body>
- 
+
 <div id="wholeWrap">
 
 	<div id="headWrap">
@@ -50,7 +51,16 @@
 	<div id="pageHeader">Contact</div>
 	<div id="bodyWrap">
 		<div id="formWrap">
-			<p>
+<?php if (isset($mailResponse)){
+  ?>
+  <p>
+    <?php echo $mailResponse; ?>
+  </p>
+  <?php
+}
+else {
+  ?>
+      <p>
 				We would love your feedback - issues, suggestions, anything. Fill out this form and tell us what you think.
 			</p>
 			<form method="post">
@@ -68,12 +78,13 @@
 					<input class="regButton" id="submit" name="submit" type="submit" value="Submit">
 				</div>
 			</form>
+      <?php } ?>
 		</div>
 	</div>
 	<div id="pageFooter">
 		Copyright &copy; 2016 GameOnWorld
 	</div>
-		
+
 </div>
 </body>
 
