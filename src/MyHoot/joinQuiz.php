@@ -11,6 +11,7 @@ require 'controller/dbsettings.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/form.css">
     <link rel="stylesheet" href="style/joinQuiz.css">
 	<title>Join a Game</title>
 </head>
