@@ -27,7 +27,12 @@ require 'controller/dbsettings.php';
 			<label for="name" class="jqLabel">YOUR NAME<?php if ($error=="Bad Name") echo " That name has been used"; ?></label>
 			<input type="text" name="name" id="name" value="<?php echo $name ?>" class="jqInput"maxlength="20" >
 
-			<Center><input type="submit" name="submit" value="Join" id="jqJoin" class="regButton"></Center>
+			<Center>
+				<input type="submit" name="submit" value="Join" id="jqJoin" class="regButton">
+				<label class="jqLabel">OR</label>
+				<a href="startQuiz.php" class="regButton" id="startGame">Start a Game</a>
+			</Center>
+
 		</form>
 	</div>
 	<div id="footer">

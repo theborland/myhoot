@@ -25,6 +25,17 @@ body{
 
 }
 
+#startGame, #startGame:visited{
+	background:transparent;
+	padding: 5px 15px;
+	border:1px solid rgba(255,255,255,0.3);
+	color:rgba(255,255,255,0.8);
+}
+#startGame:hover{
+	border:1px solid rgba(255,255,255,0.7);
+	color:rgba(255,255,255,1);
+}
+
 
 
 
