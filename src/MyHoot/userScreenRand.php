@@ -25,7 +25,7 @@ $max=$theQuestion->max;
         height: 100%;
         margin: 0px;
         padding: 0px
-        background: #A2311A;
+        background: #84392A;
       }
 
       #overlayWrap{
@@ -33,7 +33,7 @@ $max=$theQuestion->max;
         bottom: 0px;
         height: auto;
         position: fixed;
-        background: #A2311A;
+        background: #84392A;
       }
       #newSlider .noUi-pips{
         font-size: 16px;
