@@ -42,6 +42,12 @@ body{
 	color:#fff;
 }
 
+#questionWrap #questionType{
+	font-weight: 500;
+	color:rgba(255,255,255,0.8);
+	font-size: 24pt;
+}
+
 #controlWrap{
 	display: inline-block;
 	vertical-align: top;	

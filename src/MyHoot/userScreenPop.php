@@ -21,7 +21,7 @@ if (isset($_GET["question"]))
         height: 100%;
         margin: 0px;
         padding: 0px
-        background: #2C909F;
+        background: #4449A2;
       }
 
       #overlayWrap{
@@ -29,7 +29,7 @@ if (isset($_GET["question"]))
         bottom: 0px;
         height: auto;
         position: fixed;
-        background: #2C909F;
+        background: #4449A2;
       }
 
     </style>

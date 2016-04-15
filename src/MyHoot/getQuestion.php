@@ -92,7 +92,11 @@ include("controller/gameLogic.php");
 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
 		</div>
 		<div id="questionWrap">
-			<?php echo $theQuestion->getQuestionText(); ?><?php echo $theQuestion->getLabel(); ?>?
+			
+<div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
+<div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?></div>
+
+			
 		</div>
 		<div id="controlWrap">
 			<a href="showAnswer.php" class="regButton" id="showAnswer">Show Answer</a>
