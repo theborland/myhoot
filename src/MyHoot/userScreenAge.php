@@ -14,10 +14,11 @@ if (isset($_GET["question"]))
     <link rel="stylesheet" href="style/inputSlider.css">
   <script src="scripts/socketScripts.js"></script>
     <style>
-      html, body, #map-canvas {
+      html, body {
         height: 100%;
         margin: 0px;
         padding: 0px
+        background: #4C3D91; /* fallback for old browsers */
       }
 
       #overlayWrap{
@@ -25,9 +26,7 @@ if (isset($_GET["question"]))
         bottom: 0px;
         height: auto;
         position: fixed;
-        background: #43cea2; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #096433 , #B8CE15); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #096433 , #B8CE15); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: #4C3D91; /* fallback for old browsers */
       }
       #newSlider .noUi-pips{
         font-size: 16px;
@@ -97,7 +96,6 @@ x.send();
   <script src="scripts/nouislider.min.js"></script>
   <div id="overlayWrap">
     			<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
-    <h3>Round <?php echo $_GET["question"] ?></h3>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
         <input type="hidden" id="answer" name="answer">

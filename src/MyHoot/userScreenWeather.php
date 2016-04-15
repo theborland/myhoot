@@ -21,9 +21,6 @@ if (isset($_GET["question"]))
         background: #438BCE;
       }
 
-      #newSlider .noUi-handle {
-          background: #<?php echo User::getColor(); ?>;
-        }
       #overlayWrap{
         top:0px;
         bottom: 0px;
@@ -99,7 +96,6 @@ x.send();
   <script src="scripts/nouislider.min.js"></script>
   <div id="overlayWrap">
     			<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
-    <h3>Round <?php echo $_GET["question"] ?></h3>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
         <input type="hidden" id="answer" name="answer">
