@@ -28,11 +28,12 @@ body{
 #startGame, #startGame:visited{
 	background:transparent;
 	padding: 5px 15px;
-	border:1px solid rgba(255,255,255,0.3);
+	border:1px solid rgba(255,255,255,0.5);
 	color:rgba(255,255,255,0.8);
+	font-size: 18px;
 }
 #startGame:hover{
-	border:1px solid rgba(255,255,255,0.7);
+	border:1px solid rgba(255,255,255,0.5);
 	color:rgba(255,255,255,1);
 }
 

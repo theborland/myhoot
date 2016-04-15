@@ -29,7 +29,7 @@ require 'controller/dbsettings.php';
 
 			<Center>
 				<input type="submit" name="submit" value="Join" id="jqJoin" class="regButton">
-				<label class="jqLabel">OR</label>
+				<label class="jqLabel" padding="10px 0px">OR</label>
 				<a href="startQuiz.php" class="regButton" id="startGame">Start a Game</a>
 			</Center>
 
