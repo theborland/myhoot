@@ -53,6 +53,8 @@ if ($answer>100000)
           $message= "Off by: ". $distanceAway. " years";
     if ($game->type=="geo")
       $message= "Distance away : ". $distanceAway. " miles away";
+    if ($game->type=="rand")
+      $message= "Off by: ". $distanceAway. "";
   //  $place=
     //echo $correct->location->longg;
   //  die ($message);//place='.$place.
