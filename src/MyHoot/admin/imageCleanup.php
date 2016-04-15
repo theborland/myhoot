@@ -91,6 +91,8 @@ function getURL()
 				    return $row ['wording'] . ', ' . $row ['id'] . "\n" . $row ['image'];
         if ($db=="people")
     				    return $row ['name'] . ', ' . $row ['id'] . "\n" . $row ['image'];
+        if ($db=="rand")
+            				    return $row ['keyword'] . ', ' . $row ['id'] . "\n" . $row ['image'];
 		  }
 		}
 }

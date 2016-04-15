@@ -129,7 +129,7 @@ class Question
 		if ($this->type=="time")
 				return "Guess the Year: ";
 		if ($this->type=="rand")
-					return $this->city;
+					return ucfirst($this->city);
 	}
 	function getWeather(){
 		$this->getLocation("weather");
@@ -159,7 +159,8 @@ class Question
 				$this->min=$row["min"];
 				$this->max=$row["max"];
 				$url= $row["image"];
-        $this->image="a.jpg";//Question::getRandomUrl($url);
+				$this->image=Question::getRandomUrl($url);
+        //$this->image="a.jpg";//Question::getRandomUrl($url);
 				}
 		}
 		if ($this->checkForRepeats($this->country))
@@ -305,6 +306,8 @@ public static function loadImage($wording,$type){
 		$sql = "SELECT * FROM `data-people` WHERE `name`='$wording'  LIMIT 1";//" WHERE `id`='3'";
 	if ($type=="time")
 		$sql = "SELECT * FROM `data-time` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
+		if ($type=="rand")
+			$sql = "SELECT * FROM `data-rand` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
 
 	$result = $conn->query($sql);
 	//die($sql);
@@ -367,7 +370,7 @@ function addAnswer(){
 	    $latLong=new LatLong($this->min,$this->max);
   else
 		  $latLong=new LatLong(0,0);
-	if ($this->city!="")
+	if ($this->city!="" && $this->type!="rand")
 		$cityName=$this->city . ",".$this->country;
   else
 		$cityName=$this->country;

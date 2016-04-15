@@ -70,7 +70,7 @@ include("controller/gameLogic.php");
 		body{
 			background-image:url("<?php echo $theQuestion->getImage() ?>");
 			<?php
-				if(Game::findGame()->type == "age"){
+				if(Game::findGame()->type == "age" || Game::findGame()->type == "rand"){
 			?>
 			background-size       : contain;
 			background-position   : top center;
@@ -92,11 +92,11 @@ include("controller/gameLogic.php");
 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
 		</div>
 		<div id="questionWrap">
-			
+
 <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
 <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?></div>
 
-			
+
 		</div>
 		<div id="controlWrap">
 			<a href="showAnswer.php" class="regButton" id="showAnswer">Show Answer</a>
