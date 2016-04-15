@@ -107,7 +107,7 @@ x.send();
             <input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
             <div id="newSlider"></div>
           </center>
-                      <input type="submit" name="submit" id="userMapSubmit" value="Submit!">
+                      <input type="submit" name="submit" class="regButton" id="userMapSubmit" value="Submit!">
 
           <!--
           <div id="relativeWrap">

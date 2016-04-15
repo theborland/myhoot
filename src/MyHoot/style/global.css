@@ -79,6 +79,7 @@ body{
 	cursor:pointer;
 	box-shadow: 0px 0px 30px rgba(255,255,255,.1);	
 	text-decoration: none;
+	-webkit-appearance: none;
 }
 .regButton:visited{
 	background: #FFBD98;
@@ -243,33 +244,7 @@ input[type='checkbox']:focus {
 	position: fixed;
 	right:10px;
 	top:10px;
-	margin:auto;
-	display: inline-block;
-	padding:10px 40px;
-	background: #F76116;
-	color:#fff;
-	font-family: overpass;
-	font-weight: 500;
-	border-radius: 10px;
-	border: 0px solid #fff;
-	border-bottom: 3px solid #BB3B08;
-	font-size: 22px;
-	box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
-	-webkit-appearance: none;
-	outline:0px;
-	transition:.2s all;
-	text-decoration: none;
 }
-
-#overlayWrap #userMapSubmit:hover{
-	background: #F77C27;
-	cursor:pointer;
-	box-shadow: 0px 0px 35px 0px rgba(0, 0, 0, 0.3);
-}
-#overlayWrap #userMapSubmit:active{
-	background:#F79B00;
-}
-
 
 
 .cloudWrap{

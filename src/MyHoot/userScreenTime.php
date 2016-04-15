@@ -13,10 +13,11 @@ if (isset($_GET["question"]))
       <link href="style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
     <style>
-      html, body, #map-canvas {
+      html, body {
         height: 100%;
         margin: 0px;
         padding: 0px
+        background: #249471;
       }
 
       #overlayWrap{
@@ -24,9 +25,7 @@ if (isset($_GET["question"]))
         bottom: 0px;
         height: auto;
         position: fixed;
-        background: #43cea2; /* fallback for old browsers */
-        background: -webkit-linear-gradient(to bottom, #096433 , #B8CE15); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to bottom, #096433 , #B8CE15); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: #249471;
       }
       #newSlider .noUi-pips{
         font-size: 16px;
@@ -106,7 +105,7 @@ x.send();
             <input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
             <div id="newSlider"></div>
           </center>
-                      <input type="submit" name="submit" id="userMapSubmit" value="Submit!">
+                      <input type="submit"  class="regButton" name="submit" id="userMapSubmit" value="Submit!">
 
           <!--
           <div id="relativeWrap">
