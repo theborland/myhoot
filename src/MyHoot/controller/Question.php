@@ -247,7 +247,7 @@ class Question
 		$url=str_replace("','","','",$url);
 
 		$splits=explode("','",$url);
-
+ die ($url);
 		if (sizeof($splits)==0)
 		{
 		//	echo "going in again";
