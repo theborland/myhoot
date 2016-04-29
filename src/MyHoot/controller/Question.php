@@ -199,7 +199,7 @@ class Question
 
 		$sql = "SELECT * FROM `data-time` WHERE `imageUpdatedDate` IS NOT null  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
 		//die ($sql);
-			$sql = "SELECT * FROM `data-time`   WHERE `id`='63'";
+		//	$sql = "SELECT * FROM `data-time`   WHERE `id`='63'";
 			//die ($sql);
 		$result = $conn->query($sql);
 		if ($result)
@@ -236,7 +236,7 @@ class Question
 
   public static function getRandomUrl($url){
 	  //echo $url;
-		
+
 		$url=trim(preg_replace('/\s\s+/', ' ', $url));
 		$url=str_replace(" ","",$url);
 
