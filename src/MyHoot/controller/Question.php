@@ -236,8 +236,10 @@ class Question
 
   public static function getRandomUrl($url){
 	  //echo $url;
+		
 		$url=trim(preg_replace('/\s\s+/', ' ', $url));
 		$url=str_replace(" ","",$url);
+
 		$url=str_replace("[ '","['",$url);
 		$url=substr($url,1,-1);
 		$url=str_replace("',\"","','",$url);
@@ -245,9 +247,9 @@ class Question
 		$url=str_replace("\",'","','",$url);
 		$url=str_replace("','","','",$url);
 		$url=str_replace("','","','",$url);
-
+  	$url=str_replace(",''","",$url);
 		$splits=explode("','",$url);
- die ($url);
+ //die ($url);
 		if (sizeof($splits)==0)
 		{
 		//	echo "going in again";
