@@ -45,8 +45,12 @@ class Game
 					$colors=str_replace($theColor,"",$colors);
 					$colors=str_replace(",,",",",$colors);
 					if (substr($colors,strlen($colors)-1)==",")
-					    $colors=substr($colors,strlen($colors)-1);
+					    $colors=substr($colors,0,strlen($colors)-1);
+					if (substr($colors,0,1)==",")
+							$colors=substr($colors,1);
 					//now update games
+					if (strlen($theColor)<2)
+						$theColor=get_random_color();
 					$sql = "UPDATE `games` SET `colors`='$colors' WHERE `game_id` = '".$_SESSION["game_id"]."'";
 				  $result = $conn->query($sql);
 					//die ($sql);

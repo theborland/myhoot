@@ -1,8 +1,10 @@
 <?php
 	session_start();
 	require 'controller/dbsettings.php';
+	//$_SESSION["game_id"]=99121;
 	$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 	$allAnswers->fillMissingAnswers();
+
 ?>
 
 <html>
