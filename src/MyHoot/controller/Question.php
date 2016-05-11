@@ -275,6 +275,7 @@ class Question
 		//die ($sql);
 		//" WHERE `id`='3'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
+   //	$sql = "SELECT * FROM `data-geo` WHERE `id`=224";
 		$result = $conn->query($sql);
 		if ($result)
 		{
