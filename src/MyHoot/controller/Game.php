@@ -92,5 +92,34 @@ class Game
 		      header( 'Location: waitingScreen.php?message='."Sorry, there is no question in progress" ) ;
 				else return $questionNumber;
 	 }
+
+	 public static function getNumberUsers(){
+		 	$game=Game::findGame();
+			global $conn;
+		 	$lastQuestionNumber=$game->round-1;
+			if ($lastQuestionNumber>0){
+					$sql = "SELECT COUNT(*) as total FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='$lastQuestionNumber' AND points>=1";
+					//echo $sql;
+					$result = $conn->query($sql);
+		  		if ($result)
+		  		{
+		          $row = $result->fetch_assoc();
+		  				return $row ['total'];
+
+		  		}
+			}
+			else{
+					$sql = "SELECT COUNT(*) as total FROM `users` WHERE game_id ='".$_SESSION["game_id"]."'";
+					$result = $conn->query($sql);
+					if ($result)
+					{
+							$row = $result->fetch_assoc();
+							return $row ['total'];
+
+					}
+			}
+			return 999;
+
+	 }
 }
 ?>
