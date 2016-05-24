@@ -56,6 +56,9 @@ if ($submit=="Join"){
 
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+  <?php if ($submit=="Join") { ?>
+      <div id="welcome">Game On <?php echo $name; ?></div>   
+  <?php  } ?>
 	<div id="waiting">Waiting...</div>
 
 </div>

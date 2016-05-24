@@ -66,11 +66,13 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
       conn.subscribe('Game'+gameID+'Status', function(topic, data) {
         console.log('Waiting for users:"' + topic + '" : ' + data.title);
         var container = document.getElementById("waitingDiv");
-        if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
+        if (data.title.substring(0,1)=="R")
+          window.location.href='joinQuiz.php?error=Reject';
+        else if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
           window.location.href='waitingScreen.php';
         else if (data.title.substring(0,1)=="Q")
         {
-            if (data.type=="geo")
+          if (data.type=="geo")
               window.location.href='userScreen.php?question='+data.title.substring(1);
           else
               window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);

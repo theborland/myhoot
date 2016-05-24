@@ -13,7 +13,7 @@ require 'controller/dbsettings.php';
     <link rel="stylesheet" href="style/global.css">
     <link rel="stylesheet" href="style/form.css">
     <link rel="stylesheet" href="style/joinQuiz.css">
-	<title>Join a Game</title>
+  <title>Join a Game</title>
 </head>
 <body>
 	<?php include_once("controller/analyticstracking.php") ?>
@@ -21,10 +21,13 @@ require 'controller/dbsettings.php';
 					<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 		<h4 class="formHeader">Join a Game</h4>
 		<form action="waitingScreen.php">
-			<label for="game_id" class="jqLabel"> GAME ID <?php if ($error=="Bad Game") echo " Game ID is not valid"; ?></label>
+			<label for="game_id" class="jqLabel"> GAME ID <?php if ($error=="Bad Game") echo " (Game ID is not valid)"; ?></label>
 			<input type="text" name="game_id" id="game_id" class="jqInput" value="<?php echo $game_id ?>"  maxlength="6">
 
-			<label for="name" class="jqLabel">YOUR NAME<?php if ($error=="Bad Name") echo " That name has been used"; ?></label>
+			<label for="name" class="jqLabel">YOUR NAME<?php
+			if ($error=="Bad Name") echo " (That name has been used)";
+			if ($error=="Reject") echo " (Really, come on.  Grow up.)";
+			 ?></label>
 			<input type="text" name="name" id="name" value="<?php echo $name ?>" class="jqInput"maxlength="20" >
 
 			<Center>

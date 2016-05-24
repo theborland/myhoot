@@ -93,6 +93,21 @@ class Game
 				else return $questionNumber;
 	 }
 
+	 public static function rejectUser($userName){
+			global $conn;
+			$sql = "DELETE FROM `users` WHERE game_id ='".$_SESSION["game_id"]."'  AND name='".$userName."'";
+			$result = $conn->query($sql);
+			$entryData = array(
+				'category' => "Game".$_SESSION["game_id"]."Status"
+				, 'title'    => "Reject"
+				, 'type'    => "Reject"
+			);
+			$context = new ZMQContext();
+			$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+			$socket->connect("tcp://localhost:5555");
+			$socket->send(json_encode($entryData));
+		}
+
 	 public static function getNumberUsers(){
 		 	$game=Game::findGame();
 			global $conn;
@@ -101,21 +116,17 @@ class Game
 					$sql = "SELECT COUNT(*) as total FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='$lastQuestionNumber' AND points>=1";
 					//echo $sql;
 					$result = $conn->query($sql);
-		  		if ($result)
-		  		{
+		  		if ($result){
 		          $row = $result->fetch_assoc();
 		  				return $row ['total'];
-
 		  		}
 			}
 			else{
 					$sql = "SELECT COUNT(*) as total FROM `users` WHERE game_id ='".$_SESSION["game_id"]."'";
 					$result = $conn->query($sql);
-					if ($result)
-					{
+					if ($result){
 							$row = $result->fetch_assoc();
 							return $row ['total'];
-
 					}
 			}
 			return 999;
