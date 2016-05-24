@@ -57,7 +57,7 @@ if ($submit=="Join"){
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="img/logo.svg" id="logo"></a>
   <?php if ($submit=="Join") { ?>
-      <div id="welcome">Game On <?php echo $name; ?></div>   
+      <div id="welcome">Game On <?php echo $name; ?></div>
   <?php  } ?>
 	<div id="waiting">Waiting...</div>
 
@@ -74,7 +74,7 @@ if ($submit=="Join"){
 
 </div>
 <div id="tryContainer">
-	Everyone else playing?
+	Others playing?
 	<a href="checkQuestion.php" class="regButton" id="tryHere">Catch Up!</a>
 </div>
 </body>
