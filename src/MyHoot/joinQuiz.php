@@ -3,7 +3,7 @@
 session_start();
 if ($_SESSION["game_id"]>0 && $_SESSION["user_id"]>0){
 		$ref=$_SERVER['HTTP_REFERER'];
-	  if (strpos($ref,"wait")!==false || strpos($ref,"submitAns")!==false){
+	  if (strpos($ref,"wait")!==false || strpos($ref,"submitAns")!==false || || strpos($ref,"user")!==false){
 			     header( 'Location: checkQuestion.php');
 		}
 
