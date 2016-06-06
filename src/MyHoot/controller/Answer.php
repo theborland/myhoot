@@ -48,7 +48,7 @@ class AllAnswers
 			foreach ($this->allAnswers as $key=>$answer){
 				$answer->updateAnswer($totalPoints--);
 			}
-			Game::updateRound(-1);
+			Game::updateRound(-1*$_SESSION["questionNumber"]);
 		}
 	}
 

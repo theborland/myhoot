@@ -8,7 +8,7 @@ $questionNumber=$game->round;
 //die( $questionNumber);
 if ($questionNumber==null)
   header( 'Location: joinQuiz.php');
-else if ($questionNumber==-1)
+else if ($questionNumber<0)
   header( 'Location: waitingScreen.php?message='."Sorry, there is no question in progress" ) ;
 else
 {

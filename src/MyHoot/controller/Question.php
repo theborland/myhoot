@@ -236,7 +236,7 @@ class Question
 
   public static function getRandomUrl($url){
 	  //echo $url;
-
+		$originalUrl=$url;
 		$url=trim(preg_replace('/\s\s+/', ' ', $url));
 		$url=str_replace(" ","",$url);
 
@@ -259,7 +259,12 @@ class Question
 		if (substr($url,0,1)=="'")$url=substr($url,1);
 		if (substr($url,0,1)=="\"")$url=substr($url,1);
 		if (substr($url,-1)=="'")$url=substr($url,0,-1);
-		return $url;
+
+		if (checkRemoteFile($url))
+			return $url;
+		else
+			return getRandomUrl($url);
+
 	}
 
 	function getLocation($type){
@@ -385,4 +390,21 @@ function addAnswer(){
 }
 }
 
+function checkRemoteFile($url)
+{
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,$url);
+    // don't download content
+    curl_setopt($ch, CURLOPT_NOBODY, 1);
+    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    if(curl_exec($ch)!==FALSE)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 ?>

@@ -20,6 +20,8 @@ class User{
 		   return false;
 	//echo "😀";
     $color=Game::getColor();
+		$sql = "UPDATE games SET numOfUsers = numOfUsers+1 WHERE game_id = '".$_GET['game_id']."'";
+		$result = $conn->query($sql);
     $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$_GET['game_id']."','".$name."','".$color."')";
 //mb_internal_encoding("UTF-8");
 //echo "😀"; INSERT INTO `MyHoot`.`users` (`user_id`, `game_id`, `name`, `round`, `score`, `color`) VALUES ('51', '51', '😀', NULL, NULL, '')
