@@ -1,7 +1,9 @@
 <html>
 <head>
 
-	<title>GameOn.World</title>
+	<title>GameOn.World - Online Trivia Game</title>
+
+	<meta name="description" content="GameOn.World is an online, educational trivia game for groups! Starting a game is fast, easy, and doesn't require registration." />
 
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/form.css">
