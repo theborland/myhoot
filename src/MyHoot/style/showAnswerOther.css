@@ -117,7 +117,7 @@ body{
 	border-radius: 5px;
 	color: white;
 	background: #333;
-    width: 230px;
+    max-width: 230px;
     overflow: hidden;
 }
 .scoresScore{

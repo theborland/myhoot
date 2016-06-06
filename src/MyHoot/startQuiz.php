@@ -13,7 +13,8 @@ Game::createGame();
 <head>
 	<meta charset="UTF-8">
 
-	<title>Start a Quiz</title>
+
+	<title>Start a Game</title>
 
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/startQuiz.css">
