@@ -149,7 +149,9 @@ class Answer
 			  //echo $sql;
 			  //die();
 			  $result = $conn->query($sql);
+				return true;
 			}
+			else return false;
 
 	}
 

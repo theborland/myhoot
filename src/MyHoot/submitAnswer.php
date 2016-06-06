@@ -9,6 +9,7 @@ $color=User::getColor();
 //die ($color);
 if ($_SESSION["user_id"]==0)die("Sorry this shouldnt happen - tell me about it...");
 $correct=Answer::loadCorrect($questionNumber);
+//place currently is true or false if they could submit (meaning 1st time)
 $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
 
 //echo $sql;
@@ -32,16 +33,18 @@ if ($answer>100000)
 //echo $sql;
 //die();
 //SOCKET SENDING MESSAGE
-    $entryData = array(
-        'category' => "Game".$_SESSION['game_id'].$questionNumber
-      , 'title'    => stripslashes($_SESSION["name"])
-      , 'miles'    => number_format($distanceAway)
-      , 'color'    => $color
-    );
-    $context = new ZMQContext();
-    $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
-    $socket->connect("tcp://localhost:5555");
-    $socket->send(json_encode($entryData));
+    if ($place==true){
+      $entryData = array(
+          'category' => "Game".$_SESSION['game_id'].$questionNumber
+        , 'title'    => stripslashes($_SESSION["name"])
+        , 'miles'    => number_format($distanceAway)
+        , 'color'    => $color
+      );
+      $context = new ZMQContext();
+      $socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+      $socket->connect("tcp://localhost:5555");
+      $socket->send(json_encode($entryData));
+    }
     //END SOCKET SENDING
     if ($distanceAway>1000)
       $distanceAway=number_format($distanceAway);

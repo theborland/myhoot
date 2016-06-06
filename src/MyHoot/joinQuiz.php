@@ -1,6 +1,13 @@
 <?php
 
 session_start();
+if ($_SESSION["game_id"]>0 && $_SESSION["user_id"]>0){
+		$ref=$_SERVER['HTTP_REFERER'];
+	  if (strpos($ref,"wait")!==false || strpos($ref,"submitAns")!==false){
+			     header( 'Location: checkQuestion.php');
+		}
+
+}
 $whitelist = array('error','name','game_id');
 require 'controller/dbsettings.php';
 ?>

@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	require 'controller/dbsettings.php';
-	$_SESSION["game_id"]=16214;
+	//$_SESSION["game_id"]=16214;
 	$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 	//	$allAnswers->getTP();
 	//print_r($allAnswers);
