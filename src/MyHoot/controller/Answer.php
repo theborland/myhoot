@@ -41,7 +41,7 @@ class AllAnswers
 
 
 	public function awardPoints(){
-		if (Game::findGame()->round!=-1){
+		if (Game::findGame()->round>0){
 			$this->fillMissingAnswers();
 			usort($this->allAnswers, array("Answer", "sortMiles"));
 			$totalPoints=count($this->allAnswers);
@@ -61,6 +61,7 @@ class AllAnswers
 	 		 $result = $conn->query($sql);
 	     //$row = $result->fetch_assoc();
 			 //echo $sql. " rea".$result;
+			 //print_r($this->allAnswers);
 			 while($row = $result->fetch_assoc()){
 				// echo $sql;
 				 $name = $row["name"];

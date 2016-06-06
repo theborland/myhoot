@@ -1,8 +1,10 @@
 <?php
 	session_start();
 	require 'controller/dbsettings.php';
-	//$_SESSION["game_id"]=99121;
+	$_SESSION["game_id"]=16214;
 	$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+	//	$allAnswers->getTP();
+	//print_r($allAnswers);
 	$allAnswers->fillMissingAnswers();
 
 ?>
@@ -34,7 +36,7 @@
 
 
 <div id="sidebarWrap">
-	<div id="sidebarHeader">Scoreboard</div>
+	<div id="sidebarHeader">Final Scoreboard</div>
 	<div id="scoresWrap" class="scrollable">
 
       <?php
@@ -45,7 +47,7 @@
               <div class="scoresLine">
                 <div class="scoresName" style="background:#<?php echo $value->color; ?>"><?php echo stripslashes($value->name); ?></div>
                 <div class="scoresGraphScore"><?php echo $value->totalPoints; ?></div>
-                <div class="roundPoints"><?php echo $value->roundPoints; ?></div>
+
               </div>
       <?php }?>
 
