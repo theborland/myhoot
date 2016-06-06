@@ -29,7 +29,7 @@ require 'controller/dbsettings.php';
 		<h4 class="formHeader">Join a Game</h4>
 		<form action="waitingScreen.php">
 			<label for="game_id" class="jqLabel"> GAME ID <?php if ($error=="Bad Game") echo " (Game ID is not valid)"; ?></label>
-			<input type="text" name="game_id" id="game_id" class="jqInput" value="<?php echo $game_id ?>"  maxlength="6">
+			<input type="number" pattern="[0-9]*" name="game_id" id="game_id" class="jqInput" value="<?php echo $game_id ?>"  maxlength="6">
 
 			<label for="name" class="jqLabel">YOUR NAME<?php
 			if ($error=="Bad Name") echo " (That name has been used)";
