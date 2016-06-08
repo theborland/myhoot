@@ -118,9 +118,8 @@ function animateSelectAll(){
 function removeUser(username){
     //alert("user is..." + username);
     $.ajax({
-        url: "index.php"//"rejectUser.php?name="+username
+        url: "rejectUser.php?name="+username
     }).done(function(){
-        //$('#user_w_name_' + username).remove();
 
         $('#user_w_name_' + username).animate({
 
