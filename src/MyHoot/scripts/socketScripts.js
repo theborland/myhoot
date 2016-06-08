@@ -5,7 +5,7 @@ function loadWaitingForUsers(ip,gameID){
         conn.subscribe('Game'+gameID, function(topic, data) {
             console.log('Waiting for users:"' + topic + '" : ' + data.title);
           var container = document.getElementById("nameUsers");
-    container.innerHTML =	'<div class="sqName" id="user_w_name_' + data.title + '" onClick="removeUser('  +data.title+')" style="background:#'+data.color +';">'+data.title+'</div>'   + ""+container.innerHTML;
+    container.innerHTML =	'<div class="sqName" id="user_w_name_' + data.title + '" onClick="removeUser(\''  +data.title+'\')" style="background:#'+data.color +';">'+data.title+'</div>'   + ""+container.innerHTML;
             var numUsers = document.getElementById("numUsers");
     numUsers.innerHTML = parseInt(numUsers.innerHTML)  + 1;
         });
