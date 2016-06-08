@@ -120,7 +120,7 @@ function removeUser(username){
     $.ajax({
         url: "joinQuiz.php"
     }).done(function(){
-        $('user_w_name_' + username).remove();
+        $('#user_w_name_' + username).remove();
     });
 }
 
