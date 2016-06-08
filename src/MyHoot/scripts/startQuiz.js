@@ -118,7 +118,7 @@ function animateSelectAll(){
 function removeUser(username){
     alert("user is..." + username);
     $.ajax({
-        url: "http://www.google.com"
+        url: "joinQuiz.php"
     }).done(function(){
         $('user_w_name_' + username).remove();
     });
