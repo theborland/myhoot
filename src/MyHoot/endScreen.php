@@ -6,7 +6,7 @@
 	//	$allAnswers->getTP();
 	//print_r($allAnswers);
 	$allAnswers->fillMissingAnswers();
-
+  Question::alertUsers(-1,"end");
 ?>
 
 <html>

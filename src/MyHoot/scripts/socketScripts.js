@@ -74,20 +74,11 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
         {
           if (data.type=="geo")
               window.location.href='userScreen.php?question='+data.title.substring(1);
+          else if (data.type=="end")
+                  window.location.href='waitingScreenEnd.php';
           else
               window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
-            /*if (data.type=="pop")
-              window.location.href='userScreenPop.php?question='+data.title.substring(1);
-            if (data.type=="weather")
-                window.location.href='userScreenWeather.php?question='+data.title.substring(1);
-            if (data.type=="age")
-                window.location.href='userScreenAge.php?question='+data.title.substring(1);
-            if (data.type=="user")
-                window.location.href='userScreenAge.php?question='+data.title.substring(1);
-            if (data.type=="time")
-                window.location.href='userScreenTime.php?question='+data.title.substring(1);
-            if (data.type=="rand")
-                    window.location.href='userScreenRand.php?question='+data.title.substring(1);*/
+
         }
             });
 
