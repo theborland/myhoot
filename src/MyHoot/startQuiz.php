@@ -25,6 +25,7 @@ Game::createGame();
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="scripts/cloud.js"></script>
+	<script src="scripts/jquery.js"></script>
 
 
 

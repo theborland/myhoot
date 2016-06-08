@@ -115,5 +115,9 @@ function animateSelectAll(){
 
 }
 
-
+function removeUser(username){
+    $.ajax({
+        url: "removeUser.php?name="+username
+    });
+}
 
