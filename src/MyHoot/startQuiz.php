@@ -2,10 +2,10 @@
 session_start();
 //$_SESSION = array();
 //$_SESSION["auto"]="";
-//require 'controller/dbsettings.php';
+require 'controller/dbsettings.php';
 //create game
 
-//Game::createGame();
+Game::createGame();
 
 ?>
 <!DOCTYPE html>
