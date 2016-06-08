@@ -122,7 +122,7 @@ function removeUser(username){
     }).done(function(){
 
         $('#user_w_name_' + username).animate({
-
+            opacity: 0 ,
             width: "0px"
         }, 500, function() {
             $('#user_w_name_' + username).remove();
