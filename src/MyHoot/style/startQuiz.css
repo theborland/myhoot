@@ -214,6 +214,34 @@ body{
 	color:#fff;
 	margin-bottom: 5px;
 	margin-right: 5px;
+	position: relative;
+	overflow: hidden;
+	transition: .2s all;
+	text-align: center;
+}
+
+.sqNameRemove{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	background:#E14646;
+	text-align: center;
+	top: 0px;
+	left: 0px;
+	opacity: 0;
+	transition: .2s all;
+	z-index: 10;
+	cursor: pointer;
+}
+
+.sqNameRemove:hover {
+	opacity: 1;
+}
+
+.sqNameRemove img{
+	width: 17px;
+	vertical-align: middle;
 }
 
 #col1 #showMap{

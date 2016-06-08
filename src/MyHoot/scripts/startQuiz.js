@@ -116,11 +116,19 @@ function animateSelectAll(){
 }
 
 function removeUser(username){
-    alert("user is..." + username);
+    //alert("user is..." + username);
     $.ajax({
-        url: "joinQuiz.php"
+        url: "index.php"//"rejectUser.php?name="+username
     }).done(function(){
-        $('#user_w_name_' + username).remove();
+        //$('#user_w_name_' + username).remove();
+
+        $('#user_w_name_' + username).animate({
+
+            width: "0px"
+        }, 500, "linear", function() {
+            $('#user_w_name_' + username).remove();
+        });
+
     });
 }
 

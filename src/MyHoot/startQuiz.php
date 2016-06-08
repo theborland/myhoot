@@ -2,10 +2,10 @@
 session_start();
 //$_SESSION = array();
 //$_SESSION["auto"]="";
-require 'controller/dbsettings.php';
+//require 'controller/dbsettings.php';
 //create game
 
-Game::createGame();
+//Game::createGame();
 
 ?>
 <!DOCTYPE html>
@@ -215,6 +215,7 @@ Game::createGame();
 			<div class="sqLabel" id="sqNumUsers"><div id="numUsers">0</div> USERS IN THE GAME</div>
 				<div id="usersWrap">
 					<div id="nameUsers" class="scrollable">
+
 					</div>
 				</div>
 
