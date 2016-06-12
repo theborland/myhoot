@@ -25,6 +25,7 @@ Game::createGame();
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="scripts/cloud.js"></script>
+	<script src="scripts/jquery.js"></script>
 
 
 
@@ -214,6 +215,7 @@ Game::createGame();
 			<div class="sqLabel" id="sqNumUsers"><div id="numUsers">0</div> USERS IN THE GAME</div>
 				<div id="usersWrap">
 					<div id="nameUsers" class="scrollable">
+
 					</div>
 				</div>
 

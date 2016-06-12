@@ -115,5 +115,19 @@ function animateSelectAll(){
 
 }
 
+function removeUser(username){
+    //alert("user is..." + username);
+    $.ajax({
+        url: "rejectUser.php?name="+username
+    }).done(function(){
 
+        $('#user_w_name_' + username).animate({
+            opacity: 0 ,
+            width: "0px"
+        }, 500, function() {
+            $('#user_w_name_' + username).remove();
+        });
+
+    });
+}
 
