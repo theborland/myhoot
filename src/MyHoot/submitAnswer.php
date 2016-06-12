@@ -10,7 +10,7 @@ $color=User::getColor();
 if ($_SESSION["user_id"]==0)die("Sorry this shouldnt happen - tell me about it...");
 $correct=Answer::loadCorrect($questionNumber);
 //place currently is true or false if they could submit (meaning 1st time)
-$place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$color);
+
 
 //echo $sql;
 //die();
@@ -29,11 +29,15 @@ else
 if ($answer>100000)
       $distanceAway=round($distanceAway,-5);
 //die ($distanceAway);
+$place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$distanceAway,$color,$game->type);
+
+//NOW WE FIND THE OVERALL PERCENT PLACE THAT PERCENT DID ON THAT question_id
+//Answer::findPercentPlace()
 
 //echo $sql;
 //die();
 //SOCKET SENDING MESSAGE
-    if ($place==true){
+    if ($place>=0){
       $entryData = array(
           'category' => "Game".$_SESSION['game_id'].$questionNumber
         , 'title'    => stripslashes($_SESSION["name"])
@@ -61,5 +65,5 @@ if ($answer>100000)
   //  $place=
     //echo $correct->location->longg;
   //  die ($message);//place='.$place.
-   header( 'Location: waitingScreen.php?message='.$message ) ;
+   header( 'Location: waitingScreen.php?message='.$message.'&place='.$place ) ;
  ?>

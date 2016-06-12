@@ -135,7 +135,7 @@ class Answer
 	var $value;
 	var $color;
 
-	public static function addAnswer($userID,$questionNumber,$lat,$long,$answer,$color)
+	public static function addAnswer($userID,$questionNumber,$lat,$long,$answer,$distanceAway,$color,$type)
 	{
 			global $conn;
 			$sql=" Select 1 from `answers` WHERE `game_id`='$_SESSION[game_id]' AND `user_id`='$userID' AND `questionNum`='$questionNumber'";
@@ -144,14 +144,30 @@ class Answer
 			$result = $conn->query($sql);
 			if ($result->num_rows == 0)
 			{
-			  $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`answer`,`color`) VALUES
-			   ('$_SESSION[game_id]' ,'$userID','$questionNumber','$lat','$long','$answer','$color')";
+				$question_id=$type.Question::findQID($questionNumber);
+			  $sql = "INSERT INTO `answers` (`game_id`,`user_id`,`questionNum`,`lat`,`longg`,`answer`,`distanceAway`,`color`,`question_id`) VALUES
+			   ('$_SESSION[game_id]' ,'$userID','$questionNumber','$lat','$long','$answer','$distanceAway','$color','$question_id')";
 			  //echo $sql;
 			  //die();
 			  $result = $conn->query($sql);
-				return true;
+
+				//now find place
+				$sql = "select question_id, count(*) total, sum(case when distanceAway >= '$distanceAway' then 1 else 0 end) worse from `answers` WHERE question_id='$question_id'";
+
+				$result = $conn->query($sql);
+				//die($sql);
+	  		if ($result)
+	  		{
+	          $row = $result->fetch_assoc();
+						if ($row ['total']>5)
+	  					return round($row['worse']/$row['total']*100,1);
+						else return 0;
+
+	  		}
+
+
 			}
-			else return false;
+			else return -1;
 
 	}
 

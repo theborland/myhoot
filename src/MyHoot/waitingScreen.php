@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$whitelist = array('message','submit','name','game_id');
+$whitelist = array('message','submit','name','game_id','place');
 require 'controller/dbsettings.php';
 
 if ($submit=="Join"){
@@ -70,8 +70,8 @@ if ($submit=="Join"){
 	<?php } else { ?>
 		<div id="score"><div style="font-size:30px;"> <?php echo $message . "<br>"; ?> </div>
 	<?php }  ?>
-
-
+	<?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
+	<?php }  ?>
 </div>
 <div id="tryContainer">
 	Others playing?

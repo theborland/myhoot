@@ -6,6 +6,7 @@ class Question
 	var $type;
 	var $answer;
 	var $image;
+	var $qID; //this keeps track of the id of question from rand or geo or whatever
 	var $min;
 	var $max;
 	var $timesRepeated=0;
@@ -160,6 +161,7 @@ class Question
 				$this->max=$row["max"];
 				$url= $row["image"];
 				$this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
         //$this->image="a.jpg";//Question::getRandomUrl($url);
 				}
 		}
@@ -187,6 +189,7 @@ class Question
 				$this->answer=$age->format('%y');
 				$url= $row["image"];
         $this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
 				}
 		}
 		if ($this->checkForRepeats($this->country))
@@ -209,6 +212,7 @@ class Question
 				$this->answer=$row["answer"];
 				$url= $row["image"];
 				$this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
 			}
 		}
 		if (Question::checkForRepeats($this->country))
@@ -263,7 +267,7 @@ class Question
 		if (checkRemoteFile($url))
 			return $url;
 		else
-			return getRandomUrl($url);
+			return Question::getRandomUrl($url);
 
 	}
 
@@ -290,6 +294,7 @@ class Question
 				$this->answer=$row["population"];
 		    $url= $row["image"];
 		    $this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
 					//echo $this->image;
 		  }
 		}
@@ -384,10 +389,30 @@ function addAnswer(){
   else
 		$cityName=$this->country;
 	$cityName=$conn->real_escape_string($cityName);
-	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`, `wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','$cityName', '".$latLong->lat."', '".$latLong->longg."', '".$this->answer."')";
+	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$latLong->lat."', '".$latLong->longg."', '".$this->answer."')";
 	$result = $conn->query($sql);
 	//echo $sql;
+	//die ($sql);
 }
+
+	public static function findQID($questionNum)
+	{
+		global $conn;
+		$sql = "SELECT * FROM `questions` WHERE `gameid` = '".$_SESSION["game_id"]."' AND questionNum='".$questionNum."'";
+		//die ($sql);
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			$row = $result->fetch_assoc();
+			if ($row){
+
+				return $row["qID"];
+			}
+
+		}
+		return -1;
+
+	}
 }
 
 function checkRemoteFile($url)
