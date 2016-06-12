@@ -184,7 +184,7 @@ Game::createGame();
 			<div class="sqLabel" id="sqQuizLabel">GAME ID</div>
 			<div id="sqQuizID">
 				<div id="quizID">
-						<?php echo $_SESSION["game_id"] ; ?>
+						<?php echo substr($_SESSION["game_id"],0,5); ?>
 				</div>
 			</div>
 			<div class="sqLine" id="submitLine">

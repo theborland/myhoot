@@ -77,6 +77,8 @@ function findID($type,$word){
   if ($type=="rand"){
     $words=explode(",",$word);
     $sql = "SELECT * FROM `data-rand` WHERE category='".$words[0]."' AND  wording='".$words[1]."'";
+    if (strpos($word,",")==false)
+        $sql = "SELECT * FROM `data-rand` WHERE wording='".$words[0]."'";
   }
   if ($type=="time"){
     $sql = "SELECT * FROM `data-time` WHERE wording='".$word."'";

@@ -13,16 +13,17 @@ class User{
 	public static function createUser($game_id,$name){
 		global $conn;
 		$_SESSION["name"] =$name;
-		$sql = "SELECT * from `users` WHERE `game_id`= '".$_GET['game_id']."' AND `name`='".$name."'";
+
+		$sql = "SELECT * from `users` WHERE `game_id`= '".$game_id."' AND `name`='".$name."'";
 		$result = $conn->query($sql);
 		//die ($sql);
 		if ($result->num_rows>0 || $name=="")
 		   return false;
 	//echo "😀";
     $color=Game::getColor();
-		$sql = "UPDATE games SET numOfUsers = numOfUsers+1 WHERE game_id = '".$_GET['game_id']."'";
+		$sql = "UPDATE games SET numOfUsers = numOfUsers+1 WHERE game_id = '".$game_id."'";
 		$result = $conn->query($sql);
-    $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$_GET['game_id']."','".$name."','".$color."')";
+    $sql = "INSERT INTO `users` (`game_id`, `name`,`color`) VALUES ('".$game_id."','".$name."','".$color."')";
 //mb_internal_encoding("UTF-8");
 //echo "😀"; INSERT INTO `MyHoot`.`users` (`user_id`, `game_id`, `name`, `round`, `score`, `color`) VALUES ('51', '51', '😀', NULL, NULL, '')
 
@@ -31,6 +32,7 @@ class User{
 
 		$result = $conn->query($sql);
 		$_SESSION["user_id"] =  $conn->insert_id;
+		
 	 //echo mysqli_info($conn);
 	//	die ("s".$conn->error . " ". $sql);
 		//SOCKET SENDING MESSAGE

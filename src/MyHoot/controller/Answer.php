@@ -70,7 +70,7 @@ class AllAnswers
 				 $ans=-999;
 				 if (!array_key_exists($user_id,$this->allAnswers))
 				 {
-					  Answer::addAnswer($user_id,$_SESSION["questionNumber"],-99,-99,$ans,$color);
+					  Answer::addAnswer($user_id,$_SESSION["questionNumber"],-99,-99,$ans,-1,$color,"no");
 				 		$this->allAnswers[]=Answer::addUser($_SESSION["questionNumber"],new LatLong(-99,-99),$ans,$user_id,0,0,$color);
 				 }
 			 }

@@ -6,14 +6,19 @@ require 'controller/dbsettings.php';
 
 if ($submit=="Join"){
     // $name=substr($name,0,20);
-     $_SESSION["game_id"] =$game_id;
     // User::createUser($game_id,$name);
 
-    if (Game::findGame()==null){
-         header( 'Location: joinQuiz.php?error=Bad Game&name='.$name);
-         die();
+    date_default_timezone_set('America/New_York');
+    //I have padded game id with 3 digit code for this date
+    $_SESSION["game_id"]=$game_id.(	str_pad(date("z"), 3, "0", STR_PAD_LEFT));
+    if (Game::findGame($_SESSION["game_id"])==null){
+        $_SESSION["game_id"]=$game_id.(	str_pad(date("z"), 3, "0", STR_PAD_LEFT))-1;
+        if (Game::findGame($_SESSION["game_id"])==null){
+            header( 'Location: joinQuiz.php?error=Bad Game&name='.$name);
+            die();
+        }
     }
-    if (!User::createUser($game_id,$name)){
+    if (!User::createUser($_SESSION["game_id"],$name)){
          header( 'Location: joinQuiz.php?error=Bad Username&game='.$game_id);
          die();
     }
