@@ -1,11 +1,11 @@
 <?php
 session_start();
-//$_SESSION = array();
-//$_SESSION["auto"]="";
+$whitelist = array('replay');
 require 'controller/dbsettings.php';
 //create game
 
-Game::createGame();
+Game::createGame($replay);
+
 
 ?>
 <!DOCTYPE html>

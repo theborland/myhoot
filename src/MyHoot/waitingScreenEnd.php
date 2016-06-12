@@ -19,7 +19,11 @@ require 'controller/dbsettings.php';
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
-
+   <script>
+     window.onload = function(){
+         loadWaitingForNextGame('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
+     }
+   </script>
 
 </head>
 <body>

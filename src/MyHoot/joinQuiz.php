@@ -11,6 +11,10 @@ if (isset($_SESSION["user_id"]) && isset($_SESSION["game_id"]) && $_SESSION["gam
 }
 $whitelist = array('error','name','game_id');
 require 'controller/dbsettings.php';
+
+if (isset($_SESSION["name"]) && strlen($name)==0)
+	$name=$_SESSION["name"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +37,7 @@ require 'controller/dbsettings.php';
 			<input type="number" pattern="[0-9]*" name="game_id" id="game_id" class="jqInput" value="<?php echo $game_id ?>"  min="00000" max="99999">
 
 			<label for="name" class="jqLabel">YOUR NAME<?php
-			if ($error=="Bad Name") echo " (That name has been used)";
+			if ($error=="Bad Username") { echo " (That name has been used)"; $name=""; }
 			if ($error=="Reject") echo " (Really, come on.  Grow up.)";
 			 ?></label>
 			<input type="text" name="name" id="name" value="<?php echo $name ?>" class="jqInput"maxlength="20" >

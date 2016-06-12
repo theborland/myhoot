@@ -19,7 +19,7 @@ if ($submit=="Join"){
         }
     }
     if (!User::createUser($_SESSION["game_id"],$name)){
-         header( 'Location: joinQuiz.php?error=Bad Username&game='.$game_id);
+         header( 'Location: joinQuiz.php?error=Bad Username&game_id='.$game_id);
          die();
     }
     $game=Game::findGame();

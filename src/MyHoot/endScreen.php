@@ -89,7 +89,7 @@
 </div>
 
 
-<a href="startQuiz.php" id="replayButton" class="regButton">Replay</a>
+<a href="startQuiz.php?replay=yes" id="replayButton" class="regButton">Replay</a>
 
 <audio id="bgMusic"  enablejavascript="yes" volume="0">
   <source src="music/end.mp3"  type="audio/mpeg" volume="0">

@@ -4,11 +4,11 @@ class Game
 {
 	var $type;
 	var $round;
-	public static function createGame()
+	public static function createGame($replay)
 	{
 		global $conn;
 		$game_id=rand(10000,99999);
-
+		if ($replay=="yes")$lastGame_ID=$_SESSION["game_id"];
 		date_default_timezone_set('America/New_York');
 		//die (date("z"));
 		$_SESSION["game_id"]=$game_id.(	str_pad(date("z"), 3, "0", STR_PAD_LEFT));
@@ -20,6 +20,19 @@ class Game
 
 		$_SESSION["questionNumber"]=0;
 		Game::updateRound(-1);
+
+		if ($replay=="yes"){
+			//SOCKET SENDING MESSAGE
+			$entryData = array(
+				'category' => "Game".$lastGame_ID."NextGame"
+				, 'title'    => substr($_SESSION["game_id"],0,5)
+			);
+			$context = new ZMQContext();
+			$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
+			$socket->connect("tcp://127.0.0.1:5555");
+			$socket->send(json_encode($entryData));
+		}
+
 	}
 
 	public static function  updateRound($val, $type=NULL)

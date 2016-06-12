@@ -92,6 +92,24 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
   );
 }
 
+function loadWaitingForNextGame(ip,gameID){
+  var conn = new ab.Session('ws://'+ip+':8080',
+  function() {
+    conn.subscribe('Game'+gameID+'NextGame', function(topic, data) {
+      console.log('Waiting for nextgame:"' + topic + '" : ' + data.title);
+      var container = document.getElementById("waitingDiv");
+      window.location.href='joinQuiz.php?game_id='+data.title;
+      
+          });
+
+  },
+  function() {
+    console.warn('WebSocket connection closed');
+  },
+  {'skipSubprotocolCheck': true}
+);
+}
+
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
