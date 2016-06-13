@@ -3,7 +3,8 @@ session_start();
 $whitelist = array('replay');
 require 'controller/dbsettings.php';
 //create game
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 Game::createGame($replay);
 
 
