@@ -12,6 +12,8 @@ class Game
 		date_default_timezone_set('America/New_York');
 		//die (date("z"));
 		$_SESSION["game_id"]=$game_id.(	str_pad(date("z"), 3, "0", STR_PAD_LEFT));
+		//if ($single==true)
+		//   $_SESSION["game_id"]*=00;//, $single=false
 		//$_SESSION["game_id"] =$_GET['game_id'];
 		//$_SESSION["user_id"] =rand (0,111111111);
 		$sql = "INSERT INTO `games` (`game_id`) VALUES ('$_SESSION[game_id]')";
