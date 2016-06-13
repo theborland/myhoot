@@ -152,7 +152,7 @@ class Answer
 			  $result = $conn->query($sql);
 
 				//now find place
-				$sql = "select question_id, count(*) total, sum(case when distanceAway >= '$distanceAway' then 1 else 0 end) worse from `answers` WHERE question_id='$question_id'";
+				$sql = "select question_id, count(*) total, sum(case when distanceAway >= '$distanceAway' then 1 else 0 end) worse from `answers` WHERE question_id='$question_id' AND distanceAway>=NULL";
 
 				$result = $conn->query($sql);
 				//die($sql);
