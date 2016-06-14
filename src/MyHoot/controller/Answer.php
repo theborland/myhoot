@@ -82,7 +82,7 @@ class AllAnswers
 		foreach ($this->allAnswers as $key=>$answer){
 			//echo "<br>".$answer->name. " has " . User::getTP($answer->user_id) . " total Points";
 			$answer->totalPoints=User::getTP($answer->user_id) ;
-			if ($answer->totalPoints==0)
+			if ($answer->totalPoints==0 || $answer->name=="" )
 			   unset($this->allAnswers[$key]);
 		}
 		usort($this->allAnswers, array("Answer", "sortTotalMiles"));
