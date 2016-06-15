@@ -58,12 +58,12 @@ if ($submit=="Join"){
   padding:10px;
   border:0px;
   border-radius: 10px;
-  font-size:35px;
+  font-size:28px;
   font-weight: 300;
 }
 
 #mainMessageExtra{
-  font-size:22px;
+  font-size:20px;
   font-weight:normal;
   color:rgba(0,0,0,0.6);
 }
