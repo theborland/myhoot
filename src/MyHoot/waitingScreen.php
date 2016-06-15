@@ -58,7 +58,8 @@ if ($submit=="Join"){
       padding:10px;
       border:0px;
       border-radius: 10px;
-      font-size:30px;
+      font-size:35px;
+      font-weight: 300;
     }
 
     #mainMessageExtra{
