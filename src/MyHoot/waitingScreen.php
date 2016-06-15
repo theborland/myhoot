@@ -51,6 +51,23 @@ if ($submit=="Join"){
 	<script src="scripts/socketScripts.js"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
+  <style>
+    #mainMessageWrap{
+      background:rgba(255,255,255,0.5);
+      color:#333;
+      padding:10px;
+      border:0px;
+      border-radius: 10px;
+      font-size:30px;
+    }
+
+    #mainMessageExtra{
+      font-size:25px;
+      font-weight:bold;
+      color:rgba(255,255,255,0.6);
+    }
+  </style>
+
 	<script>
 		window.onload = function(){
 	   		loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
@@ -69,14 +86,17 @@ if ($submit=="Join"){
 </div>
 <div id="messageWrap">
 
+  <div id="mainMessageWrap">
+      <?php if (is_numeric($message)){ ?>
+    <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message . "<br>"; ?> miles away.</div>
+  <?php } else { ?>
+    <div id="mainMessageExtra"> <?php echo $message . "<br>"; ?> 
+  <?php }  ?>
+  <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
+  <?php }  ?>
+</div>
+  </div>
 
-	<?php if (is_numeric($message)){ ?>
-		<div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message . "<br>"; ?> miles away.</div>
-	<?php } else { ?>
-		<div id="score"><div style="font-size:30px;"> <?php echo $message . "<br>"; ?> </div>
-	<?php }  ?>
-	<?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
-	<?php }  ?>
 </div>
 <div id="tryContainer">
 	Others playing?
