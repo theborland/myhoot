@@ -51,6 +51,24 @@ if ($submit=="Join"){
 	<script src="scripts/socketScripts.js"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
+<style>
+  #mainMessageWrap{
+  background:rgba(255,255,255,0.5);
+  color:#333;
+  padding:10px;
+  border:0px;
+  border-radius: 10px;
+  font-size:35px;
+  font-weight: 300;
+}
+
+#mainMessageExtra{
+  font-size:22px;
+  font-weight:normal;
+  color:rgba(0,0,0,0.6);
+}
+
+</style>
 	<script>
 		window.onload = function(){
 	   		loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
@@ -68,10 +86,6 @@ if ($submit=="Join"){
 
   <div id="mainMessageWrap">
 
-
-
-
-
       <?php if ($submit=="Join") { ?>
         <div id="welcome">Game on, <?php echo $name; ?>!</div>
       <?php  } ?>
@@ -86,6 +100,7 @@ if ($submit=="Join"){
           <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
       <?php }  ?>
     </div>
+
   </div>
 
 </div>
