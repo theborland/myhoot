@@ -63,8 +63,8 @@ if ($submit=="Join"){
 
     #mainMessageExtra{
       font-size:25px;
-      font-weight:bold;
-      color:rgba(255,255,255,0.6);
+      font-weight:normal;
+      color:rgba(0,0,0,0.6);
     }
   </style>
 
