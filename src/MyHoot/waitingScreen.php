@@ -78,7 +78,7 @@ if ($submit=="Join"){
 
       <?php if (is_numeric($message)){ ?>
         <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message ; ?> miles away.</div>
-      <?php } else
+      <?php } else {
         echo $message;
        }  ?>
 
