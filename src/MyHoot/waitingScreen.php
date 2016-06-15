@@ -85,18 +85,18 @@ if ($submit=="Join"){
 <div id="messageWrap">
 
   <div id="mainMessageWrap">
-    <?php if ($submit=="Join") { ?>
-      <div id="welcome">Game on, <?php echo $name; ?>!</div>
-  <?php  } ?>
+      <?php if ($submit=="Join") { ?>
+        <div id="welcome">Game on, <?php echo $name; ?>!</div>
+      <?php  } ?>
 
       <?php if (is_numeric($message)){ ?>
-    <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message . "<br>"; ?> miles away.</div>
-  <?php } else { ?>
-    <div id="mainMessageExtra"> <?php echo $message . "<br>"; ?> 
-  <?php }  ?>
-  <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
-  <?php }  ?>
-</div>
+        <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message ; ?> miles away.</div>
+      <?php } else { ?>
+        <div id="mainMessageExtra"> <?php echo $message ; ?> 
+      <?php }  ?>
+      <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
+      <?php }  ?>
+    </div>
   </div>
 
 </div>
