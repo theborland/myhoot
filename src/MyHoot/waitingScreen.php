@@ -63,7 +63,7 @@ if ($submit=="Join"){
 }
 
 #mainMessageExtra{
-  font-size:20px;
+  font-size:18px;
   font-weight:300;
   color:rgba(0,0,0,0.5);
 }
