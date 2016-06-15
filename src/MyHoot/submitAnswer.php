@@ -59,7 +59,7 @@ $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer
     if ($game->type=="age" || $game->type=="time")
           $message= "Off by: ". $distanceAway. " years";
     if ($game->type=="geo")
-      $message= "Distance away : ". $distanceAway. " miles away";
+      $message= "Distance away : ". $distanceAway. " miles";
     if ($game->type=="rand")
       $message= "Off by: ". $distanceAway. "";
   //  $place=
