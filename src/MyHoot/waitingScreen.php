@@ -55,17 +55,17 @@ if ($submit=="Join"){
   #mainMessageWrap{
   background:rgba(255,255,255,0.5);
   color:#333;
-  padding:10px;
+  padding:20px;
   border:0px;
   border-radius: 10px;
-  font-size:28px;
+  font-size:25px;
   font-weight: 300;
 }
 
 #mainMessageExtra{
   font-size:20px;
-  font-weight:normal;
-  color:rgba(0,0,0,0.6);
+  font-weight:300;
+  color:rgba(0,0,0,0.5);
 }
 
 </style>
