@@ -62,7 +62,7 @@ if ($submit=="Join"){
     }
 
     #mainMessageExtra{
-      font-size:25px;
+      font-size:22px;
       font-weight:normal;
       color:rgba(0,0,0,0.6);
     }
@@ -78,15 +78,16 @@ if ($submit=="Join"){
 
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="img/logo.svg" id="logo"></a>
-  <?php if ($submit=="Join") { ?>
-      <div id="welcome">Game On <?php echo $name; ?></div>
-  <?php  } ?>
-	<div id="waiting">Waiting...</div>
+    	<div id="waiting">Waiting...</div>
 
 </div>
 <div id="messageWrap">
 
   <div id="mainMessageWrap">
+    <?php if ($submit=="Join") { ?>
+      <div id="welcome">Game on, <?php echo $name; ?>!</div>
+  <?php  } ?>
+
       <?php if (is_numeric($message)){ ?>
     <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message . "<br>"; ?> miles away.</div>
   <?php } else { ?>
