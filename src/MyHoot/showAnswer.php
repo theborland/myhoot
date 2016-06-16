@@ -126,8 +126,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 <input type="button" id="muteButton" onclick="mute()">
 <a href="endScreen.php" id="endGame" class="regButton">End Game</a>
-<div id="gameID">ID:<?php echo $_SESSION["game_id"] ?></div>
-
+<div id="gameID">ID:<?php echo substr($_SESSION["game_id"],0,5); ?></div>
 
 </body>
 </html>

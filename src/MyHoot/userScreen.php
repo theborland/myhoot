@@ -43,7 +43,10 @@ function initialize() {
       mapTypeId: google.maps.MapTypeId.TERRAIN,
       stylers: [{ visibility: 'off' }]
     },
-      { featureType: "administrative.province", stylers: [ { visibility: "off" } ] },
+      { featureType: "administrative.province", stylers: [ { visibility: "on" } ] },
+      {  featureType: "administrative.province",elementType: "labels",  stylers: [    { visibility: "off" }
+          ]
+        },
     { featureType: "road", stylers: [ { visibility: "off" } ] },
     {
       featureType: 'water',
