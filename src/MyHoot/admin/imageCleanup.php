@@ -75,7 +75,7 @@ function getURL()
     date_default_timezone_set('America/Los_Angeles');
     $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
 		$sql = "SELECT * FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
-    $sql = "SELECT * FROM `data-$db` WHERE id=75 ORDER BY rand() LIMIT 1";
+  //  $sql = "SELECT * FROM `data-$db` WHERE id=75 ORDER BY rand() LIMIT 1";
 
     //echo $sql;
 		$result = $conn->query($sql);
