@@ -1,5 +1,8 @@
 <?php
 require '../controller/dbsettings.php';
+$sql = "DELETE FROM `games` WHERE `numOfUsers`<2";
+$result = $conn->query($sql);
+
 ?>
 <html>
  <head>

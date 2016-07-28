@@ -3,6 +3,8 @@ class Question
 {
 	var $city;
 	var $country;
+	var $lat;
+	var $longg;
 	var $type;
 	var $answer;
 	var $image;
@@ -134,8 +136,8 @@ class Question
 	}
 	function getWeather(){
 		$this->getLocation("weather");
-		$latLong=LatLong::findLatLong($this->city,$this->country);
-		$url='http://api.wunderground.com/api/766deb6baf5fc335/almanac/conditions/forecast/q/'.$latLong->lat.','.$latLong->longg.'.json';
+		//$latLong=LatLong::findLatLong($this->city,$this->country);
+		$url='http://api.wunderground.com/api/766deb6baf5fc335/almanac/conditions/forecast/q/'.$this->lat.','.$this->longg.'.json';
 		$jsonData =file_get_contents( $url);
 		$phpArray = json_decode($jsonData,true);
 		//echo $url;
@@ -291,6 +293,8 @@ class Question
 		  if($row = $result->fetch_assoc()){
 				$this->country=$row["country"];
 				$this->city=$row["city"];
+				$this->lat=$row["lat"];
+				$this->longg=$row["longg"];
 				$this->answer=$row["population"];
 		    $url= $row["image"];
 		    $this->image=Question::getRandomUrl($url);
@@ -378,18 +382,24 @@ function getImage(){
 function addAnswer(){
 	global $conn;
 	//$latLong=new LatLong();
-	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop")
-	    $latLong=LatLong::findLatLong($this->city,$this->country);
-	else if ($this->type=="rand")  //we save min max of random as a lat just for ease
-	    $latLong=new LatLong($this->min,$this->max);
-  else
-		  $latLong=new LatLong(0,0);
+	//if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop")
+	//    $latLong=LatLong::findLatLong($this->city,$this->country);
+//  if ($this->type=="rand")  //we save min max of random as a lat just for ease
+//	    $latLong=new LatLong($this->min,$this->max);
+//  else
+//		  $min=new LatLong(0,0);
 	if ($this->city!="" && $this->type!="rand")
 		$cityName=$this->city . ",".$this->country;
   else
 		$cityName=$this->country;
 	$cityName=$conn->real_escape_string($cityName);
-	$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$latLong->lat."', '".$latLong->longg."', '".$this->answer."')";
+	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop")
+		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->lat."', '".$this->longg."', '".$this->answer."')";
+	else if ($this->type=="rand")
+		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->min."', '".$this->max."', '".$this->answer."')";
+  else
+		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '0', '0', '".$this->answer."')";
+
 	$result = $conn->query($sql);
 	//echo $sql;
 	//die ($sql);

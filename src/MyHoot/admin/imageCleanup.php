@@ -3,7 +3,7 @@ require '../controller/dbsettings.php';
 if (isset($_GET['db']))
   $db=$_GET['db'];
 else
-  $db="time";
+  $db="geo";
 
 if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
   updateSQL($_POST['id'],$_POST['url']);
@@ -72,10 +72,10 @@ function getURL()
   	global $conn;
     global $id;
     global $db;
-  date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('America/Los_Angeles');
     $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
 		$sql = "SELECT * FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
-  //  $sql = "SELECT * FROM `data-$db` WHERE id=20 OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
+    $sql = "SELECT * FROM `data-$db` WHERE id=75 OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
 
     //echo $sql;
 		$result = $conn->query($sql);
