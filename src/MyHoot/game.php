@@ -12,7 +12,7 @@
 			width: 100%;
 			height: 100%;
 			box-sizing: border-box;
-			background: #CAA2EE;
+			background: #fff;
 		}
 		#page{
 			position: absolute;
@@ -48,6 +48,10 @@
 		  }  
 		}
 
+
+		function home(){
+			window.location.href = 'index.php';
+		}
 	</script>
 </head>
 <body>

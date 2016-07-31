@@ -86,7 +86,7 @@ include("controller/gameLogic.php");
 
 	<div id="headerWrap">
 		<div id="logoWrap">
-						<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+			<a href="#" onclick="parent.home()" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 		</div>
 		<div id="roundWrap">
 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
@@ -118,7 +118,8 @@ include("controller/gameLogic.php");
 </audio>
 
 
-<input type="button" id="muteButton" onclick="mute()">
+<input type="button" class="utilityButton" id="muteButton" 			onclick="mute()">
+<input type="button" class="utilityButton" id="fullscreenButton" 	onclick="parent.fullscreen()">
 <a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo substr($_SESSION["game_id"],0,5); ?></div>
 

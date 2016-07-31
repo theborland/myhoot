@@ -143,7 +143,7 @@ Game::createGame($replay);
 
 <div id="headWrap">
 	<div id="logoWrap">
-					<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+		<a href="#" onclick="parent.home()" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 	</div>
 
 </div>
