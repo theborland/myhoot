@@ -243,7 +243,8 @@ Game::createGame($replay);
 
 </div>
 
-<input type="button" id="muteButton" onclick="mute()">
+<input type="button" class="utilityButton" id="muteButton" 			onclick="mute()">
+<input type="button" class="utilityButton" id="fullscreenButton" 	onclick="parent.fullscreen()">
 <div id="sun"></div>
 <div id="linkPlane"></div>
 <div id="sqBackground"></div></form>
