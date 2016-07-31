@@ -75,7 +75,7 @@ else {
 				<textarea class="jqInput" id="message" name="message" ></textarea>
 
 				<div id="submitWrap">
-					<input class="regButton" id="submit" name="submit" type="submit" value="Submit">
+					<input class="regButton" id="submit" name="submit" type="submit" value="Send">
 				</div>
 			</form>
       <?php } ?>

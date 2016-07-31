@@ -45,7 +45,7 @@ if (isset($_SESSION["name"]) && strlen($name)==0)
 			<Center>
 				<input type="submit" name="submit" value="Join" id="jqJoin" class="regButton">
 				<label class="jqLabel" id="orLabel">OR</label>
-				<a href="startQuiz.php" class="regButton" id="startGame">Start a Game</a>
+				<a href="game.php" class="regButton" id="startGame">Start a Game</a>
 			</Center>
 
 		</form>
