@@ -131,8 +131,7 @@ input[type='checkbox']:focus {
 }
 
 
-#muteButton{
-	background:url('../img/mute.svg');
+.utilityButton{
 	border:0px;
 	position: fixed;
 	bottom: 10px;
@@ -145,12 +144,20 @@ input[type='checkbox']:focus {
 	z-index: 8;
 	transition:.1s all;
 }
-#muteButton:focus{
+.utilityButton:focus{
 	outline:0px;
 	border:0px;
 }
-#muteButton:hover{
+.utilityButton:hover{
 	opacity: 1;
+}
+
+#muteButton{
+	background: url('../img/mute.svg');
+}
+#fullscreenButton{
+	background: url('../img/fullscreen.svg');
+	right: 60px;
 }
 
 
