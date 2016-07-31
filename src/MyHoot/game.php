@@ -49,7 +49,7 @@
 		}
 
 
-		function home(){
+		function redirectHome(){
 			window.location.href = 'index.php';
 		}
 	</script>
