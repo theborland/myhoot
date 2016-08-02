@@ -32,12 +32,27 @@ class AllAnswers
 		}
 
 		$this->awardPoints();
-        Question::alertUsers(-1);
+    Question::alertUsers(-1);
 
 		//echo "loc is ".$this->correctAns->location->lat;
 	}
 
-
+	//this will find the zoom level for the map when shown
+	public function zoomLevel(){
+		  $maxAway=0;
+			foreach($this->allAnswers as $key=>$answer){
+				if ($answer->distanceAway>$maxAway)
+					$maxAway=$answer->distanceAway;
+			}
+			//return $maxAway;
+			if ($maxAway<40)return 8;
+			else if ($maxAway<150)return 7;
+			else if ($maxAway<300)return 6;
+			else if ($maxAway<900)return 5;
+			else if ($maxAway<2500)return 4;
+			else if ($maxAway<6000)return 3;
+			else return 2;
+	}
 
 
 	public function awardPoints(){

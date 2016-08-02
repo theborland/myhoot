@@ -1,8 +1,8 @@
 <?php
-include ("Question.php");
-include ("Answer.php");
-include ("User.php");
-include ("Game.php");
+include ("controller/Question.php");
+include ("controller/Answer.php");
+include ("controller/User.php");
+include ("controller/Game.php");
 
 class LatLong
 {

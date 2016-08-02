@@ -7,6 +7,7 @@ if (Game::findGame()->type!="geo")
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
+//die ($allAnswers->zoomLevel());
 ?>
 
 
@@ -48,7 +49,7 @@ $theQuestion=Question::loadQuestion();
 
 		  var myLatlng = new google.maps.LatLng(<?php echo $allAnswers->correctAns->location->lat; ?>,<?php echo $allAnswers->correctAns->location->longg; ?>);//ll.lat(),ll.lng());
 		  var mapOptions = {
-		    zoom: 4,
+		    zoom: <?php echo $allAnswers->zoomLevel(); ?>,
 		        mapTypeControl: false,
 		    streetViewControl: false,
 		center: myLatlng
