@@ -81,7 +81,6 @@ Game::createGame($replay);
 
 		function checkNumUsers(){
 			if( $('#nameUsers').children().length > 0 ){
-				alert("here: " + $("#nameUsers").children().length);
 				return true;
 			}else{
 				$('#errorLine').fadeIn(200);
@@ -96,7 +95,7 @@ Game::createGame($replay);
 </head>
 <body>
 <?php include_once("controller/analyticstracking.php") ?>
-<form action="getQuestion.php">
+<form action="getQuestion.php" onsubmit="return checkNumUsers()">
 
 
 
@@ -200,7 +199,7 @@ Game::createGame($replay);
 			</div>
 			<div class="sqLine" id="submitLine">
 				<div id="sqSettingsButton" onclick="showSetting()"></div>
-				<input type="submit" class="regButton" id="sqStart" value="Start" onsubmit="return checkNumUsers()">
+				<input type="submit" class="regButton" id="sqStart" value="Start">
 
 
 					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
