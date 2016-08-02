@@ -38,5 +38,16 @@ $result = $conn->query($sql);
  </head>
  <body>
    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+   The total number of questions is:
+   <?php
+$sql="SELECT (SELECT count(`id`) FROM `data-geo`) + (SELECT count(`id`) FROM `data-people`)+ (SELECT count(`id`) FROM `data-rand`)+ (SELECT count(`id`) FROM `data-time`) AS total";
+$result = $conn->query($sql);
+//die($sql);
+if ($result)
+{
+    $row = $result->fetch_assoc();
+    echo $row ['total'];
+  }
+    ?>
  </body>
 </html>
