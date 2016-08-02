@@ -80,10 +80,11 @@ Game::createGame($replay);
 		}
 
 		function checkNumUsers(){
-			if( $("#nameUsers").children().length > 0 ){
+			if( $('#nameUsers').children().length > 0 ){
+				alert("here: " + $("#nameUsers").children().length);
 				return true;
 			}else{
-				$("#errorLine").fadeIn(200);
+				$('#errorLine').fadeIn(200);
 				return false;
 			}
 		}
