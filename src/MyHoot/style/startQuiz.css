@@ -262,8 +262,8 @@ body{
 #errorLine{
 	text-align: center;
 	margin-top: 10px;
-	opacity: 0;
-	color: #fff;
+	display: none;
+	color: rgba(255,255,255,0.6);
 }
 
 
