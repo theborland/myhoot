@@ -55,6 +55,7 @@
 	</script>
 </head>
 <body>
-	<embed id="page" src="startQuiz.php" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true">
+	<object id="page" data="startQuiz.php"></object>
+
 </body>
 </html>
