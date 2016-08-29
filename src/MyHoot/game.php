@@ -55,7 +55,7 @@
 	</script>
 </head>
 <body>
-	<object id="page" data="startQuiz.php" type="text/php"></object>
+	<object id="page" data="startQuiz.php" type="text/html"></object>
 
 </body>
 </html>
