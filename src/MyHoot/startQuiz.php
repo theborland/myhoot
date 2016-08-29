@@ -79,6 +79,15 @@ Game::createGame($replay);
 			}
 		}
 
+		function checkNumUsers(){
+			if( $('#nameUsers').children().length > 0 ){
+				return true;
+			}else{
+				$('#errorLine').fadeIn(200);
+				return false;
+			}
+		}
+
 		loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
 
 	</script>
@@ -86,7 +95,7 @@ Game::createGame($replay);
 </head>
 <body>
 <?php include_once("controller/analyticstracking.php") ?>
-<form action="getQuestion.php">
+<form action="getQuestion.php" onsubmit="return checkNumUsers()">
 
 
 
@@ -210,7 +219,9 @@ Game::createGame($replay);
 					<input type="hidden" name="r_OC" id="sm_state_OC" value="true">
 
 			</div>
-
+			<div class="sqLine" id="errorLine">
+				You can't start a game without any players. Try joining using the Game ID above.
+			</div>
 
 		</div><div class="col" id="col3">
 			<div class="sqLabel" id="sqNumUsers"><div id="numUsers">0</div> USERS IN THE GAME</div>
