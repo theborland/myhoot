@@ -4,10 +4,12 @@ class Game
 {
 	var $type;
 	var $round;
-	public static function createGame($replay)
+	public static function createGame($replay,$game_idSet=null)
 	{
 		global $conn;
 		$game_id=rand(10000,99999);
+		if ($game_idSet!=null)
+			$game_id=55555;
 		if ($replay=="yes")$lastGame_ID=$_SESSION["game_id"];
 		date_default_timezone_set('America/New_York');
 		//die (date("z"));

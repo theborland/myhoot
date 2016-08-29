@@ -1,4 +1,5 @@
 <?php
+//echo _DIR_;
 require '../controller/dbsettings.php';
 if (isset($_GET['db']))
   $db=$_GET['db'];
@@ -11,9 +12,11 @@ if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
 
   $source = getURL();
 //echo "dsf";
+//echo $source;
 	function createImageTag ($url, $highlight) {
 		return ("<img src = $url alt = '$highlight' onclick = 'check(this)' class = 'imgButton' height = '200' width = '250'>");
 	};
+  //echo $source;
 	preg_match ('/^(.+), (.+)\n\[(.+)\]$/', $source, $nameCapture);
 	preg_match_all ('/[\'"]?(\S+)[\'"]?/', $nameCapture [3], $imageCapture); //'/([^,]+)/' captures those ,'s inside the links -.-
 	$outputSource =  "<html>\n\t<style>\n\t\t.imgButton{\n\t\t\tcursor: pointer;\n\t\t\talign: center;";
@@ -57,7 +60,7 @@ $outputSource .= "element.parentNode.removeChild(element);\n\t\t};\n\t\tfunction
     global $db;
     	global $conn;
     date_default_timezone_set('America/Los_Angeles');
-      $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
+      $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-6 month" ) );
   		$sql = "SELECT COUNT(*) as total FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
   		$result = $conn->query($sql);
   		if ($result)
@@ -73,11 +76,11 @@ function getURL()
     global $id;
     global $db;
     date_default_timezone_set('America/Los_Angeles');
-    $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-1 month" ) );
-		$sql = "SELECT * FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
+    $myDate = date("Y-m-d", strtotime( date( "Y-m-d", strtotime( date("Y-m-d") ) ) . "-6 month" ) );
+		$sql = "SELECT * FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate` = '0000-00-00' OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
   //  $sql = "SELECT * FROM `data-$db` WHERE id=75 ORDER BY rand() LIMIT 1";
 
-    //echo $sql;
+  //  echo $sql;
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -85,6 +88,10 @@ function getURL()
         $id=$row ['id'];
         //echo $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
         //return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
+        if ($db=="geo-places")
+				    return $row ['place']  . ', ' . $row ['id'] . "\n" . $row ['image'];
+        if ($db=="geo-product")
+  			    return $row ['product']  . ', ' . $row ['id'] . "\n" . $row ['image'];
         if ($db=="geo")
 				    return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
         if ($db=="time")
