@@ -1,8 +1,8 @@
 <?php
-include ("controller/Question.php");
-include ("controller/Answer.php");
-include ("controller/User.php");
-include ("controller/Game.php");
+include ($_SERVER['DOCUMENT_ROOT']."/fall15/src/Myhoot/controller/Question.php");
+include ($_SERVER['DOCUMENT_ROOT']."/fall15/src/Myhoot/controller/Answer.php");
+include ($_SERVER['DOCUMENT_ROOT']."/fall15/src/Myhoot/controller/User.php");
+include ($_SERVER['DOCUMENT_ROOT']."/fall15/src/Myhoot/controller/Game.php");
 
 class LatLong
 {
@@ -24,7 +24,7 @@ class LatLong
   	$prepAddr = urlencode(str_replace(' ','+',$prepAddr));
 		//$geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
 		$geocode=file_get_contents('http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false');
-	//	echo 'http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false';
+		echo 'http://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false';
 		$output= json_decode($geocode);
 		//print_r($output);
 		$instance = new self($output->results[0]->geometry->location->lat,$output->results[0]->geometry->location->lng);
