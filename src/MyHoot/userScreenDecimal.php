@@ -1,10 +1,18 @@
+<?php
+session_start();
+require 'controller/dbsettings.php';
+if (isset($_GET["question"]))
+  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
+    header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+  Game::questionStatusRedirect();
+?>
 <html>
   <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="style/global.css">
       <link href="style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
-  <!--<script src="scripts/socketScripts.js"></script>-->
+    <script src="scripts/socketScripts.js"></script>
     <style>
       html, body {
         height: 100%;
@@ -132,40 +140,52 @@ window.onload = function(){
   var valbox = document.getElementById("isValue");
   var answer = document.getElementById("answer");
 
+  var realAnswer = 1700; /// change this to have the numerical value of the actual answer
+  var range = {   'min': [-800],    '25%': [-500],    '50%': [-200],    '75%': [100],   'max': [400] };
+
+
+  if (realAnswer < -200){
+    range = {   'min': [-800],    '25%': [-600],    '50%': [-400],    '75%': [-200],   'max': [0] };
+  }else if (realAnswer >= -200 && realAnswer < 600){
+    range = {   'min': [-200],    '25%': [0],    '50%': [200],    '75%': [400],   'max': [600] };
+  }else if (realAnswer >= 600 && realAnswer < 1300){
+    range = {   'min': [600],    '25%': [800],    '50%': [1000],    '75%': [1200],   'max': [1400] };
+  }else if (realAnswer >= 1300 && realAnswer < 1700){
+    range = {   'min': [1300],    '25%': [1400],    '50%': [1500],    '75%': [1600],   'max': [1700] };
+  }else if (realAnswer >= 1700){
+    range = {   'min': [1600],    '25%': [1700],    '50%': [1800],    '75%': [1900],   'max': [2020] };
+  }
+
   noUiSlider.create(slider, {
-    start: [50],
+    start: [range['50%']],
     connect: "lower",
     orientation: "vertical",
     direction: 'rtl',
-    range: {
-      'min': [10],
-      '25%': [25],
-      '50%': [50],
-      '75%': [75],
-      'max': [100]
-    },pips: { // Show a scale with the slider
+    range: range
+    ,pips: { // Show a scale with the slider
       mode: 'steps',
       density: 2
     }
   });
 
 
+
   slider.noUiSlider.on('update', function( values, handle ) {
 
     if(true){ // true if you want decimals
-      a = Math.round(values[handle] * 10) / 10;
+      a = Math.round(values[handle]);
     }else{
       a = Math.round(values[handle]);
     }
-      valbox.value = a + " years old";
+      valbox.value = formatYear(a);
       answer.value = a;
       //changeValue(values[handle]);
   });
 
   labels = document.getElementsByClassName("noUi-value-large");
   for(var i=0; i<labels.length;i++){
-    //val = parseInt(labels[i].innerHTML);
-    //labels[i].innerHTML = comma(val);
+    val = parseInt(labels[i].innerHTML);
+    labels[i].innerHTML = formatYear(val);
     if(i%2 != 0)
       labels[i].className = labels[i].className + " smallLabel";
   }
@@ -173,13 +193,22 @@ window.onload = function(){
   markers = document.getElementsByClassName("noUi-marker-large");
   for(var i=0; i<markers.length;i++){
     //val = parseInt(markers[i].innerHTML);
-    //markers[i].innerHTML = comma(val);
+    //markers[i].innerHTML = formatYear(val);
     if(i%2 != 0)
       markers[i].className = markers[i].className + " smallMarker";
   }
 
 
 };
+
+function formatYear(year){
+      if (year < 0){
+        return( (year * -1) + " BC" );
+      }else{  
+        return(year);
+      }
+
+}
 
   function decimalize(numberAsString){
     var numberInt = parseInt(numberAsString)
