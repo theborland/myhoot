@@ -1,4 +1,4 @@
-<?php /*
+<?php 
 session_start();
 $whitelist = array('replay');
 require 'controller/dbsettings.php';
@@ -6,7 +6,7 @@ require 'controller/dbsettings.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 Game::createGame($replay);
-*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@ Game::createGame($replay);
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/startQuiz2.css">
 	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
-	<script src="scripts/startQuiz.js"></script>
+	<script src="scripts/startQuiz2.js"></script>
 	<script src="scripts/mapdata.js"></script>
 	<script src="scripts/continentmap.js"></script>
 	<script src="scripts/global.js"></script>
@@ -87,7 +87,7 @@ Game::createGame($replay);
 			}
 		}
 
-		/*loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);*/
+		loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);
 
 	</script>
 
@@ -168,39 +168,39 @@ Game::createGame($replay);
 
 				<div class="gsItem gsSel" id="gs1">
 					<img src="img/map.svg" class="gsImg" alt="">
-					<div class="gsName">GEOGRAPHY</div>
+					<div class="gsName">CITIES</div>
 				</div>
 				<div class="gsItem" id="gs2">
 					<img src="img/population.svg" class="gsImg" alt="">
-					<div class="gsName">POPULATIONS</div>
+					<div class="gsName">PLACES</div>
 				</div>
 				<div class="gsItem" id="gs3">
 					<img src="img/temp.svg" class="gsImg" alt="">
-					<div class="gsName">WEATHER</div>
+					<div class="gsName">PEOPLE</div>
 				</div>
 				<div class="gsItem" id="gs4">
 					<img src="img/star.svg" class="gsImg" alt="">
-					<div class="gsName">CELEBRITY AGES</div>
+					<div class="gsName">TIMELINE</div>
 				</div>
 				<div class="gsItem" id="gs5">
 					<img src="img/history.svg" class="gsImg" alt="">
-					<div class="gsName">HISTORY</div>
+					<div class="gsName">FACTS</div>
 				</div>
 	 			<div class="gsItem" id="gs6">
 					<img src="img/random.svg" class="gsImg" alt="">
-					<div class="gsName">RANDOM</div>
+					<div class="gsName">TEMPERATURE</div>
 				</div>
 				<div class="gsItem" id="gs7">
 					<img src="img/star.svg" class="gsImg" alt="">
-					<div class="gsName">CELEBRITY AGES</div>
+					<div class="gsName">SCIENCE</div>
 				</div>
 				<div class="gsItem" id="gs8">
 					<img src="img/history.svg" class="gsImg" alt="">
-					<div class="gsName">HISTORY</div>
+					<div class="gsName">SPORTS</div>
 				</div>
 	 			<div class="gsItem" id="gs9">
 					<img src="img/random.svg" class="gsImg" alt="">
-					<div class="gsName">RANDOM</div>
+					<div class="gsName">ENTERTAINMENT</div>
 				</div>
 				<!--<div id="showMap" class="regButton" onclick="alert('sup')">Select Regions</div>-->
 			</div>
@@ -209,7 +209,7 @@ Game::createGame($replay);
 			<div class="sqLabel" id="sqQuizLabel">GAME ID</div>
 			<div id="sqQuizID">
 				<div id="quizID">
-						<?php //echo substr($_SESSION["game_id"],0,5); ?>
+						<?php echo substr($_SESSION["game_id"],0,5); ?>
 				</div>
 			</div>
 			<div class="sqLine" id="submitLine">
@@ -217,12 +217,15 @@ Game::createGame($replay);
 				<input type="submit" class="regButton" id="sqStart" value="Start">
 
 
-					<input type="hidden" name="gsGeo" id="gsGeo" value="true">
-					<input type="hidden" name="gsAge" id="gsAge" value="false">
-					<input type="hidden" name="gsHist" id="gsHist" value="false">
-					<input type="hidden" name="gsPop" id="gsPop" value="false">
+					<input type="hidden" name="gsCities" id="gsCities" value="true">
+					<input type="hidden" name="gsPlaces" id="gsPlaces" value="false">
+					<input type="hidden" name="gsPeople" id="gsPeople" value="false">
+					<input type="hidden" name="gsTimeline" id="gsTimeline" value="false">
+					<input type="hidden" name="gsFacts" id="gsFacts" value="false">
+   					<input type="hidden" name="gsScience" id="gsScience" value="false">
+					<input type="hidden" name="gsSports" id="gsSports" value="false">
 					<input type="hidden" name="gsTemp" id="gsTemp" value="false">
-   					<input type="hidden" name="gsRand" id="gsRand" value="false">
+   					<input type="hidden" name="gsEntertainment" id="gsEntertainment" value="false">
 					<!--regions-->
 					<input type="hidden" name="r_SA" id="sm_state_SA" value="true">
 					<input type="hidden" name="r_NA" id="sm_state_NA" value="true">
