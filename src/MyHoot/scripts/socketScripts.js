@@ -74,7 +74,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
           window.location.href='waitingScreen.php';
         else if (data.title.substring(0,1)=="Q")
         {
-          if (data.type=="geo")
+          if (data.type=="geo" || data.type=="ppt")
               window.location.href='userScreen.php?question='+data.title.substring(1);
           else if (data.type=="end")
                   window.location.href='waitingScreenEnd.php';
@@ -99,7 +99,7 @@ function loadWaitingForNextGame(ip,gameID){
       console.log('Waiting for nextgame:"' + topic + '" : ' + data.title);
       var container = document.getElementById("waitingDiv");
       window.location.href='joinQuiz.php?game_id='+data.title;
-      
+
           });
 
   },

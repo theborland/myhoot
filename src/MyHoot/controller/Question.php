@@ -20,18 +20,28 @@ class Question
 				$this->type=$type;
 				if ($type=="geo")
 					  $this->getLocation($type);
-			  if ($type=="pop")
+			  else if ($type=="pop")
 						$this->getLocation($type);
-				if ($type=="weather")
+				else if ($type=="weather")
 						$this->getWeather();
-				if ($type=="age")
+				else if ($type=="age")
 						$this->getAge();
-				if ($type=="time")
+				else if ($type=="entertainment")
+						$this->getEntertainment();
+				else if ($type=="ppt")
+						$this->getPPT();
+				else if ($type=="sports")
+						$this->getQuestion($type);
+				else if ($type=="science")
+						$this->getQuestion($type);
+				else if ($type=="time")
 						$this->getTime();
-				if ($type=="rand")
-								$this->getRand();
-				if ($type=="user")
-						$this->getUserQuestion();
+				else if ($type=="facts")
+						$this->getFacts();
+				else //if ($type=="rand")
+						$this->getQuestion($type);
+				//if ($type=="user")
+				//		$this->getUserQuestion();
 				$this->addAnswer();
 				//echo "in here again";
 				Game::updateRound($_SESSION["questionNumber"],$type);
@@ -83,7 +93,7 @@ class Question
 	 				$question->country=$row["wording"];
 					$question->min=$row["lat"];
 					$question->max=$row["longg"];
-					if ($type=="geo" || $type=="pop" || $type=="weather"){
+					if ($type=="geo" || $type=="pop" || $type=="weather"|| $type=="ppt"){
 						   $splits=explode(",",$question->country);
 					     $question->country=$splits[1];
 							 $question->city=$splits[0];
@@ -118,11 +128,39 @@ class Question
 				return "";
 
 	}
+
+	function getQuestionTextEnd(){
+			if ($this->type=="ppt"){
+				if ($this->city=="based" || $this->city=="started" || $this->city=="born")
+					return $this->city;
+				if ($this->city=="lived" || $this->city=="live" )
+					return "live";
+				if ($this->city=="bus")
+					return " ride her famous bus";
+				if ($this->city=="worked" || $this->city=="works" )
+						return "work";
+			}
+			return "";
+	}
+
 	function getQuestionText(){
 		if ($this->type=="geo")
 			return "Where is ";
-			if ($this->type=="geo")
-				return "Where is ";
+		if ($this->type=="ppt"){
+				if ($this->city=="hometown")
+					return "Where was the hometown of ";
+				else if ($this->city=="started" || $this->city=="born")
+					return "Where was ";
+				else if ($this->city=="lived" || $this->city=="worked" || $this->city=="bus")
+					return "Where did ";
+				else if ($this->city=="live" || $this->city=="works")
+					return "Where does ";
+				else if ($this->city=="resting place")
+					return "Where is the resting place of ";
+				else if ($this->city=="place")
+					return "Where is ";
+				else return "Where is ";
+		}
 		if ($this->type=="pop")
 				return "What is the population of ";
 		if ($this->type=="weather")
@@ -132,7 +170,42 @@ class Question
 		if ($this->type=="time")
 				return "Guess the Year: ";
 		if ($this->type=="rand")
-					return ucfirst($this->city);
+				return ucfirst($this->city);
+	}
+
+	function getQuestion($type){
+		global $conn;
+		$sql = "SELECT * FROM `data-$type`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		//echo $sql;
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			if($row = $result->fetch_assoc()){
+				//$this->city=$row["category"];
+				$this->country=$row["wording"];
+				$this->answer=$row["answer"];
+				$this->min=$row["min"];
+				$this->max=$row["max"];
+				$url= $row["image"];
+				$this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
+        //$this->image="a.jpg";//Question::getRandomUrl($url);
+				}
+		}
+		if ($this->checkForRepeats($this->country))
+			$this->getQuestion($type);
+	}
+
+	function getEntertainment(){
+		  //either get a cel age (75% of time )
+			if (rand(0,100)>75)
+					$this->getQuestion('Entertainment');
+			else {
+				$this->type="age";
+				$this->getAge();
+
+			}
 	}
 	function getWeather(){
 		$this->getLocation("weather");
@@ -200,12 +273,14 @@ class Question
 
 	function getTime(){
 		global $conn;
-		$sql = "SELECT * FROM `data-time` ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		$regionsSelected=$_SESSION["regionsSelected"];
+		$sql = "SELECT * FROM `data-time` WHERE `imageUpdatedDate` IS NOT null AND";
+		foreach ($regionsSelected as $region)
+			$sql.=" `region` = '" . $region ."' OR";
+		$sql=substr($sql,0,strlen($sql)-3);
+		 $sql.=" ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+	//	die ($sql);
 
-		$sql = "SELECT * FROM `data-time` WHERE `imageUpdatedDate` IS NOT null  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
-		//die ($sql);
-		//	$sql = "SELECT * FROM `data-time`   WHERE `id`='63'";
-			//die ($sql);
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -220,6 +295,32 @@ class Question
 		if (Question::checkForRepeats($this->country))
    		$this->getTime();
 	}
+
+	function getFacts(){
+		global $conn;
+		$regionsSelected=$_SESSION["regionsSelected"];
+		$sql = "SELECT * FROM `data-facts` WHERE `imageUpdatedDate` IS NOT null AND";
+		foreach ($regionsSelected as $region)
+			$sql.=" `region` = '" . $region ."' OR";
+		$sql=substr($sql,0,strlen($sql)-3);
+		 $sql.=" ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+	//	die ($sql);
+
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			if($row = $result->fetch_assoc()){
+				$this->country=$row["wording"] . " ".$row["country"] . "(".$row["year"] . ")" ;
+				$this->answer=$row["answer"];
+				$url= $row["image"];
+				$this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
+			}
+		}
+		if (Question::checkForRepeats($this->country))
+			$this->getTime();
+	}
+
 
 	function getUserQuestion(){
 			$csvData = file_get_contents("https://docs.google.com/spreadsheets/d/1fco39wut_t7dFqCQ8ZuNe7VGCupndG8UPpinlohpbXc/pub?output=csv");
@@ -259,7 +360,7 @@ class Question
 		if (sizeof($splits)==0)
 		{
 		//	echo "going in again";
-				return $this->getLocation();
+				return Question::getRandomUrl($url);
 			}
 		$url=$splits[rand(0,sizeof($splits)-1)];
 		if (substr($url,0,1)=="'")$url=substr($url,1);
@@ -272,6 +373,57 @@ class Question
 			return Question::getRandomUrl($url);
 
 	}
+
+	function getPPT(){
+		global $conn;
+		$regionsSelected=$_SESSION["regionsSelected"];
+
+		//determine people, place, things
+		$rand=rand(1,10);
+		if ($rand<7)
+		   $db="places";
+	  else if ($rand<9)
+		   $db="people";
+		else $db="products";
+
+		$sql = "SELECT * FROM `data-geo-$db` WHERE ";
+    foreach ($regionsSelected as $region)
+			$sql.=" `region` = '" . $region ."' OR";
+		$sql=substr($sql,0,strlen($sql)-3);
+		$sql.=" ORDER BY rand() LIMIT 1";
+		//die ($sql);
+		//" WHERE `id`='3'";
+		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
+    //$sql = "SELECT * FROM `data-geo` WHERE `id`=75";
+		$result = $conn->query($sql);
+		if ($result)
+		{
+		  if($row = $result->fetch_assoc()){
+				if ($db=="places"){
+						$this->country=$row["place"];
+						$this->city="place";
+				}
+				if ($db=="people"){
+						$this->country=$row["name"];
+						$this->city=$row["type"];
+				}
+				if ($db=="products"){
+						$this->country=$row["product"];
+						$this->city=$row["basedOrStarted"];
+				}
+				$this->lat=$row["lat"];
+				$this->longg=$row["longg"];
+				//$this->answer=$row["population"];
+		    $url= $row["image"];
+		    $this->image=Question::getRandomUrl($url);
+				$this->qID=$row["id"];
+					//echo $this->image;
+		  }
+		}
+		if ($this->checkForRepeats($this->country))
+			$this->getPPT();
+
+}
 
 	function getLocation($type){
 
@@ -393,7 +545,7 @@ function addAnswer(){
   else
 		$cityName=$this->country;
 	$cityName=$conn->real_escape_string($cityName);
-	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop")
+	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop"|| $this->type=="ppt")
 		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->lat."', '".$this->longg."', '".$this->answer."')";
 	else if ($this->type=="rand")
 		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->min."', '".$this->max."', '".$this->answer."')";

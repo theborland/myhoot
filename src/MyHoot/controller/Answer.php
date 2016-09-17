@@ -236,7 +236,7 @@ class Answer
 			$answer->distanceAway=-999.99;
 		else if (!is_object($correct))//meaning end of game
 			$answer->distanceAway=-999.99;
-		else if (Game::findGame()->type=="geo")
+		else if (Game::findGame()->type=="geo" || Game::findGame()->type=="ppt")
 			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
 		else
 		  $answer->distanceAway=abs($ans-$correct->value);

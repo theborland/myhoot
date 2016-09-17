@@ -70,7 +70,7 @@ include("controller/gameLogic.php");
 		body{
 			background-image:url("<?php echo $theQuestion->getImage() ?>");
 			<?php
-				if(Game::findGame()->type == "age" || Game::findGame()->type == "rand"){
+				if(Game::findGame()->type == "age" || Game::findGame()->type == "entertainment" || Game::findGame()->type == "rand"){
 			?>
 			background-size       : contain;
 			background-position   : top center;
@@ -95,6 +95,7 @@ include("controller/gameLogic.php");
 
 <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
 <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?></div>
+<div id="questionType"><?php echo $theQuestion->getQuestionTextEnd(); ?></div>
 
 
 		</div>

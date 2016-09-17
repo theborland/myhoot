@@ -1,9 +1,9 @@
 <?php
 //this will update question id for all those missing it
 require '../controller/dbsettings.php';
-$db='data-geo-places';
+$db='data-geo-people';
 $sql = "SELECT * FROM `$db` WHERE lat='0' ORDER BY RAND() LIMIT 10 ";
-//echo $sql;
+echo $sql;
 $result = $conn->query($sql);
 if ($result)
 {
@@ -21,8 +21,8 @@ if ($result)
  $country=$splits[1];
  */
  //now for places
- $city=$row["place"];
- $country=$row["country"];
+ $city="";//$row["place"];
+ $country=$row["city"];
 
     $latLong=LatLong::findLatLong($city,$country);
     //echo $city.$latLong->lat . "<br>";

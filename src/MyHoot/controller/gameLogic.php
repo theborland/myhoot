@@ -1,5 +1,5 @@
 <?php  //file used just for getQuestion.php
-$whitelist = array('statesCB','numRounds','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
+$whitelist = array('statesCB','numRounds','gsScience','gsSports','gsEntertainment','gsFacts','gsPPT','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'controller/dbsettings.php';
 //echo print_r($_GET["games"]);
 if ($_SESSION["game_id"]==0)
@@ -25,6 +25,11 @@ if ($gsGeo=="false" || $gsGeo=="true")
   if ($gsTemp=="true")$gamesSelected[]="weather";
   if ($gsPop=="true")$gamesSelected[]="pop";
   if ($gsRand=="true")$gamesSelected[]="rand";
+  if ($gsScience=="true")$gamesSelected[]="science";
+  if ($gsSports=="true")$gamesSelected[]="sports";
+  if ($gsEntertainment=="true")$gamesSelected[]="entertainment";
+  if ($gsFacts=="true")$gamesSelected[]="facts";
+  if ($gsPPT=="true")$gamesSelected[]="ppt";
   if ($gsGeo=="true"){
     foreach ($gamesSelected as $key)
         if (sizeof($gamesSelected)<=7)
@@ -65,6 +70,7 @@ else {
         //
     }
     $theQuestion=new Question($current);
+    if ($current=="age")$current="entertainment";
     $playedGames[]=$current;
     $_SESSION["playedGames"]=$playedGames;
     //print_r($playedGames);

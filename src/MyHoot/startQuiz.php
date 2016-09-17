@@ -1,4 +1,5 @@
 <?php
+die ("We are currently upgrading EVERYTHING - We should be up soon!");
 session_start();
 $whitelist = array('replay');
 require 'controller/dbsettings.php';
@@ -80,7 +81,8 @@ Game::createGame($replay);
 		}
 
 		function checkNumUsers(){
-			if( $('#nameUsers').children().length > 0 ){
+			//console.log($('#errorLine').is(':visible'));
+			if( $('#nameUsers').children().length > 0 || $('#errorLine').is(':visible')){
 				return true;
 			}else{
 				$('#errorLine').fadeIn(200);

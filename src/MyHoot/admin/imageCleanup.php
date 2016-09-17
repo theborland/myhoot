@@ -4,9 +4,12 @@ require '../controller/dbsettings.php';
 if (isset($_GET['db']))
   $db=$_GET['db'];
 else
-  $db="geo";
+  $db="facts";
 
 if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
+  if ($db=="facts")
+  updateCountry($_POST['country'],$_POST['url']);
+  else
   updateSQL($_POST['id'],$_POST['url']);
 }
 
@@ -16,8 +19,9 @@ if (isset($_POST['Submit']) && $_POST['Submit']=="Submit"){
 	function createImageTag ($url, $highlight) {
 		return ("<img src = $url alt = '$highlight' onclick = 'check(this)' class = 'imgButton' height = '200' width = '250'>");
 	};
-  //echo $source;
+  //echo "~".$source."~";
 	preg_match ('/^(.+), (.+)\n\[(.+)\]$/', $source, $nameCapture);
+  //print_r($nameCapture);
 	preg_match_all ('/[\'"]?(\S+)[\'"]?/', $nameCapture [3], $imageCapture); //'/([^,]+)/' captures those ,'s inside the links -.-
 	$outputSource =  "<html>\n\t<style>\n\t\t.imgButton{\n\t\t\tcursor: pointer;\n\t\t\talign: center;";
 	$outputSource .= "\n\t\t}\n\t\t.imgButton:hover{\n\t\t\tborder: 2px solid #ccc\n\t\t}\n\t\t";
@@ -42,7 +46,7 @@ $outputSource .= "element.parentNode.removeChild(element);\n\t\t};\n\t\tfunction
 	$outputSource .= "\n\t\t\t\t\thandleResponse(this.reponseText);\n\t\t\t};\n\t\t\txhttp.open(\"POST\", \"Images.php\", true);\n\t\t\txhttp.setRequestHeader";
 	$outputSource .= "(\"Content-type\", \"application/x-www-form-urlencoded\");\n\t\t\txhttp.send(\"?newSource=\" + btoa(source) + \"&id=\" + id);\n\t\t};";
 	$outputSource .= "\n\t</script>\n\t<body>\n\t\t<p>" . $nameCapture [1] . ", " . $nameCapture[2]. " ".$id . " ,left:".numLeft();
-	$outputSource .= "</p>\n\t\t<form method='POST'><input type='hidden' id='id' name='id' value=\"".$id."\"><input type='hidden' id='url' name='url' value=\"".
+	$outputSource .= "</p>\n\t\t<form method='POST'><input type='hidden' id='id' name='id' value=\"".$id."\"><input type='hidden' id='country' name='country' value=\"".$nameCapture [1] ."\"><input type='hidden' id='url' name='url' value=\"".
   str_replace("\"","$",substr($source,strpos($source,"[")-1)).
   "\"><table border = '1' width = '100%' table-layout = 'fixed'>\n\t\t\t<tr table-layout = 'fixed'>";
 //print_r($imageCapture[0]);
@@ -80,7 +84,7 @@ function getURL()
 		$sql = "SELECT * FROM `data-$db` WHERE `imageUpdatedDate` IS null OR `imageUpdatedDate` = '0000-00-00' OR `imageUpdatedDate`<'".$myDate."' ORDER BY rand() LIMIT 1";
   //  $sql = "SELECT * FROM `data-$db` WHERE id=75 ORDER BY rand() LIMIT 1";
 
-  //  echo $sql;
+     echo $sql;
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -88,10 +92,16 @@ function getURL()
         $id=$row ['id'];
         //echo $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
         //return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
+        if ($db=="facts")
+				    return $row ['country']  . ', ' . $row ['id'] . "\n" . $row ['image'];
+        if ($db=="science" || $db=="sports" || $db=="entertainment")
+    		    return $row ['keyword']  . ', ' . $row ['id'] . "\n" . $row ['image'];
         if ($db=="geo-places")
 				    return $row ['place']  . ', ' . $row ['id'] . "\n" . $row ['image'];
         if ($db=="geo-product")
   			    return $row ['product']  . ', ' . $row ['id'] . "\n" . $row ['image'];
+        if ($db=="geo-people")
+      	    return $row ['name']  . ', ' . $row ['id'] . "\n" . $row ['image'];
         if ($db=="geo")
 				    return $row ['city'] . ', ' . $row ['country'] . "\n" . $row ['image'];
         if ($db=="time")
@@ -113,6 +123,21 @@ function updateSQL($id,$url)
     $url=str_replace(",",", ",$url);
     $url=trim($url);
     $sql = "UPDATE `data-$db` SET image='".$url."' , imageUpdatedDate='".date('Y-m-d')."' WHERE id='".$id."'";
+//die ($sql);
+  	$result = $conn->query($sql);
+
+}
+
+function updateCountry($country,$url)
+{
+  global $db;
+  date_default_timezone_set('America/Los_Angeles');
+  	global $conn;
+    $url=addslashes(str_replace("$","\"",$url));
+    //$url=addslashes(str_replace(" ","",$url));
+    $url=str_replace(",",", ",$url);
+    $url=trim($url);
+    $sql = "UPDATE `data-$db` SET image='".$url."' , imageUpdatedDate='".date('Y-m-d')."' WHERE country='".$country."'";
 //die ($sql);
   	$result = $conn->query($sql);
 
