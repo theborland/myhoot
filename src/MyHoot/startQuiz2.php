@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 $whitelist = array('replay');
 require 'controller/dbsettings.php';
@@ -79,7 +79,8 @@ Game::createGame($replay);
 		}
 
 		function checkNumUsers(){
-			if( $('#nameUsers').children().length > 0 ){
+			//console.log($('#errorLine').is(':visible'));
+			if( $('#nameUsers').children().length > 0 || $('#errorLine').is(':visible')){
 				return true;
 			}else{
 				$('#errorLine').fadeIn(200);
@@ -172,11 +173,11 @@ Game::createGame($replay);
 				</div>
 				<div class="gsItem" id="gs2">
 					<img src="img/population.svg" class="gsImg" alt="">
-					<div class="gsName">PLACES</div>
+					<div class="gsName">PLACES,PEOPLE,THINGS</div>
 				</div>
 				<div class="gsItem" id="gs3">
 					<img src="img/temp.svg" class="gsImg" alt="">
-					<div class="gsName">PEOPLE</div>
+					<div class="gsName">POPULATION</div>
 				</div>
 				<div class="gsItem" id="gs4">
 					<img src="img/star.svg" class="gsImg" alt="">
@@ -218,9 +219,9 @@ Game::createGame($replay);
 
 
 					<input type="hidden" name="gsCities" id="gsCities" value="true">
-					<input type="hidden" name="gsPlaces" id="gsPlaces" value="false">
-					<input type="hidden" name="gsPeople" id="gsPeople" value="false">
-					<input type="hidden" name="gsTimeline" id="gsTimeline" value="false">
+					<input type="hidden" name="gsPPT" id="gsPPT" value="false">
+					<input type="hidden" name="gsPop" id="gsPop" value="false">
+					<input type="hidden" name="gsHist" id="gsHist" value="false">
 					<input type="hidden" name="gsFacts" id="gsFacts" value="false">
    					<input type="hidden" name="gsScience" id="gsScience" value="false">
 					<input type="hidden" name="gsSports" id="gsSports" value="false">
