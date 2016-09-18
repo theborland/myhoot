@@ -32,7 +32,7 @@ class AllAnswers
 		}
 
 		$this->awardPoints();
-    Question::alertUsers(-1);
+    Question::alertUsers("-1");
 
 		//echo "loc is ".$this->correctAns->location->lat;
 	}

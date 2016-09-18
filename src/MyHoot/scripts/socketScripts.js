@@ -71,15 +71,15 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
         if (data.title.substring(0,1)=="R")
           window.location.href='joinQuiz.php?error=Reject';
         else if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
-          window.location.href='waitingScreen.php';
-        else if (data.title.substring(0,1)=="Q")
+          window.location.href='waitingScreen.php?message=nosubmit';
+        else if (data.title.substring(0,1)=="Q" && data.title!="Q-1")
         {
           if (data.type=="geo" || data.type=="pt" || data.type=="places")
               window.location.href='userScreen.php?question='+data.title.substring(1);
           else if (data.type=="end")
                   window.location.href='waitingScreenEnd.php';
           else if (data.type=="facts" || data.type=="science" || data.type=="sports" || data.type=="entertainment")
-                  window.location.href='waitingScreenDecimal.php';
+                  window.location.href='userScreenDecimal2.php?question='+data.title.substring(1);
           else
               window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
 

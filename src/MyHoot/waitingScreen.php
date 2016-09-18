@@ -89,15 +89,17 @@ if ($submit=="Join"){
 
       <?php if ($submit=="Join") { ?>
         <div id="welcome">Game on, <?php echo $name; ?>!</div>
-      <?php  } ?>
-
-      <?php if (is_numeric($message)){ ?>
+      <?php  }
+       else if ($message=="nosubmit"){ ?>
+        <div id="score"><div style="font-size:30px;">The question is over - remember to hit submit next time.</div>
+      <?php }
+      else if (is_numeric($message)){ ?>
         <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message ; ?> miles away.</div>
       <?php } else {
         echo $message;
        }  ?>
 
-        <div id="mainMessageExtra"> 
+        <div id="mainMessageExtra">
           <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
       <?php }  ?>
     </div>

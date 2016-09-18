@@ -47,7 +47,7 @@ class Question
 				$this->addAnswer();
 				//echo "in here again";
 				Game::updateRound($_SESSION["questionNumber"],$this->type);
-				if ($this->type=="time" && $this->answers<1600)
+				if ($this->type=="time" && $this->answer<1600)
 					$this->alertUsers($_SESSION["questionNumber"],"WorldTime");
 				else
 					$this->alertUsers($_SESSION["questionNumber"],$this->type);
@@ -445,6 +445,9 @@ class Question
     foreach ($regionsSelected as $region)
 			$sql.=" `location` = '" . $region ."' OR";
 		$sql=substr($sql,0,strlen($sql)-3);
+
+		if ($type=="pop")
+			$sql.=" AND `population`>0";
 		$sql.=" ORDER BY rand() LIMIT 1";
 		//die ($sql);
 		//" WHERE `id`='3'";

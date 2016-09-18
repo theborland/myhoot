@@ -1,9 +1,20 @@
+<?php
+session_start();
+require 'controller/dbsettings.php';
+if (isset($_GET["question"]))
+  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"])  )
+    header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+  Game::questionStatusRedirect();
+
+?>
+
 <html>
   <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="style/global.css">
       <link href="style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
+       <script src="scripts/socketScripts.js"></script>
   <!--<script src="scripts/socketScripts.js"></script>-->
     <style>
       html, body {
@@ -157,7 +168,7 @@ window.onload = function(){
     }else{
       a = Math.round(values[handle]);
     }
-      valbox.value = a + " years old";
+      valbox.value = a + " %";
       answer.value = a;
       //changeValue(values[handle]);
   });
