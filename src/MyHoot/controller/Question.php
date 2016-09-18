@@ -46,8 +46,11 @@ class Question
 				//		$this->getUserQuestion();
 				$this->addAnswer();
 				//echo "in here again";
-				Game::updateRound($_SESSION["questionNumber"],$type);
-				$this->alertUsers($_SESSION["questionNumber"],$type);
+				Game::updateRound($_SESSION["questionNumber"],$this->type);
+				if ($this->type=="time" && $this->answers<1600)
+					$this->alertUsers($_SESSION["questionNumber"],"WorldTime");
+				else
+					$this->alertUsers($_SESSION["questionNumber"],$this->type);
 			}
 	}
 
@@ -91,6 +94,7 @@ class Question
 	 				//echo $this->location->lat;
 	 				$question=new self(null);
 	 				$question->type=$row["type"];
+					$question->qID=$row["qID"];
 					$type=$question->type;
 	 				$question->country=$row["wording"];
 					$question->min=$row["lat"];
@@ -248,7 +252,7 @@ class Question
 
 	function getAge(){
 		global $conn;
-		$sql = "SELECT * FROM `data-people`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
+		$sql = "SELECT * FROM `data-age`  ORDER BY rand() LIMIT 1";//" WHERE `id`='3'";
 	//		$sql = "SELECT * FROM `data-people`  WHERE `id`='169'";
 		//echo $sql;
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `id`='13'";
@@ -428,7 +432,7 @@ class Question
 		  }
 		}
 		if ($this->checkForRepeats($this->country))
-			$this->getPPT();
+			$this->getPT($db);
 
 }
 
@@ -468,23 +472,48 @@ class Question
 
 }
 
-public static function loadImage($wording,$type){
+public static function loadImageOld($wording,$type){
 
 	global $conn;
 	$wording=$conn->escape_string ($wording);
+	//die ($type);
 	if ($type=="geo" || $type=="pop" || $type=="weather")
 	{
+		//die ($wording);
 		$words=explode(",",$wording);
 		$city=$words[0];
 		$country=$words[1];
 		$sql = "SELECT * FROM `data-geo` WHERE `country`='$country' AND `city`='$city' LIMIT 1";//" WHERE `id`='3'";
 	}
-	if ($type=="age")
-		$sql = "SELECT * FROM `data-people` WHERE `name`='$wording'  LIMIT 1";//" WHERE `id`='3'";
-	if ($type=="time")
+	else if ($type=="age")
+		$sql = "SELECT * FROM `data-age` WHERE `name`='$wording'  LIMIT 1";//" WHERE `id`='3'";
+	else if ($type=="time")
 		$sql = "SELECT * FROM `data-time` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
-		if ($type=="rand")
-			$sql = "SELECT * FROM `data-rand` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
+		else if ($type=="places")
+			$sql = "SELECT * FROM `data-geo-places` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
+		else
+			$sql = "SELECT * FROM `data-$db` WHERE `wording`='$wording' LIMIT 1";//" WHERE `id`='3'";
+	$result = $conn->query($sql);
+	//die($sql);
+	if ($result)
+	{
+		if($row = $result->fetch_assoc()){
+			$url= $row["image"];
+			return Question::getRandomUrl($url);
+		}
+	}
+}
+
+public function loadImage(){
+
+	global $conn;
+
+	if ($this->type=="places" || $this->type=="things" || $this->type=="people")
+	{
+		$sql = "SELECT * FROM `data-geo-$this->type` WHERE `id`='$this->qID' LIMIT 1";//" WHERE `id`='3'";
+	}
+	else
+		$sql = "SELECT * FROM `data-$this->type` WHERE `id`='$this->qID' LIMIT 1";//" WHERE `id`='3'";
 
 	$result = $conn->query($sql);
 	//die($sql);
@@ -552,7 +581,7 @@ function addAnswer(){
   else
 		$cityName=$this->country;
 	$cityName=$conn->real_escape_string($cityName);
-	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop"|| $this->type=="ppt")
+	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop"|| $this->type=="places"|| $this->type=="pt")
 		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->lat."', '".$this->longg."', '".$this->answer."')";
 	else if ($this->type=="rand")
 		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->min."', '".$this->max."', '".$this->answer."')";

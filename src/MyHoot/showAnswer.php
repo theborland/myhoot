@@ -2,7 +2,7 @@
 session_start();
 //echo "sdfsdf";
 require 'controller/dbsettings.php';
-if (Game::findGame()->type!="geo" && Game::findGame()->type!="ppt")
+if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places")
      header( 'Location: showAnswerOther.php') ;
 
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);

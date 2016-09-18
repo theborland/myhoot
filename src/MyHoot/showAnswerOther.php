@@ -102,7 +102,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	<style>
 		body{
 			background-color:black;
-	    background-image: url('<?php echo Question::loadImage($allAnswers->correctAns->name,Game::findGame()->type); ?>');
+	    background-image: url('<?php echo $theQuestion->loadImage(); ?>');
 			background-attachment : fixed;
 			<?php
 				if(Game::findGame()->type == "age"){

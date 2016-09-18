@@ -74,10 +74,12 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
           window.location.href='waitingScreen.php';
         else if (data.title.substring(0,1)=="Q")
         {
-          if (data.type=="geo" || data.type=="ppt")
+          if (data.type=="geo" || data.type=="pt" || data.type=="places")
               window.location.href='userScreen.php?question='+data.title.substring(1);
           else if (data.type=="end")
                   window.location.href='waitingScreenEnd.php';
+          else if (data.type=="facts" || data.type=="science" || data.type=="sports" || data.type=="entertainment")
+                  window.location.href='waitingScreenDecimal.php';
           else
               window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
 

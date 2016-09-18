@@ -16,7 +16,7 @@ $correct=Answer::loadCorrect($questionNumber);
 //die();
 $game=Game::findGame();
 
-if ($game->type=="geo" || $game->type=="ppt")
+if ($game->type=="geo" || $game->type=="places"|| $game->type=="pt")
     $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
 /*else if ($game->type=="age"){
   $datetime1 = date_create($answer-$correct->value);
@@ -58,7 +58,7 @@ $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer
         $message= "Off by: ". $distanceAway. " degrees";
     else if ($game->type=="age" || $game->type=="time")
           $message= "Off by: ". $distanceAway. " years";
-    else if ($game->type=="geo" || $game->type=="ppt")
+    else if ($game->type=="geo" || $game->type=="pt"|| $game->type=="places")
       $message= "Distance away : ". $distanceAway. " miles";
     else //if ($game->type=="rand")
       $message= "Off by: ". $distanceAway. "";
