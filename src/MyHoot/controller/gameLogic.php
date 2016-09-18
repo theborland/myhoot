@@ -1,7 +1,8 @@
 <?php  //file used just for getQuestion.php
-$whitelist = array('statesCB','numRounds','gsScience','gsSports','gsEntertainment','gsFacts','gsPPT','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
+$whitelist = array('statesCB','numRounds','gsScience','gsSports','gsEntertainment','gsFacts','gsPT','gsPlaces','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'controller/dbsettings.php';
 //echo print_r($_GET["games"]);
+
 if ($_SESSION["game_id"]==0)
    die("no game id");
 if ($gsGeo=="false" || $gsGeo=="true")
@@ -23,13 +24,13 @@ if ($gsGeo=="false" || $gsGeo=="true")
   if ($gsAge=="true")$gamesSelected[]="age";
   if ($gsHist=="true")$gamesSelected[]="time";
   if ($gsTemp=="true")$gamesSelected[]="weather";
-  if ($gsPop=="true")$gamesSelected[]="pop";
-  if ($gsRand=="true")$gamesSelected[]="rand";
+  if ($gsPT=="true")$gamesSelected[]="pt";
+  if ($gsPlaces=="true")$gamesSelected[]="places";
   if ($gsScience=="true")$gamesSelected[]="science";
   if ($gsSports=="true")$gamesSelected[]="sports";
   if ($gsEntertainment=="true")$gamesSelected[]="entertainment";
   if ($gsFacts=="true")$gamesSelected[]="facts";
-  if ($gsPPT=="true")$gamesSelected[]="ppt";
+
   if ($gsGeo=="true"){
     foreach ($gamesSelected as $key)
         if (sizeof($gamesSelected)<=7)
@@ -49,7 +50,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
   //echo "her";
   //print_r($regionsSelected);
 }
-
+//die ($numRounds);
 if ($_SESSION["questionNumber"]>=$_SESSION["numRounds"]){
     header( 'Location: endScreen.php') ;
 }
@@ -71,6 +72,7 @@ else {
     }
     $theQuestion=new Question($current);
     if ($current=="age")$current="entertainment";
+    if ($current=="pop")$current="facts";
     $playedGames[]=$current;
     $_SESSION["playedGames"]=$playedGames;
     //print_r($playedGames);

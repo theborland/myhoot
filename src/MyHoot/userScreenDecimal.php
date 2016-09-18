@@ -1,10 +1,18 @@
+<?php
+session_start();
+require 'controller/dbsettings.php';
+if (isset($_GET["question"]))
+  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
+    header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+  Game::questionStatusRedirect();
+?>
 <html>
   <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="style/global.css">
       <link href="style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
-  <!--<script src="scripts/socketScripts.js"></script>-->
+  <script src="scripts/socketScripts.js"></script>
     <style>
       html, body {
         height: 100%;
@@ -151,12 +159,7 @@ window.onload = function(){
 
 
   slider.noUiSlider.on('update', function( values, handle ) {
-
-    if(true){ // true if you want decimals
-      a = Math.round(values[handle] * 10) / 10;
-    }else{
       a = Math.round(values[handle]);
-    }
       valbox.value = a + " years old";
       answer.value = a;
       //changeValue(values[handle]);
@@ -180,11 +183,6 @@ window.onload = function(){
 
 
 };
-
-  function decimalize(numberAsString){
-    var numberInt = parseInt(numberAsString)
-    var numberDecimalized = 2
-  }
 
   function comma(num){
     num = num+"";

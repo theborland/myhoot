@@ -4,7 +4,7 @@ var selected = 8;
 //  adds the onClick functions to all the game types
 function initChecks(){
 
-    var games = ['gsCities', 'gsPlaces', 'gsPeople', 'gsTimeline', 'gsFacts', 'gsTemp', 'gsScience', 'gsSports', 'gsEntertainment'];
+    var games = ['gsGeo', 'gsPlaces', 'gsPT', 'gsHist', 'gsFacts', 'gsTemp', 'gsScience', 'gsSports', 'gsEntertainment'];
 
     for(var i = 0; i < 9; i++) {
         var gs = document.getElementById("gs"+(i+1));
@@ -130,4 +130,3 @@ function removeUser(username){
 
     });
 }
-

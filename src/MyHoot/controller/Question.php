@@ -20,16 +20,18 @@ class Question
 				$this->type=$type;
 				if ($type=="geo")
 					  $this->getLocation($type);
-			  else if ($type=="pop")
-						$this->getLocation($type);
+			  //else if ($type=="pop")
+				//		$this->getLocation($type);
 				else if ($type=="weather")
 						$this->getWeather();
-				else if ($type=="age")
-						$this->getAge();
+				//else if ($type=="age")
+				//		$this->getAge();
 				else if ($type=="entertainment")
 						$this->getEntertainment();
-				else if ($type=="ppt")
-						$this->getPPT();
+				else if ($type=="pt")
+						$this->getPPT("pt");
+				else if ($type=="places")
+						$this->getPPT("places");
 				else if ($type=="sports")
 						$this->getQuestion($type);
 				else if ($type=="science")
@@ -130,7 +132,7 @@ class Question
 	}
 
 	function getQuestionTextEnd(){
-			if ($this->type=="ppt"){
+			if ($this->type=="pt"){
 				if ($this->city=="based" || $this->city=="started" || $this->city=="born")
 					return $this->city;
 				if ($this->city=="lived" || $this->city=="live" )
@@ -144,9 +146,9 @@ class Question
 	}
 
 	function getQuestionText(){
-		if ($this->type=="geo")
+		if ($this->type=="geo" || $this->type=="places")
 			return "Where is ";
-		if ($this->type=="ppt"){
+		if ($this->type=="pt"){
 				if ($this->city=="hometown")
 					return "Where was the hometown of ";
 				else if ($this->city=="started" || $this->city=="born")
@@ -298,6 +300,11 @@ class Question
 
 	function getFacts(){
 		global $conn;
+		if (rand(1,10)<5){
+			$this->type="pop";
+			return $this->getLocation("population");
+		}
+
 		$regionsSelected=$_SESSION["regionsSelected"];
 		$sql = "SELECT * FROM `data-facts` WHERE `imageUpdatedDate` IS NOT null AND";
 		foreach ($regionsSelected as $region)
@@ -374,17 +381,17 @@ class Question
 
 	}
 
-	function getPPT(){
+	function getPPT($type){
 		global $conn;
 		$regionsSelected=$_SESSION["regionsSelected"];
 
 		//determine people, place, things
 		$rand=rand(1,10);
-		if ($rand<7)
-		   $db="places";
-	  else if ($rand<9)
+	  if ($rand<7)
 		   $db="people";
 		else $db="products";
+
+		if ($type=="places")$db="places";
 
 		$sql = "SELECT * FROM `data-geo-$db` WHERE ";
     foreach ($regionsSelected as $region)
