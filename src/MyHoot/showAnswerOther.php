@@ -8,7 +8,6 @@ require 'controller/dbsettings.php';
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
 
-
 $max=$allAnswers->getMax();
 $min=$allAnswers->getMin();
 if ($max-$min==0)

@@ -1,18 +1,31 @@
 <?php
 session_start();
+$whitelist = array('perc', 'max');
 require 'controller/dbsettings.php';
 if (isset($_GET["question"]))
-  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
+  if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"])  )
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
   Game::questionStatusRedirect();
+
+
+  $min=0;
+  if ($max=="yes"){
+    $_SESSION["questionNumber"]=Game::questionStatusRedirect();
+
+    $theQuestion=Question::loadQuestion();
+    $max=$theQuestion->max;
+  }
+  else $max=100;
 ?>
+
 <html>
   <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="style/global.css">
       <link href="style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/inputSlider.css">
-  <script src="scripts/socketScripts.js"></script>
+       <script src="scripts/socketScripts.js"></script>
+  <!--<script src="scripts/socketScripts.js"></script>-->
     <style>
       html, body {
         height: 100%;
@@ -133,12 +146,12 @@ x.send();
     <script type="text/javascript">
 
 
-
 window.onload = function(){
 
   var slider = document.getElementById('newSlider');
   var valbox = document.getElementById("isValue");
   var answer = document.getElementById("answer");
+
 
   noUiSlider.create(slider, {
     start: [50],
@@ -146,11 +159,11 @@ window.onload = function(){
     orientation: "vertical",
     direction: 'rtl',
     range: {
-      'min': [10],
-      '25%': [25],
-      '50%': [50],
-      '75%': [75],
-      'max': [100]
+      'min': [<?php echo $min; ?>],
+      '25%': [<?php echo round($min+($max-$min)*.25); ?>],
+      '50%': [<?php echo round($min+($max-$min)*.5); ?>],
+      '75%': [<?php echo round($min+($max-$min)*.75); ?>],
+      'max': [<?php echo $max; ?>]
     },pips: { // Show a scale with the slider
       mode: 'steps',
       density: 2
@@ -159,8 +172,13 @@ window.onload = function(){
 
 
   slider.noUiSlider.on('update', function( values, handle ) {
+
+    if(true){ // true if you want decimals
+      a = Math.round(values[handle] * 10) / 10;
+    }else{
       a = Math.round(values[handle]);
-      valbox.value = a + " years old";
+    }
+      valbox.value = a + " <?php if ($perc=="yes")echo "%"; ?>";
       answer.value = a;
       //changeValue(values[handle]);
   });
@@ -183,6 +201,11 @@ window.onload = function(){
 
 
 };
+
+  function decimalize(numberAsString){
+    var numberInt = parseInt(numberAsString)
+    var numberDecimalized = 2
+  }
 
   function comma(num){
     num = num+"";

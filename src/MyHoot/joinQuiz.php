@@ -2,10 +2,13 @@
 
 session_start();
 if (isset($_SESSION["user_id"]) && isset($_SESSION["game_id"]) && $_SESSION["game_id"]>0 && $_SESSION["user_id"]>0){
-		$ref=$_SERVER['HTTP_REFERER'];
-	  if (strpos($ref,"wait")!==false || strpos($ref,"submitAns")!==false || strpos($ref,"user")!==false){
-			if (strpos($ref,"End")==false)
-				header( 'Location: checkQuestion.php');
+		if (isset($_SERVER['HTTP_REFERER']))
+		{
+			$ref=$_SERVER['HTTP_REFERER'];
+	  	if (strpos($ref,"wait")!==false || strpos($ref,"submitAns")!==false || strpos($ref,"user")!==false){
+				if (strpos($ref,"End")==false)
+					header( 'Location: checkQuestion.php');
+			}
 		}
 
 }

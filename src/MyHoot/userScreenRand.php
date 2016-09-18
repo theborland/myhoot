@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+
 require 'controller/dbsettings.php';
 if (isset($_GET["question"])){
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))

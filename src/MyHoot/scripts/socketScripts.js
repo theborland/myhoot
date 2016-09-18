@@ -66,7 +66,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
     var conn = new ab.Session('ws://'+ip+':8080',
     function() {
       conn.subscribe('Game'+gameID+'Status', function(topic, data) {
-        console.log('Waiting for users:"' + topic + '" : ' + data.title);
+        console.log('Waiting for users:"' + topic + '" : ' + data.title + " : " + data.type);
         var container = document.getElementById("waitingDiv");
         if (data.title.substring(0,1)=="R")
           window.location.href='joinQuiz.php?error=Reject';
@@ -78,8 +78,14 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
               window.location.href='userScreen.php?question='+data.title.substring(1);
           else if (data.type=="end")
                   window.location.href='waitingScreenEnd.php';
-          else if (data.type=="facts" || data.type=="science" || data.type=="sports" || data.type=="entertainment")
-                  window.location.href='userScreenDecimal2.php?question='+data.title.substring(1);
+          else if (data.type=="facts")
+                  window.location.href='userScreenDecimal.php?perc=no&question='+data.title.substring(1);
+          else if (data.type=="factsMax")
+                  window.location.href='userScreenDecimal.php?perc=no&max=yes&question='+data.title.substring(1);
+          else if (data.type=="factsPercent")
+                  window.location.href='userScreenDecimal.php?perc=yes&question='+data.title.substring(1);
+          else if (data.type=="science" || data.type=="sports" || data.type=="entertainment" || data.type=="factsRand")
+                  window.location.href='userScreenRand.php?question='+data.title.substring(1);
           else
               window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
 

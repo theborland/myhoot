@@ -40,7 +40,7 @@ $result = $conn->query($sql);
    <div id="curve_chart" style="width: 900px; height: 500px"></div>
    The total number of questions is:
    <?php
-$sql="SELECT (SELECT count(`id`) FROM `data-geo`) + (SELECT count(`id`) FROM `data-people`)+ (SELECT count(`id`) FROM `data-rand`)+ (SELECT count(`id`) FROM `data-time`) AS total";
+$sql="SELECT (SELECT count(`id`) FROM `data-geo`) + (SELECT count(`id`) FROM `data-geo-places`) + (SELECT count(`id`) FROM `data-geo-people`) +(SELECT count(`id`) FROM `data-geo-products`) +  (SELECT count(`id`) FROM `data-age`)+ (SELECT count(`id`) FROM `data-entertainment`)+ (SELECT count(`id`) FROM `data-facts`)+ (SELECT count(`id`) FROM `data-science`)+ (SELECT count(`id`) FROM `data-sports`)+ (SELECT count(`id`) FROM `data-time`) AS total";
 $result = $conn->query($sql);
 //die($sql);
 if ($result)
