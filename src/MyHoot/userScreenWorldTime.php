@@ -140,7 +140,7 @@ window.onload = function(){
   var valbox = document.getElementById("isValue");
   var answer = document.getElementById("answer");
 
-  var realAnswer = <?php echo(Answer::loadCorrect($questionNumber)); ?>; /// 1700 ************ change this to the correct answer
+  var realAnswer = 1700; ///  ************ change this to the correct answer
 
 
   
