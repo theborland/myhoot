@@ -140,7 +140,9 @@ window.onload = function(){
   var valbox = document.getElementById("isValue");
   var answer = document.getElementById("answer");
 
-  var realAnswer = 1700; /// change this to have the numerical value of the actual answer
+  var realAnswer = 1700; /// ************ change this to the correct answer
+
+  
   var range = {   'min': [-800],    '25%': [-500],    '50%': [-200],    '75%': [100],   'max': [400] };
 
 

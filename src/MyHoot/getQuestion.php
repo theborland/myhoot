@@ -94,8 +94,8 @@ include("controller/gameLogic.php");
 		<div id="questionWrap">
 
 <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
-<div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?></div>
-<div id="questionType"><?php echo $theQuestion->getQuestionTextEnd(); ?></div>
+<div id="actualQuestion"><?php echo $theQuestion->getLabel(); echo $theQuestion->getQuestionTextEnd(); ?></div>
+
 
 
 		</div>
