@@ -214,7 +214,7 @@ class Question
 
 	function getEntertainment(){
 		  //either get a cel age (75% of time )
-			if (rand(0,100)>75)
+			if (rand(0,100)>65)
 					$this->getQuestion('entertainment');
 			else {
 				$this->type="age";
