@@ -120,8 +120,8 @@ class Question
 	function getLabel(){
 		if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
-		else if ($this->type=="places" )
-			return substr($this->country,6);
+//		else if ($this->type=="places" )
+//			return substr($this->country,0);
 		//if ($this->type=="pop" )
 	  else
 			return $this->country;
