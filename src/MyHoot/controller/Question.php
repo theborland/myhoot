@@ -120,7 +120,7 @@ class Question
 	function getLabel(){
 		if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
-//		else if ($this->type=="places" )
+	//	else if ($this->country=="places," )
 //			return substr($this->country,0);
 		//if ($this->type=="pop" )
 	  else
@@ -591,7 +591,7 @@ function addAnswer(){
 //	    $latLong=new LatLong($this->min,$this->max);
 //  else
 //		  $min=new LatLong(0,0);
-	if ($this->city!="" && $this->type!="rand")
+	if ($this->city!="" && $this->type!="rand" && $this->type!="places")
 		$cityName=$this->city . ",".$this->country;
   else
 		$cityName=$this->country;

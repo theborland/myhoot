@@ -41,8 +41,10 @@ class AllAnswers
 	public function zoomLevel(){
 		  $maxAway=0;
 			foreach($this->allAnswers as $key=>$answer){
-				if ($answer->distanceAway>$maxAway)
+				if ($answer->distanceAway>$maxAway){
+					//$maxAway++;
 					$maxAway=$answer->distanceAway;
+				}
 			}
 			//return $maxAway;
 			if ($maxAway<40)return 8;
@@ -236,7 +238,7 @@ class Answer
 			$answer->distanceAway=-999.99;
 		else if (!is_object($correct))//meaning end of game
 			$answer->distanceAway=-999.99;
-		else if (Game::findGame()->type=="geo" || Game::findGame()->type=="ppt")
+		else if (Game::findGame()->type=="geo" || Game::findGame()->type=="pt" || Game::findGame()->type=="places")
 			$answer->distanceAway=LatLong::findDistance($correct->location,$loc);
 		else
 		  $answer->distanceAway=abs($ans-$correct->value);
