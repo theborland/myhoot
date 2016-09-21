@@ -68,7 +68,11 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
       conn.subscribe('Game'+gameID+'Status', function(topic, data) {
         console.log('Waiting for users:"' + topic + '" : ' + data.title + " : " + data.type);
         var container = document.getElementById("waitingDiv");
-        if (data.title.substring(0,1)=="R")
+        if (data.type=="NextGame")
+          window.location.href='joinQuiz.php?replay=yes&game_id='+data.title;
+        else if (data.type=="end")
+          window.location.href='waitingScreenEnd.php';
+        else if (data.title.substring(0,1)=="R")
           window.location.href='joinQuiz.php?error=Reject';
         else if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
           window.location.href='waitingScreen.php?message=nosubmit';
@@ -76,8 +80,6 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
         {
           if (data.type=="geo" || data.type=="pt" || data.type=="places")
               window.location.href='userScreen.php?question='+data.title.substring(1);
-          else if (data.type=="end")
-                  window.location.href='waitingScreenEnd.php';
           else if (data.type=="facts")
                   window.location.href='userScreenDecimal.php?perc=no&question='+data.title.substring(1);
           else if (data.type=="factsMax")
@@ -106,7 +108,7 @@ function loadWaitingForNextGame(ip,gameID){
     conn.subscribe('Game'+gameID+'NextGame', function(topic, data) {
       console.log('Waiting for nextgame:"' + topic + '" : ' + data.title);
       var container = document.getElementById("waitingDiv");
-      window.location.href='joinQuiz.php?game_id='+data.title;
+      window.location.href='joinQuiz.php?replay=yes&game_id='+data.title;
 
           });
 

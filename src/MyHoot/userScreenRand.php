@@ -80,7 +80,9 @@ $max=$theQuestion->max;
 
 
 
-
+    window.setTimeout(function(){
+            window.location.href = "waitingScreen.php";
+        }, 31000);
 
 	setTimeout( function(){
    if(XMLHttpRequest) var x = new XMLHttpRequest();

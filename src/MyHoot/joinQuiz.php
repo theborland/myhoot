@@ -1,19 +1,20 @@
 <?php
-
 session_start();
+$whitelist = array('error','name','game_id','replay');
+require 'controller/dbsettings.php';
+
 if (isset($_SESSION["user_id"]) && isset($_SESSION["game_id"]) && $_SESSION["game_id"]>0 && $_SESSION["user_id"]>0){
 		if (isset($_SERVER['HTTP_REFERER']))
 		{
 			$ref=$_SERVER['HTTP_REFERER'];
 	  	if (strpos($ref,"wait")!==false || strpos($ref,"submitAns")!==false || strpos($ref,"user")!==false){
-				if (strpos($ref,"End")==false)
+				if ($replay!="yes")
 					header( 'Location: checkQuestion.php');
 			}
 		}
 
 }
-$whitelist = array('error','name','game_id');
-require 'controller/dbsettings.php';
+
 
 if (isset($_SESSION["name"]) && strlen($name)==0)
 	$name=$_SESSION["name"];

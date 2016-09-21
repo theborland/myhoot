@@ -35,6 +35,12 @@ class Game
 			$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
 			$socket->connect("tcp://127.0.0.1:5555");
 			$socket->send(json_encode($entryData));
+			$entryData = array(
+				'category' => "Game".$lastGame_ID."Status"
+				, 'title'    => substr($_SESSION["game_id"],0,5)
+				, 'type'    => "NextGame"
+			);
+			$socket->send(json_encode($entryData));
 		}
 
 	}

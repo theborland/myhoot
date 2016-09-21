@@ -21,6 +21,11 @@ if (isset($_GET["question"]))
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 
+
+    window.setTimeout(function(){
+            window.location.href = "waitingScreen.php";
+        }, 31000);
+
 	setTimeout( function(){
    if(XMLHttpRequest) var x = new XMLHttpRequest();
 else var x = new ActiveXObject("Microsoft.XMLHTTP");

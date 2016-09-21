@@ -47,7 +47,9 @@ if (isset($_GET["question"]))
     </style>
 
     <script>
-
+    window.setTimeout(function(){
+            window.location.href = "waitingScreen.php";
+        }, 31000);
     //var nf = new Intl.NumberFormat();
 
     function changeValue() {

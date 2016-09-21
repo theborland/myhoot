@@ -48,7 +48,9 @@ if (isset($_GET["question"]))
     </style>
 
     <script>
-
+    window.setTimeout(function(){
+            window.location.href = "waitingScreen.php";
+        }, 31000);
     //var nf = new Intl.NumberFormat();
 
     function changeValue() {
@@ -143,7 +145,7 @@ window.onload = function(){
   var realAnswer = 1700; ///  ************ change this to the correct answer
 
 
-  
+
   var range = {   'min': [-800],    '25%': [-500],    '50%': [-200],    '75%': [100],   'max': [400] };
 
 
@@ -207,7 +209,7 @@ window.onload = function(){
 function formatYear(year){
       if (year < 0){
         return( (year * -1) + " BC" );
-      }else{  
+      }else{
         return(year);
       }
 
