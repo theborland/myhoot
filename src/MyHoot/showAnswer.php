@@ -37,7 +37,7 @@ $theQuestion=Question::loadQuestion();
 			//automatically forward if automode is on
 			setTimeout( function(){
 			      window.location.href='getQuestion.php';
-			}  , 9000 );
+			}  , 11000 );
 			<?php
 			}
 			?>
