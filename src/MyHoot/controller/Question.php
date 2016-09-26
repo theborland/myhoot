@@ -47,12 +47,13 @@ class Question
 				$this->addAnswer();
 				//echo "in here again";
 				Game::updateRound($_SESSION["questionNumber"],$this->type);
-				if ($this->type=="time" && $this->answer<1600)
+				if ($this->type=="time")
 				{
 					if ($this->answer<-200)$region=0;
 					else if ($this->answer<600)$region=1;
 					else if ($this->answer<1200)$region=2;
-					else $region=3;
+					else if ($this->answer<1600)$region=3;
+					else $region=4;
 					$this->alertUsers($_SESSION["questionNumber"],"WorldTime".$region);
 				}
 				else if ($this->type=="facts" && $this->max==-100)
