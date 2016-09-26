@@ -143,24 +143,38 @@ window.onload = function(){
   var valbox = document.getElementById("isValue");
   var answer = document.getElementById("answer");
 
-  var realAnswer = 1700; ///  ************ change this to the correct answer
+  var realAnswer = <?php echo $region; ?>; ///  ************ change this to the correct answer
+
+  alert("<?php echo $region; ?>");
 
 
 
-  var range = {   'min': [-800],    '25%': [-500],    '50%': [-200],    '75%': [100],   'max': [400] };
+  var range = {   'min': [1600],    '25%': [1700],    '50%': [1800],    '75%': [1900],   'max': [2020] };
 
 
-  if (realAnswer < -200){
+
+  // if (realAnswer < -200){
+  //   range = {   'min': [-800],    '25%': [-600],    '50%': [-400],    '75%': [-200],   'max': [0] };
+  // }else if (realAnswer >= -200 && realAnswer < 600){
+  //   range = {   'min': [-200],    '25%': [0],    '50%': [200],    '75%': [400],   'max': [600] };
+  // }else if (realAnswer >= 600 && realAnswer < 1300){
+  //   range = {   'min': [600],    '25%': [800],    '50%': [1000],    '75%': [1200],   'max': [1400] };
+  // }else if (realAnswer >= 1300 && realAnswer < 1700){
+  //   range = {   'min': [1300],    '25%': [1400],    '50%': [1500],    '75%': [1600],   'max': [1700] };
+  // }else if (realAnswer >= 1700){
+  //   range = {   'min': [1600],    '25%': [1700],    '50%': [1800],    '75%': [1900],   'max': [2020] };
+  // }
+
+    if (realAnswer == 0){
     range = {   'min': [-800],    '25%': [-600],    '50%': [-400],    '75%': [-200],   'max': [0] };
-  }else if (realAnswer >= -200 && realAnswer < 600){
+  }else if (realAnswer == 1){
     range = {   'min': [-200],    '25%': [0],    '50%': [200],    '75%': [400],   'max': [600] };
-  }else if (realAnswer >= 600 && realAnswer < 1300){
+  }else if (realAnswer == 2){
     range = {   'min': [600],    '25%': [800],    '50%': [1000],    '75%': [1200],   'max': [1400] };
-  }else if (realAnswer >= 1300 && realAnswer < 1700){
-    range = {   'min': [1300],    '25%': [1400],    '50%': [1500],    '75%': [1600],   'max': [1700] };
-  }else if (realAnswer >= 1700){
-    range = {   'min': [1600],    '25%': [1700],    '50%': [1800],    '75%': [1900],   'max': [2020] };
+  }else if (realAnswer == 3){
+    range = {   'min': [1200],    '25%': [1300],    '50%': [1400],    '75%': [1500],   'max': [1600] };
   }
+
 
   noUiSlider.create(slider, {
     start: [range['50%']],
