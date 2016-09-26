@@ -3,7 +3,7 @@ session_start();
 require 'controller/dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
-    header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
+    header("Location: waitingScreen.php?message=".urlencode("Come on - you can't submit twice..."));
   Game::questionStatusRedirect();
 ?>
 <html>
