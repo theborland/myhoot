@@ -145,10 +145,6 @@ window.onload = function(){
 
   var realAnswer = <?php echo $region; ?>; ///  ************ change this to the correct answer
 
-  alert("<?php echo $region; ?>");
-
-
-
   var range = {   'min': [1600],    '25%': [1700],    '50%': [1800],    '75%': [1900],   'max': [2020] };
 
 
