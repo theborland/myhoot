@@ -1,5 +1,6 @@
 <?php
 session_start();
+$whitelist = array('region');
 require 'controller/dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
