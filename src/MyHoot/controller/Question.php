@@ -48,7 +48,13 @@ class Question
 				//echo "in here again";
 				Game::updateRound($_SESSION["questionNumber"],$this->type);
 				if ($this->type=="time" && $this->answer<1600)
-					$this->alertUsers($_SESSION["questionNumber"],"WorldTime");
+				{
+					if ($this->answer<-200)$region=0;
+					else if ($this->answer<600)$region=1;
+					else if ($this->answer<1200)$region=2;
+					else $region=3;
+					$this->alertUsers($_SESSION["questionNumber"],"WorldTime".$region);
+				}
 				else if ($this->type=="facts" && $this->max==-100)
 					$this->alertUsers($_SESSION["questionNumber"],"factsPercent");
 				else if ($this->type=="facts" && $this->max==100)
