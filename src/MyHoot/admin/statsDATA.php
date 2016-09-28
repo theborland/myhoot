@@ -1,4 +1,6 @@
 <?php
+$whitelist = array('users');
+
 require '../controller/dbsettings.php';
 
 ?>
@@ -10,8 +12,9 @@ require '../controller/dbsettings.php';
   "rows": [
   <?php
 
-  $sql = "SELECT DATE((time)) AS time, COUNT(*) AS NumPosts FROM games GROUP BY DATE((time)) ORDER BY time";
+  $sql = "SELECT DATE((time)) AS time, COUNT(*) AS NumPosts, GROUP_CONCAT(DISTINCT `game_id` SEPARATOR ',') AS ids FROM games GROUP BY DATE((time)) ORDER BY time";
   $result = $conn->query($sql);
+  //echo $sql;
   if ($result)
   {
       $i=0;
@@ -20,6 +23,8 @@ require '../controller/dbsettings.php';
         //die ($sql);
         $time=$row["time"];
         $numPosts=$row["NumPosts"];
+        if ($users==1)
+          $numPosts=findTotalUsers($row["ids"]);
         echo  '{"c":[{"v":"'.$time.'","f":null},{"v":'.$numPosts.',"f":null}]}';
         $i++;
         if ($i!=$numResults)
@@ -32,3 +37,20 @@ require '../controller/dbsettings.php';
 
       ]
 }
+<?php
+function findTotalUsers($ids){
+  global $conn;
+  $count=0;
+  $allID=explode(",",$ids);
+  foreach ($allID as $key => $value) {
+      $sql = "SELECT COUNT(*) AS num FROM users WHERE game_id=$value";
+      $result = $conn->query($sql);
+      $row = $result->fetch_assoc();
+      $count+=$row["num"];
+  }
+
+
+  return $count;
+}
+
+?>
