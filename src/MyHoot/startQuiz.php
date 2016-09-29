@@ -168,39 +168,39 @@ Game::createGame($replay);
 
 
 				<div class="gsItem gsSel" id="gs1">
-					<img src="img/map.svg" class="gsImg" alt="">
+					<img src="img/cities.svg" class="gsImg" alt="">
 					<div class="gsName">CITIES</div>
 				</div>
 				<div class="gsItem" id="gs2">
-					<img src="img/population.svg" class="gsImg" alt="">
+					<img src="img/map.svg" class="gsImg" alt="">
 					<div class="gsName">PLACES</div>
 				</div>
 				<div class="gsItem" id="gs3">
-					<img src="img/temp.svg" class="gsImg" alt="">
+					<img src="img/ppt.svg" class="gsImg" alt="">
 					<div class="gsName">PEOPLE/THINGS</div>
 				</div>
 				<div class="gsItem" id="gs4">
-					<img src="img/star.svg" class="gsImg" alt="">
+					<img src="img/history.svg" class="gsImg" alt="">
 					<div class="gsName">TIMELINE</div>
 				</div>
 				<div class="gsItem" id="gs5">
-					<img src="img/history.svg" class="gsImg" alt="">
+					<img src="img/facts.svg" class="gsImg" alt="">
 					<div class="gsName">FACTS</div>
 				</div>
 	 			<div class="gsItem" id="gs6">
-					<img src="img/random.svg" class="gsImg" alt="">
+					<img src="img/temp.svg" class="gsImg" alt="">
 					<div class="gsName">TEMPERATURE</div>
 				</div>
 				<div class="gsItem" id="gs7">
-					<img src="img/star.svg" class="gsImg" alt="">
+					<img src="img/science.svg" class="gsImg" alt="">
 					<div class="gsName">SCIENCE</div>
 				</div>
 				<div class="gsItem" id="gs8">
-					<img src="img/history.svg" class="gsImg" alt="">
+					<img src="img/sports.svg" class="gsImg" alt="">
 					<div class="gsName">SPORTS</div>
 				</div>
 	 			<div class="gsItem" id="gs9">
-					<img src="img/random.svg" class="gsImg" alt="">
+					<img src="img/entertainment.svg" class="gsImg" alt="">
 					<div class="gsName">ENTERTAINMENT</div>
 				</div>
 				<!--<div id="showMap" class="regButton" onclick="alert('sup')">Select Regions</div>-->
