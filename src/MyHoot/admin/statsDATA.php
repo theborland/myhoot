@@ -25,6 +25,8 @@ require '../controller/dbsettings.php';
         $numPosts=$row["NumPosts"];
         if ($users==1)
           $numPosts=findTotalUsers($row["ids"]);
+          if ($users==w)
+            $numPosts=findTotalAnswers($row["ids"]);
         echo  '{"c":[{"v":"'.$time.'","f":null},{"v":'.$numPosts.',"f":null}]}';
         $i++;
         if ($i!=$numResults)
@@ -53,4 +55,18 @@ function findTotalUsers($ids){
   return $count;
 }
 
+function findTotalAnswers($ids){
+  global $conn;
+  $count=0;
+  $allID=explode(",",$ids);
+  foreach ($allID as $key => $value) {
+      $sql = "SELECT COUNT(*) AS num FROM games WHERE game_id=$value";
+      $result = $conn->query($sql);
+      $row = $result->fetch_assoc();
+      $count+=$row["num"];
+  }
+
+
+  return $count;
+}
 ?>
