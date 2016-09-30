@@ -25,8 +25,8 @@ require '../controller/dbsettings.php';
         $numPosts=$row["NumPosts"];
         if ($users==1)
           $numPosts=findTotalUsers($row["ids"]);
-          if ($users==w)
-            $numPosts=findTotalAnswers($row["ids"]);
+        if ($users==2)
+          $numPosts=findTotalAnswers($row["ids"]);
         echo  '{"c":[{"v":"'.$time.'","f":null},{"v":'.$numPosts.',"f":null}]}';
         $i++;
         if ($i!=$numResults)
