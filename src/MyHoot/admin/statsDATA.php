@@ -62,6 +62,7 @@ function findTotalAnswers($ids){
   foreach ($allID as $key => $value) {
       $sql = "SELECT COUNT(*) AS num FROM answers WHERE game_id=$value";
       $result = $conn->query($sql);
+      echo $sql;
       $row = $result->fetch_assoc();
       $count+=$row["num"];
   }
