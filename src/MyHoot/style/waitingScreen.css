@@ -81,4 +81,7 @@ body{
 #surveyWrap a:link, #surveyWrap a:visited, #surveyWrap a:hover, #surveyWrap a:focus{
 	color:#fff;
 	text-decoration: none;
+	display: inline-block;
+	padding:3px 6px;
+	border:2px solid #fff;
 }

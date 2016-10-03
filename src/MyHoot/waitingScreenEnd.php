@@ -56,7 +56,7 @@ require 'controller/dbsettings.php';
 </div>
 <div id="messageWrap">
 
-<input type="button" value="Share on Facebook!" id="shareOnFB">
+<input type="button" value="Share on Facebook!" id="shareOnFB" class="regButton">
 <br>
 <div id="surveyWrap">
 	
