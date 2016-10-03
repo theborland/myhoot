@@ -72,7 +72,6 @@ require 'controller/dbsettings.php';
 	document.getElementById('shareOnFB').onclick = function() {
 	  FB.ui({
 	    method: 'share',
-	    display: 'page',
 	    quote: 'I just got nth place playing against my friends on GameOn.World! Start a game now, it\'s free and easy to play!',
 	    href: 'https://gameon.world/game.php',
 	  }, function(response){});
