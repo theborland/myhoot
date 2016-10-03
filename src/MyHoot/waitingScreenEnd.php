@@ -59,7 +59,7 @@ require 'controller/dbsettings.php';
 <input type="button" value="Share on Facebook!" id="shareOnFB" class="regButton">
 <br>
 <div id="surveyWrap">
-	
+	Enjoyed our game or have any suggestions? <a href="#">Give us feedback!</a>
 </div>
 
 </div>
