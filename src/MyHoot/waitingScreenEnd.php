@@ -36,6 +36,7 @@ require 'controller/dbsettings.php';
       xfbml      : true,
       version    : 'v2.7'
     });
+    FB.AppEvents.logPageView();
   };
 
   (function(d, s, id){
