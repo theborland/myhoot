@@ -12,7 +12,7 @@ require 'controller/dbsettings.php';
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Waiting...</title>
+	<title>Game Over!</title>
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/waitingScreen.css">
 
@@ -51,7 +51,7 @@ require 'controller/dbsettings.php';
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="img/logo.svg" id="logo"></a>
 
-	<div id="waiting">Game Over - all good things must come to an end...</div>
+	<div id="waiting">Game Over</div>
 
 </div>
 <div id="messageWrap">
@@ -74,7 +74,7 @@ require 'controller/dbsettings.php';
 	    method: 'share',
     	mobile_iframe: true,
 	    display: 'popup',
-	    quote: 'I just got nth place playing against my friends on GameOn.World! Start a game now, it\'s free and easy play.',
+	    quote: 'I just got nth place playing against my friends on GameOn.World! Start a game now, it\'s free and easy to play!',
 	    href: 'https://gameon.world/game.php',
 	  }, function(response){});
 	}
