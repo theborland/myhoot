@@ -70,6 +70,7 @@ require 'controller/dbsettings.php';
 
 <script>
 	document.getElementById('shareOnFB').onclick = function() {
+		alert('it works!');
 	  FB.ui({
 	    method: 'share',
 	    display: 'popup',
