@@ -73,7 +73,6 @@ require 'controller/dbsettings.php';
 	  FB.ui({
 	    method: 'share',
     	mobile_iframe: true,
-	    display: 'popup',
 	    quote: 'I just got nth place playing against my friends on GameOn.World! Start a game now, it\'s free and easy to play!',
 	    href: 'https://gameon.world/game.php',
 	  }, function(response){});
