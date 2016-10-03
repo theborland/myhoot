@@ -62,7 +62,10 @@ body{
 	color: #fff;
 	padding:10px 29px 10px;
 }
-#shareOnFB:hover{
+#shareOnFB:focus{
+	background: #415DFF;
+	color: #fff;
+}#shareOnFB:hover{
 	background: #6281FF;
 	color: #fff;
 }
@@ -70,10 +73,7 @@ body{
 	background: #84A0FF;
 	color: #fff;
 }
-#shareOnFB:focus{
-	background: #415DFF;
-	color: #fff;
-}
+
 
 #surveyWrap{
 	font-size: 18px;
