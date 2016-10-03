@@ -69,7 +69,7 @@ require 'controller/dbsettings.php';
 </div>
 
 <script>
-	document.getElementById('shareBtn').onclick = function() {
+	document.getElementById('shareOnFB').onclick = function() {
 	  FB.ui({
 	    method: 'share',
     	mobile_iframe: true,
