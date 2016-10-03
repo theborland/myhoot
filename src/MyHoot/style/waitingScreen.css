@@ -56,3 +56,29 @@ body{
 	margin-left: 5px;
 }
 
+
+#shareOnFB{
+	background: #415DFF;
+	color: #e9e9e9;
+}
+#shareOnFB:hover{
+	background: #6281FF;
+	color: #fff;
+}
+#shareOnFB:active{
+	background: #84A0FF;
+	color: #fff;
+}
+#shareOnFB:focus{
+	background: #415DFF;
+	color: #e9e9e9;
+}
+
+#surveyWrap{
+	font-size: 18px;
+}
+
+#surveyWrap a:link, #surveyWrap a:visited, #surveyWrap a:hover, #surveyWrap a:focus{
+	color:#fff;
+	text-decoration: none;
+}
