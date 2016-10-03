@@ -37,7 +37,7 @@ require 'controller/dbsettings.php';
       version    : 'v2.7'
     });
   };
-  alert("df");
+
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
