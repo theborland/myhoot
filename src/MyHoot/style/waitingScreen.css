@@ -56,3 +56,37 @@ body{
 	margin-left: 5px;
 }
 
+
+#shareOnFB{
+	background: #415DFF;
+	color: #fff;
+	padding:10px 29px 10px;
+}
+#shareOnFB:focus{
+	background: #415DFF;
+	color: #fff;
+}#shareOnFB:hover{
+	background: #5282FF;
+	color: #fff;
+}
+#shareOnFB:active{
+	background: #638EFF;
+	color: #fff;
+}
+
+
+#surveyWrap{
+	font-size: 18px;
+	margin-top:20px;
+}
+
+#surveyWrap a:link, #surveyWrap a:visited, #surveyWrap a:hover, #surveyWrap a:focus{
+	color:#fff;
+	text-decoration: none;
+	display: inline-block;
+	padding:0px 8px;
+	margin-left: 5px;
+	border:1px solid rgba(255,255,255,0.8);
+	border-radius:5px;
+
+}
