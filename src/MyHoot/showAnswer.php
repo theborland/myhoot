@@ -4,9 +4,11 @@ session_start();
 require 'controller/dbsettings.php';
 if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places")
      header( 'Location: showAnswerOther.php') ;
-
-$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
+$theQuestion->alertUsers(-1);
+$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+
+
 //die ($allAnswers->zoomLevel());
 ?>
 

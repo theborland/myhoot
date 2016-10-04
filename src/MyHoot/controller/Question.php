@@ -84,25 +84,32 @@ class Question
 	}
 
 
-	public static function alertUsers($message,$type=NULL){
+	public function alertUsers($message,$type=NULL){
 		//SOCKET SENDING MESSAGE
 		$entryData = array(
 			'category' => "Game".$_SESSION["game_id"]."Status"
 			, 'title'    => "Q".$message
 			, 'type'    => $type
 		);
+		$connect="5555";
+		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+		{
+			$entryData["question"]=$this->getQuestionText() . "" . $this->getLabel() . " ". $this->getQuestionTextEnd(); ;
+			//if ($this->type=="geo" || $this->type=="places")
+			$connect="5556";
+		}
 		$context = new ZMQContext();
 		$socket = $context->getSocket(ZMQ::SOCKET_PUSH, 'my pusher');
-		$socket->connect("tcp://localhost:5555");
+		$socket->connect("tcp://localhost:".$connect);
 		$socket->send(json_encode($entryData));
 		//END SOCKET SENDING
 	}
 
 	public static function loadQuestion(){
 		   global $conn;
-			 $sql = "SELECT * FROM `questions` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".$_SESSION["questionNumber"]."'";
+			 $sql = "SELECT * FROM `questions` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".abs($_SESSION["questionNumber"])."'";
 	 		 $result = $conn->query($sql);
-	 		//echo $sql;
+
 	 		if ($result)
 	 		{
 	 			if($row = $result->fetch_assoc()){
@@ -450,7 +457,7 @@ class Question
 		  }
 		}
 		if ($this->checkForRepeats($this->country))
-			$this->getPT($db);
+			$this->getPPT($db);
 
 }
 
@@ -598,17 +605,20 @@ function addAnswer(){
 //	    $latLong=new LatLong($this->min,$this->max);
 //  else
 //		  $min=new LatLong(0,0);
+  $table="questions";
+	if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+		$table="questionsSingle";
 	if ($this->city!="" && $this->type!="rand" && $this->type!="places")
 		$cityName=$this->city . ",".$this->country;
   else
 		$cityName=$this->country;
 	$cityName=$conn->real_escape_string($cityName);
 	if ($this->type=="geo" || $this->type=="weather" || $this->type=="pop"|| $this->type=="places"|| $this->type=="pt")
-		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->lat."', '".$this->longg."', '".$this->answer."')";
+		$sql = "INSERT INTO `$table` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->lat."', '".$this->longg."', '".$this->answer."')";
 	else if ($this->type!="age" && $this->type!="time")
-		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->min."', '".$this->max."', '".$this->answer."')";
+		$sql = "INSERT INTO `$table` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '".$this->min."', '".$this->max."', '".$this->answer."')";
   else
-		$sql = "INSERT INTO `questions` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '0', '0', '".$this->answer."')";
+		$sql = "INSERT INTO `$table` (`gameID`, `questionNum`,`type`,`qID` ,`wording`, `lat`, `longg`,`answer`) VALUES ('".$_SESSION["game_id"]."', '".$_SESSION["questionNumber"]."','".$this->type."','".$this->qID."','$cityName', '0', '0', '".$this->answer."')";
 
 	$result = $conn->query($sql);
 	//echo $sql;

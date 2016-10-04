@@ -2,11 +2,13 @@
 session_start();
 //echo "sdfsdf";
 //echo $_SESSION["questionNumber"];
+//echo $_SESSION["game_id"];
 require 'controller/dbsettings.php';
 //  $_SESSION["game_id"]=90993;
   //$_SESSION["questionNumber"]=7;
-$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 $theQuestion=Question::loadQuestion();
+$theQuestion->alertUsers(-1);
+$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
 $max=$allAnswers->getMax();
 $min=$allAnswers->getMin();

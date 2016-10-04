@@ -104,6 +104,48 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
   );
 }
 
+function loadWaitingForQuestionSingle(ip,gameID){
+  var conn = new ab.Session('ws://'+ip+':8081',
+  function() {
+    conn.subscribe('Game'+gameID+'Status', function(topic, data) {
+      console.log('Waiting for users:"' + topic + '" : ' + data.title + " : " + data.type);
+      var container = document.getElementById("waitingDiv");
+      if (data.type=="NextGame")
+        window.location.href='joinQuiz.php?replay=yes&game_id='+data.title;
+      else if (data.type=="end")
+        window.location.href='waitingScreenEnd.php';
+      else if (data.title.substring(0,1)=="R")
+        window.location.href='joinQuiz.php?error=Reject';
+      else if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
+        window.location.href='waitingScreen.php?message=nosubmit';
+      else if (data.title.substring(0,1)=="Q" && data.title!="Q-1")
+      {
+        if (data.type=="geo" || data.type=="pt" || data.type=="places")
+            window.location.href='userScreen.php?question='+data.title.substring(1);
+        else if (data.type=="facts")
+                window.location.href='userScreenDecimal.php?perc=no&question='+data.title.substring(1);
+        else if (data.type=="factsMax")
+                window.location.href='userScreenDecimal.php?perc=no&max=yes&question='+data.title.substring(1);
+        else if (data.type=="factsPercent")
+                window.location.href='userScreenDecimal.php?perc=yes&question='+data.title.substring(1);
+        else if (data.type=="science" || data.type=="sports" || data.type=="entertainment" || data.type=="factsRand")
+                window.location.href='userScreenRand.php?question='+data.title.substring(1);
+        else if (data.type.substring(0,9)=="WorldTime")
+                window.location.href='userScreenWorldTime.php?region='+data.type.substring(9)+'&perc=no&question='+data.title.substring(1);
+        else
+            window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
+
+      }
+          });
+
+  },
+  function() {
+    console.warn('WebSocket connection closed');
+  },
+  {'skipSubprotocolCheck': true}
+);
+}
+
 function loadWaitingForNextGame(ip,gameID){
   var conn = new ab.Session('ws://'+ip+':8080',
   function() {

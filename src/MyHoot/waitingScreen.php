@@ -25,14 +25,21 @@ if ($submit=="Join"){
     $game=Game::findGame();
     $questionNumber=$game->round;
     if ($questionNumber!=-1){
-        if ($game->type=="geo"){
-          header( 'Location: userScreen.php?question='.$questionNumber ) ;
-        }
-        else {
-          $type=ucwords($game->type);
-          header( 'Location: userScreen'.$type.'.php?question='.$questionNumber ) ;
-        }
-    }
+      if ($game->type=="geo"|| $game->type=="pt" || $game->type=="places")
+              header( 'Location: userScreen.php?question='.$questionNumber ) ;
+      else if ($game->type=="facts")
+              header('Location: userScreenDecimal.php?perc=no&question='.$questionNumber ) ;
+      else if ($game->type=="factsMax")
+              header('Location: userScreenDecimal.php?perc=no&max=yes&question='.$questionNumber ) ;
+      else if ($game->type=="factsPercent")
+              header('Location: userScreenDecimal.php?perc=yes&question='.$questionNumber ) ;
+      else if ($game->type=="science" || $game->type=="sports" || $game->type=="entertainment" || $game->type=="factsRand")
+              header('Location: userScreenRand.php?question='.$questionNumber ) ;
+      else if ($game->type=="WorldTime")//below is messed up I put 3 for region which is not right
+              header('Location: userScreenWorldTime.php?region=3&perc=no&question='.$questionNumber ) ;
+      else
+          header('Location: userScreen'.$type=ucwords($game->type).'.php?question='.$questionNumber ) ;
+      }
 }
 
  ?>

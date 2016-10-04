@@ -9,12 +9,14 @@ class Game
 		global $conn;
 		$game_id=rand(10000,99999);
 		if ($game_idSet!=null)
-			$game_id=55555;
+			$game_id=1111;
 		if ($replay=="yes")$lastGame_ID=$_SESSION["game_id"];
 		date_default_timezone_set('America/New_York');
 		//die (date("z"));
 		$_SESSION["game_id"]=$game_id.(	str_pad(date("z"), 3, "0", STR_PAD_LEFT));
 		//if ($single==true)
+		if ($game_idSet!=null)
+			$_SESSION["game_id"]=$game_id=1111;
 		//   $_SESSION["game_id"]*=00;//, $single=false
 		//$_SESSION["game_id"] =$_GET['game_id'];
 		//$_SESSION["user_id"] =rand (0,111111111);
