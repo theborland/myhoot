@@ -5,12 +5,15 @@ require '../controller/dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("Come on - you can't submit twice..."));
-  Game::questionStatusRedirect();
+    $_SESSION["questionNumber"]=Game::questionStatusRedirect();
+    $theQuestion=Question::loadQuestion();
 ?>
 <html>
   <head>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="../style/global.css">
+  <link rel="stylesheet" href="../style/getQuestion.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <link href="../style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/inputSlider.css">
     <script src="../scripts/socketScripts.js"></script>
@@ -71,20 +74,52 @@ if (isset($_GET["question"]))
         //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
 
+    var counter = 30;
+    window.onload = function(){
+      $('#timer').animate({
+        width: "0%"
+      }, 30000, "linear");
 
+      var interval = setInterval(function() {
+          counter--;
+        $('#timeLeft').html(counter);
+          if (counter == 0) {
+            window.location.replace("showAnswer.php");
+          }
+      }, 1000);
+
+      //animation clock
+      var x=0;
+      var interval = setInterval(function() {
+
+           x++;
+      }, 50);
+
+
+
+    }
 
 
     </script>
     <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
     <script>
+
       loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>
 
  </head>
  <body>
   <script src="../scripts/nouislider.min.js"></script>
+
   <div id="overlayWrap">
+    <div id="timerContainer">
+      <div id="timer"></div>
+    </div>
+    <div id="questionWrap">
+      <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
+      <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+    </div>
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">

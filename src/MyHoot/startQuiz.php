@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["single"]=false;
 $whitelist = array('replay');
 require 'controller/dbsettings.php';
 //create game

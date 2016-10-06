@@ -3,6 +3,7 @@
 session_start();
 $whitelist = array('message','submit','name','place');
 $game_id=1111;
+$_SESSION["single"]=true;
 
 require '../controller/dbsettings.php';
 
@@ -16,7 +17,7 @@ if ($submit=="Join"){
     $_SESSION["game_id"]=$game_id;
     $game=Game::findGame();
     $questionNumber=$game->round;
-    
+
 }
 
  ?>

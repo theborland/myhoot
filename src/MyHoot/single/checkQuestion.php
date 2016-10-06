@@ -1,7 +1,7 @@
 <?php
 session_start();
 $whitelist = array('lat','long','questionNumber');
-require 'controller/dbsettings.php';
+require '../controller/dbsettings.php';
 
 $game=Game::findGame();
 $questionNumber=$game->round;

@@ -98,6 +98,11 @@ $max=$theQuestion->max;
  <body>
   <script src="scripts/nouislider.min.js"></script>
   <div id="overlayWrap">
+  <div id="questionWrap">
+    <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
+    <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+  </div>
+
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">

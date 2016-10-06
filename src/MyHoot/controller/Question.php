@@ -107,7 +107,10 @@ class Question
 
 	public static function loadQuestion(){
 		   global $conn;
-			 $sql = "SELECT * FROM `questions` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".abs($_SESSION["questionNumber"])."'";
+			 $table="questions";
+			 if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+		 			$table="questionsSingle";
+			 $sql = "SELECT * FROM `$table` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".abs($_SESSION["questionNumber"])."'";
 	 		 $result = $conn->query($sql);
 
 	 		if ($result)
@@ -321,7 +324,7 @@ class Question
 				$this->qID=$row["id"];
 			}
 		}
-		if (Question::checkForRepeats($this->country))
+		if ($this->checkForRepeats($this->country))
    		$this->getTime();
 	}
 
@@ -353,7 +356,7 @@ class Question
 				$this->min=0;
 			}
 		}
-		if (Question::checkForRepeats($this->country))
+		if ($this->checkForRepeats($this->country))
 			$this->getFacts();
 	}
 
@@ -415,7 +418,7 @@ class Question
 		$regionsSelected=$_SESSION["regionsSelected"];
 
 		//determine people, place, things
-		$rand=rand(1,10);
+		$rand=rand(1,7);
 	  if ($rand<7)
 		   $db="people";
 		else $db="products";
@@ -423,12 +426,12 @@ class Question
 		if ($type=="places")$db="places";
 
 		$sql = "SELECT * FROM `data-geo-$db` WHERE ";
-    foreach ($regionsSelected as $region)
-			$sql.=" `region` = '" . $region ."' OR";
-		$sql=substr($sql,0,strlen($sql)-3);
-		$sql.=" ORDER BY rand() LIMIT 1";
+  //  foreach ($regionsSelected as $region)
+	//		$sql.=" `region` = '" . $region ."' OR";
+//$sql=substr($sql,0,strlen($sql)-3);
+	//	$sql.=" ORDER BY rand() LIMIT 1";
 		//die ($sql);
-		//" WHERE `id`='3'";
+		$sql.="  `id`='60'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
     //$sql = "SELECT * FROM `data-geo` WHERE `id`=75";
 		$result = $conn->query($sql);
@@ -456,8 +459,8 @@ class Question
 					//echo $this->image;
 		  }
 		}
-		if ($this->checkForRepeats($this->country))
-			$this->getPPT($db);
+	//	if ($this->checkForRepeats($this->country))
+	//		$this->getPPT($db);
 
 }
 
@@ -556,7 +559,24 @@ public function loadImage(){
 }
 
 function checkForRepeats($country){
-	   global $conn;
+	global $conn;
+	if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+	{
+		$sql = "select count(*) total FROM `answers` WHERE `question_id`='".$this->type.$this->qID."'";
+		$result = $conn->query($sql);
+		//echo($sql);
+		if ($result)
+		{
+				$row = $result->fetch_assoc();
+				if ($row ['total']>10){
+					//echo ($sql);
+					return false;
+				}
+		}
+		 return true;
+	}
+
+
 		 $sql = "SELECT * FROM `questions` WHERE gameID='".$_SESSION["game_id"]."' AND wording LIKE '%$country%'";
 	 	$result = $conn->query($sql);
 		//echo $sql;
@@ -628,14 +648,17 @@ function addAnswer(){
 	public static function findQID($questionNum)
 	{
 		global $conn;
-		$sql = "SELECT * FROM `questions` WHERE `gameid` = '".$_SESSION["game_id"]."' AND questionNum='".$questionNum."'";
-		//die ($sql);
+		$table="questions";
+		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+			$table="questionsSingle";
+		$sql = "SELECT * FROM `$table` WHERE `gameid` = '".$_SESSION["game_id"]."' AND questionNum='".$questionNum."'";
+		//echo ($sql);
 		$result = $conn->query($sql);
 		if ($result)
 		{
 			$row = $result->fetch_assoc();
 			if ($row){
-
+				//echo $row["qID"];
 				return $row["qID"];
 			}
 

@@ -59,7 +59,8 @@ class AllAnswers
 
 	public function awardPoints(){
 		if (Game::findGame()->round>0){
-			$this->fillMissingAnswers();
+			if (!isset($_SESSION["single"]) || $_SESSION["single"]!=true)
+					$this->fillMissingAnswers();
 			usort($this->allAnswers, array("Answer", "sortMiles"));
 			$totalPoints=count($this->allAnswers);
 			foreach ($this->allAnswers as $key=>$answer){
@@ -191,7 +192,10 @@ class Answer
 	public static function loadCorrect($questionNum){
 
 		global $conn;
-		$sql = "SELECT * FROM `questions` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".$questionNum."'";
+		$table="questions";
+		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+			$table="questionsSingle";
+		$sql = "SELECT * FROM `$table` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".$questionNum."'";
 		$result = $conn->query($sql);
 		//echo $sql;
 		if ($result)
