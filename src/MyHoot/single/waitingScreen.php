@@ -17,7 +17,7 @@ if ($submit=="Join"){
     $_SESSION["game_id"]=$game_id;
     $game=Game::findGame();
     $questionNumber=$game->round;
-
+    header( 'Location: checkQuestion.php') ;
 }
 
  ?>

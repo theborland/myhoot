@@ -43,7 +43,7 @@ while (true){
     if ($current=="pop")$current="facts";
     $playedGames[]=$current;
     echo $theQuestion->getLabel()."\n";
-    sleep(30);
+    sleep(18);
     $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
     $numUsers=sizeof($allAnswers->allAnswers);
     echo "Question:".$_SESSION["questionNumber"]." Num Users:".$numUsers."\n";
@@ -57,7 +57,7 @@ while (true){
     $theQuestion->alertUsers(-1);
 
 
-    sleep(10);
+    sleep(7);
     //echo $theQuestion->getLabel();
 }
 
