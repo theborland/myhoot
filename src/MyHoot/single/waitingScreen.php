@@ -2,7 +2,7 @@
 
 session_start();
 $whitelist = array('message','submit','name','place');
-$game_id=1111;
+$_SESSION["game_id"]=$game_id=1111;
 $_SESSION["single"]=true;
 
 require '../controller/dbsettings.php';
