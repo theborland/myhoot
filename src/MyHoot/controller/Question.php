@@ -428,8 +428,8 @@ class Question
 		$sql = "SELECT * FROM `data-geo-$db` WHERE ";
     foreach ($regionsSelected as $region)
 			$sql.=" `region` = '" . $region ."' OR";
-$sql=substr($sql,0,strlen($sql)-3);
-		$sql.=" ORDER BY rand() LIMIT 1";
+			$sql=substr($sql,0,strlen($sql)-3);
+			$sql.=" ORDER BY rand() LIMIT 1";
 		//die ($sql);
 		//$sql.="  `id`='60'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";

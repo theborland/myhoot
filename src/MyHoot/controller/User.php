@@ -13,14 +13,14 @@ class User{
 	public static function createUser($game_id,$name){
 		global $conn;
 		$_SESSION["name"] =$name;
-		
+
 		$table="users";
 		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
 			$table="usersSingle";
 		else {
 			$sql = "SELECT * from `users` WHERE `game_id`= '".$game_id."' AND `name`='".$name."'";
 			$result = $conn->query($sql);
-			//echo($sql);
+			echo($sql);
 			if ($result->num_rows>0 || $name=="")
 			   return false;
 		}
