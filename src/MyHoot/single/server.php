@@ -1,5 +1,5 @@
 <?php
-
+set_time_limit(0);
 require '../controller/dbsettings.php';
 include ('../controller/siteFunctions.php');
 include ('../controller/Question.php');
@@ -12,6 +12,7 @@ include ('../controller/User.php');
 $result = $conn->query($sql);
 
 
+
 $_SESSION["single"]=true;
 $playedGames=array();
 $_SESSION["regionsSelected"]=$regionsSelected=array(1,2,3,4,5,6,7,8,9,10,11);
@@ -21,8 +22,11 @@ $gamesSelected=array("time","weather","pt","places","places","facts","facts","ge
 Game::createGame(false,true);
 $_SESSION["questionNumber"]=getLastQuestion()+1;
 echo $_SESSION["questionNumber"]."<Br>Starting";
-
+$counter=0;
 while (true){
+   $counter++;
+   echo "$counter \n";
+  /*
     if (sizeof($playedGames)==0)
         $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
     else {
@@ -36,14 +40,21 @@ while (true){
         }
         //
     }
-
-
+*/
+    $current=$gamesSelected[rand(0,count($gamesSelected)-1)];
+    echo $current;
     $theQuestion=new Question($current);
+    echo "got question";
     if ($current=="age")$current="entertainment";
     if ($current=="pop")$current="facts";
-    $playedGames[]=$current;
+    //$playedGames[]=$current;
     echo $theQuestion->getLabel()."\n";
-    sleep(18);
+    $seconds=time();
+    while ($seconds%($lengthOfGame+$lengthOfBreak)!=$lengthOfGame)
+    {
+       sleep(1);
+       $seconds=time();
+     }
     $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
     $numUsers=sizeof($allAnswers->allAnswers);
     echo "Question:".$_SESSION["questionNumber"]." Num Users:".$numUsers."\n";
@@ -56,8 +67,14 @@ while (true){
     }
     $theQuestion->alertUsers(-1);
 
-
-    sleep(7);
+    $seconds=date("s");
+    $seconds=time();
+    while ($seconds%($lengthOfGame+$lengthOfBreak)!=0)
+    {
+       sleep(1);
+       $seconds=time();
+     }
+    //sleep(7);
     //echo $theQuestion->getLabel();
 }
 

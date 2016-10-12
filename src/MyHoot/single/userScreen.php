@@ -7,6 +7,8 @@ if (isset($_GET["question"]))
   $_SESSION["questionNumber"]=Game::questionStatusRedirect();
   $theQuestion=Question::loadQuestion();
 
+  $seconds=time();
+  $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
 ?>
  <html>
  <head>
@@ -22,6 +24,21 @@ if (isset($_GET["question"]))
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 
+    var count=<?php echo $timeLeft; ?>;
+
+    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+    function timer()
+    {
+      count=count-1;
+      if (count <= 0)
+      {
+         clearInterval(counter);
+         return;
+      }
+
+     document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+    }
 
     window.setTimeout(function(){
             window.location.href = "waitingScreen.php";
@@ -124,9 +141,11 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div id="questionWrap">
       <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
       <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+<span id="timer2"></span>
     </div>
     <div id="timerContainer">
       <div id="timer"></div>
+
     </div>
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
       <form name="form1" method="post" action="submitAnswer.php">

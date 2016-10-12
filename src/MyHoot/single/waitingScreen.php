@@ -5,7 +5,11 @@ $whitelist = array('message','submit','name','place');
 $_SESSION["game_id"]=$game_id=1111;
 $_SESSION["single"]=true;
 
+
 require '../controller/dbsettings.php';
+
+$seconds=time();
+$timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak);
 
 if ($submit=="Join"){
     // $name=substr($name,0,20);
@@ -56,6 +60,23 @@ if ($submit=="Join"){
 
 </style>
 	<script>
+
+  var count=<?php echo $timeLeft; ?>;
+
+  var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+  function timer()
+  {
+    count=count-1;
+    if (count <= 0)
+    {
+       clearInterval(counter);
+       return;
+    }
+
+   document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+  }
+
 		window.onload = function(){
 	   		loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
 		}
@@ -66,7 +87,7 @@ if ($submit=="Join"){
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
     	<div id="waiting">Waiting...</div>
-
+<span id="timer2"></span>
 </div>
 <div id="messageWrap">
 

@@ -426,12 +426,12 @@ class Question
 		if ($type=="places")$db="places";
 
 		$sql = "SELECT * FROM `data-geo-$db` WHERE ";
-  //  foreach ($regionsSelected as $region)
-	//		$sql.=" `region` = '" . $region ."' OR";
-//$sql=substr($sql,0,strlen($sql)-3);
-	//	$sql.=" ORDER BY rand() LIMIT 1";
+    foreach ($regionsSelected as $region)
+			$sql.=" `region` = '" . $region ."' OR";
+$sql=substr($sql,0,strlen($sql)-3);
+		$sql.=" ORDER BY rand() LIMIT 1";
 		//die ($sql);
-		$sql.="  `id`='60'";
+		//$sql.="  `id`='60'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
     //$sql = "SELECT * FROM `data-geo` WHERE `id`=75";
 		$result = $conn->query($sql);

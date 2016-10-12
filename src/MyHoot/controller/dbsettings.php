@@ -20,7 +20,8 @@ $password = "myhoot";
 $dbname = "MyHoot";
 //mysqladmin -u root -p'MyHoot' password myhoot
 
-
+$lengthOfGame=3;
+$lengthOfBreak=1;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
