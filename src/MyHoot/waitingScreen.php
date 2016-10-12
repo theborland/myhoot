@@ -24,7 +24,7 @@ if ($submit=="Join"){
     }
     $game=Game::findGame();
     $questionNumber=$game->round;
-    if ($questionNumber!=-1){
+    if ($questionNumber>0){
       if ($game->type=="geo"|| $game->type=="pt" || $game->type=="places")
               header( 'Location: userScreen.php?question='.$questionNumber ) ;
       else if ($game->type=="facts")
