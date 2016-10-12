@@ -2,7 +2,7 @@
 session_start();
 $whitelist = array('error','name','game_id','replay');
 require 'controller/dbsettings.php';
-
+$_SESSION["single"]="";
 if (isset($_SESSION["user_id"]) && isset($_SESSION["game_id"]) && $_SESSION["game_id"]>0 && $_SESSION["user_id"]>0){
 		if (isset($_SERVER['HTTP_REFERER']))
 		{

@@ -20,7 +20,7 @@ class User{
 		else {
 			$sql = "SELECT * from `users` WHERE `game_id`= '".$game_id."' AND `name`='".$name."'";
 			$result = $conn->query($sql);
-			if ($game_id=="45920285")die($sql);
+			//if ($game_id=="45920285")die($sql);
 			if ($result->num_rows>0 || $name=="")
 			   return false;
 		}
