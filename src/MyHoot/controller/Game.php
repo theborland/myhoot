@@ -1,5 +1,5 @@
 <?php
-$lengthOfGame=10;
+$lengthOfGame=18;
 $lengthOfBreak=7;
 class Game
 {
