@@ -11,6 +11,7 @@ require '../controller/dbsettings.php';
 if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places")
      header( 'Location: showAnswerOther.php') ;
 $theQuestion=Question::loadQuestion();
+$user=User::loadUserSingle();
 
 $seconds=time();
 $timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak);
@@ -94,25 +95,16 @@ if ($submit=="Join"){
 <span id="timer2"></span>
 </div>
 <div id="messageWrap">
-
   <div id="mainMessageWrap">
+  <?php
+  if ($user->avg>0){
+   echo "This round you scored ".$user->place . "%";
+   echo "You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers;
+   echo "<br>Your average is ".$user->avg . "%";
+   echo "Overall you are " .$user->singleStatsGame->place. " out of ".$user->singleStatsGame->numOfPlayers;
+  }
+  ?>
 
-      <?php if ($submit=="Join") { ?>
-        <div id="welcome">Game on, <?php echo $name; ?>!</div>
-      <?php  }
-       else if ($message=="nosubmit"){ ?>
-        <div id="score"><div style="font-size:30px;">The question is over - remember to hit submit next time.</div>
-      <?php }
-      else if (is_numeric($message)){ ?>
-        <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message ; ?> miles away.</div>
-      <?php } else {
-        echo $message;
-       }  ?>
-
-        <div id="mainMessageExtra">
-          <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
-      <?php }  ?>
-    </div>
 
   </div>
 

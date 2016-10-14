@@ -1,6 +1,6 @@
 <?php
-$lengthOfGame=18;
-$lengthOfBreak=7;
+$lengthOfGame=13;
+$lengthOfBreak=6;
 class Game
 {
 	var $type;
