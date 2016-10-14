@@ -105,6 +105,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
 }
 
 function loadWaitingForQuestionSingle(ip,gameID){
+
   var conn = new ab.Session('ws://'+ip+':8081',
   function() {
     conn.subscribe('Game'+gameID+'Status', function(topic, data) {
@@ -116,8 +117,8 @@ function loadWaitingForQuestionSingle(ip,gameID){
         window.location.href='waitingScreenEnd.php';
       else if (data.title.substring(0,1)=="R")
         window.location.href='joinQuiz.php?error=Reject';
-      else if (data.title.substring(1)=="-1" && window.location.href.indexOf("waiting")==-1)
-        window.location.href='waitingScreen.php?message=nosubmit';
+      else if (data.title.substring(1)=="-1" && window.location.href.indexOf("showAnswer")==-1)
+        window.location.href='showAnswer.php';
       else if (data.title.substring(0,1)=="Q" && data.title!="Q-1")
       {
         if (data.type=="geo" || data.type=="pt" || data.type=="places")

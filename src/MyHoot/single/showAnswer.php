@@ -1,15 +1,19 @@
 <?php
 
 session_start();
-$whitelist = array('message','submit','name','place','avg');
+$whitelist = array('message','submit','name','place');
 $_SESSION["game_id"]=$game_id=1111;
 $_SESSION["single"]=true;
 
 
 require '../controller/dbsettings.php';
 
+if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places")
+     header( 'Location: showAnswerOther.php') ;
+$theQuestion=Question::loadQuestion();
+
 $seconds=time();
-$timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
+$timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak);
 
 if ($submit=="Join"){
     // $name=substr($name,0,20);
@@ -86,7 +90,7 @@ if ($submit=="Join"){
 
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
-    	<div id="waiting">Waiting...</div>
+    	<div id="waiting">Show Answer</div>
 <span id="timer2"></span>
 </div>
 <div id="messageWrap">
@@ -108,8 +112,6 @@ if ($submit=="Join"){
         <div id="mainMessageExtra">
           <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
       <?php }  ?>
-      <?php if (is_numeric($avg) && $avg>0){ ?>You running average is now <?php echo $avg ?>% 
-  <?php }  ?>
     </div>
 
   </div>

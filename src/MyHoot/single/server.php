@@ -17,7 +17,7 @@ $_SESSION["single"]=true;
 $playedGames=array();
 $_SESSION["regionsSelected"]=$regionsSelected=array(1,2,3,4,5,6,7,8,9,10,11);
 $gamesSelected=array("time","weather","pt","places","places","facts","facts","geo","geo","geo","geo","geo");
-//$gamesSelected=array("time","weather");
+$gamesSelected=array("time");
 
 Game::createGame(false,true);
 $_SESSION["questionNumber"]=getLastQuestion()+1;
@@ -58,9 +58,11 @@ while (true){
     $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
     $numUsers=sizeof($allAnswers->allAnswers);
     echo "Question:".$_SESSION["questionNumber"]." Num Users:".$numUsers."\n";
+    $theQuestion->alertUsers(-1);
     if ($numUsers>0)
-      ;//$theQuestion->alertUsers(-1);
+      ;//
     else{
+      sleep(3);
       $sql = "DELETE FROM `questionsSingle` WHERE `questionNum`='".$_SESSION["questionNumber"]."'";
       $result = $conn->query($sql);
       $_SESSION["questionNumber"]--;

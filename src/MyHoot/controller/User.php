@@ -5,6 +5,13 @@ class User{
 	var $id;
 	var $totalPoints;
 	var $color;
+	var $place;
+	var $avg;
+	var $gamesPlayed;
+	var $singleStatsRound;
+	var $singleStatsGame;
+
+
 	function __construct($name,$id){
 		$this->name=$name;
 		$this->id=$id;
@@ -69,6 +76,29 @@ class User{
 		}
 	}
 
+	public static function updateUser($userID,$questionNumber,$place){
+		  global $conn;
+
+			$sql = "SELECT * from `usersSingle` WHERE `user_id`= '".$userID."'";
+			$result = $conn->query($sql);
+			if ($result)
+			{
+				$row = $result->fetch_assoc();
+				$lastRound=$row["round"];
+				$gamesPlayed=$row["gamesPlayed"];
+				$avg=$row["avg"];
+				if ($lastRound!=$questionNumber){
+					$gamesPlayed++;
+					$newAvg=round(($avg*($gamesPlayed-1)+$place)/$gamesPlayed,2);
+					$sql = "UPDATE `usersSingle` SET `score`='".$place."', `gamesPlayed` = '".$gamesPlayed."', `avg` = '".$newAvg."', `round` = '".$questionNumber."' WHERE user_id = '".$userID."'";
+					$result = $conn->query($sql);
+					//die ($sql);
+					return $newAvg;
+				}
+			}
+
+		}
+
 	public static function getTP($id){
 		global $conn;
 		$sql = "	SELECT sum(`points`) FROM `answers` WHERE `user_id`='".$id."'";
@@ -93,6 +123,24 @@ class User{
     return $row['color'];
 
 	  }
+
+		public static function loadUserSingle(){
+			global $conn;
+			$sql = "SELECT * from `usersSingle` WHERE `user_id`= '".$_SESSION['user_id']."' AND round='".abs($_SESSION["questionNumber"])."'";
+			$result = $conn->query($sql);
+			if ($result){
+		    $row = $result->fetch_assoc();
+				$user=new self($row["name"],$_SESSION['user_id']);
+				$user->place=$row["score"];
+				$user->avg=$row["avg"];
+				$user->gamesPlayed=$row["gamesPlayed"];
+				$user->singleStatsRound=new SingleStats($user->place,"score");
+				$user->singleStatsGame=new SingleStats($user->avg,'avg');
+				return $user;
+			}
+			else return new self($_SESSION["name"],$_SESSION['user_id']);;
+		}
+
 }
 
 function random_color_part() {
@@ -101,5 +149,41 @@ function random_color_part() {
 
 function get_random_color() {
     return random_color_part() . random_color_part() . random_color_part();
+}
+
+class SingleStats{
+	var $topThree;
+	var $place;
+	var $numOfPlayers;
+
+	function __construct($place,$type){
+		global $conn;
+		 $sql = "SELECT * from `usersSingle` WHERE round='".abs($_SESSION["questionNumber"])."' ORDER BY $type DESC LIMIT 3";
+		 //die ($sql);
+		 $result = $conn->query($sql);
+		 $this->topThree=array();
+		 if ($result){
+			 $i=0;
+			 while ($row = $result->fetch_assoc()){
+				 //die ($sql);
+				 $this->topThree[$i]=new User($row["name"],$i);
+				 $this->topThree[$i]->place=$row[$type];
+			 }
+		 }
+		 //die($sql);
+		 $place=$place+.01;
+		 $sql = "select count(*) total, sum(case when $type > '$place' then 1 else 0 end) worse from `usersSingle` WHERE round='".abs($_SESSION["questionNumber"])."'";
+		 $result = $conn->query($sql);
+		 //die($sql);
+		 if ($result)
+		 {
+				 $row = $result->fetch_assoc();
+				 $this->numOfPlayers=$row ['total'];
+				 $this->place=$row['worse']+1;
+
+
+		 }
+	}
+
 }
  ?>

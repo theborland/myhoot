@@ -34,7 +34,7 @@ $questionNumberSite=$game->round;
 if ($questionNumberSite<0)
   header( 'Location: waitingScreen.php?message='."Submit your answer in time" ) ;
 $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$distanceAway,$color,$game->type);
-
+$avg=User::updateUser($_SESSION["user_id"],$questionNumber,$place);
 //NOW WE FIND THE OVERALL PERCENT PLACE THAT PERCENT DID ON THAT question_id
 //Answer::findPercentPlace()
 
@@ -69,5 +69,5 @@ $place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer
   //  $place=
     //echo $correct->location->longg;
   //  die ($message);//place='.$place.
-   header( 'Location: waitingScreen.php?message='.$message.'&place='.$place ) ;
+   header( 'Location: waitingScreen.php?message='.$message.'&place='.$place.'&avg='.$avg ) ;
  ?>

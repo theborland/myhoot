@@ -13,9 +13,10 @@ class Question
 	var $max;
 	var $timesRepeated=0;
 
-	function __construct($type){
+	function __construct($type){ $s=0;
 		if ($type!=null)
 		{
+			  //echo $type . "d";
 				$_SESSION["questionNumber"]++;
 				$this->type=$type;
 				if ($type=="geo")
@@ -31,7 +32,7 @@ class Question
 				else if ($type=="pt")
 						$this->getPPT("pt");
 				else if ($type=="places")
-						$this->getPPT("places");
+					  $this->getPPT("places");
 				else if ($type=="sports")
 						$this->getQuestion($type);
 				else if ($type=="science")
@@ -40,10 +41,11 @@ class Question
 						$this->getTime();
 				else if ($type=="facts")
 						$this->getFacts();
-				else //if ($type=="rand")
+				else
 						$this->getQuestion($type);
 				//if ($type=="user")
 				//		$this->getUserQuestion();
+
 				$this->addAnswer();
 				//echo "in here again";
 				Game::updateRound($_SESSION["questionNumber"],$this->type);
@@ -216,17 +218,23 @@ class Question
 			if($row = $result->fetch_assoc()){
 				//$this->city=$row["category"];
 				$this->country=$row["wording"];
+				$this->qID=$row["id"];
+				if ($this->checkForRepeats($this->country))
+				{
+					$this->getQuestion($type);
+					return;
+				}
 				$this->answer=$row["answer"];
 				$this->min=$row["min"];
 				$this->max=$row["max"];
 				$url= $row["image"];
 				$this->image=Question::getRandomUrl($url);
-				$this->qID=$row["id"];
+
         //$this->image="a.jpg";//Question::getRandomUrl($url);
 				}
 		}
-		if ($this->checkForRepeats($this->country))
-			$this->getQuestion($type);
+
+
 	}
 
 	function getEntertainment(){
@@ -295,12 +303,17 @@ class Question
 				$age=date_diff($now, $bday);
 				$this->answer=$age->format('%y');
 				$url= $row["image"];
-        $this->image=Question::getRandomUrl($url);
+
 				$this->qID=$row["id"];
+				if ($this->checkForRepeats($this->country))
+				{
+					$this->getAge();
+					return;
+				}
+				$this->image=Question::getRandomUrl($url);
 				}
 		}
-		if ($this->checkForRepeats($this->country))
-			$this->getAge();
+
 	}
 
 	function getTime(){
@@ -320,12 +333,16 @@ class Question
 				$this->country=$row["wording"];
 				$this->answer=$row["answer"];
 				$url= $row["image"];
-				$this->image=Question::getRandomUrl($url);
 				$this->qID=$row["id"];
+				if ($this->checkForRepeats($this->country))
+				{
+					$this->getTime();
+					return;
+				}
+				$this->image=Question::getRandomUrl($url);
 			}
 		}
-		if ($this->checkForRepeats($this->country))
-   		$this->getTime();
+
 	}
 
 	function getFacts(){
@@ -350,14 +367,18 @@ class Question
 				$this->country=$row["wording"] . " ".$row["country"] . "(".$row["year"] . ")" ;
 				$this->answer=$row["answer"];
 				$url= $row["image"];
-				$this->image=Question::getRandomUrl($url);
 				$this->qID=$row["id"];
+				if ($this->checkForRepeats($this->country))
+				{
+					$this->getFacts();
+					return;
+				}
+				$this->image=Question::getRandomUrl($url);
 				$this->max=$row["max"];
 				$this->min=0;
 			}
 		}
-		if ($this->checkForRepeats($this->country))
-			$this->getFacts();
+
 	}
 
 
@@ -415,6 +436,7 @@ class Question
 
 	function getPPT($type){
 		global $conn;
+		//echo "here";
 		$regionsSelected=$_SESSION["regionsSelected"];
 
 		//determine people, place, things
@@ -434,6 +456,7 @@ class Question
 		//$sql.="  `id`='60'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
     //$sql = "SELECT * FROM `data-geo` WHERE `id`=75";
+		//die ($sql);
 		$result = $conn->query($sql);
 		if ($result)
 		{
@@ -491,15 +514,16 @@ class Question
 				$this->longg=$row["longg"];
 				$this->answer=$row["population"];
 		    $url= $row["image"];
-		    $this->image=Question::getRandomUrl($url);
 				$this->qID=$row["id"];
+				if ($this->checkForRepeats($this->country)){
+					$this->getLocation($type);
+					return;
+				}
+				$this->image=Question::getRandomUrl($url);
 					//echo $this->image;
 		  }
 		}
-		if ($this->checkForRepeats($this->country))
-			$this->getLocation($type);
-		if ($type=="pop"&& $this->answer=="-1")
-			$this->getLocation($type);
+
 
 }
 
@@ -559,7 +583,16 @@ public function loadImage(){
 }
 
 function checkForRepeats($country){
+	//return false;
+	//echo "here";
 	global $conn;
+	$this->timesRepeated++;
+	if ($this->timesRepeated>=8 && $this->type!="geo"){
+		$this->type="geo";
+		$this->timesRepeated=0;
+		$this->getLocation("geo");
+		return false;
+	}
 	if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
 	{
 		$sql = "select count(*) total FROM `answers` WHERE `question_id`='".$this->type.$this->qID."'";
@@ -580,8 +613,8 @@ function checkForRepeats($country){
 		 $sql = "SELECT * FROM `questions` WHERE gameID='".$_SESSION["game_id"]."' AND wording LIKE '%$country%'";
 	 	$result = $conn->query($sql);
 		//echo $sql;
-		$this->timesRepeated++;
-		if ($result!=null && $result->num_rows>0 && $this->timesRepeated<5)
+
+		if ($result!=null && $result->num_rows>0)
 		   return true;
 	  return false;
 

@@ -1,15 +1,20 @@
 <?php
 
 session_start();
-$whitelist = array('message','submit','name','place','avg');
+$whitelist = array('message','submit','name','place');
 $_SESSION["game_id"]=$game_id=1111;
 $_SESSION["single"]=true;
 
 
 require '../controller/dbsettings.php';
+Game::findGame()->type;
+if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places" && strpos($_SERVER['REQUEST_URI'],'Other')==false)
+     header( 'Location: showAnswerOther.php') ;
+$theQuestion=Question::loadQuestion();
+$user=User::loadUserSingle();
 
 $seconds=time();
-$timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
+$timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak);
 
 if ($submit=="Join"){
     // $name=substr($name,0,20);
@@ -58,6 +63,21 @@ if ($submit=="Join"){
   color:rgba(0,0,0,0.5);
 }
 
+body{
+  background-color:black;
+  background-image: url('<?php echo $theQuestion->loadImage(); ?>');
+  background-attachment : fixed;
+  <?php
+    if(Game::findGame()->type == "age"){
+  ?>
+  background-size       : contain;
+  background-position   : top center;
+  <?php }else{ ?>
+  background-size       : cover;
+  background-position   : center;
+  <?php } ?>
+  background-repeat: no-repeat;
+}
 </style>
 	<script>
 
@@ -86,31 +106,21 @@ if ($submit=="Join"){
 
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
-    	<div id="waiting">Waiting...</div>
+    	<div id="waiting">Show Answer</div>
 <span id="timer2"></span>
 </div>
 <div id="messageWrap">
 
   <div id="mainMessageWrap">
+<?php
+if ($user->avg>0){
+   echo "This round you scored ".$user->place . "%";
+   echo "You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers;
+   echo "<br>Your average is ".$user->avg . "%";
+   echo "Overall you are " .$user->singleStatsGame->place. " out of ".$user->singleStatsGame->numOfPlayers;
+ }
+ ?>
 
-      <?php if ($submit=="Join") { ?>
-        <div id="welcome">Game on, <?php echo $name; ?>!</div>
-      <?php  }
-       else if ($message=="nosubmit"){ ?>
-        <div id="score"><div style="font-size:30px;">The question is over - remember to hit submit next time.</div>
-      <?php }
-      else if (is_numeric($message)){ ?>
-        <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message ; ?> miles away.</div>
-      <?php } else {
-        echo $message;
-       }  ?>
-
-        <div id="mainMessageExtra">
-          <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
-      <?php }  ?>
-      <?php if (is_numeric($avg) && $avg>0){ ?>You running average is now <?php echo $avg ?>% 
-  <?php }  ?>
-    </div>
 
   </div>
 
