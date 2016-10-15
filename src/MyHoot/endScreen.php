@@ -92,6 +92,7 @@
 
 
 <a href="startQuiz.php?replay=yes" id="replayButton" class="regButton">Replay</a>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSd6Ffh6mC0tBQ52YoEWNdu696FHKfh5dxGYTinzr4fC7nK1OQ/viewform?c=0&w=1" id="feedbackButton" class="regButton">Give Feedback</a>
 
 <audio id="bgMusic"  enablejavascript="yes" volume="0">
   <source src="music/end.mp3"  type="audio/mpeg" volume="0">
