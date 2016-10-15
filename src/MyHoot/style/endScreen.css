@@ -65,26 +65,23 @@ body{
 	position: fixed;
 	right: 10px;
 	top: 10px;
-	width:140px;
+	width:150px;
 	text-align: center;
 }
 #feedbackButton{
 	position: fixed;
 	right: 10px;
-	top: 70px;
+	top: 80px;
 	background: #238EFF;
-	color: #fff;
 	padding:10px 29px 10px;
-	width: 140px;
+	width: 150px;
 }
 #feedbackButton:focus{
 	background: #49B9FF;
-	color: #fff;
-}#feedbackButton:hover{
+}
+#feedbackButton:hover{
 	background: #52C5FF;
-	color: #fff;
 }
 #feedbackButton:active{
 	background: #6CCCFF;
-	color: #fff;
 }
