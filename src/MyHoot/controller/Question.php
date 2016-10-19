@@ -419,7 +419,7 @@ class Question
  //die ($url);
 		if (sizeof($splits)==0)
 		{
-		//	echo "going in again";
+		  	//echo "going in again";
 				return Question::getRandomUrl($url);
 			}
 		$url=$splits[rand(0,sizeof($splits)-1)];
@@ -429,8 +429,9 @@ class Question
 
 		if (checkRemoteFile($url))
 			return $url;
-		else
-			return Question::getRandomUrl($url);
+		else if (rand(1,10)<8)
+			return Question::getRandomUrl($originalUrl);
+		else return "https://upload.wikimedia.org/wikipedia/en/7/72/World_Map_WSF.svg.png";
 
 	}
 
@@ -448,16 +449,17 @@ class Question
 		if ($type=="places")$db="places";
 
 		$sql = "SELECT * FROM `data-geo-$db` WHERE ";
-    foreach ($regionsSelected as $region)
-			$sql.=" `region` = '" . $region ."' OR";
-			$sql=substr($sql,0,strlen($sql)-3);
-			$sql.=" ORDER BY rand() LIMIT 1";
+    //foreach ($regionsSelected as $region)
+		//	$sql.=" `region` = '" . $region ."' OR";
+		//	$sql=substr($sql,0,strlen($sql)-3);
+		///	$sql.=" ORDER BY rand() LIMIT 1";
 		//die ($sql);
-		//$sql.="  `id`='60'";
+		$sql.="  `id`='60'";
 		//	$sql = "SELECT * FROM `data-geo`   WHERE `country`='Antigua and Barbuda'";
     //$sql = "SELECT * FROM `data-geo` WHERE `id`=75";
 		//die ($sql);
 		$result = $conn->query($sql);
+	//	echo "a";
 		if ($result)
 		{
 		  if($row = $result->fetch_assoc()){
@@ -477,8 +479,10 @@ class Question
 				$this->longg=$row["longg"];
 				//$this->answer=$row["population"];
 		    $url= $row["image"];
+				//echo "b";
 		    $this->image=Question::getRandomUrl($url);
 				$this->qID=$row["id"];
+				//echo "c";
 					//echo $this->image;
 		  }
 		}
