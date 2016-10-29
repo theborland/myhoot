@@ -1,4 +1,14 @@
 <?php
+//  tail -f name of file to view in process
+// ./script.sh
+// crontab -e
+date_default_timezone_set('America/New_York');
+$datetime1 = strtotime("now");//current datetime object
+$datetime2 = mktime(23, 59, 59);//next day at midnight
+$timeUntilStop= ($datetime2 - $datetime1);
+//die("time is ".$timeUntilStop);
+
+
 set_time_limit(0);
 require '../controller/dbsettings.php';
 include ('../controller/siteFunctions.php');
@@ -23,7 +33,9 @@ Game::createGame(false,true);
 $_SESSION["questionNumber"]=getLastQuestion()+1;
 echo $_SESSION["questionNumber"]."<Br>Starting";
 $counter=0;
-while (true){
+
+while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
+  echo "time is ".$timeUntilStop;
    $counter++;
    echo "$counter \n";
   /*
@@ -78,6 +90,9 @@ while (true){
      }
     //sleep(7);
     //echo $theQuestion->getLabel();
+    $datetime1 = strtotime("now");//current datetime object
+    $datetime2 = mktime(7, 28, 0);//next day at midnight
+    $timeUntilStop= ($datetime2 - $datetime1);
 }
 
 function getLastQuestion(){
