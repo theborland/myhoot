@@ -2,6 +2,7 @@
 //  tail -f name of file to view in process
 // ./script.sh
 // crontab -e
+///Users/jeffborland/web/launchSingle.sh >> /Users/jeffborland/web/results.log
 date_default_timezone_set('America/New_York');
 $datetime1 = strtotime("now");//current datetime object
 $datetime2 = mktime(23, 59, 59);//next day at midnight
@@ -91,7 +92,7 @@ while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
     //sleep(7);
     //echo $theQuestion->getLabel();
     $datetime1 = strtotime("now");//current datetime object
-    $datetime2 = mktime(7, 28, 0);//next day at midnight
+    $datetime2 = mktime(23, 59, 59);//next day at midnight
     $timeUntilStop= ($datetime2 - $datetime1);
 }
 
