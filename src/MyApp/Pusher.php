@@ -17,7 +17,7 @@ class Pusher implements WampServerInterface {
     public function onClose(ConnectionInterface $conn) {
       $this->clients->detach($conn);
       $conn->close();
-      echo "closing connection";
+      echo "closing connection\n";
     }
     public function onCall(ConnectionInterface $conn, $id, $topic, array $params) {
         // In this application if clients send data it's because the user hacked around in console
@@ -34,16 +34,16 @@ class Pusher implements WampServerInterface {
 
 public function onSubscribe(ConnectionInterface $conn, $topic) {
     $this->subscribedTopics[$topic->getId()] = $topic;
-    echo $topic;
+    echo "subscribing to : ".$topic . "\n";
 }
 
 /**
  * @param string JSON'ified string we'll receive from ZeroMQ
  */
 public function onBlogEntry($entry) {
-echo "in here";
+    echo "sending out \n";
     $entryData = json_decode($entry, true);
- 	print_r($entryData);
+  	//print_r($entryData);
     // If the lookup topic object isn't set there is no one to publish to
     if (!array_key_exists($entryData['category'], $this->subscribedTopics)) {
         return;

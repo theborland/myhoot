@@ -1,0 +1,246 @@
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+subscribing to : Game21524304sending out 
+closing connectionsubscribing to : Game215243041subscribing to : InGame21524304-1sending out 
+closing connectionclosing connectionsending out 
+subscribing to : Game215243042subscribing to : InGame21524304-2sending out 
+closing connectionclosing connectionsending out 
+subscribing to : Game215243043subscribing to : InGame21524304-3sending out 
+closing connectionclosing connectionsending out 
+subscribing to : Game215243044subscribing to : InGame21524304-4
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+sending out 
+sending out 
+sending out 
+subscribing to : Game25755304
+sending out 
+Array
+(
+    [category] => Game25755304
+    [title] => sd
+    [color] => 3dffa4
+)
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q1
+    [type] => geo
+)
+closing connectionclosing connectionsubscribing to : Game257553041
+subscribing to : InGame25755304-1
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-1
+    [title] => Unnec
+)
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionclosing connectionsubscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q2
+    [type] => geo
+)
+closing connectionsubscribing to : Game257553042
+subscribing to : InGame25755304-2
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-2
+    [title] => Unnec
+)
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionclosing connectionsubscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q3
+    [type] => geo
+)
+closing connectionsubscribing to : Game257553043
+subscribing to : InGame25755304-3
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-3
+    [title] => Unnec
+)
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionclosing connectionsubscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q4
+    [type] => geo
+)
+closing connectionsubscribing to : Game257553044
+subscribing to : InGame25755304-4
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-4
+    [title] => Unnec
+)
+closing connectionsubscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionsending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q5
+    [type] => geo
+)
+closing connectionsubscribing to : Game257553045
+subscribing to : InGame25755304-5
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-5
+    [title] => Unnec
+)
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionclosing connectionsubscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q6
+    [type] => geo
+)
+closing connectionsubscribing to : Game257553046
+subscribing to : InGame25755304-6
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-6
+    [title] => Unnec
+)
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionclosing connectionsubscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q7
+    [type] => geo
+)
+closing connectionsubscribing to : Game257553047
+subscribing to : InGame25755304-7
+subscribing to : Game25755304Status
+sending out 
+Array
+(
+    [category] => InGame25755304-7
+    [title] => Unnec
+)
+sending out 
+Array
+(
+    [category] => Game25755304Status
+    [title] => Q-1
+    [type] => 
+)
+closing connectionclosing connectionclosing connectionsubscribing to : Game25755304Status

@@ -1,6 +1,9 @@
 <?php
 //  tail -f name of file to view in process
 // ./script.sh
+// killall -9 php  kill php processes
+//  lsof -t -i:5555
+// kill `lsof -t -i:5555`
 // crontab -e
 ///Users/jeffborland/web/launchSingle.sh >> /Users/jeffborland/web/results.log
 date_default_timezone_set('America/New_York');
