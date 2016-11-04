@@ -152,8 +152,8 @@ line-height: 0.7;
 
 			<label class="settingsLabel" for="numRounds">NUMBER OF ROUNDS</label>
 			<select id="numRounds" name="numRounds">
-				<option value="5">5</option>
-				<option value="10" selected>10</option>
+				<option value="5" selected>5</option>
+				<option value="10" >10</option>
 				<option value="15">15</option>
 				<option value="20">20</option>
 				<option value="9999">infinite</option>
