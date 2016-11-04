@@ -5,6 +5,7 @@
 //  lsof -t -i:5555
 // kill `lsof -t -i:5555`
 // crontab -e
+//     kill -9 $(lsof -i:5555 -t)`` 
 ///Users/jeffborland/web/launchSingle.sh >> /Users/jeffborland/web/results.log
 date_default_timezone_set('America/New_York');
 $datetime1 = strtotime("now");//current datetime object

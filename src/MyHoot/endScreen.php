@@ -31,6 +31,9 @@
 		    	muteOff();
 		    }
 		}
+    <?php if (isset($_SESSION["continuous"]) && $_SESSION["continuous"]==true){ ?>
+		window.setTimeout(function(){window.location.href = "startQuizD.php?replay=yes";}, 10000);
+   <?php } ?>
 	</script>
 </head>
 <body>

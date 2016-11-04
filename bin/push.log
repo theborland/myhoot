@@ -376,3 +376,25 @@ subscribing to : InGame43530305-10
 sending out 
 sending out 
 closing connectionclosing connectionsending out 
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
+
+Warning: Module 'zmq' already loaded in Unknown on line 0
+
+Fatal error: Uncaught exception 'ZMQSocketException' with message 'Failed to bind the ZMQ: Address already in use' in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php:114
+Stack trace:
+#0 [internal function]: ZMQSocket->bind('tcp://127.0.0.1...')
+#1 /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php(114): call_user_func_array(Array, Array)
+#2 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->__call('bind', Array)
+#3 /Users/jeffborland/web/fall15/bin/Push-Server.php(11): React\ZMQ\SocketWrapper->bind('tcp://127.0.0.1...')
+#4 {main}
+  thrown in /Users/jeffborland/web/fall15/src/MyApp/vendor/react/zmq/src/React/ZMQ/SocketWrapper.php on line 114
