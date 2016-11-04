@@ -114,7 +114,7 @@ class Question
 		 			$table="questionsSingle";
 			 $sql = "SELECT * FROM `$table` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".abs($_SESSION["questionNumber"])."'";
 	 		 $result = $conn->query($sql);
-
+			 echo $sql;
 	 		if ($result)
 	 		{
 	 			if($row = $result->fetch_assoc()){
@@ -349,7 +349,7 @@ class Question
 		global $conn;
 		if (rand(1,10)<7){
 			$this->type="pop";
-			return $this->getLocation("population");
+			return $this->getLocation("pop");
 		}
 
 		$regionsSelected=$_SESSION["regionsSelected"];
