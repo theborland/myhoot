@@ -44,7 +44,8 @@ include("controller/gameLogic.php");
 			}, 30000, "linear");
 
 			var interval = setInterval(function() {
-			    if(gameplaying==true)
+			    if(typeof gameplaying !== 'undefined' && gameplaying==false);
+					else
 							 counter--;
 					console.log(counter);
 			  //$('#timeLeft').html(counter);
