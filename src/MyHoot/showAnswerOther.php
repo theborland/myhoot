@@ -48,13 +48,16 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 
 			<?php
-			if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
-			{
-			?>
-			//automatically forward if automode is on
-			setTimeout( function(){
-			      window.location.href='getQuestion.php';
-			}  , 11000 );
+				var counter=11;
+				var interval = setInterval(function() {
+					if(gameplaying==true)
+							 counter--;
+					//console.log(counter);
+					//$('#timeLeft').html(counter);
+						if (counter <= 0) {
+							window.location.replace("getQuestion.php");
+						}
+				}, 1000);
 			<?php
 			}
 			?>

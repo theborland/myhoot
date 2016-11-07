@@ -37,11 +37,19 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 			{
 			?>
 			//automatically forward if automode is on
-			setTimeout( function(){
-			      window.location.href='getQuestion.php';
-			}  , 11000 );
+      var counter=11;
+      var interval = setInterval(function() {
+			  if(gameplaying==true)
+             counter--;
+        //console.log(counter);
+			  //$('#timeLeft').html(counter);
+			    if (counter <= 0) {
+			    	window.location.replace("getQuestion.php");
+			    }
+			}, 1000);
+
 			<?php
-			}
+    }
 			?>
 
 

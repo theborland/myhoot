@@ -25,7 +25,25 @@ include("controller/gameLogic.php");
 	  loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>',<?php echo Game::getNumberUsers(); ?>);
 	  findingNumberOfUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
 	</script>
-
+	<style>
+		#deering{
+			transition:all .2s;
+			position: fixed;
+			bottom: 0px;
+			right: 0px;
+			width: 100%;
+			height: 100px;
+			opacity: 0.90;
+			background: #525DB3;
+			padding:0px;
+			    text-align: center;
+			color: white;
+			font-size: 400%;
+			box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+			border-radius: 4px;
+			vertical-align: middle;
+		}
+		</style>
 	<script>
     var counter = 30;
 		window.onload = function(){
@@ -47,11 +65,9 @@ include("controller/gameLogic.php");
 			}, 30000, "linear");
 
 			var interval = setInterval(function() {
-			    if(gameplaying==true)
-							 counter--;
-					//console.log(counter);
-			  //$('#timeLeft').html(counter);
-			    if (counter <= 0) {
+			    counter--;
+			  $('#timeLeft').html(counter);
+			    if (counter == 0) {
 			    	window.location.replace("showAnswer.php");
 			    }
 			}, 1000);
@@ -129,7 +145,11 @@ include("controller/gameLogic.php");
 <input type="button" class="utilityButton" id="fullscreenButton" 	onclick="parent.fullscreen()">
 <a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo substr($_SESSION["game_id"],0,5); ?></div>
-
+<?php if (isset($_SESSION["continuous"]) && $_SESSION["continuous"]==true){ ?>
+	<div id="deering">
+	Created by Deering High School Students!!!
+	</div>
+<?php } ?>
 
 </body>
 </html>
