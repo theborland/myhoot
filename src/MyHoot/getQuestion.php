@@ -39,9 +39,6 @@ include("controller/gameLogic.php");
 		    	muteOff();
 		    }
 
-
-
-
 			$('#timer').animate({
 				width: "0%"
 			}, 30000, "linear");
@@ -49,7 +46,7 @@ include("controller/gameLogic.php");
 			var interval = setInterval(function() {
 			    if(gameplaying==true)
 							 counter--;
-					//console.log(counter);
+					console.log(counter);
 			  //$('#timeLeft').html(counter);
 			    if (counter <= 0) {
 			    	window.location.replace("showAnswer.php");
