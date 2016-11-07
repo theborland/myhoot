@@ -41,7 +41,7 @@ function switchGameWAnimation(){ // same as switchGame, but pauses animation on 
 		$('#timer').pause();
 	}else{
 		playgame();
-		$('#timer').play();
+		$('#timer').resume();
 	}
 
 }
