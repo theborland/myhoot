@@ -157,7 +157,7 @@ input[type='checkbox']:focus {
 }
 #playGameButton{
 	background: url('../img/pause.svg');
-	right: 120px;
+	right: 110px;
 }
 #fullscreenButton{
 	background: url('../img/fullscreen.svg');

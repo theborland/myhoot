@@ -193,6 +193,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 
 <input type="button" class="utilityButton" id="muteButton" 			onclick="mute()">
+<input type="button" class="utilityButton" id="playGameButton" 		onclick="switchGame()">
 <input type="button" class="utilityButton" id="fullscreenButton" 	onclick="parent.fullscreen()">
 <a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo substr($_SESSION["game_id"],0,5); ?></div>
