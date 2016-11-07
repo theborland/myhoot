@@ -65,7 +65,7 @@ body{
 	position: fixed;
 	right: 10px;
 	top: 10px;
-	width:150px;
+	width:140px;
 	text-align: center;
 }
 #feedbackButton{
@@ -73,15 +73,19 @@ body{
 	right: 10px;
 	top: 80px;
 	background: #238EFF;
-	padding:10px 29px 10px;
-	width: 150px;
+	color: #fff;
+	padding:10px 20px 10px;
+	width: 170px;
+	font-size: 20px;
 }
 #feedbackButton:focus{
 	background: #49B9FF;
-}
-#feedbackButton:hover{
+	color: #fff;
+}#feedbackButton:hover{
 	background: #52C5FF;
+	color: #fff;
 }
 #feedbackButton:active{
 	background: #6CCCFF;
+	color: #fff;
 }

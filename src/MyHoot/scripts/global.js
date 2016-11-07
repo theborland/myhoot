@@ -1,4 +1,5 @@
 var playing = false;
+var gameplaying = true;
 
 
 function mute(){
@@ -26,6 +27,28 @@ function muteOff(){
 	button.style.backgroundImage = "url(img/mute2.svg)";
   document.cookie="playMusic=false";
 }
+
+function switchGame(){
+	if(gameplaying==true)
+		pausegame();
+	else
+		playgame();
+}
+
+function playgame(){
+	var button = document.getElementById("playGameButton");
+	gameplaying = true;
+	button.style.backgroundImage = "url(img/pause.svg)";
+}
+
+function pausegame(){
+	var button = document.getElementById("playGameButton");
+	gameplaying = false;
+	button.style.backgroundImage = "url(img/play.svg)";
+}
+
+
+
 
 function fullscreen(){
 	if ((document.fullScreenElement && document.fullScreenElement !== null) ||    

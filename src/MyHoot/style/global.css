@@ -155,6 +155,9 @@ input[type='checkbox']:focus {
 #muteButton{
 	background: url('../img/mute.svg');
 }
+#playGameButton{
+	background: url('../img/pause.svg');
+}
 #fullscreenButton{
 	background: url('../img/fullscreen.svg');
 	right: 60px;
