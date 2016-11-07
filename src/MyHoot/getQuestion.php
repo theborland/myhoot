@@ -18,6 +18,7 @@ include("controller/gameLogic.php");
 	<!--<script src="scripts/getQuestion.js"></script>-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="scripts/global.js"></script>
+	<script src="scripts/jquery.pause.min.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 	<script>
@@ -82,6 +83,8 @@ include("controller/gameLogic.php");
 
 		}
 
+
+
 	</script>
 
 	<style>
@@ -138,7 +141,7 @@ include("controller/gameLogic.php");
 
 
 <input type="button" class="utilityButton" id="muteButton" 			onclick="mute()">
-<input type="button" class="utilityButton" id="playGameButton" 		onclick="switchGame()">
+<input type="button" class="utilityButton" id="playGameButton" 		onclick="switchGameWAnimation()">
 <input type="button" class="utilityButton" id="fullscreenButton" 	onclick="parent.fullscreen()">
 <a href="endScreen.php" id="endGame" class="regButton">End Game</a>
 <div id="gameID">ID:<?php echo substr($_SESSION["game_id"],0,5); ?></div>

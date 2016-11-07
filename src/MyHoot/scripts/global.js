@@ -35,6 +35,18 @@ function switchGame(){
 		playgame();
 }
 
+function switchGameWAnimation(){ // same as switchGame, but pauses animation on the timer bar
+	if(gameplaying==true){
+		pausegame();
+		$('#timer').pause();
+	}else{
+		playgame();
+		$('#timer').play();
+	}
+
+}
+
+
 function playgame(){
 	var button = document.getElementById("playGameButton");
 	gameplaying = true;
