@@ -1,8 +1,6 @@
 <?php
 session_start();
 //echo "sdfsdf";
-//$_SESSION["game_id"]=30177320;
-//$_SESSION["questionNumber"]=1;
 require 'controller/dbsettings.php';
 if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places")
      header( 'Location: showAnswerOther.php') ;
@@ -24,16 +22,20 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/showAnswer.css">
 	<link rel="stylesheet" href="style/showAnswerOther.css">
+  <link rel="stylesheet" href="style/getQuestion.css">
 
 	<!--<script src="scripts/getQuestion.js"></script>-->
 	<script src="scripts/global.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
 
 	<script>
-
-
-
+  window.onload = function(){
+    $('#timer').animate({
+      width: "0%"
+    }, 30000, "linear");
+  }
 			<?php
 			if (isset($_SESSION["auto"]) && $_SESSION["auto"]=='yes')
 			{
@@ -100,6 +102,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
 <div id="topBarWrap">
+
   <div id="answerLabel"> <?php echo $theQuestion->getLabel(); ?></div>
 
 	<div id="topLeftCell">
@@ -108,6 +111,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		<a href="getQuestion.php" class="regButton" id="userMapSubmit"><?php if ($_SESSION["questionNumber"]<$_SESSION["numRounds"]) echo "Next Question"; else echo "Game Over"; ?></a>
 
 	</div>
+</div>
+<div id="timerContainer">
+  <div id="timer"></div>
 </div>
 <div id="sidebarWrap">
   <div id="sidebarHeader">Scoreboard 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>

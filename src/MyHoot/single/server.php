@@ -3,9 +3,11 @@
 // ./script.sh
 // killall -9 php  kill php processes
 //  lsof -t -i:5555
+// ps aux | less see all processes
 // kill `lsof -t -i:5555`
 // crontab -e
-//     kill -9 $(lsof -i:5555 -t)`` 
+//import database  mysql -u root -p  MyHoot <3.sql
+//     kill -9 $(lsof -i:5555 -t)``
 ///Users/jeffborland/web/launchSingle.sh >> /Users/jeffborland/web/results.log
 date_default_timezone_set('America/New_York');
 $datetime1 = strtotime("now");//current datetime object

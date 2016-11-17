@@ -114,7 +114,7 @@ class Question
 		 			$table="questionsSingle";
 			 $sql = "SELECT * FROM `$table` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".abs($_SESSION["questionNumber"])."'";
 	 		 $result = $conn->query($sql);
-			 //echo $sql;
+			 echo $sql;
 	 		if ($result)
 	 		{
 	 			if($row = $result->fetch_assoc()){

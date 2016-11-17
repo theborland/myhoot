@@ -45,9 +45,6 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 	<script>
 
-
-
-			<?php
 				var counter=11;
 				var interval = setInterval(function() {
 					if(gameplaying==true)
