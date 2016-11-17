@@ -4,7 +4,7 @@ $whitelist = array('users');
 require '../controller/dbsettings.php';
 
 $yest= date('Y-m-d');
-$last=findLastGame();
+$last=findLastGame($users);
 $sql = "SELECT DATE((time)) AS time, COUNT(*) AS NumPosts, GROUP_CONCAT(DISTINCT `game_id` SEPARATOR ',') AS ids FROM games WHERE time>'$last 23:59' GROUP BY DATE((time))  ORDER BY time";
 $result = $conn->query($sql);
 //echo $sql;
@@ -73,16 +73,24 @@ if ($result)
    ?>
 
 
-      ]
+      ]}
 
 <?php
 $sql = "DELETE FROM `stats` WHERE date=$yest ;";
 $result = $conn->query($sql);
 
-function findLastGame(){
+function findLastGame($users){
   global $conn;
+  if ($users<1)
+  $type="games";
 
-      $sql = "SELECT date FROM stats ORDER by date DESC limit 1";
+  if ($users==1){
+    $type="users";
+  }
+  if ($users==2){
+    $type="answers";
+  }
+      $sql = "SELECT date FROM stats WHERE type='$type' ORDER by date DESC limit 1";
       $result = $conn->query($sql);
       $row = $result->fetch_assoc();
       return $row["date"];
