@@ -55,9 +55,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 							window.location.replace("getQuestion.php");
 						}
 				}, 1000);
-			<?php
-			}
-			?>
+			
 			window.onload = function(){
 		    answer = document.getElementById("answer").innerHTML;
 			  //alert(answer);
