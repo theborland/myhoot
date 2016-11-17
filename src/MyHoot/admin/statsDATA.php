@@ -7,7 +7,7 @@ $yest= date('Y-m-d');
 $last=findLastGame();
 $sql = "SELECT DATE((time)) AS time, COUNT(*) AS NumPosts, GROUP_CONCAT(DISTINCT `game_id` SEPARATOR ',') AS ids FROM games WHERE time>'$last 23:59' GROUP BY DATE((time))  ORDER BY time";
 $result = $conn->query($sql);
-echo $sql;
+//echo $sql;
 if ($result)
 {
     $i=0;
