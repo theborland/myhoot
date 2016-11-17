@@ -54,7 +54,8 @@ if ($result)
 
   $sql = "SELECT * FROM stats WHERE `type`='$type' ORDER BY date ASC";
   $result = $conn->query($sql);
-  echo $sql;
+  $numResults = $result->num_rows;
+  //echo $sql;
   if ($result)
   {
       $i=0;
