@@ -76,9 +76,9 @@ if ($result)
       ]}
 
 <?php
-$sql = "DELETE FROM `stats` WHERE date=$yest ;";
+$sql = "DELETE FROM `stats` WHERE date='$yest' ;";
 $result = $conn->query($sql);
-
+//echo $sql;
 function findLastGame($users){
   global $conn;
   if ($users<1)
