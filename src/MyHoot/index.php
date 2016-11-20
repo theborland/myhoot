@@ -68,6 +68,8 @@
 
 			<div id="welcomeMessage">Starting a game is fast, easy, and doesn't require registration!</div>
 			<a href="game.php" id="startQuizButton" class="regButton">Start a Game!</a>
+			<div id="extraMessage">Our website had some issues last week, but we are back, better than ever. We added play and pause as many of you requested so you can pause the action and discuss a location or question. Other ideas - tell us <a href="contactUs.php">here</a>.<br>
+The site is run by a full time teacher and some students and we hope you continue to use the site to encourage students to learn about the world. Sorry for the inconvenience.</div>
 		</div>
 	</div>
 
