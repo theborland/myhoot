@@ -26,6 +26,8 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 	<link rel="stylesheet" href="style/showAnswerOther.css">
 
 	<!--<script src="scripts/getQuestion.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="scripts/jquery.pause.min.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
@@ -90,6 +92,15 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 		}
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
+		window.onload = function(){
+
+			$('#timer').animate({
+				width: "0%"
+			}, 30000, "linear");
+		};
+
 	</script>
 
 
