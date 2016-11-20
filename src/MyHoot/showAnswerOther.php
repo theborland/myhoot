@@ -38,6 +38,8 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	<link rel="stylesheet" href="style/nouislider.min.css">
 
 	<!--<script src="scripts/getQuestion.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="scripts/jquery.pause.min.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/showAnswer.js"></script>
 	<script src="scripts/socketScripts.js"></script>
@@ -57,6 +59,13 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 				}, 1000);
 			
 			window.onload = function(){
+
+
+			$('#timer').animate({
+				width: "0%"
+			}, 11000, "linear");
+
+
 		    answer = document.getElementById("answer").innerHTML;
 			  //alert(answer);
 			  answer = answer.length >= 10 ? answer :new Array(2).join("x") + answer;
@@ -96,6 +105,8 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			    labels[i].innerHTML = comma(val);
 			  }
 			}
+
+
 	</script>
 
 	<style>
@@ -144,6 +155,9 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	</div><div id="topRightCell">
 		<a href="getQuestion.php" class="regButton" id="userMapSubmit"><?php if ($_SESSION["questionNumber"]<$_SESSION["numRounds"]) echo "Next Question"; else echo "Game Over"; ?></a>
 
+	</div>
+	<div id="timerContainer">
+		<div id="timer"></div>
 	</div>
 </div>
 <div id="sidebarWrap">

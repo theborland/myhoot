@@ -98,7 +98,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 			$('#timer').animate({
 				width: "0%"
-			}, 30000, "linear");
+			}, 11000, "linear");
 		};
 
 	</script>
