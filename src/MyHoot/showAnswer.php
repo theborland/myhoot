@@ -108,6 +108,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 		<a href="getQuestion.php" class="regButton" id="userMapSubmit"><?php if ($_SESSION["questionNumber"]<$_SESSION["numRounds"]) echo "Next Question"; else echo "Game Over"; ?></a>
 
 	</div>
+	<div id="timerContainer">
+		<div id="timer"></div>
+	</div>
 </div>
 <div id="sidebarWrap">
   <div id="sidebarHeader">Scoreboard 			<?php echo $_SESSION["questionNumber"];  if ($_SESSION["numRounds"]<999) echo " of ". $_SESSION["numRounds"]; ?>
