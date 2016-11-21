@@ -5,7 +5,7 @@
 
 	<meta name="description" content="GameOn.World is an online, educational trivia game for groups! Starting a game is fast, easy, and doesn't require registration." />
 
-	<link rel="stylesheet" href="style/global.css">
+	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/form.css">
 	<link rel="stylesheet" href="style/content.css">
 	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
@@ -76,7 +76,7 @@ The site is run by a full time teacher and some students and we hope you continu
 		<div id="pageFooter">
 			Copyright &copy; 2016 GameOnWorld
 		</div>
-		
+
 </div>
 </body>
 </html>
