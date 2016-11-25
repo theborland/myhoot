@@ -10,6 +10,7 @@ $theQuestion=Question::loadQuestion();
 $theQuestion->alertUsers(-1);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
+/*8
 $max=$allAnswers->getMax();
 $min=$allAnswers->getMin();
 if ($max-$min==0)
@@ -23,6 +24,7 @@ $reg2=round((($max-$min)*.5)+$min,$rounding);
 $reg3=round((($max-$min)*.75)+$min,$rounding);
 $reg4=round($max,$rounding);
 $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
+*/
 //die ($reg2);
 
 ?>
@@ -57,7 +59,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 							window.location.replace("getQuestion.php");
 						}
 				}, 1000);
-			
+
 			window.onload = function(){
 
 
@@ -81,24 +83,25 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			    }
 			  }, 500);
 
+			/*
 			var timeline = document.getElementById('timeline');
 
 			noUiSlider.create(timeline, {
-			  start: [<?php echo $reg2 ?>],
+			  start: [<?php //echo $reg2 ?>],
 			  connect: "upper",
 			  direction: 'ltr',
 			  range: {
-			    'min': [<?php echo $reg0 ?>],
-			    '25%': [<?php echo $reg1 ?>],
-			    '50%': [<?php echo $reg2 ?>],
-			    '75%': [<?php echo $reg3 ?>],
-			    'max': [<?php echo $reg4 ?>]
+			    'min': [<?php //echo $reg0 ?>],
+			    '25%': [<?php //echo $reg1 ?>],
+			    '50%': [<?php //echo $reg2 ?>],
+			    '75%': [<?php //echo $reg3 ?>],
+			    'max': [<?php //echo $reg4 ?>]
 			  },pips: { // Show a scale with the slider
 			    mode: 'steps',
 			    density: 2
 			  }
 			});
-
+*/
 			  labels = document.getElementsByClassName("noUi-value-large");
 			  for(var i=0; i<labels.length;i++){
 			    val = parseInt(labels[i].innerHTML);
@@ -186,20 +189,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 
 
-<div id="timelineWrap" style="display:none;">
 
-
-  <div id="timeline">
-    <div class="timelineMarker" id="timelineCA" style="border-color:#E12027;margin-left:calc(<?php echo $correctLoc*100; ?>% - 10px);">&nbsp;</div>
-    <?php foreach ($allAnswers->allAnswers as $key => $value)
-    {
-        $loc=($value->ans-$reg0)/($reg4-$reg0);
-        ?>
-    <div class="timelineMarker" style="border-color:#<?php echo $value->color ?>;margin-left:calc(<?php echo $loc*100; ?>% - 10px);">&nbsp;</div>
-    <?php } ?>
-
-  </div>
-</div>
 <div id="answer"><?php echo ($allAnswers->correctAns->value); ?></div>
 
 

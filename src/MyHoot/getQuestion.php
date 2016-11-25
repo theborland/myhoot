@@ -4,6 +4,7 @@ session_start();
 
 include("controller/gameLogic.php");
 //die();
+$type=Game::findGame()->type;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,7 @@ include("controller/gameLogic.php");
 	<script src="scripts/socketScripts.js"></script>
 	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 	<script>
-	  loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>',<?php echo Game::getNumberUsers(); ?>);
+	  loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>',<?php echo Game::getNumberUsers(); ?>,'<?php echo $type; ?>');
 	  findingNumberOfUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);
 	</script>
 
@@ -50,7 +51,7 @@ include("controller/gameLogic.php");
 					console.log(counter);
 			  //$('#timeLeft').html(counter);
 			    if (counter <= 0) {
-			    	window.location.replace("showAnswer.php");
+			    	window.location.replace("showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php");
 			    }
 			}, 1000);
 
@@ -73,7 +74,7 @@ include("controller/gameLogic.php");
 		body{
 			background-image:url("<?php echo $theQuestion->getImage() ?>");
 			<?php
-				if(Game::findGame()->type == "age" || Game::findGame()->type == "entertainment" || Game::findGame()->type == "rand"){
+				if($type == "age" || $type == "entertainment" || $type == "rand"){
 			?>
 			background-size       : contain;
 			background-position   : top center;

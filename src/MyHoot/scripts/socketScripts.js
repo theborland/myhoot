@@ -19,7 +19,7 @@ function loadWaitingForUsers(ip,gameID){
 
 
 }
-function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
+function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
     var conn = new ab.Session('ws://'+ip+':8080',
     function() {
         conn.subscribe('Game'+gameID+''+questionNumber+'', function(topic, data) {
@@ -36,7 +36,10 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers){
 //<div class="userAnswer" style="background:#38D38E;">John <div class="userResult">434,134</div></div>
              if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<27 && auto=="yes" && parseInt(numPlayers.innerHTML)>=numUsers)
               setTimeout(function (){
-                    window.location.href='showAnswer.php';
+                    if (type=="geo" || type=="places" || type=="pt")
+                      window.location.href='showAnswer.php';
+                    else
+                      window.location.href='showAnswerOther.php';
                   }, 2000);
 
          });

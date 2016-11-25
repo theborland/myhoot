@@ -4,8 +4,10 @@ session_start();
 //$_SESSION["game_id"]=30177320;
 //$_SESSION["questionNumber"]=1;
 require 'controller/dbsettings.php';
-if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places")
+if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places"){
      header( 'Location: showAnswerOther.php') ;
+     die();
+   }
 $theQuestion=Question::loadQuestion();
 $theQuestion->alertUsers(-1);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);

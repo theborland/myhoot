@@ -112,7 +112,7 @@ class Question
 			 $table="questions";
 			 if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
 		 			$table="questionsSingle";
-			 $sql = "SELECT * FROM `$table` WHERE gameid ='".$_SESSION["game_id"]."' AND questionNum='".abs($_SESSION["questionNumber"])."'";
+			 $sql = "SELECT * FROM `$table` WHERE gameid ='".$_SESSION["game_id"]."' ORDER BY questionNum DESC";
 	 		 $result = $conn->query($sql);
 			 //echo $sql;
 	 		if ($result)
@@ -120,6 +120,7 @@ class Question
 	 			if($row = $result->fetch_assoc()){
 	 				//echo $this->location->lat;
 	 				$question=new self(null);
+					$_SESSION["questionNumber"]=$row["questionNum"];
 	 				$question->type=$row["type"];
 					$question->qID=$row["qID"];
 					$type=$question->type;
