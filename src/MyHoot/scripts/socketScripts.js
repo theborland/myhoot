@@ -34,7 +34,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
             answersWrap.innerHTML = answersWrap.innerHTML  + '<div class="userAnswer" style="background-color: rgba('+r+','+g+','+b+',.8);">'+data.title+'<div class="userResult">'+data.miles+'</div></div>';
 
 //<div class="userAnswer" style="background:#38D38E;">John <div class="userResult">434,134</div></div>
-             if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<27 &&counter>2 && auto=="yes" && parseInt(numPlayers.innerHTML)>=numUsers)
+             if (parseInt(numAnswers.innerHTML) ==parseInt(numPlayers.innerHTML) && counter<27 &&counter>2 && auto=="yes" && parseInt(numPlayers.innerHTML)>=numUsers){
               counter=50000;
               setTimeout(function (){
 
@@ -44,7 +44,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
                       window.location.href='showAnswerOther.php';
                   }, 2000);
 
-         });
+         });}
     },
     function() {
         console.warn('WebSocket connection closed');
