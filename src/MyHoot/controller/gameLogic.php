@@ -4,7 +4,8 @@ require 'controller/dbsettings.php';
 //echo print_r($_GET["games"]);
 
 if ($_SESSION["game_id"]==0)
-   die("no game id");
+  $_SESSION["game_id"]=Game::findGameID();
+   //die("no game id");
 if ($gsGeo=="false" || $gsGeo=="true")
 {
   //die ($r_OC);

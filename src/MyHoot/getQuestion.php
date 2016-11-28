@@ -4,6 +4,9 @@ session_start();
 
 include("controller/gameLogic.php");
 //die();
+if (!isset($_SESSION["game_id"]))
+	$_SESSION["game_id"]=Game::findGameID();
+	//die ($_SESSION["game_id"]);
 $type=Game::findGame()->type;
 ?>
 <!DOCTYPE html>

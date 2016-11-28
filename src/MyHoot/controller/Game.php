@@ -92,11 +92,31 @@ class Game
 
 	}
 
+	public static function findGameID()
+	{
+		global $conn;
+		$sql = "SELECT * FROM `games` WHERE `ip` = '".$_SERVER['REMOTE_ADDR']."' ORDER BY time DESC";
+//die ($sql);
+		$result = $conn->query($sql);
+		if ($result)
+		{
+			$row = $result->fetch_assoc();
+			if ($row){
+				return $row["game_id"];
+			}
+			else {
+				 return null;
+			}
+		}
+		return null;
+
+	}
+
 	public static function findGame()
 	{
 		global $conn;
 		$sql = "SELECT * FROM `games` WHERE `game_id` = '".$_SESSION["game_id"]."'";
-
+//die ($sql);
 		$result = $conn->query($sql);
 		if ($result)
 		{
