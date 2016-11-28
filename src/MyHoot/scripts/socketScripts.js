@@ -43,8 +43,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
                     else
                       window.location.href='showAnswerOther.php';
                   }, 2000);
-
-         });}
+              }
+         });
     },
     function() {
         console.warn('WebSocket connection closed');
