@@ -496,12 +496,12 @@ class Question
 
 		global $conn;
 		$regionsSelected=$_SESSION["regionsSelected"];
-		$sql = "SELECT * FROM `data-geo` WHERE ";
+		$sql = "SELECT * FROM `data-geo` WHERE ( ";
 
     foreach ($regionsSelected as $region)
 			$sql.=" `location` = '" . $region ."' OR";
 		$sql=substr($sql,0,strlen($sql)-3);
-
+		$sql.=" ) ";"
 		if ($type=="pop" || $type=="population" || $this->type=="pop")
 			$sql.=" AND `population`>0";
 		$sql.=" ORDER BY rand() LIMIT 1";
