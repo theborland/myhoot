@@ -3,7 +3,7 @@ $whitelist = array('statesCB','numRounds','gsScience','gsSports','gsEntertainmen
 require 'controller/dbsettings.php';
 //echo print_r($_GET["games"]);
 
-if ($_SESSION["game_id"]==0)
+if (!isset($_SESSION["game_id"]) || $_SESSION["game_id"]==0)
   $_SESSION["game_id"]=Game::findGameID();
    //die("no game id");
 if ($gsGeo=="false" || $gsGeo=="true")
