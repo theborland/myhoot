@@ -68,7 +68,7 @@
 
 			<div id="welcomeMessage">Starting a game is fast, easy, and doesn't require registration!</div>
 			<a href="game.php" id="startQuizButton" class="regButton">Start a Game!</a>
-			<div id="extraMessage">Thanks for telling us about the page stalling on some questions.  <br>It should be fixed - thats why we say GameOn is in beta.
+			<div id="extraMessage">All should be working now - we have spent a lot of time diagnosing and feel good about it.
 				  <br>If you have any issues (or ideas) - tell us <a href="contactUs.php">here</a>.<br>
 </div>
 		</div>

@@ -2,6 +2,8 @@
 session_start();
 $whitelist = array('perc', 'max');
 require 'controller/dbsettings.php';
+if (!isset($_SESSION["game_id"]))
+  Game::findGameID();
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"])  )
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));

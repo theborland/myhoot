@@ -6,6 +6,8 @@ session_start();
 require 'controller/dbsettings.php';
 //  $_SESSION["game_id"]=90993;
   //$_SESSION["questionNumber"]=7;
+if (!isset($_SESSION["game_id"]))
+	$_SESSION["game_id"]=Game::findGameID();
 $theQuestion=Question::loadQuestion();
 $theQuestion->alertUsers(-1);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);

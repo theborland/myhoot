@@ -3,6 +3,8 @@
 	require 'controller/dbsettings.php';
 	//$_SESSION["game_id"]=64733165;
 	//$_SESSION["questionNumber"]=10;
+	if (!isset($_SESSION["game_id"]))
+		$_SESSION["game_id"]=Game::findGameID();
 	$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 	//	$allAnswers->getTP();
 	//print_r($allAnswers);

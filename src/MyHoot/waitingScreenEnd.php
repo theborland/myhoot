@@ -2,7 +2,8 @@
 
 session_start();
 require 'controller/dbsettings.php';
-
+if (!isset($_SESSION["game_id"]))
+  Game::findGameID();
 
  ?>
 
@@ -27,7 +28,7 @@ require 'controller/dbsettings.php';
 
    </script>
 
-</head> 
+</head>
 <body>
 <script>
   window.fbAsyncInit = function() {

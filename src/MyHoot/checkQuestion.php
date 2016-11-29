@@ -2,7 +2,8 @@
 session_start();
 $whitelist = array('lat','long','questionNumber');
 require 'controller/dbsettings.php';
-
+if (!isset($_SESSION["game_id"]))
+  Game::findGameID();
 $game=Game::findGame();
 $questionNumber=$game->round;
 //die( $questionNumber);

@@ -4,6 +4,8 @@ session_start();
 //$_SESSION["game_id"]=30177320;
 //$_SESSION["questionNumber"]=1;
 require 'controller/dbsettings.php';
+if (!isset($_SESSION["game_id"]))
+	$_SESSION["game_id"]=Game::findGameID();
 if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findGame()->type!="places"){
      header( 'Location: showAnswerOther.php') ;
      die();

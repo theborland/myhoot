@@ -17,6 +17,27 @@ class User{
 		$this->id=$id;
 	}
 
+	public static function findGameID(){
+		global $conn;
+			$sql = "SELECT * from `users` WHERE `ip`= '".session_id()."' ORDER by id DESC";
+			$result = $conn->query($sql);
+			if ($result)
+			{
+				$row = $result->fetch_assoc();
+				if ($row){
+					$_SESSION["game_id"]= $row["game_id"];
+					$_SESSION["user_id"]= $row["user_id"];
+					$_SESSION["name"]= $row["name"];
+				}
+				else {
+					 return null;
+				}
+			}
+			return null;
+
+		}
+
+
 	public static function createUser($game_id,$name){
 		global $conn;
 		$_SESSION["name"] =$name;
@@ -35,7 +56,7 @@ class User{
     $color=Game::getColor();
 		$sql = "UPDATE games SET numOfUsers = numOfUsers+1 WHERE game_id = '".$game_id."'";
 		$result = $conn->query($sql);
-    $sql = "INSERT INTO `$table` (`game_id`, `name`,`color`) VALUES ('".$game_id."','".$name."','".$color."')";
+    $sql = "INSERT INTO `$table` (`game_id`, `name`,`color`,`ip`) VALUES ('".$game_id."','".$name."','".$color."','".session_id() ."')";
 //mb_internal_encoding("UTF-8");
 //echo "😀"; INSERT INTO `MyHoot`.`users` (`user_id`, `game_id`, `name`, `round`, `score`, `color`) VALUES ('51', '51', '😀', NULL, NULL, '')
 
