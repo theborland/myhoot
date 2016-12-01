@@ -29,10 +29,10 @@ class User{
 					$_SESSION["user_id"]= $row["user_id"];
 					$_SESSION["name"]= $row["name"];
 				}
-				else {
-					 return null;
-				}
+
 			}
+			header("index.php");
+			die ();
 			return null;
 
 		}

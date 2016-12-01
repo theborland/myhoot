@@ -104,10 +104,9 @@ class Game
 			if ($row){
 				return $row["game_id"];
 			}
-			else {
-				 return null;
-			}
 		}
+		header("index.php");
+		die ();
 		return null;
 
 	}
