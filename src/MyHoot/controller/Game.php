@@ -118,7 +118,7 @@ class Game
 	{
 		global $conn;
 		$sql = "SELECT * FROM `games` WHERE `game_id` = '".$_SESSION["game_id"]."'";
-//die ($sql);
+die ($sql);
 		$result = $conn->query($sql);
 		if ($result)
 		{
