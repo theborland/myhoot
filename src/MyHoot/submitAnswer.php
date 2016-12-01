@@ -3,6 +3,8 @@ session_start();
 $whitelist = array('lat','long','answer','questionNumber');
 require 'controller/dbsettings.php';
 
+if (!isset($_SESSION["game_id"]))
+  User::findGameID();
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
 $color=User::getColor();

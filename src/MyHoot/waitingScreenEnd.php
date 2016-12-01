@@ -3,7 +3,7 @@
 session_start();
 require 'controller/dbsettings.php';
 if (!isset($_SESSION["game_id"]))
-  Game::findGameID();
+  User::findGameID();
 
  ?>
 
