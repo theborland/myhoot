@@ -105,8 +105,8 @@ class Game
 				return $row["game_id"];
 			}
 		}
-		header("index.php");
-		die ();
+		//header("index.php");
+		//die ();
 		return null;
 
 	}

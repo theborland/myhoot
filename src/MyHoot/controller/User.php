@@ -31,8 +31,8 @@ class User{
 				}
 
 			}
-			header("index.php");
-			die ();
+			//header("index.php");
+			//die ();
 			return null;
 
 		}
