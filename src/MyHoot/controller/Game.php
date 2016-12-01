@@ -133,6 +133,7 @@ class Game
 				 return null;
 			}
 		}
+		return null;
 
 	}
 	public static function questionStatusRedirect(){
