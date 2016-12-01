@@ -1,9 +1,9 @@
 <?php
 require '../controller/dbsettings.php';
 $hourAgo=date('Y-m-d H:i:s',strtotime('-1 hour'));
-$sql = "DELETE FROM `games` WHERE `numOfUsers`<2 AND time<`$hourAgo`";
+$sql = "DELETE FROM `games` WHERE `numOfUsers`<2 AND `time`<'$hourAgo'";
 $result = $conn->query($sql);
-die ($sql);
+//die ($sql);
 ?>
 <html>
  <head>
