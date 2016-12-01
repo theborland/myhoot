@@ -104,8 +104,11 @@ class Game
 			if ($row){
 				return $row["game_id"];
 			}
+			else {
+				 return null;
+			}
 		}
-		//header("index.php");
+		//header("joinQuiz.php");
 		//die ();
 		return null;
 
