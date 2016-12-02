@@ -6,15 +6,17 @@ require 'controller/dbsettings.php';
 if (!isset($_SESSION["game_id"]))
   User::findGameID();
 
+if ($lat==0 && $long==0 && $answer==0 && $questionNumber==0){
+    header("userScreen.php");
+    die ();
+  }
+
 if ($questionNumber<=0)
 {
   $game=Game::findGame();
   $questionNumber=abs($game->round);
 }
-if ($lat==0 && $long==0){
-  header("userScreen.php");
-  die ();
-}
+
 if ($lat=="")$lat=0;
 if ($long=="")$long=0;
 $color=User::getColor();
