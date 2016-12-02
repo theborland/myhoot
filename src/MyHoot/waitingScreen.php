@@ -3,8 +3,7 @@
 session_start();
 $whitelist = array('message','submit','name','game_id','place');
 require 'controller/dbsettings.php';
-if (!isset($_SESSION["game_id"]))
-  User::findGameID();
+
 
 if ($submit=="Join"){
     // $name=substr($name,0,20);
@@ -44,6 +43,8 @@ if ($submit=="Join"){
       }
 }
 
+if (!isset($_SESSION["game_id"]))
+  User::findGameID();
  ?>
 
 <!DOCTYPE html>
