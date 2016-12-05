@@ -68,9 +68,7 @@
 
 			<div id="welcomeMessage">Starting a game is fast, easy, and doesn't require registration!</div>
 			<a href="game.php" id="startQuizButton" class="regButton">Start a Game!</a>
-			<div id="extraMessage">All should be working now - we have spent a lot of time diagnosing and feel good about it.
-				  <br>If you have any issues (or ideas) - tell us <a href="contactUs.php">here</a>.<br>
-</div>
+
 		</div>
 	</div>
 
@@ -81,3 +79,8 @@
 </div>
 </body>
 </html>
+<?php
+//	<div id="extraMessage">All should be working now - we have spent a lot of time diagnosing and feel good about it.
+	//		<br>If you have any issues (or ideas) - tell us <a href="contactUs.php">here</a>.<br>
+//</div>
+ ?>
