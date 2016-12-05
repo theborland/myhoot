@@ -95,6 +95,8 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
                   window.location.href='userScreenRand.php?question='+data.title.substring(1);
           else if (data.type.substring(0,9)=="WorldTime")
                   window.location.href='userScreenWorldTime.php?region='+data.type.substring(9)+'&perc=no&question='+data.title.substring(1);
+          else if (data.type=="time")
+                  window.location.href='userScreenWorldTime.php?region=4&perc=no&question='+data.title.substring(1);
           else
               window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
 

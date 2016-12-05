@@ -36,7 +36,7 @@ if ($submit=="Join"){
               header('Location: userScreenDecimal.php?perc=yes&question='.$questionNumber ) ;
       else if ($game->type=="science" || $game->type=="sports" || $game->type=="entertainment" || $game->type=="factsRand")
               header('Location: userScreenRand.php?question='.$questionNumber ) ;
-      else if ($game->type=="WorldTime")//below is messed up I put 3 for region which is not right
+      else if ($game->type=="WorldTime" || $game->type=="time")//below is messed up I put 3 for region which is not right
               header('Location: userScreenWorldTime.php?region=3&perc=no&question='.$questionNumber ) ;
       else
           header('Location: userScreen'.$type=ucwords($game->type).'.php?question='.$questionNumber ) ;
@@ -58,7 +58,7 @@ if (!isset($_SESSION["game_id"]))
 	<link rel="stylesheet" href="style/waitingScreen.css">
 
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
 <style>
