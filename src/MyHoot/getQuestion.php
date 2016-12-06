@@ -54,7 +54,7 @@ $type=Game::findGame()->type;
 					console.log(counter);
 			  //$('#timeLeft').html(counter);
 			    if (counter <= 0) {
-			    	window.location.replace("showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php");
+			    	window.location.replace("showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php?sender=getQ");
 			    }
 			}, 1000);
 
@@ -107,7 +107,7 @@ $type=Game::findGame()->type;
 
 		</div>
 		<div id="controlWrap">
-			<a href="showAnswer.php" class="regButton" id="showAnswer">Show Answer</a>
+			<a href="showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php" class="regButton" id="showAnswer">Show Answer</a>
 			<div id="numAnswersContainer"><div id="numAnswers">0</div>/<div id="numPlayers">0</div> users have answered</div>
 		</div>
 	</div>

@@ -41,7 +41,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
                     if (type=="geo" || type=="places" || type=="pt")
                       window.location.href='showAnswer.php';
                     else
-                      window.location.href='showAnswerOther.php';
+                      window.location.href='showAnswerOther.php?sender=socket';
                   }, 2000);
               }
          });
