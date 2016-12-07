@@ -55,7 +55,8 @@ $type=Game::findGame()->type;
 			  //$('#timeLeft').html(counter);
 			    if (counter <= 0) {
 			    	window.location.replace("showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php?sender=getQ");
-			    }
+						counter=9999;
+					}
 			}, 1000);
 
 			//animation clock
