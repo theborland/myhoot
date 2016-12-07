@@ -58,7 +58,7 @@ if (!isset($_SESSION["game_id"]))
 	<link rel="stylesheet" href="style/waitingScreen.css">
 
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js?ver=1"></script>
+	<script src="scripts/socketScripts.js?ver=2"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
 <style>
