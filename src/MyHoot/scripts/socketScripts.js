@@ -96,9 +96,9 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
           else if (data.type.substring(0,9)=="WorldTime")
                   window.location.href='userScreenWorldTime.php?region='+data.type.substring(9)+'&perc=no&question='+data.title.substring(1);
           else if (data.type.substring(0,4)=="time")
-                  window.location.href='userScreenWorldTime.php?region=4&perc=no&question='+data.title.substring(1);
+                  window.location.href='userScreenWorldTime.php?sender=ss&region=4&perc=no&question='+data.title.substring(1);
           else
-              window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
+              window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?sender=ssa&question='+data.title.substring(1);
 
         }
             });
