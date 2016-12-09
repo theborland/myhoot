@@ -54,8 +54,8 @@ $type=Game::findGame()->type;
 					console.log(counter);
 			  //$('#timeLeft').html(counter);
 			    if (counter <= 0) {
-			    	window.location.replace("showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php?sender=getQ");
 						counter=9999;
+			    	window.location.replace("showAnswer<?php if ($type!="geo" && $type!="pt" && $type!="places")echo "Other" ?>.php?sender=getQ");
 					}
 			}, 1000);
 

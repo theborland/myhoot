@@ -52,6 +52,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
         //console.log(counter);
 			  //$('#timeLeft').html(counter);
 			    if (counter <= 0) {
+						counter=99999;
 			    	window.location.replace("getQuestion.php");
 			    }
 			}, 1000);

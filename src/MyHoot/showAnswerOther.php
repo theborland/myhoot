@@ -58,6 +58,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 					//console.log(counter);
 					//$('#timeLeft').html(counter);
 						if (counter <= 0) {
+							counter=999999;
 							window.location.replace("getQuestion.php");
 						}
 				}, 1000);
