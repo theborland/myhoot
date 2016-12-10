@@ -37,7 +37,7 @@ if ($submit=="Join"){
       else if ($game->type=="science" || $game->type=="sports" || $game->type=="entertainment" || $game->type=="factsRand")
               header('Location: userScreenRand.php?question='.$questionNumber ) ;
       else if ($game->type=="WorldTime" || $game->type=="time")//below is messed up I put 3 for region which is not right
-              header('Location: userScreenWorldTime.php?region=3&perc=no&question='.$questionNumber ) ;
+              header('Location: userScreenWorldTime.php?region=4&perc=no&question='.$questionNumber ) ;
       else
           header('Location: userScreen'.$type=ucwords($game->type).'.php?question='.$questionNumber ) ;
       }
