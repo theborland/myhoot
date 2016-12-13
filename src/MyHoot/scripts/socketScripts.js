@@ -141,7 +141,7 @@ function loadWaitingForQuestionSingle(ip,gameID){
         else if (data.type.substring(0,9)=="WorldTime")
                 window.location.href='userScreenWorldTime.php?region='+data.type.substring(9)+'&perc=no&question='+data.title.substring(1);
         else
-            window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?question='+data.title.substring(1);
+            window.location.href='userScreen'+capitalizeFirstLetter(data.type)+'.php?sender=single&question='+data.title.substring(1);
 
       }
           });

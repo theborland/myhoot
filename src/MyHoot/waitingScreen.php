@@ -39,7 +39,7 @@ if ($submit=="Join"){
       else if ($game->type=="WorldTime" || $game->type=="time")//below is messed up I put 3 for region which is not right
               header('Location: userScreenWorldTime.php?region=4&perc=no&question='.$questionNumber ) ;
       else
-          header('Location: userScreen'.$type=ucwords($game->type).'.php?question='.$questionNumber ) ;
+          header('Location: userScreen'.$type=ucwords($game->type).'.php?sender=wS&question='.$questionNumber ) ;
       }
 }
 
@@ -58,7 +58,7 @@ if (!isset($_SESSION["game_id"]))
 	<link rel="stylesheet" href="style/waitingScreen.css">
 
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js?ver=3"></script>
+	<script src="scripts/socketScripts.js?ver=4"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
 <style>

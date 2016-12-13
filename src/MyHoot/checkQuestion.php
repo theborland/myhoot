@@ -26,7 +26,7 @@ else
   else if ($game->type=="WorldTime" || $game->type=="Time")//below is messed up I put 3 for region which is not right
           header('Location: userScreenWorldTime.php?region=3&perc=no&question='.$questionNumber ) ;
   else
-      header('Location: userScreen'.$type=ucwords($game->type).'.php?question='.$questionNumber ) ;
+      header('Location: userScreen'.$type=ucwords($game->type).'.php?sender=check&question='.$questionNumber ) ;
 
 //    else
 //      header( 'Location: userScreen.php?question='.$questionNumber ) ;
