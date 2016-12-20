@@ -75,7 +75,7 @@ if (!isset($_SESSION["game_id"]))
 	  FB.ui({
 	    method: 'share',
 	    display: 'iframe',
-	    quote: 'I just got nth place playing against my friends on GameOn.World! Start a game now, it\'s free and easy to play!',
+	    quote: 'I just played the World\'s Best Trivia game on GameOn.World! Start a game now, it\'s free and easy to play!',
 	    href: 'https://gameon.world/game.php',
 	  }, function(response){});
 	}
