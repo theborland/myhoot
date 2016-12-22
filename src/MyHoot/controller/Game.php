@@ -102,6 +102,7 @@ class Game
 		{
 			$row = $result->fetch_assoc();
 			if ($row){
+				$_SESSION["questionNumber"]=abs($row["round"]);
 				return $row["game_id"];
 			}
 		}

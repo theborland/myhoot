@@ -5,7 +5,7 @@ class AllAnswers
 	public $correctAns;
   //public $wording;
 	function __construct($questionNum)
-	{
+	{ 
 		$this->allAnswers=array();
 		$this->correctAns=Answer::loadCorrect($questionNum);
 		global $conn;
@@ -187,7 +187,7 @@ class Answer
 			}
 			else return -1;
 
-	} 
+	}
 
 	public static function loadCorrect($questionNum){
 

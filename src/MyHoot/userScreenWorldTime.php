@@ -7,7 +7,9 @@ if (!isset($_SESSION["game_id"]))
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"]))
     header("Location: waitingScreen.php?message=".urlencode("Come on - you can't submit twice..."));
-  Game::questionStatusRedirect();
+$questionNumber=Game::questionStatusRedirect();
+if (!isset($_GET["question"]))
+    $_GET["question"])=$questionNumber;
 ?>
 <html>
   <head>

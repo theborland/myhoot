@@ -259,7 +259,7 @@ class Question
 		if ($this->answer=="" || $this->answer<=0)
 		{
 			$this->type="geo";
-			$this->getLocation($type);
+			$this->getLocation($this->type);
 		}
 
   }
