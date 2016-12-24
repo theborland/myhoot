@@ -33,8 +33,10 @@ class Pusher implements WampServerInterface {
     protected $subscribedTopics = array();
 
 public function onSubscribe(ConnectionInterface $conn, $topic) {
+    $topic->autoDelete = true;
     $this->subscribedTopics[$topic->getId()] = $topic;
     echo "subscribing to : ".$topic . "\n";
+
 }
 
 /**
