@@ -6,6 +6,10 @@ if (isset($_GET["question"]))
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
     $_SESSION["questionNumber"]=Game::questionStatusRedirect();
     $theQuestion=Question::loadQuestion();
+
+    $seconds=time();
+    $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
+
 ?>
 <html>
   <head>
@@ -49,6 +53,24 @@ if (isset($_GET["question"]))
     </style>
 
     <script>
+    var count=<?php echo $timeLeft; ?>;
+
+    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+    function timer()
+    {
+      count=count-1;
+      if (count <= 0)
+      {
+         clearInterval(counter);
+         window.location.href = "showAnswerOther.php";
+         count=33333;
+         return;
+      }
+
+     document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+    }
+
     window.setTimeout(function(){
             window.location.href = "waitingScreen.php";
         }, 31000);
@@ -82,7 +104,7 @@ if (isset($_GET["question"]))
     <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
     <script>
-      loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
+  //    loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>
 
  </head>
@@ -92,6 +114,7 @@ if (isset($_GET["question"]))
    <div id="questionWrap">
      <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
      <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+<span id="timer2"></span>
    </div>
 
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>

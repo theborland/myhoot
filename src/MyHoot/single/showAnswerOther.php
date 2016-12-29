@@ -90,16 +90,16 @@ body{
     count=count-1;
     if (count <= 0)
     {
+      window.location.href = "userScreen.php";
        clearInterval(counter);
+       count=999;
        return;
     }
 
    document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
   }
 
-		window.onload = function(){
-	   		loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
-		}
+	
 	</script>
 </head>
 <body>

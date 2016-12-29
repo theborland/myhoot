@@ -26,16 +26,15 @@ include ('../controller/User.php');
 
 //$sql = "DELETE FROM `questionsSingle`";
 
-//$result = $conn->query($sql);
-
-$sql = "DELETE FROM `questionsSingle` WHERE `active`='0'";
 $result = $conn->query($sql);
+
+
 
 $_SESSION["single"]=true;
 $playedGames=array();
 $_SESSION["regionsSelected"]=$regionsSelected=array(1,2,3,4,5,6,7,8,9,10,11);
 $gamesSelected=array("time","weather","pt","places","places","facts","facts","geo","geo","geo","geo","geo");
-//$gamesSelected=array("weather");
+//$gamesSelected=array("places");
 
 Game::createGame(false,true);
 $_SESSION["questionNumber"]=getLastQuestion()+1;
@@ -72,24 +71,22 @@ while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
     $seconds=time();
     while ($seconds%($lengthOfGame+$lengthOfBreak)!=$lengthOfGame)
     {
-       usleep(500000);
+       sleep(1);
        $seconds=time();
      }
     $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
     $numUsers=sizeof($allAnswers->allAnswers);
     echo "Question:".$_SESSION["questionNumber"]." Num Users:".$numUsers."\n";
-    //$theQuestion->alertUsers(-1);
-    if ($numUsers>0){
-      $sql = "UPDATE `questionsSingle` set `active`='1' WHERE `questionNum`='".$_SESSION["questionNumber"]."'";
-      $result = $conn->query($sql);
-    }
+    $theQuestion->alertUsers(-1);
+    if ($numUsers>0)
+      ;//
     else{
       sleep(3);
       $sql = "DELETE FROM `questionsSingle` WHERE `questionNum`='".$_SESSION["questionNumber"]."'";
       $result = $conn->query($sql);
       $_SESSION["questionNumber"]--;
     }
-    //$theQuestion->alertUsers(-1);
+    $theQuestion->alertUsers(-1);
 
     $seconds=date("s");
     $seconds=time();

@@ -73,6 +73,8 @@ class Question
 
 	public static function InQuestion($questionNum){
 		//SOCKET SENDING MESSAGE
+			  if (isset($_SESSION["single"]) && $_SESSION["single"]==true)return;
+
 				$entryData = array(
 						'category' => "InGame".$_SESSION['game_id']."-".$questionNum
 					, 'title'    => "Unnec"
@@ -88,6 +90,7 @@ class Question
 
 	public function alertUsers($message,$type=NULL){
 		//SOCKET SENDING MESSAGE
+		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)return;
 		$entryData = array(
 			'category' => "Game".$_SESSION["game_id"]."Status"
 			, 'title'    => "Q".$message
@@ -684,6 +687,41 @@ function addAnswer(){
 	$result = $conn->query($sql);
 	//echo $sql;
 	//die ($sql);
+}
+
+public static function findQuestion()
+{
+	global $conn;
+	$table="questions";
+	if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+		$table="questionsSingle";
+	$sql = "SELECT * FROM `$table` WHERE `gameid` = '".$_SESSION["game_id"]."' order by questionNum DESC LIMIT 1";
+	//echo ($sql);
+
+
+	$result = $conn->query($sql);
+	if ($result)
+	{
+		$row = $result->fetch_assoc();
+		if ($row){
+			if ($row["active"]==1){
+				usleep(500000);
+				return Question::findQuestion();
+			}
+			else {
+				$game=new self(null);
+				$game->qID= $row["questionNum"];
+				$game->type=$row["type"];
+				$game->max=$row["max"];
+				$game->answer=$row["answer"];
+				return $game;
+			}
+		}
+
+	}
+	return null;
+
+
 }
 
 	public static function findQID($questionNum)

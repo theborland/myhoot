@@ -41,6 +41,7 @@ $avg=User::updateUser($_SESSION["user_id"],$questionNumber,$place);
 //echo $sql;
 //die();
 //SOCKET SENDING MESSAGE
+/*
     if ($place>=0){
       $entryData = array(
           'category' => "Game".$_SESSION['game_id'].$questionNumber
@@ -54,6 +55,7 @@ $avg=User::updateUser($_SESSION["user_id"],$questionNumber,$place);
       $socket->send(json_encode($entryData));
     }
     //END SOCKET SENDING
+    */
     if ($distanceAway>1000)
       $distanceAway=number_format($distanceAway);
     if ($game->type=="pop")
@@ -66,6 +68,7 @@ $avg=User::updateUser($_SESSION["user_id"],$questionNumber,$place);
       $message= "Distance away : ". $distanceAway. " miles";
     else //if ($game->type=="rand")
       $message= "Off by: ". $distanceAway. "";
+
   //  $place=
     //echo $correct->location->longg;
   //  die ($message);//place='.$place.

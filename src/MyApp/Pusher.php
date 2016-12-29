@@ -15,9 +15,9 @@ class Pusher implements WampServerInterface {
     	$this->clients->attach($conn);
     }
     public function onClose(ConnectionInterface $conn) {
+        echo "closing connection\n";
       $this->clients->detach($conn);
       $conn->close();
-      echo "closing connection\n";
     }
     public function onCall(ConnectionInterface $conn, $id, $topic, array $params) {
         // In this application if clients send data it's because the user hacked around in console
@@ -45,6 +45,10 @@ public function onSubscribe(ConnectionInterface $conn, $topic) {
 public function onBlogEntry($entry) {
     echo "sending out \n";
     $entryData = json_decode($entry, true);
+    // if (isset($entryData['type']) && $entryData['type']=="end")
+    // {
+    //   var_dump(gc_collect_cycles()); // # of elements cleaned up
+    // }
   	//print_r($entryData);
     // If the lookup topic object isn't set there is no one to publish to
     if (!array_key_exists($entryData['category'], $this->subscribedTopics)) {

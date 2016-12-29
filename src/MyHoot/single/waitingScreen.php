@@ -10,7 +10,7 @@ require '../controller/dbsettings.php';
 
 $seconds=time();
 $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
-
+//die ($seconds . " ". $lengthOfGame . " " . $timeLeft);
 if ($submit=="Join"){
     // $name=substr($name,0,20);
     // User::createUser($game_id,$name);
@@ -70,8 +70,8 @@ if ($submit=="Join"){
     count=count-1;
     if (count <= 0)
     {
-       clearInterval(counter);
-       return;
+       //clearInterval(counter);
+       //return;
     }
 
    document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
@@ -108,7 +108,7 @@ if ($submit=="Join"){
         <div id="mainMessageExtra">
           <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
       <?php }  ?>
-      <?php if (is_numeric($avg) && $avg>0){ ?>You running average is now <?php echo $avg ?>% 
+      <?php if (is_numeric($avg) && $avg>0){ ?>You running average is now <?php echo $avg ?>%
   <?php }  ?>
     </div>
 
