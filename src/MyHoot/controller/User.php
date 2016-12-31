@@ -41,14 +41,14 @@ class User{
 	public static function createUser($game_id,$name){
 		global $conn;
 		$_SESSION["name"] =$name;
-
 		$table="users";
 		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
 			$table="usersSingle";
 		else {
 			$sql = "SELECT * from `users` WHERE `game_id`= '".$game_id."' AND `name`='".$name."'";
 			$result = $conn->query($sql);
-			//if ($game_id=="45920285")die($sql);
+			//if ($game_id=="45920285")
+			//die($sql);
 			if ($result->num_rows>0 || $name=="")
 			   return false;
 		}
@@ -60,7 +60,7 @@ class User{
 //mb_internal_encoding("UTF-8");
 //echo "😀"; INSERT INTO `MyHoot`.`users` (`user_id`, `game_id`, `name`, `round`, `score`, `color`) VALUES ('51', '51', '😀', NULL, NULL, '')
 
-//	die ($sql);
+	//fdie ($sql);
 //	echo mb_internal_encoding();
 
 		$result = $conn->query($sql);

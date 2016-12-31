@@ -70,8 +70,9 @@ if ($submit=="Join"){
     count=count-1;
     if (count <= 0)
     {
-       //clearInterval(counter);
-       //return;
+      clearInterval(counter);
+      window.location.href = "showAnswerOther.php";
+      count=33333;
     }
 
    document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
