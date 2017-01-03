@@ -6,6 +6,7 @@
 // ps aux | less see all processes
 // kill `lsof -t -i:5555`
 // sudo env EDITOR=nano crontab -e
+// # sync; echo 3 > /proc/sys/vm/drop_caches   ?
 // crontab -e
 //import database  mysql -u root -p  MyHoot <3.sql
 //     kill -9 $(lsof -i:5555 -t)``

@@ -9,7 +9,7 @@ if (isset($_GET["question"]))
     header("Location: waitingScreen.php?message=".urlencode("Come on - you can't submit twice..."));
 $questionNumber=Game::questionStatusRedirect();
 if (!isset($_GET["question"]))
-    $_GET["question"])=$questionNumber;
+    $_GET["question"]=$questionNumber;
 ?>
 <html>
   <head>
