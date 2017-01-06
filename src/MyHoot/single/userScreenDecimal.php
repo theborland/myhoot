@@ -80,8 +80,8 @@ if (isset($_GET["question"]))
          count=33333;
          return;
       }
-
-     document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+      else if (count<30)
+        document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
     }
     window.setTimeout(function(){
             window.location.href = "waitingScreen.php";

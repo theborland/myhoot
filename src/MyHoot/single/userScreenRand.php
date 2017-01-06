@@ -75,8 +75,8 @@ $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
          count=33333;
          return;
       }
-
-     document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+      else if (count<30)
+        document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
     }
     //var nf = new Intl.NumberFormat();
 

@@ -95,11 +95,11 @@ body{
        count=999;
        return;
     }
-
-   document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+   else if (count<30)
+      document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
   }
 
-	
+
 	</script>
 </head>
 <body>

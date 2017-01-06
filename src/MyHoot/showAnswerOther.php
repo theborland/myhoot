@@ -11,7 +11,8 @@ if (!isset($_SESSION["game_id"]))
 $theQuestion=Question::loadQuestion();
 $theQuestion->alertUsers(-1);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
-
+if (!isset($_SESSION["numRounds"]))
+	$_SESSION["numRounds"]=10;
 /*8
 $max=$allAnswers->getMax();
 $min=$allAnswers->getMin();

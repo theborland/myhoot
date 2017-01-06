@@ -74,8 +74,8 @@ if ($submit=="Join"){
       window.location.href = "showAnswerOther.php";
       count=33333;
     }
-
-   document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+    else if (count<30)
+      document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
   }
 
 		window.onload = function(){
