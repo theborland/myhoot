@@ -3,7 +3,8 @@
 // ./script.sh
 // killall -9 php  kill php processes
 //  lsof -t -i:5555
-// ps aux | less see all processes
+//  ps -ef | grep php
+// kill -9 pid
 // kill `lsof -t -i:5555`
 // sudo env EDITOR=nano crontab -e
 // # sync; echo 3 > /proc/sys/vm/drop_caches   ?
