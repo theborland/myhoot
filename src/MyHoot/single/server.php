@@ -104,8 +104,8 @@ while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
     //sleep(7);
     //echo $theQuestion->getLabel();
     $datetime1 = strtotime("now");//current datetime object
-    $datetime2 = mktime(23, 59, 59);//next day at midnight
-    $timeUntilStop= ($datetime2 - $datetime1);
+    $datetime2 = mktime(23, 59, 50);//next day at midnight
+    $timeUntilStop= ($datetime2 - $datetime1)/10;
 }
 
 function getLastQuestion(){
