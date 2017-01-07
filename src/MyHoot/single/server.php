@@ -35,7 +35,7 @@ $sql = "DELETE FROM `questionsSingle` WHERE `active`='0'";
 $result = $conn->query($sql);
 
 $_SESSION["single"]=true;
-$playedGames=array();
+$playedGames=array(); 
 $_SESSION["regionsSelected"]=$regionsSelected=array(1,2,3,4,5,6,7,8,9,10,11);
 $gamesSelected=array("time","pt","places","places","facts","facts","geo","geo","geo","geo","geo");//weather
 //$gamesSelected=array("weather");
