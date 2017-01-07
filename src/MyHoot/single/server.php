@@ -15,7 +15,7 @@
 date_default_timezone_set('America/New_York');
 $datetime1 = strtotime("now");//current datetime object
 $datetime2 = mktime(23, 59, 59);//next day at midnight
-$timeUntilStop= ($datetime2 - $datetime1);
+$timeUntilStop= ($datetime2 - $datetime1)/10;
 //die("time is ".$timeUntilStop);
 
 
