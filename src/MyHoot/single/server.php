@@ -107,6 +107,7 @@ while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
     $datetime2 = mktime(23, 59, 50);//next day at midnight
     echo $datetime1 . " " . $datetime2;
     $timeUntilStop= ($datetime2 - $datetime1)/10;
+    echo " ".$timeUntilStop;
 }
 
 function getLastQuestion(){
