@@ -45,8 +45,8 @@ $_SESSION["questionNumber"]=getLastQuestion()+1;
 echo $_SESSION["questionNumber"]."<Br>Starting";
 $counter=0;
 
-while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
-  echo "time is ".$timeUntilStop;
+while ($timeUntilStop>($lengthOfGame+$lengthOfBreak)){
+  echo "time is ".$timeUntilStop . "\n";
    $counter++;
    echo "$counter \n";
   /*
@@ -105,9 +105,11 @@ while ($timeUntilStop>$lengthOfGame+$lengthOfBreak){
     //echo $theQuestion->getLabel();
     $datetime1 = strtotime("now");//current datetime object
     $datetime2 = mktime(23, 59, 50);//next day at midnight
-    echo $datetime1 . " " . $datetime2;
+    //echo $datetime1 . " " . $datetime2;
     $timeUntilStop= ($datetime2 - $datetime1)/10;
-    echo " ".$timeUntilStop;
+    //echo "time is ".$timeUntilStop;
+    sleep(1);
+
 }
 
 function getLastQuestion(){
