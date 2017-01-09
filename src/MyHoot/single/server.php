@@ -16,11 +16,11 @@ date_default_timezone_set('America/New_York');
 $datetime1 = strtotime("now");//current datetime object
 $hour=date("H");
 $datetime2 = mktime($hour, 59, 59);//next day at midnight
-$timeUntilStop= ($datetime2 - $datetime1)/10;
+$timeUntilStop= ($datetime2 - $datetime1);///10;
 //die("time is ".$timeUntilStop);
 
 
-set_time_limit(0); 
+set_time_limit(0);
 require '../controller/dbsettings.php';
 include ('../controller/siteFunctions.php');
 include ('../controller/Question.php');
@@ -108,7 +108,7 @@ while ($timeUntilStop>($lengthOfGame+$lengthOfBreak)){
     $datetime1 = strtotime("now");//current datetime object
     //$datetime2 = mktime($hour, 59, 50);//next day at midnight
     //echo $datetime1 . " " . $datetime2;
-    $timeUntilStop= ($datetime2 - $datetime1)/10;
+    $timeUntilStop= ($datetime2 - $datetime1);///10;
     //echo "time is ".$timeUntilStop;
     sleep(1);
 
