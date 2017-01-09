@@ -14,7 +14,8 @@
 ///Users/jeffborland/web/launchSingle.sh >> /Users/jeffborland/web/results.log
 date_default_timezone_set('America/New_York');
 $datetime1 = strtotime("now");//current datetime object
-$datetime2 = mktime(23, 59, 59);//next day at midnight
+$hour=date("H");
+$datetime2 = mktime($hour, 59, 59);//next day at midnight
 $timeUntilStop= ($datetime2 - $datetime1)/10;
 //die("time is ".$timeUntilStop);
 
@@ -47,6 +48,7 @@ $counter=0;
 
 while ($timeUntilStop>($lengthOfGame+$lengthOfBreak)){
   echo "time is ".$timeUntilStop . "\n";
+  echo memory_get_usage(true)."\n";
    $counter++;
    echo "$counter \n";
   /*
@@ -104,7 +106,7 @@ while ($timeUntilStop>($lengthOfGame+$lengthOfBreak)){
     //sleep(7);
     //echo $theQuestion->getLabel();
     $datetime1 = strtotime("now");//current datetime object
-    $datetime2 = mktime(23, 59, 50);//next day at midnight
+    //$datetime2 = mktime($hour, 59, 50);//next day at midnight
     //echo $datetime1 . " " . $datetime2;
     $timeUntilStop= ($datetime2 - $datetime1)/10;
     //echo "time is ".$timeUntilStop;
