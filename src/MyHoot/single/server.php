@@ -20,7 +20,7 @@ $timeUntilStop= ($datetime2 - $datetime1)/10;
 //die("time is ".$timeUntilStop);
 
 
-set_time_limit(0);
+set_time_limit(0); 
 require '../controller/dbsettings.php';
 include ('../controller/siteFunctions.php');
 include ('../controller/Question.php');
