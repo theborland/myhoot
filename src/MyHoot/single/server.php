@@ -48,7 +48,7 @@ $counter=0;
 
 while ($timeUntilStop>($lengthOfGame+$lengthOfBreak)){
   echo "time is ".$timeUntilStop . "\n";
-  echo memory_get_usage(true)."\n";
+  echo memory_get_usage()."\n";
    $counter++;
    echo "$counter \n";
   /*
