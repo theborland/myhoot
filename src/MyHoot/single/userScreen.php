@@ -209,8 +209,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   </div>
 
     <div id="questionWrap">
-      <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
-      <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+      <div id="actualQuestion"><?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
     </div>
 
 
