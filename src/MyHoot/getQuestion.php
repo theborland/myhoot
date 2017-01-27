@@ -115,10 +115,7 @@ $type=Game::findGame()->type;
 	<div id="timerContainer">
 		<div id="timer"></div>
 	</div>
-<div id="answersWrap" class="scrollable">
 
-
-</div>
 
 
 <audio id="bgMusic" enablejavascript="yes"  volume="0">

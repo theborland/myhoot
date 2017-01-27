@@ -60,6 +60,17 @@ if (isset($_GET["question"]))
         height: 5px;
         background: #17DB91;
       }
+
+      #questionWrap{
+        position: fixed;
+        bottom: 0px;
+        right:0px;
+        left:0px;
+        height:100px;
+        font-size: 20px;
+        padding:15px;
+        background-color: rgba(30,30,30,.9);
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
@@ -182,10 +193,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
  <body>
 
   <div id="overlayWrap">
-    <div id="questionWrap">
-      <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
-      <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
-    </div>
     <div id="timerBar">
     </div>
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
@@ -197,6 +204,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
       </form>
 
   </div>
+
+    <div id="questionWrap">
+      <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
+      <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+    </div>
+
 
     <div id="map-canvas"></div>
  </body>
