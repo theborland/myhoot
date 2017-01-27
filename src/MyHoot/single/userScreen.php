@@ -66,8 +66,10 @@ if (isset($_GET["question"]))
         bottom: 0px;
         right:0px;
         left:0px;
-        height:100px;
+        height:60px;
         font-size: 20px;
+        font-weight: 500;
+        color:#fff;
         padding:15px;
         background-color: rgba(30,30,30,.9);
         z-index: 1000;
