@@ -52,6 +52,14 @@ if (isset($_GET["question"]))
         margin: 0px;
         padding: 0px
       }
+      #timerBar{
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 5px;
+        background: #17DB91;
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
@@ -164,6 +172,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
     <script src="../scripts/socketScripts.js"></script>
     <script>
@@ -177,9 +186,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
       <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
     </div>
-    <div id="timerContainer">
-      <div id="timer"></div>
-
+    <div id="timerBar">
     </div>
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
       <form name="form1" method="post" action="submitAnswer.php">
