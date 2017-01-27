@@ -76,9 +76,11 @@ if ($submit=="Join"){
 </style>
 	<script>
 
+  var timeleft = <?php echo $timeLeft; ?> * 1000;
+  console.log(timeleft);
   $('#timerBar').animate({
     width: "0%"
-  }, <?php echo $timeLeft; ?> * 1000, "linear");
+  }, timeleft, "linear");
 
 
   var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
