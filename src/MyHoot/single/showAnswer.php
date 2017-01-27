@@ -83,11 +83,10 @@ if ($submit=="Join"){
   }, timeleft, "linear");
 
 
-  var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
+  var counter=setInterval(timer, <?php echo $timeLeft; ?> * 100000); //1000 will  run it every 1 second
 
   function timer()
   {
-
        window.location.href = "userScreen.php";
        clearInterval(counter);
        count=0999;
