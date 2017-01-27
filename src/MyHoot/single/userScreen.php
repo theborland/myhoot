@@ -70,6 +70,7 @@ if (isset($_GET["question"]))
         font-size: 20px;
         padding:15px;
         background-color: rgba(30,30,30,.9);
+        z-index: 1000;
       }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
