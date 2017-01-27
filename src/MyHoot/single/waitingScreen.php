@@ -37,6 +37,7 @@ if ($submit=="Join"){
 	<link rel="stylesheet" href="../style/waitingScreen.css">
 
 	<script src="../scripts/global.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../scripts/socketScripts.js"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
@@ -58,25 +59,43 @@ if ($submit=="Join"){
   color:rgba(0,0,0,0.5);
 }
 
+#timerBar{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 5px;
+  background: #17DB91;
+}
+
 </style>
 	<script>
 
-  var count=<?php echo $timeLeft; ?>;
 
-  var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 
-  function timer()
-  {
-    count=count-1;
-    if (count <= 0)
-    {
-      clearInterval(counter);
-      window.location.href = "showAnswerOther.php";
-      count=33333;
+
+      window.onload = function(){
+
+
+      var timeleft = <?php echo $timeLeft; ?> * 1000;
+      console.log(timeleft);
+      $('#timerBar').animate({
+        width: "0%"
+      }, timeleft, "linear");
+
+
+      var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
+
+      function timer()
+      {
+        window.location.href = "showAnswerOther.php";
+        clearInterval(counter);
+        count=33333;
+        return;
+      }
+
     }
-    else if (count<30)
-      document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
-  }
+
 
 		window.onload = function(){
 	   		loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
@@ -89,6 +108,8 @@ if ($submit=="Join"){
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
     	<div id="waiting">Waiting...</div>
 <span id="timer2"></span>
+<div id="timerBar"></div>
+
 </div>
 <div id="messageWrap">
 
