@@ -42,6 +42,7 @@ if ($submit=="Join"){
 	<link rel="stylesheet" href="../style/waitingScreen.css">
 
 	<script src="../scripts/global.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../scripts/socketScripts.js"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
@@ -63,25 +64,32 @@ if ($submit=="Join"){
   color:rgba(0,0,0,0.5);
 }
 
+#timerBar{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 5px;
+  background: #17DB91;
+}
+
 </style>
 	<script>
 
-  var count=<?php echo $timeLeft; ?>;
+  $('#timerBar').animate({
+    width: "0%"
+  }, <?php echo $timeLeft; ?> * 1000, "linear");
 
-  var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+  var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
 
   function timer()
   {
-    count=count-1;
-    if (count <= 0)
-    {
+
        window.location.href = "userScreen.php";
        clearInterval(counter);
        count=0999;
        return;
-    }
-   else if (count<30)
-      document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
   }
 
 
@@ -92,10 +100,12 @@ if ($submit=="Join"){
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
     	<div id="waiting">Show Answer</div>
-<span id="timer2"></span>
 </div>
+<div id="timerBar"></div>
 <div id="messageWrap">
   <div id="mainMessageWrap">
+  <span id="timer2"></span>
+
   <?php
   if ($user->avg>0){
    echo "This round you scored ".$user->place . "%";
