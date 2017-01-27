@@ -56,26 +56,30 @@ if (isset($_GET["question"]))
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
 
-    var count=<?php echo $timeLeft; ?>;
 
-    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 
-    function timer()
-    {
-      count=count-1;
-      if (count <= 0)
+
+ window.onload = function(){
+
+
+      var timeleft = <?php echo $timeLeft; ?> * 1000;
+      console.log(timeleft);
+      $('#timerBar').animate({
+        width: "0%"
+      }, timeleft, "linear");
+
+
+      var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
+
+      function timer()
       {
-         clearInterval(counter);
+           clearInterval(counter);
          window.location.href = "showAnswer.php";
          count=33333;
-         return;
+           return;
       }
-      else if (count<30)
-        document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
+
     }
-
-
-
 
 var map;
 var worldCenter = new google.maps.LatLng(20.6743890, -3.9455); //starting position
@@ -172,7 +176,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <div id="questionWrap">
       <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
       <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
-<span id="timer2"></span>
     </div>
     <div id="timerContainer">
       <div id="timer"></div>

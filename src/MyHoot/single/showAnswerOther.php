@@ -81,23 +81,27 @@ body{
 </style>
 	<script>
 
-  var count=<?php echo $timeLeft; ?>;
+  window.onload = function(){
 
-  var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 
-  function timer()
-  {
-    count=count-1;
-    if (count <= 0)
-    {
-      window.location.href = "userScreen.php";
-       clearInterval(counter);
-       count=999;
-       return;
+      var timeleft = <?php echo $timeLeft; ?> * 1000;
+      console.log(timeleft);
+      $('#timerBar').animate({
+        width: "0%"
+      }, timeleft, "linear");
+
+
+      var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
+
+      function timer()
+      {
+           window.location.href = "userScreen.php";
+           clearInterval(counter);
+           count=0999;
+           return;
+      }
+
     }
-   else if (count<30)
-      document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
-  }
 
 
 	</script>
