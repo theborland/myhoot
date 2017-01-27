@@ -42,6 +42,7 @@ if ($submit=="Join"){
 	<link rel="stylesheet" href="../style/waitingScreen.css">
 
 	<script src="../scripts/global.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../scripts/socketScripts.js"></script>
 	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
@@ -61,6 +62,15 @@ if ($submit=="Join"){
   font-size:18px;
   font-weight:300;
   color:rgba(0,0,0,0.5);
+}
+
+#timerBar{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 5px;
+  background: #17DB91;
 }
 
 body{
@@ -111,7 +121,7 @@ body{
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
     	<div id="waiting">Show Answer</div>
-<span id="timer2"></span>
+<span id="timerBar"></span>
 </div>
 <div id="messageWrap">
 
