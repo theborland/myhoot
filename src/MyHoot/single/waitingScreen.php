@@ -94,12 +94,10 @@ if ($submit=="Join"){
         return;
       }
 
+        loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
+
     }
 
-
-		window.onload = function(){
-	   		loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
-		}
 	</script>
 </head>
 <body>
