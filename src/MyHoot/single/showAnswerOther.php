@@ -73,21 +73,6 @@ if ($submit=="Join"){
   background: #17DB91;
 }
 
-body{
-  background-color:black;
-  background-image: url('<?php echo $theQuestion->loadImage(); ?>');
-  background-attachment : fixed;
-  <?php
-    if(Game::findGame()->type == "age"){
-  ?>
-  background-size       : contain;
-  background-position   : top center;
-  <?php }else{ ?>
-  background-size       : cover;
-  background-position   : center;
-  <?php } ?>
-  background-repeat: no-repeat;
-}
 </style>
 	<script>
 
@@ -128,9 +113,9 @@ body{
   <div id="mainMessageWrap">
 <?php
 if ($user->avg>0){
-   echo "This round you scored ".$user->place . "%";
-   echo "You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers;
-   echo "<br>Your average is ".$user->avg . "%";
+   echo "This round you did better than ".$user->place . "% of the people worldwide!</div><div id=\"mainMessageExtra\"";
+   echo "You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers.".";
+   echo "<br>Your average is ".$user->avg ."%";
    echo "Overall you are " .$user->singleStatsGame->place. " out of ".$user->singleStatsGame->numOfPlayers;
  }
  ?>
