@@ -196,8 +196,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
  <body>
 
   <div id="overlayWrap">
-    <div id="timerBar">
-    </div>
+    <div id="timerBar"></div>
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
