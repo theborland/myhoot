@@ -90,28 +90,6 @@ if (isset($_GET["question"]))
     </style>
 
     <script>
-       window.onload = function(){
-
-
-      var timeleft = <?php echo $timeLeft; ?> * 1000;
-      console.log(timeleft);
-      $('#timerBar').animate({
-        width: "0%"
-      }, timeleft, "linear");
-
-
-      var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
-
-      function timer()
-      {
-           clearInterval(counter);
-         window.location.href = "showAnswerOther.php";
-         count=33333;
-           return;
-      }
-
-    }
-
 
 
 
@@ -197,6 +175,30 @@ if (isset($_GET["question"]))
 
 
 window.onload = function(){
+
+  var timeleft = <?php echo $timeLeft; ?> * 1000;
+  console.log(timeleft);
+  $('#timerBar').animate({
+    width: "0%"
+  }, timeleft, "linear");
+
+
+  var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
+
+  function timer()
+  {
+       clearInterval(counter);
+     window.location.href = "showAnswerOther.php";
+     count=33333;
+       return;
+  }
+
+
+
+
+
+
+
 
   var slider = document.getElementById('newSlider');
   var valbox = document.getElementById("isValue");

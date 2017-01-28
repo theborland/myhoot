@@ -53,30 +53,32 @@ if (isset($_GET["question"]))
         margin-top:-8px;
       }
 
+        #timerBar{
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 5px;
+        background: #17DB91;
+      }
+
+      #questionWrap{
+        position: fixed;
+        bottom: 0px;
+        right:0px;
+        left:0px;
+        height:60px;
+        font-size: 20px;
+        font-weight: 500;
+        color:#fff;
+        padding:15px;
+        background-color: rgba(30,30,30,.9);
+        z-index: 1000;
+      }
+
     </style>
 
     <script>
-    var count=<?php echo $timeLeft; ?>;
-
-    var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-
-    function timer()
-    {
-      count=count-1;
-      if (count <= 0)
-      {
-         clearInterval(counter);
-         window.location.href = "showAnswerOther.php";
-         count=33333;
-         return;
-      }
-      else if (count<30)
-        document.getElementById("timer2").innerHTML=count + " secs"; // watch for spelling
-    }
-
-    window.setTimeout(function(){
-            window.location.href = "waitingScreen.php";
-        }, 31000);
     //var nf = new Intl.NumberFormat();
 
     function changeValue() {
@@ -135,14 +137,6 @@ if (isset($_GET["question"]))
   <script src="../scripts/nouislider.min.js"></script>
 
   <div id="overlayWrap">
-    <div id="timerContainer">
-      <div id="timer"></div>
-    </div>
-    <div id="questionWrap">
-      <div id="questionType"><?php echo $theQuestion->getQuestionText(); ?></div>
-      <div id="actualQuestion"><?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
-<span id="timer2"></span>
-    </div>
     			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
       <form name="form1" method="post" action="submitAnswer.php">
         <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
@@ -178,11 +172,40 @@ if (isset($_GET["question"]))
       </form>
   </div>
 
+    <div id="timerBar"></div>
+  <div id="questionWrap">
+    <div id="actualQuestion"><?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+  </div>
+
+
     <script type="text/javascript">
 
 
 
 window.onload = function(){
+
+      var timeleft = <?php echo $timeLeft; ?> * 1000;
+    console.log(timeleft);
+    $('#timerBar').animate({
+      width: "0%"
+    }, timeleft, "linear");
+
+
+    var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
+
+    function timer()
+    {
+         clearInterval(counter);
+       window.location.href = "showAnswerOther.php";
+       count=33333;
+         return;
+    }
+
+
+
+
+
+
 
   var slider = document.getElementById('newSlider');
   var valbox = document.getElementById("isValue");
