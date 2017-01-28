@@ -113,14 +113,14 @@ if ($submit=="Join"){
   <div id="mainMessageWrap">
 <?php
 if ($user->avg>0){
-   echo "This round you did better than ".$user->place . "% of the people worldwide!</div><div id=\"mainMessageExtra\"";
+   echo "This round you did better than ".$user->place . "% of the people worldwide!<div id=\"mainMessageExtra\"";
    echo "You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers.".";
    echo "<br>Your average is ".$user->avg ."%";
    echo "Overall you are " .$user->singleStatsGame->place. " out of ".$user->singleStatsGame->numOfPlayers;
  }
  ?>
 
-
+  </div>
   </div>
 
 </div>
