@@ -129,10 +129,6 @@ if (isset($_GET["question"]))
  <body>
  <script src="../scripts/nouislider.min.js"></script>
 
-  <div id="timerBar"></div>
-  <div id="questionWrap">
-    <div id="actualQuestion"><?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
-  </div>
 
 
 
@@ -172,6 +168,12 @@ if (isset($_GET["question"]))
           </div>
       </form>
   </div>
+
+    <div id="timerBar"></div>
+  <div id="questionWrap">
+    <div id="actualQuestion"><?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+  </div>
+
 
 
     <script type="text/javascript">
