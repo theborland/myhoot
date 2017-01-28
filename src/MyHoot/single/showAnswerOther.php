@@ -120,7 +120,7 @@ body{
 
 <div id="headerContainer">
 				<a href="#" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
-    	<div id="waiting">Show Answer</div>
+    	<div id="waiting">Answer</div>
 <span id="timerBar"></span>
 </div>
 <div id="messageWrap">

@@ -173,6 +173,13 @@ if (isset($_GET["question"]))
 
     <script type="text/javascript">
 
+  function timer()
+  {
+       clearInterval(counter);
+     window.location.href = "showAnswerOther.php";
+     count=33333;
+       return;
+  }
 
 window.onload = function(){
 
@@ -185,13 +192,6 @@ window.onload = function(){
 
   var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
 
-  function timer()
-  {
-       clearInterval(counter);
-     window.location.href = "showAnswerOther.php";
-     count=33333;
-       return;
-  }
 
 
 
