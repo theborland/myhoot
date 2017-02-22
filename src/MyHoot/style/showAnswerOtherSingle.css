@@ -58,7 +58,7 @@
 	box-sizing: border-box;
 	padding:5px 10px;
 	display:inline-block;
-	width: calc(100% - 140px);
+	width: calc(100% - 160px);
 	text-align: left;
 }
 
