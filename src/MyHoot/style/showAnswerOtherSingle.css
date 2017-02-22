@@ -5,12 +5,36 @@
 }
 
 .saoItem{
-	border-bottom: 1px solid #999;
-	padding:5px 0px;
+	border-bottom: 3px solid rgba(0, 0, 0, 0.12);
+	text-align: left;
 }
 
-.saoItem:first-child{
-	font-size: 
+.saoItem:nth-child(1) .saoName{
+	font-size: 20px;
+	font-weight: normal;
+}
+.saoItem:nth-child(2) .saoName{
+	font-size: 20px;
+	font-weight: normal;
+}
+.saoItem:nth-child(3) .saoName{
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.saoItem:nth-child(1) .saoNumber{
+	color:#fff;
+	background:#FEB41A;
+}
+.saoItem:nth-child(2) .saoNumber{
+	font-size: 20px;
+	color:#fff;
+	background:#BCBCBA;
+}
+.saoItem:nth-child(3) .saoNumber{
+	font-size: 20px;
+	color:#fff;
+	background:#BF6726;
 }
 
 .saoItem:last-child{
@@ -19,28 +43,34 @@
 
 
 .saoNumber{
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: bold;
 	color:#999;
 	box-sizing: border-box;
-	padding:0px 10px;
-	width: 20%;
+	padding:5px 10px;
+	display:inline-block;
+	width: 50px;
+	text-align: center;
 }
 
 .saoName{
-	font-size: 16px;
-	font-weight: normal;
+	font-size: 18px;
+	font-weight: 300;
 	color:#333;
 	box-sizing: border-box;
-	padding:0px 5px;
-	width: 60%;
+	padding:5px 10px;
+	display:inline-block;
+	width: calc(100% - 140px);
+	text-align: left;
 }
 
 .saoAve{
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: bold;
 	color:#333;
 	box-sizing: border-box;
-	padding:0px 5px;
-	width: 20%;
+	padding:5px 5px;
+	display:inline-block;
+	width: 90px;
+	text-align: center;
 }
