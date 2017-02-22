@@ -38,7 +38,8 @@ if ($submit=="Join"){
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Waiting...</title>
-	<link rel="stylesheet" href="../style/global.css">
+  <link rel="stylesheet" href="../style/global.css">
+  <link rel="stylesheet" href="../style/showAnswerOtherSingle.css">
 	<link rel="stylesheet" href="../style/waitingScreen.css">
 
 	<script src="../scripts/global.js"></script>
@@ -111,6 +112,35 @@ if ($submit=="Join"){
 <div id="messageWrap">
 
   <div id="mainMessageWrap">
+  <div id="saoTable">
+    <div class="saoItem">
+      <div class="saoNumber">1</div>
+      <div class="saoName">Orkhan</div>
+      <div class="saoAve">99.9%</div>
+    </div>
+    <div class="saoItem">
+      <div class="saoNumber">2</div>
+      <div class="saoName">Someone</div>
+      <div class="saoAve">93.5%</div>
+    </div>
+    <div class="saoItem">
+      <div class="saoNumber">3</div>
+      <div class="saoName">Else</div>
+      <div class="saoAve">94%</div>
+    </div>
+    <div class="saoItem">
+      <div class="saoNumber">4</div>
+      <div class="saoName">On</div>
+      <div class="saoAve">23.4%</div>
+    </div>
+    <div class="saoItem">
+      <div class="saoNumber">5</div>
+      <div class="saoName">Here</div>
+      <div class="saoAve">10.3%</div>
+    </div>
+  </div>
+
+
 <?php
 if ($user->avg>0){
    echo "This round you did better than ".$user->place . "% of the people worldwide!<div id=\"mainMessageExtra\"";
