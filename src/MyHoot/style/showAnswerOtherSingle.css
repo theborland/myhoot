@@ -4,21 +4,21 @@
 
 }
 
-#saoItem{
+.saoItem{
 	border-bottom: 1px solid #999;
 	padding:5px 0px;
 }
 
-#saoItem:first-child{
+.saoItem:first-child{
 	font-size: 
 }
 
-#saoItem:last-child{
+.saoItem:last-child{
 	border-bottom: 0px solid #999;
 }
 
 
-#saoNumber{
+.saoNumber{
 	font-size: 20px;
 	font-weight: bold;
 	color:#999;
@@ -27,7 +27,7 @@
 	width: 20%;
 }
 
-#saoName{
+.saoName{
 	font-size: 16px;
 	font-weight: normal;
 	color:#333;
@@ -36,7 +36,7 @@
 	width: 60%;
 }
 
-#saoAve{
+.saoAve{
 	font-size: 16px;
 	font-weight: bold;
 	color:#333;
