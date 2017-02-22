@@ -5,8 +5,8 @@ require '../controller/dbsettings.php';
 if (isset($_GET["question"]))
   if (Answer::checkUserSubmitted($_GET["question"],$_SESSION["user_id"])  )
     header("Location: waitingScreen.php?message=".urlencode("come on - you cant submit twice"));
-    $_SESSION["questionNumber"]=Game::questionStatusRedirect();
-    $theQuestion=Question::loadQuestion();
+  $_SESSION["questionNumber"]=Game::questionStatusRedirect();
+  $theQuestion=Question::loadQuestion();
 
 
   $min=0;
@@ -21,16 +21,18 @@ if (isset($_GET["question"]))
   $seconds=time();
   $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
 
-?>
+  ?>
 
-<html>
+  <html>
   <head>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="../style/global.css">
-      <link href="../style/nouislider.min.css" rel="stylesheet">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../style/global.css">
+    <link href="../style/nouislider.min.css" rel="stylesheet">
+    <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="../style/inputSlider.css">
-       <script src="../scripts/socketScripts.js"></script>
-  <!--<script src="scripts/socketScripts.js"></script>-->
+    <script src="../scripts/socketScripts.js"></script>
+    <!--<script src="scripts/socketScripts.js"></script>-->
     <style>
       html, body {
         height: 100%;
@@ -94,22 +96,22 @@ if (isset($_GET["question"]))
 
 
 
-    function changeValue() {
-      var range = document.getElementById("isRange");
-      var valbox = document.getElementById("isValue");
-      var answer = document.getElementById("answer");
+      function changeValue() {
+        var range = document.getElementById("isRange");
+        var valbox = document.getElementById("isValue");
+        var answer = document.getElementById("answer");
 
-      if(parseInt(range.value) > 2140){
-        valbox.value = "2,000,000,000";
-        answer.value = "2000000000";
-      }else{
-        var afterScale = Math.round(Math.pow(Math.E, (parseInt(range.value)/100))/100000)*100000
-        valbox.value = afterScale.toLocaleString();
-        answer.value = afterScale;
-      }
+        if(parseInt(range.value) > 2140){
+          valbox.value = "2,000,000,000";
+          answer.value = "2000000000";
+        }else{
+          var afterScale = Math.round(Math.pow(Math.E, (parseInt(range.value)/100))/100000)*100000
+          valbox.value = afterScale.toLocaleString();
+          answer.value = afterScale;
+        }
             //Math.round(value/100)*100
         //x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-    }
+      }
 
 
 
@@ -119,29 +121,28 @@ if (isset($_GET["question"]))
 
 
     </script>
-    <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
 
     <script>
     //  loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
-    </script>
+  </script>
 
- </head>
- <body>
-   <script src="../scripts/nouislider.min.js"></script>
-   <div id="overlayWrap">
-
-
-    			<a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
-      <form name="form1" method="post" action="submitAnswer.php">
-        <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
-        <input type="hidden" id="answer" name="answer">
+</head>
+<body>
+ <script src="../scripts/nouislider.min.js"></script>
+ <div id="overlayWrap">
 
 
-          <center id="submitWrap">
-            <input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
-            <div id="newSlider"></div>
-          </center>
-                      <input type="submit" name="submit" class="regButton" id="userMapSubmit" value="Submit!">
+   <a href="http://GameOn.World" id="logoLink"><img src="../img/logo.svg" id="logo"></a>
+   <form name="form1" method="post" action="submitAnswer.php">
+    <input name="questionNumber" type="hidden" value="<?php echo $_GET["question"] ?>">
+    <input type="hidden" id="answer" name="answer">
+
+
+    <center id="submitWrap">
+      <input type="text" id="isValue" name="isValue" value="5,000,000" readonly>
+      <div id="newSlider"></div>
+    </center>
+    <input type="submit" name="submit" class="regButton" id="userMapSubmit" value="Submit!">
 
           <!--
           <div id="relativeWrap">
@@ -160,34 +161,34 @@ if (isset($_GET["question"]))
               <option>70</option>
               <option>90</option>
             </datalist>
-            -->
+          -->
 
-          </div>
+        </div>
       </form>
-  </div>
+    </div>
 
-  <div id="timerBar"></div>
-  <div id="questionWrap">
-    <div id="actualQuestion"><?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
-  </div>
+    <div id="timerBar"></div>
+    <div id="questionWrap">
+      <div id="actualQuestion"><?php echo $theQuestion->getQuestionText(); ?> <?php echo $theQuestion->getLabel(); ?> <?php echo $theQuestion->getQuestionTextEnd(); ?>?</div>
+    </div>
 
     <script type="text/javascript">
 
-  function timer()
-  {
+      function timer()
+      {
        clearInterval(counter);
-     window.location.href = "showAnswerOther.php";
-     count=33333;
+       window.location.href = "showAnswerOther.php";
+       count=33333;
        return;
-  }
+     }
 
-window.onload = function(){
+     window.onload = function(){
 
-  var timeleft = <?php echo $timeLeft; ?> * 1000;
-  console.log(timeleft);
-  $('#timerBar').animate({
-    width: "0%"
-  }, timeleft, "linear");
+      var timeleft = <?php echo $timeLeft; ?> * 1000;
+      console.log(timeleft);
+      $('#timerBar').animate({
+        width: "0%"
+      }, timeleft, "linear");
 
 
   var counter=setInterval(timer, <?php echo $timeLeft; ?> * 1000); //1000 will  run it every 1 second
@@ -230,10 +231,10 @@ window.onload = function(){
     }else{
       a = Math.round(values[handle]);
     }
-      valbox.value = a + " <?php if ($perc=="yes")echo "%"; ?>";
-      answer.value = a;
+    valbox.value = a + " <?php if ($perc=="yes")echo "%"; ?>";
+    answer.value = a;
       //changeValue(values[handle]);
-  });
+    });
 
   labels = document.getElementsByClassName("noUi-value-large");
   for(var i=0; i<labels.length;i++){
@@ -254,26 +255,26 @@ window.onload = function(){
 
 };
 
-  function decimalize(numberAsString){
-    var numberInt = parseInt(numberAsString)
-    var numberDecimalized = 2
-  }
+function decimalize(numberAsString){
+  var numberInt = parseInt(numberAsString)
+  var numberDecimalized = 2
+}
 
-  function comma(num){
-    num = num+"";
-    arr = num.split("");
-    newS = "";
-    for(var i=0; i<arr.length; i++){
-      if((arr.length - i)%i == 0 && i!=0)
-        newS = newS + "," + arr[i];
-      else
-        newS = newS + arr[i];
-    }
-    return newS;
+function comma(num){
+  num = num+"";
+  arr = num.split("");
+  newS = "";
+  for(var i=0; i<arr.length; i++){
+    if((arr.length - i)%i == 0 && i!=0)
+      newS = newS + "," + arr[i];
+    else
+      newS = newS + arr[i];
   }
+  return newS;
+}
 
 </script>
 
 
- </body>
- </html>
+</body>
+</html>
