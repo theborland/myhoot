@@ -27,12 +27,10 @@
 	background:#FEB41A;
 }
 .saoItem:nth-child(2) .saoNumber{
-	font-size: 20px;
 	color:#fff;
 	background:#BCBCBA;
 }
 .saoItem:nth-child(3) .saoNumber{
-	font-size: 20px;
 	color:#fff;
 	background:#BF6726;
 }
@@ -47,7 +45,7 @@
 	font-weight: bold;
 	color:#999;
 	box-sizing: border-box;
-	padding:5px 10px;
+	padding:10px 10px;
 	display:inline-block;
 	width: 50px;
 	text-align: center;
