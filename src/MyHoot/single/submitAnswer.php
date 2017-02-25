@@ -15,6 +15,7 @@ $correct=Answer::loadCorrect($questionNumber);
 //echo $sql;
 //die();
 $game=Game::findGame();
+$theQuestion=Question::findQuestion();
 
 if ($game->type=="geo" || $game->type=="places"|| $game->type=="pt")
     $distanceAway=LatLong::findDistance($correct->location,new LatLong($lat,$long));
@@ -31,10 +32,10 @@ if ($answer>100000)
 //die ($questionNumber);
 $questionNumberSite=$game->round;
 //if ($questionNumberSite!=$questionNumber)
-if ($questionNumberSite<0)
+if ($questionNumberSite<0 || $theQuestion->answer!="waiting")
   header( 'Location: waitingScreen.php?message='."Submit your answer in time" ) ;
-$place=Answer::addAnswer($_SESSION["user_id"],$questionNumber,$lat,$long,$answer,$distanceAway,$color,$game->type);
-$avg=User::updateUser($_SESSION["user_id"],$questionNumber,$place);
+$place=Answer::addAnswer($_SESSION["user_id"],$questionNumberSite,$lat,$long,$answer,$distanceAway,$color,$game->type);
+$avg=User::updateUser($_SESSION["user_id"],$questionNumberSite,$distanceAway);
 //NOW WE FIND THE OVERALL PERCENT PLACE THAT PERCENT DID ON THAT question_id
 //Answer::findPercentPlace()
 
@@ -56,18 +57,8 @@ $avg=User::updateUser($_SESSION["user_id"],$questionNumber,$place);
     }
     //END SOCKET SENDING
     */
-    if ($distanceAway>1000)
-      $distanceAway=number_format($distanceAway);
-    if ($game->type=="pop")
-      $message= "Off by: ". $distanceAway. " people";
-    else if ($game->type=="weather")
-        $message= "Off by: ". $distanceAway. " degrees";
-    else if ($game->type=="age" || $game->type=="time")
-          $message= "Off by: ". $distanceAway. " years";
-    else if ($game->type=="geo" || $game->type=="pt"|| $game->type=="places")
-      $message= "Distance away : ". $distanceAway. " miles";
-    else //if ($game->type=="rand")
-      $message= "Off by: ". $distanceAway. "";
+
+      $message= $theQuestion->getMessageAway($distanceAway);
 
   //  $place=
     //echo $correct->location->longg;

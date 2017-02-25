@@ -6,6 +6,8 @@ $game=Question::findQuestion();
 $_GET["question"]=abs($game->qID);
 if ($game->type!="geo" && $game->type!="pt" && $game->type!="places")
 {
+  if ($game->answer=="waiting")
+    header("Location: waitingScreen.php?message=noQ");
   if ($game->type=="age")
     header("Location: userScreenAge.php?question=".$_GET["question"]);
   if ($game->type=="pop")
@@ -96,7 +98,7 @@ if (isset($_GET["question"]))
       function timer()
       {
            clearInterval(counter);
-         window.location.href = "showAnswer.php";
+         window.location.href = "showAnswerOther.php";
          count=33333;
            return;
       }

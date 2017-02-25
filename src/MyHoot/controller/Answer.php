@@ -5,7 +5,7 @@ class AllAnswers
 	public $correctAns;
   //public $wording;
 	function __construct($questionNum)
-	{ 
+	{
 		$this->allAnswers=array();
 		$this->correctAns=Answer::loadCorrect($questionNum);
 		global $conn;
@@ -67,6 +67,17 @@ class AllAnswers
 				$answer->updateAnswer($totalPoints--);
 			}
 			Game::updateRound(-1*$_SESSION["questionNumber"]);
+		}
+	}
+
+	public function findPlace($id){
+		$place=1;
+		foreach ($this->allAnswers as $key=>$answer)
+		{
+			//echo "id is ".$answer->user_id ." and ". $answer->distanceAway;
+			if ($answer->user_id==$id)
+			   return $place;
+			else $place++;
 		}
 	}
 
@@ -143,7 +154,7 @@ class Answer
 	public $location;
 	public $ans;
 	public $name;
-	var $userID;
+	var $user_id;
 	var $qID;
 	var $questionNum;
 	public $distanceAway;
@@ -177,8 +188,12 @@ class Answer
 	  		if ($result)
 	  		{
 	          $row = $result->fetch_assoc();
-						if ($row ['total']>5)
-	  					return round($row['worse']/$row['total']*100,1);
+						$place=round($row['worse']/$row['total']*100,1);
+						if ($row ['total']>5){
+							$sql = "UPDATE `answers` SET `avg`='$place' WHERE `game_id`='$_SESSION[game_id]' AND `user_id`='$userID' AND `questionNum`='$questionNumber'";
+						  $result = $conn->query($sql);
+	  					return $place;
+						}
 						else return 0;
 
 	  		}
@@ -234,6 +249,7 @@ class Answer
 	{
 		$answer=new self();
 		$answer->user_id = $userID;
+
 		$answer->location=$loc;
 		$answer->ans=$ans;
 		$answer->qID=$qID;
@@ -256,8 +272,12 @@ class Answer
 
 	public function getUserInfo(){
 		global $conn;
-		$sql = "SELECT * FROM `users` WHERE user_id ='".$this->user_id."'";
+		$table="users";
+		if (isset($_SESSION["single"]) && $_SESSION["single"]==true)
+			 $table="usersSingle";
+		$sql = "SELECT * FROM `$table` WHERE user_id ='".$this->user_id."'";
 		//echo $sql;
+
 		$result = $conn->query($sql);
 		if ($result)
 		{

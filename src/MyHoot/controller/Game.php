@@ -21,8 +21,9 @@ class Game
 		//   $_SESSION["game_id"]*=00;//, $single=false
 		//$_SESSION["game_id"] =$_GET['game_id'];
 		//$_SESSION["user_id"] =rand (0,111111111);
+		$sql = "INSERT INTO `games` (`game_id`,`ip`) VALUES ('$_SESSION[game_id]','0')";
 
-		$sql = "INSERT INTO `games` (`game_id`,`ip`) VALUES ('$_SESSION[game_id]','".$_SERVER['REMOTE_ADDR']."')";
+		//$sql = "INSERT INTO `games` (`game_id`,`ip`) VALUES ('$_SESSION[game_id]','".$_SERVER['REMOTE_ADDR']."')";
 		//echo $sql;
 		$result = $conn->query($sql);
 
@@ -134,6 +135,7 @@ class Game
 		return null;
 
 	}
+	
 	public static function questionStatusRedirect(){
 		    $game=Game::findGame();
 		    $questionNumber=$game->round;

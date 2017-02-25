@@ -1,5 +1,6 @@
 <?php
-
+/*
+NO LONGER NEEDED
 session_start();
 $whitelist = array('message','submit','name','place');
 $_SESSION["game_id"]=$game_id=1111;
@@ -12,6 +13,8 @@ if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findG
      header( 'Location: showAnswerOther.php') ;
 $theQuestion=Question::loadQuestion();
 $user=User::loadUserSingle();
+$allAnswers=new AllAnswers($_SESSION["questionNumber"]);
+
 
 $seconds=time();
 $timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak);
@@ -119,7 +122,22 @@ if ($submit=="Join"){
    echo "<br>Your average is ".$user->avg . "%";
    echo "Overall you are " .$user->singleStatsGame->place. " out of ".$user->singleStatsGame->numOfPlayers;
   }
-  ?>
+
+
+  $allAnswers->getTP();
+  $place=1;
+  foreach ($allAnswers->allAnswers as $key => $value)
+      { ?>
+          <?php echo $place; ?> :
+      <?php echo stripslashes($value->name); ?>
+
+
+<?php
+  $place++;
+  if ($place==4)
+      break;
+}
+?>
 
 
   </div>
@@ -131,3 +149,4 @@ if ($submit=="Join"){
 </div>
 </body>
 </html>
+*/ ?>

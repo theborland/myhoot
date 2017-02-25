@@ -11,6 +11,9 @@ require '../controller/dbsettings.php';
 $seconds=time();
 $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
 //die ($seconds . " ". $lengthOfGame . " " . $timeLeft);
+if ($message=="noSubmit"){
+  User::addSkip($_SESSION["user_id"],$_SESSION["game_id"]);
+}
 if ($submit=="Join"){
     // $name=substr($name,0,20);
     // User::createUser($game_id,$name);
@@ -21,7 +24,7 @@ if ($submit=="Join"){
     $_SESSION["game_id"]=$game_id;
     $game=Game::findGame();
     $questionNumber=$game->round;
-    header( 'Location: checkQuestion.php') ;
+    header( 'Location: userScreen.php') ;
 }
 
  ?>
@@ -116,8 +119,11 @@ if ($submit=="Join"){
       <?php if ($submit=="Join") { ?>
         <div id="welcome">Game on, <?php echo $name; ?>!</div>
       <?php  }
-       else if ($message=="nosubmit"){ ?>
+       else if ($message=="noSubmit"){ ?>
         <div id="score"><div style="font-size:30px;">The question is over - remember to hit submit next time.</div>
+      <?php  }
+       else if ($message=="noQ"){ ?>
+        <div id="score"><div style="font-size:30px;">There is no question currently.</div>
       <?php }
       else if (is_numeric($message)){ ?>
         <div id="score"><div style="font-size:30px;">Your answer was</div> <?php echo $message ; ?> miles away.</div>
@@ -128,8 +134,15 @@ if ($submit=="Join"){
         <div id="mainMessageExtra">
           <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
       <?php }  ?>
-      <?php if (is_numeric($avg) && $avg>0){ ?>You running average is now <?php echo $avg ?>%
+      <?php if (is_numeric($avg) && $avg>0){ ?>You last five average is now <?php echo $avg ?>%
   <?php }  ?>
+      <?php if (substr($avg,0,1)=="~"){
+            $splits=explode("~",$avg);
+            //print_r($splits);
+            $questions=$splits[1];
+            $runningAvg=$splits[2];
+        ?>Your avg is <?php echo $runningAvg ?>% of the last  <?php echo $questions ?> games.
+<?php }  ?>
     </div>
 
   </div>

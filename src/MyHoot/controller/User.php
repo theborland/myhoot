@@ -7,6 +7,7 @@ class User{
 	var $color;
 	var $place;
 	var $avg;
+	var $tempAvg;
 	var $gamesPlayed;
 	var $singleStatsRound;
 	var $singleStatsGame;
@@ -97,7 +98,7 @@ class User{
 		}
 	}
 
-	public static function updateUser($userID,$questionNumber,$place){
+	public static function updateUser($userID,$questionNumber,$distanceAway){
 		  global $conn;
 
 			$sql = "SELECT * from `usersSingle` WHERE `user_id`= '".$userID."'";
@@ -108,15 +109,93 @@ class User{
 				$lastRound=$row["round"];
 				$gamesPlayed=$row["gamesPlayed"];
 				$avg=$row["avg"];
-				if ($lastRound!=$questionNumber){
+				$last5Avg=User::findLast5($userID,$questionNumber);
+				//echo "avg is ".$last5Avg;
+				//die();
+				$tempAvg=$last5Avg;
+				$gamesPlayed++;
+				if (!is_numeric($last5Avg)){
+	            $splits=explode("~",$last5Avg);
+	            $tempAvg=-$splits[1];
+				}
+				$sql = "UPDATE `usersSingle` SET `tempAvg` = '".$tempAvg."',`score`='".$distanceAway."', `gamesPlayed` = '".$gamesPlayed."', `round` = '".$questionNumber."' WHERE user_id = '".$userID."'";
+				$result = $conn->query($sql);
+				//die ($sql);
+				if (substr($last5Avg,0,1)!="~" && $last5Avg>$avg){
 					$gamesPlayed++;
-					$newAvg=round(($avg*($gamesPlayed-1)+$place)/$gamesPlayed,2);
-					$sql = "UPDATE `usersSingle` SET `score`='".$place."', `gamesPlayed` = '".$gamesPlayed."', `avg` = '".$newAvg."', `round` = '".$questionNumber."' WHERE user_id = '".$userID."'";
+					//$newAvg=round(($avg*($gamesPlayed-1)+$place)/$gamesPlayed,2);
+					$sql = "UPDATE `usersSingle` SET `avg` = '".$last5Avg."' WHERE user_id = '".$userID."'";
 					$result = $conn->query($sql);
 					//die ($sql);
-					return $newAvg;
+
 				}
+				return $last5Avg;
 			}
+
+		}
+
+		public static function addSkip($userID){
+			  global $conn;
+				$sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND user_id='".$userID."' ORDER by questionNum DESC";
+				$result = $conn->query($sql);
+				//echo $sql;
+				if ($result && $row = $result->fetch_assoc())
+				{
+						if ($row["avg"]!=0)
+				    {
+								$sql = "UPDATE `answers` SET avg=0 WHERE game_id ='".$_SESSION["game_id"]."' AND user_id='".$userID."' AND questionNum=".$row["questionNum"];
+								$result = $conn->query($sql);
+						}
+				}
+
+		}
+/*
+		public static function findTop5Users(){
+				global $conn;
+				$sql = "SELECT * from `usersSingle` ORDER by avg DESC limit 5";
+				$result = $conn->query($sql);
+				$top5=array();
+				$place=1;
+				while ($row = $result->fetch_assoc())
+				{
+					$user=new self($row["name"],$place);
+					$user->avg=$row["avg"];
+					$top5[$place]=$user;
+					$place++;
+				}
+
+				return $top5;
+		}
+*/
+		public static function findLast5($userID,$questionNumber){
+				 $last5Avg=0;
+				 global $conn;
+				 for ($i=$questionNumber;$i>$questionNumber-5;$i--)
+				 {
+					 $sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$i."' AND user_id='".$userID."'";
+					 $result = $conn->query($sql);
+					 //echo $sql;
+					 if ($result && $row = $result->fetch_assoc())
+					    if ($row["avg"]!=0){
+								  echo "sss";
+					  			$last5Avg+=$row["avg"];
+								}
+					 		else {
+								 echo "in";
+								 $numPlayed=$questionNumber-$i;
+								 return "~".$numPlayed."~".($last5Avg/$numPlayed);
+							}
+					 else
+					 {
+							echo "in";
+							$numPlayed=$questionNumber-$i;
+							if ($numPlayed==0)return "~0~0";
+							else return "~".$numPlayed."~".($last5Avg/$numPlayed);
+					 }
+				 }
+				 return $last5Avg/5;
+
+
 
 		}
 
@@ -147,16 +226,20 @@ class User{
 
 		public static function loadUserSingle(){
 			global $conn;
-			$sql = "SELECT * from `usersSingle` WHERE `user_id`= '".$_SESSION['user_id']."' AND round='".abs($_SESSION["questionNumber"])."'";
+			$sql = "SELECT * from `usersSingle` WHERE `user_id`= '".$_SESSION['user_id']."'";
 			$result = $conn->query($sql);
 			if ($result){
 		    $row = $result->fetch_assoc();
 				$user=new self($row["name"],$_SESSION['user_id']);
 				$user->place=$row["score"];
 				$user->avg=$row["avg"];
-				$user->gamesPlayed=$row["gamesPlayed"];
-				$user->singleStatsRound=new SingleStats($user->place,"score");
-				$user->singleStatsGame=new SingleStats($user->avg,'avg');
+				$user->tempAvg=$row["tempAvg"];
+				//print_r($sql);
+				//die();
+				if ($row["tempAvg"]<0)
+					$user->gamesPlayed=-1*$row["tempAvg"];
+				$user->singleStatsRound=new SingleStats($user->place,"score",0);
+				$user->singleStatsGame=new SingleStats($user->avg,'avg',$user->tempAvg);
 				return $user;
 			}
 			else return new self($_SESSION["name"],$_SESSION['user_id']);;
@@ -173,29 +256,42 @@ function get_random_color() {
 }
 
 class SingleStats{
-	var $topThree;
+	var $topFive;
 	var $place;
 	var $numOfPlayers;
+	var $tempPlace;
 
-	function __construct($place,$type){
+	function __construct($score,$type,$tempAvg){
 		global $conn;
-		 $sql = "SELECT * from `usersSingle` WHERE round='".abs($_SESSION["questionNumber"])."' ORDER BY $type DESC LIMIT 3";
-		 //die ($sql);
+		if ($type=="avg"){
+		 $sql = "SELECT * from `usersSingle` ORDER BY `avg` DESC LIMIT 5";
+		 $sql2= "select count(*) total, sum(case when `avg` > '$score' then 1 else 0 end) worse from `usersSingle` WHERE `avg`!=0";
+
+	 }
+		else {
+				$sql = "SELECT * from `usersSingle` WHERE round='".abs($_SESSION["questionNumber"])."' ORDER BY `score` ASC LIMIT 3";
+				$sql2= "select count(*) total, sum(case when $type < '$score' then 1 else 0 end) worse from `usersSingle` WHERE round='".abs($_SESSION["questionNumber"])."'";
+			}
+		//	echo $sql;
 		 $result = $conn->query($sql);
-		 $this->topThree=array();
+		 $this->topFive=array();
+		 //echo $sql;
 		 if ($result){
-			 $i=0;
+			 $i=1;
 			 while ($row = $result->fetch_assoc()){
 				 //die ($sql);
-				 $this->topThree[$i]=new User($row["name"],$i);
-				 $this->topThree[$i]->place=$row[$type];
+				 $this->topFive[$i]=new User($row["name"],$i);
+
+				 $this->topFive[$i]->avg=$row[$type];
+				 $i++;
+				 //if ($type=="avg")echo $sql;
 			 }
 		 }
 		 //die($sql);
-		 $place=$place+.01;
-		 $sql = "select count(*) total, sum(case when $type > '$place' then 1 else 0 end) worse from `usersSingle` WHERE round='".abs($_SESSION["questionNumber"])."'";
-		 $result = $conn->query($sql);
+
+		 $result = $conn->query($sql2);
 		 //die($sql);
+		 //echo $sql2;
 		 if ($result)
 		 {
 				 $row = $result->fetch_assoc();
@@ -203,6 +299,15 @@ class SingleStats{
 				 $this->place=$row['worse']+1;
 
 
+		 }
+
+		 if ($tempAvg>0 && $score!=$tempAvg)
+		 {
+			 $sql2= "select count(*) total, sum(case when $type < '$tempAvg' then 1 else 0 end) worse from `usersSingle` ";
+				$result = $conn->query($sql2);
+				$row = $result->fetch_assoc();
+				//die ($sql2);
+			 $this->tempPlace=$row['worse']+1;
 		 }
 	}
 

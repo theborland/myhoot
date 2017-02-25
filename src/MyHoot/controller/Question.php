@@ -71,6 +71,10 @@ class Question
 			}
 	}
 
+	// public function getTopThree(){
+	//
+	// }
+
 	public static function InQuestion($questionNum){
 		//SOCKET SENDING MESSAGE
 			  if (isset($_SESSION["single"]) && $_SESSION["single"]==true)return;
@@ -130,6 +134,8 @@ class Question
 	 				$question->country=$row["wording"];
 					$question->min=$row["lat"];
 					$question->max=$row["longg"];
+					if (isset($row["active"]) && $row["active"]!=0)
+							$question->answer="waiting";
 					if ($type=="geo" || $type=="pop" || $type=="weather"|| $type=="pt"){
 						   $splits=explode(",",$question->country);
 					     $question->country=$splits[1];
@@ -209,6 +215,33 @@ class Question
 				return "Guess the Year: ";
 		if ($this->type=="rand")
 				return ucfirst($this->city);
+	}
+
+function getUnitsAway($distanceAway){
+		if ($distanceAway>1000)
+		  $distanceAway=number_format($distanceAway);
+		if ($this->type=="pop")
+		  $message= $distanceAway. " people";
+		else if ($this->type=="weather")
+		    $message= $distanceAway. " degrees";
+		else if ($this->type=="age" || $this->type=="time")
+		      $message= $distanceAway. " years";
+		else if ($this->type=="geo" || $this->type=="pt"|| $this->type=="places")
+		  $message= $distanceAway. " miles";
+		else //if ($game->type=="rand")
+		  $message= $distanceAway. "";
+		//die ($this->type);
+		return $message;
+	}
+
+  function getMessageAway($distanceAway)
+	{
+		  $units=$this->getUnitsAway($distanceAway);
+			if ($this->type=="geo" || $this->type=="pt"|| $this->type=="places")
+			  $message= "Distance away : ". $units;
+			else
+			  $message= "Off by: ". $units;
+			return $message;
 	}
 
 	function getQuestion($type){
@@ -704,7 +737,7 @@ public static function findQuestion()
 	{
 		$row = $result->fetch_assoc();
 		if ($row){
-			if ($row["active"]==1){
+			if (isset($row["active"]) && $row["active"]>=1){
 				usleep(500000);
 				return Question::findQuestion();
 			}
@@ -712,8 +745,12 @@ public static function findQuestion()
 				$game=new self(null);
 				$game->qID= $row["questionNum"];
 				$game->type=$row["type"];
-				$game->max=$row["max"];
 				$game->answer=$row["answer"];
+				if (isset($row["active"]) && $row["active"]!=0)
+						$game->answer="waiting";
+				//$game->max=$row["max"];
+
+
 				return $game;
 			}
 		}

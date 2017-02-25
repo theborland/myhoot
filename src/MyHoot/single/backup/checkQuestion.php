@@ -1,4 +1,6 @@
 <?php
+/*
+NO LONGER NEEDED I BELIEVE
 session_start();
 $whitelist = array('lat','long','questionNumber');
 require '../controller/dbsettings.php';
@@ -8,7 +10,7 @@ $questionNumber=$game->round;
 //die( $questionNumber);
 if ($questionNumber==null)
   header( 'Location: joinQuiz.php');
-else if ($questionNumber<0)
+else if ($questionNumber<0 || $game->type=="waiting")
   header( 'Location: waitingScreen.php?message='."Sorry, there is no question in progress" ) ;
 else
 {
@@ -31,4 +33,5 @@ else
 //      header( 'Location: userScreen.php?question='.$questionNumber ) ;
 
 }
+*/
  ?>
