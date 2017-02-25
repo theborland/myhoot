@@ -174,7 +174,7 @@ class User{
 				 {
 					 $sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$i."' AND user_id='".$userID."'";
 					 $result = $conn->query($sql);
-					 //echo $sql;
+					 echo $sql;
 					 if ($result && $row = $result->fetch_assoc())
 					    if ($row["avg"]!=0){
 								  echo "sss";
