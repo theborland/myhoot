@@ -150,7 +150,7 @@ if ($submit=="Join"){
 </div>
 <div id="tryContainer">
 	Others playing?
-	<a href="checkQuestion.php" class="regButton" id="tryHere">Catch Up!</a>
+	<a href="userScreen.php" class="regButton" id="tryHere">Catch Up!</a>
 </div>
 </body>
 </html>

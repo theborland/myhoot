@@ -32,7 +32,7 @@ if ($answer>100000)
 //die ($questionNumber);
 $questionNumberSite=$game->round;
 //if ($questionNumberSite!=$questionNumber)
-if ($questionNumberSite<0 || $theQuestion->answer!="waiting")
+if ($questionNumberSite<0 || $theQuestion->answer=="waiting")
   header( 'Location: waitingScreen.php?message='."Submit your answer in time" ) ;
 $place=Answer::addAnswer($_SESSION["user_id"],$questionNumberSite,$lat,$long,$answer,$distanceAway,$color,$game->type);
 $avg=User::updateUser($_SESSION["user_id"],$questionNumberSite,$distanceAway);
