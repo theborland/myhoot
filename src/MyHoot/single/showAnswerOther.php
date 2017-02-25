@@ -79,7 +79,7 @@ $timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak)
 
       function timer()
       {
-           //window.location.href = "userScreen.php";
+           window.location.href = "userScreen.php";
            clearInterval(counter);
            count=0999;
            return;
