@@ -120,7 +120,7 @@ class User{
 				}
 				$sql = "UPDATE `usersSingle` SET `tempAvg` = '".$tempAvg."',`score`='".$distanceAway."', `gamesPlayed` = '".$gamesPlayed."', `round` = '".$questionNumber."' WHERE user_id = '".$userID."'";
 				$result = $conn->query($sql);
-				die ($sql);
+				//die ($sql);
 				if (substr($last5Avg,0,1)!="~" && $last5Avg>$avg){
 					$gamesPlayed++;
 					//$newAvg=round(($avg*($gamesPlayed-1)+$place)/$gamesPlayed,2);
@@ -174,7 +174,7 @@ class User{
 				 {
 					 $sql = "SELECT * FROM `answers` WHERE game_id ='".$_SESSION["game_id"]."' AND questionNum='".$i."' AND user_id='".$userID."'";
 					 $result = $conn->query($sql);
-					 echo $sql;
+					 //echo $sql;
 					 if ($result && $row = $result->fetch_assoc())
 					    if ($row["avg"]!=0){
 								  echo "sss";
