@@ -116,7 +116,7 @@ class User{
 				$gamesPlayed++;
 				if (!is_numeric($last5Avg)){
 	            $splits=explode("~",$last5Avg);
-	            $tempAvg=-$splits[1];
+	            $tempAvg=-$splits[2];
 				}
 				$sql = "UPDATE `usersSingle` SET `tempAvg` = '".$tempAvg."',`score`='".$distanceAway."', `gamesPlayed` = '".$gamesPlayed."', `round` = '".$questionNumber."' WHERE user_id = '".$userID."'";
 				$result = $conn->query($sql);
@@ -264,7 +264,7 @@ class SingleStats{
 	function __construct($score,$type,$tempAvg){
 		global $conn;
 		if ($type=="avg"){
-		 $sql = "SELECT * from `usersSingle` ORDER BY `avg` DESC LIMIT 5";
+		 $sql = "SELECT * from `usersSingle` ORDER BY `avg` DESC LIMIT 3";
 		 $sql2= "select count(*) total, sum(case when `avg` > '$score' then 1 else 0 end) worse from `usersSingle` WHERE `avg`!=0";
 
 	 }
@@ -303,7 +303,19 @@ class SingleStats{
 
 		 if ($tempAvg>0 && $score!=$tempAvg)
 		 {
-			 $sql2= "select count(*) total, sum(case when $type < '$tempAvg' then 1 else 0 end) worse from `usersSingle` ";
+			 $sql2= "select count(*) total, sum(case when $type > '$tempAvg' then 1 else 0 end) worse from `usersSingle` ";
+			  //echo $sql2;
+				$result = $conn->query($sql2);
+				$row = $result->fetch_assoc();
+				//die ($sql2);
+			 $this->tempPlace=$row['worse']+1;
+		 }
+		 //now lets see if tempAvg is not a streak of 5 but just OutOfBoundsException
+		 if (!is_numeric($tempAvg) && $score!=$tempAvg)
+		 {
+
+			 $sql2= "select count(*) total, sum(case when $type > '$tempAvg' then 1 else 0 end) worse from `usersSingle` ";
+			  //echo $sql2;
 				$result = $conn->query($sql2);
 				$row = $result->fetch_assoc();
 				//die ($sql2);

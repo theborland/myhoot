@@ -374,12 +374,15 @@ function getUnitsAway($distanceAway){
 				$this->answer=$row["answer"];
 				$url= $row["image"];
 				$this->qID=$row["id"];
+
 				if ($this->checkForRepeats($this->country))
 				{
 					$this->getTime();
 					return;
 				}
 				$this->image=Question::getRandomUrl($url);
+				//echo ("sdf");
+
 			}
 		}
 
@@ -456,7 +459,8 @@ function getUnitsAway($distanceAway){
 		$url=str_replace("','","','",$url);
   	$url=str_replace(",''","",$url);
 		$splits=explode("','",$url);
- //die ($url);
+ 		//die ($url);
+		//echo $url;
 		if (sizeof($splits)==0)
 		{
 		  	//echo "going in again";

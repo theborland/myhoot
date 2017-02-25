@@ -23,7 +23,8 @@ class AllAnswers
 				$points=$row["points"];
 				if ($points==null)$points=0;
 				$color=$row["color"];
-				$this->allAnswers[$user_id]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points,$color);
+				$avg=$row["avg"];
+				$this->allAnswers[$user_id]=Answer::addUser($qID,new LatLong($lat1,$long1),$ans,$user_id,$this->correctAns,$points,$color,$avg);
 
 				//$submitTime= $row["submitTime"];
 				//$miles=round(LatLong::distance($lat,$long,$lat1,$long1,"M"));
@@ -163,6 +164,7 @@ class Answer
 	var $roundPoints;
 	var $value;
 	var $color;
+	var $avg;
 
 	public static function addAnswer($userID,$questionNumber,$lat,$long,$answer,$distanceAway,$color,$type)
 	{
@@ -245,11 +247,11 @@ class Answer
 		return false;
 	}
 
-	public static function addUser($qID,$loc,$ans,$userID,$correct,$points,$color)
+	public static function addUser($qID,$loc,$ans,$userID,$correct,$points,$color,$avg)
 	{
 		$answer=new self();
 		$answer->user_id = $userID;
-
+		$answer->avg=$avg;
 		$answer->location=$loc;
 		$answer->ans=$ans;
 		$answer->qID=$qID;

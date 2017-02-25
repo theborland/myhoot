@@ -12,6 +12,8 @@ if (Game::findGame()->type!="geo" && Game::findGame()->type!="pt" && Game::findG
      header( 'Location: showAnswerOther.php') ;
 $theQuestion=Question::loadQuestion();
 $user=User::loadUserSingle();
+//$_SESSION["questionNumber"]=$theQuestion->
+//echo $_SESSION["questionNumber"];
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 
 $seconds=time();
@@ -111,7 +113,7 @@ $timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak)
               <div class="saoName">
                    <?php
                    if ($statsGame->place==$key)  //meaning the user is in a place
-                   echo "<b>";
+                      echo "<b>";
                    echo $value->name;
                    if ($statsGame->place==$key)  //meaning the user is in a place
                      echo "</b>";
@@ -121,27 +123,59 @@ $timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak)
             </div>
     <?php
     }
+    if ($statsGame->place>3 && $user->avg>0){
+    ?>
+            <div class="saoItem">
+              <div class="saoNumber"><?php echo $statsGame->place ?> </div>
+              <div class="saoName">
+                   Your best
+              </div>
+              <div class="saoAve"><?php echo $user->avg  ?>%</div>
+            </div>
+    <?php
+    }
+    if ($statsGame->tempPlace>3 && $user->tempAvg>0){
+    ?>
+            <div class="saoItem">
+              <div class="saoNumber"><?php echo $statsGame->tempPlace ?> </div>
+              <div class="saoName">
+                   Your current streak
+              </div>
+              <div class="saoAve"><?php echo $user->tempAvg  ?>%</div>
+            </div>
+    <?php
+    }
+    if ($user->tempAvg<0){
+    ?>
+            <div class="saoItem">
+              <div class="saoNumber"> </div>
+              <div class="saoName">
+                   Your current streak (you need 5 in a row to place)
+              </div>
+              <div class="saoAve"><?php echo -1*$user->tempAvg;  ?>%</div>
+            </div>
+
+    <?php }
     ?>
 
   </div>
 
 
 <?php
-if ($user->avg>0){
-   echo "This round you did better than ".$user->place . "% of the people worldwide!<div id=\"mainMessageExtra\"";
-   echo "You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers.".";
-   echo "<br>Your average is ".$user->avg ."%.";
-   echo "Overall you are " .$user->singleStatsGame->place. " out of ".$user->singleStatsGame->numOfPlayers.".";
- }
+$statsRound=$user->singleStatsRound;
+//echo sizeOf($allAnswers->allAnswers);
+if ($user->avg>0 && isset($allAnswers->allAnswers[$user->id])){
+   echo "This round you were ". $theQuestion->getUnitsAway($user->place). " away.  This is better than ".
+           $allAnswers->allAnswers[$user->id]->avg . "% of the people worldwide!<div id=\"mainMessageExtra\"";
+   if ($user->singleStatsRound->numOfPlayers>1)
+        echo "<br>You placed " .$user->singleStatsRound->place. " out of ".$user->singleStatsRound->numOfPlayers.".";
+   }
  ?>
 
   </div>
   </div>
 
 </div>
-<div id="tryContainer">
-	Others playing?
-	<a href="userScreen.php" class="regButton" id="tryHere">Catch Up!</a>
-</div>
+
 </body>
 </html>
