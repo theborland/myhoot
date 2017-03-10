@@ -247,7 +247,7 @@ class Answer
 		return false;
 	}
 
-	public static function addUser($qID,$loc,$ans,$userID,$correct,$points,$color,$avg)
+	public static function addUser($qID,$loc,$ans,$userID,$correct,$points,$color,$avg=null)
 	{
 		$answer=new self();
 		$answer->user_id = $userID;
