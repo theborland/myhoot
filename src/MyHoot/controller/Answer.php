@@ -190,8 +190,9 @@ class Answer
 	  		if ($result)
 	  		{
 	          $row = $result->fetch_assoc();
-						$place=round($row['worse']/$row['total']*100,1);
+
 						if ($row ['total']>5){
+							$place=round($row['worse']/$row['total']*100,1);
 							$sql = "UPDATE `answers` SET `avg`='$place' WHERE `game_id`='$_SESSION[game_id]' AND `user_id`='$userID' AND `questionNum`='$questionNumber'";
 						  $result = $conn->query($sql);
 	  					return $place;
