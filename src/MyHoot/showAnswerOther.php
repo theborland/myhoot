@@ -9,6 +9,11 @@ require 'controller/dbsettings.php';
 if (!isset($_SESSION["game_id"]))
 	$_SESSION["game_id"]=Game::findGameID();
 $theQuestion=Question::loadQuestion();
+if ($theQuestion==null){
+	header("Location: joinQuiz.php");
+	die();
+}
+
 $theQuestion->alertUsers(-1);
 $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 if (!isset($_SESSION["numRounds"]))
