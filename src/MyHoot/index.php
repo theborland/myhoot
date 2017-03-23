@@ -1,5 +1,5 @@
 <?php
-die ("Tuesday noon: We are done for some upgrades - sorry, come back later (should be up in a couple of hours)");
+//die ("Tuesday noon: We are done for some upgrades - sorry, come back later (should be up in a couple of hours)");
  ?><html>
 <head>
 
