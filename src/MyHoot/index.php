@@ -13,7 +13,7 @@
 	<script src="http://gameon.world/http://gameon.world/scripts/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 
 
 

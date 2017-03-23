@@ -52,7 +52,7 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	<script src="scripts/jquery.pause.min.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/showAnswer.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 	<script src="scripts/nouislider.min.js"></script>
 
 	<script>

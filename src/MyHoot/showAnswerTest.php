@@ -27,7 +27,7 @@ $allAnswers=new AllAnswers($_SESSION["questionNumber"]);
 	<!--<script src="scripts/getQuestion.js"></script>-->
 	<script src="scripts/global.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFCvK3FecOiz5zPixoSmGzPsh0Zv75tZs"></script>
 
 	<script>

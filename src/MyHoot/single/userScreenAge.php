@@ -17,7 +17,7 @@ if (isset($_GET["question"]))
   <link rel="stylesheet" href="../style/global.css">
       <link href="../style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/inputSlider.css">
-  <script src="../scripts/socketScripts.js"></script>
+  <script src="../scripts/socketScripts.js?ver=1"></script>
     <style>
       html, body {
         height: 100%;

@@ -18,7 +18,7 @@ if (isset($_GET["question"]))
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <link href="../style/nouislider.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/inputSlider.css">
-    <script src="../scripts/socketScripts.js"></script>
+    <script src="../scripts/socketScripts.js?ver=1"></script>
     <style>
       html, body {
         height: 100%;

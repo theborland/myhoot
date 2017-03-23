@@ -190,7 +190,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://gameon.world/scripts/autobahn.min.js"></script>
-    <script src="../scripts/socketScripts.js"></script>
+    <script src="../scripts/socketScripts.js?ver=1"></script>
     <script>
     //  loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>

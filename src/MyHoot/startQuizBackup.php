@@ -25,7 +25,7 @@ Game::createGame($replay);
 	<script src="scripts/mapdata.js"></script>
 	<script src="scripts/continentmap.js"></script>
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 	<script src="scripts/cloud.js"></script>
 	<script src="scripts/jquery.js"></script>
 

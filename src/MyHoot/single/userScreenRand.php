@@ -109,7 +109,7 @@ $timeLeft=($seconds%($lengthOfGame+$lengthOfBreak)-$lengthOfGame)*-1;
 
     </script>
     <script src="http://gameon.world/scripts/autobahn.min.js"></script>
-    <script src="../scripts/socketScripts.js"></script>
+    <script src="../scripts/socketScripts.js?ver=1"></script>
     <link href="../style/nouislider.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../style/inputSlider.css">
     <script>

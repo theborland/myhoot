@@ -21,7 +21,7 @@
 
 	<!--<script src="scripts/getQuestion.js"></script>-->
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 
 	<script>
 		window.onload = function(){

@@ -94,7 +94,7 @@ if (isset($_GET["question"]))
 
     </script>
     <script src="http://gameon.world/scripts/autobahn.min.js"></script>
-    <script src="../scripts/socketScripts.js"></script>
+    <script src="../scripts/socketScripts.js?ver=1"></script>
     <script>
     //  loadWaitingForQuestionSingle('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');
     </script>

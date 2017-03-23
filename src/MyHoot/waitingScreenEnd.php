@@ -18,7 +18,7 @@ if (!isset($_SESSION["game_id"]))
 	<link rel="stylesheet" href="style/waitingScreen.css">
 
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
 	 <script src="http://gameon.world/scripts/autobahn.min.js"></script>
    <script>
      window.onload = function(){
