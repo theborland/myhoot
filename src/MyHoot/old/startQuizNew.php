@@ -10,7 +10,7 @@
 
 	<script src="mapdata.js"></script>
 	<script src="continentmap.js"></script>
-	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+	<script src="AutobahnJS/build/autobahn.min.js"></script>
 	<script src="socketScripts.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 

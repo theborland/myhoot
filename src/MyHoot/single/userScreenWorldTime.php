@@ -125,7 +125,7 @@ if (isset($_GET["question"]))
 
 
   </script>
-  <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+  <script src="AutobahnJS/build/autobahn.min.js"></script>
 
   <script>
 

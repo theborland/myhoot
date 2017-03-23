@@ -16,7 +16,7 @@ if (isset($_GET["question"]))
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
  <link rel="stylesheet" href="../style/global.css">
-   <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+   <script src="AutobahnJS/build/autobahn.min.js"></script>
    <script src="../scripts/socketScripts.js"></script>
 <link href="../style/nouislider.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../style/inputSlider.css">

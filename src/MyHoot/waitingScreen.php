@@ -59,7 +59,7 @@ if (!isset($_SESSION["game_id"]))
 
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js?ver=4"></script>
-	 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+	 <script src="AutobahnJS/build/autobahn.min.js"></script>
 
 <style>
   #mainMessageWrap{

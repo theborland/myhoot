@@ -102,7 +102,7 @@ x.send();
 
 
     </script>
-    <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+    <script src="AutobahnJS/build/autobahn.min.js"></script>
 
     <script>
       loadWaitingForQuestion('<?php echo $pusherIP; ?>' ,'<?php echo $_SESSION["game_id"]; ?>');

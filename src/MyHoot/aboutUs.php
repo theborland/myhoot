@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/joinQuiz.css">
 	<link rel="stylesheet" href="style/content.css">
-	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+	<script src="AutobahnJS/build/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
@@ -58,7 +58,7 @@
 				Enjoy playing.
 			</p>
 
-			 
+
 			<h3>Who?</h3>
 			<p>
 				Really anyone.  When we thought of GameOn.World, we imagined teachers (especially Social Studies teachers) using it for practice geography.  But we hope you find it fun enough to use anytime you want.  Maybe the next get together you have you try it out - the more people the merrier.
@@ -97,7 +97,7 @@
 	<div id="pageFooter">
 		Copyright &copy; 2016 GameOnWorld
 	</div>
-		
+
 </div>
 
 </body>
