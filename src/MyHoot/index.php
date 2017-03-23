@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/form.css">
 	<link rel="stylesheet" href="style/content.css">
-	<script src="AutobahnJS/build/autobahn.min.js"></script>
+	<script src="http://gameon.world/http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>

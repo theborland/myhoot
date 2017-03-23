@@ -19,7 +19,7 @@ Game::createGame($replay);
 
 	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/startQuiz2.css?ver=1">
-	<script src="AutobahnJS/build/autobahn.min.js"></script>
+	<script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
 	<script src="scripts/startQuiz2.js"></script>
 	<script src="scripts/mapdata.js"></script>
 	<script src="scripts/continentmap.js"></script>

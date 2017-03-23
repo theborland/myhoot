@@ -35,7 +35,7 @@ $timeLeft=($lengthOfGame+$lengthOfBreak)-$seconds%($lengthOfGame+$lengthOfBreak)
 	<script src="../scripts/global.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="../scripts/socketScripts.js"></script>
-	 <script src="AutobahnJS/build/autobahn.min.js"></script>
+	 <script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
 
 <style>
   #mainMessageWrap{

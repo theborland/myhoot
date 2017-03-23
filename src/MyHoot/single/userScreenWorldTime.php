@@ -125,7 +125,7 @@ if (isset($_GET["question"]))
 
 
   </script>
-  <script src="AutobahnJS/build/autobahn.min.js"></script>
+  <script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
 
   <script>
 

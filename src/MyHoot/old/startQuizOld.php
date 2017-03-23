@@ -128,7 +128,7 @@ Game::createGame();
 
 	</style>
 
- <script src="AutobahnJS/build/autobahn.min.js"></script>
+ <script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
   loadWaitingForUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>);

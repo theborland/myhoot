@@ -201,7 +201,7 @@ var interval = setInterval(function() {
 	}
 
 </style>
-<script src="AutobahnJS/build/autobahn.min.js"></script>
+<script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
  <script src="socketScripts.js"></script>
 <script>
   loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>');
