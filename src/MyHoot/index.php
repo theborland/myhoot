@@ -10,7 +10,7 @@ die ("Tuesday noon: We are done for some upgrades - sorry, come back later (shou
 	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/form.css">
 	<link rel="stylesheet" href="style/content.css">
-	<script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.js"></script>
+	<script src="AutobahnJS/build/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>
