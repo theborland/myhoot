@@ -1,8 +1,14 @@
 function loadWaitingForUsers(ip,gameID){
     var conn = new autobahn.Connection({url: 'ws://'+ip+':8080',realm: "votesapp"});
   //  var conn = new ab.Session('ws://'+ip+':8080',
-    conn.onopen = function (session, details) {
-       main(session);
+    conn.onopen = function (session) {
+      session.subscribe('Game'+gameID, function(topic, data) {
+          console.log('Waiting for users:"' + topic + '" : ' + data.title);
+        var container = document.getElementById("nameUsers");
+  container.innerHTML =	'<div class="sqName" id="user_w_name_' + data.title + '" onClick="removeUser(\''  +data.title+'\')" style="background:#'+data.color +';">'+data.title+'<div class="sqNameRemove"><img src="img/X.png"></div></div>'   + ""+container.innerHTML;
+          var numUsers = document.getElementById("numUsers");
+  numUsers.innerHTML = parseInt(numUsers.innerHTML)  + 1;
+      });
     };
 
 
@@ -10,13 +16,7 @@ function loadWaitingForUsers(ip,gameID){
        console.log("Connection lost: " + reason);
     }
 
-    conn.subscribe('Game'+gameID, function(topic, data) {
-        console.log('Waiting for users:"' + topic + '" : ' + data.title);
-      var container = document.getElementById("nameUsers");
-    container.innerHTML =	'<div class="sqName" id="user_w_name_' + data.title + '" onClick="removeUser(\''  +data.title+'\')" style="background:#'+data.color +';">'+data.title+'<div class="sqNameRemove"><img src="img/X.png"></div></div>'   + ""+container.innerHTML;
-        var numUsers = document.getElementById("numUsers");
-    numUsers.innerHTML = parseInt(numUsers.innerHTML)  + 1;
-    });
+
     /*
     function() {
     //  alert('Game'+gameID);
