@@ -1,7 +1,9 @@
 function loadWaitingForUsers(ip,gameID){
-    var conn = new autobahn.Connection({url: 'ws://'+ip+':8080',realm: "votesapp"});
-  //  var conn = new ab.Session('ws://'+ip+':8080',
-    conn.onopen = function (session) {
+  //alert('s');
+  //console.log('Waiting for users:');
+//    var conn = new autobahn.Connection({url: 'ws://'+ip+':8080',realm: "votesapp"});
+    var conn = new ab.Session('ws://'+ip+':8080',
+  /*  conn.onopen = function (session) {
       session.subscribe('Game'+gameID, function(topic, data) {
           console.log('Waiting for users:"' + topic + '" : ' + data.title);
         var container = document.getElementById("nameUsers");
@@ -16,8 +18,9 @@ function loadWaitingForUsers(ip,gameID){
        console.log("Connection lost: " + reason);
     }
 
+conn.open();
 
-    /*
+    */
     function() {
     //  alert('Game'+gameID);
         conn.subscribe('Game'+gameID, function(topic, data) {
@@ -34,7 +37,7 @@ function loadWaitingForUsers(ip,gameID){
     {'skipSubprotocolCheck': true}
     );
 
-*/
+
 
 }
 function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){

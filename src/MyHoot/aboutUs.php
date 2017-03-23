@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="style/global.css">
 	<link rel="stylesheet" href="style/joinQuiz.css">
 	<link rel="stylesheet" href="style/content.css">
-	<script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
+	<script src="http://gameon.world/scripts/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js"></script>

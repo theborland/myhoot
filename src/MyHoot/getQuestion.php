@@ -24,7 +24,7 @@ $type=Game::findGame()->type;
 	<script src="scripts/jquery.pause.min.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js?ver=2"></script>
-	<script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
+	<script src="http://gameon.world/scripts/autobahn.min.js"></script>
 	<script>
 	  loadWaitingForAnswers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>,'<?php echo $_SESSION["auto"]; ?>',<?php echo Game::getNumberUsers(); ?>,'<?php echo $type; ?>');
 	  findingNumberOfUsers('<?php echo $pusherIP; ?>' ,<?php echo $_SESSION["game_id"]; ?>,<?php echo $_SESSION["questionNumber"]; ?>);

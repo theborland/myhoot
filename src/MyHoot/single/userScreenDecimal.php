@@ -28,7 +28,7 @@ if (isset($_GET["question"]))
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../style/global.css">
     <link href="../style/nouislider.min.css" rel="stylesheet">
-    <script src="http://gameon.world/AutobahnJS/build/autobahn.min.js"></script>
+    <script src="http://gameon.world/scripts/autobahn.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" href="../style/inputSlider.css">
     <script src="../scripts/socketScripts.js"></script>
