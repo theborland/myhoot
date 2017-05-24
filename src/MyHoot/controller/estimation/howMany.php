@@ -1,6 +1,6 @@
-<?php $count=95; ?>
-<html>
-  <head>
+<?php //$count=95;
+?>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
@@ -40,18 +40,12 @@ backgroundColor:'#cedbff',
         };
 
         var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-
-        google.visualization.events.addListener(chart, 'ready', function () {
-
-          //console.log(chart_div.innerHTML);
-          //window.location.href = chart.getImageURI();
-        });
-
         chart.draw(data, options);
       }
     </script>
   </head>
   <body>
-    <div id="chart_div" style="width: 600px; height: 600px;"></div>
+    <div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+    margin-right: auto;"></div>
   </body>
 </html>

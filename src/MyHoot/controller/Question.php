@@ -154,6 +154,8 @@ class Question
 		   return "What is the height of the red bar";
 	 if ($this->country=="piePerc")
 		   return "What is the percent of the red region";
+	 if ($this->country=="howMany")
+		   return "How many dots are there";
 		else if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
 	//	else if ($this->country=="places," )
@@ -296,7 +298,7 @@ function getUnitsAway($distanceAway){
 	function getEstimation(){
 		  //either get a cel age (75% of time )
 			$random=rand(0,100);
-			if ($random<=50){
+			if ($random<=33){
 				$this->country="colHt";
 				$this->answer=rand(30,1000);
 				$this->min=0;
@@ -312,7 +314,7 @@ function getUnitsAway($distanceAway){
 				$vars = array(  'target' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'no');
 				$this->image= $this->read('estimation/columnHeight.php',$vars);
 			}
-			else if ($random<=100){
+			else if ($random<=67){
 				$this->country="piePerc";
 				$this->city="piePerc";
 				$this->answer=rand(1,99);
@@ -324,6 +326,16 @@ function getUnitsAway($distanceAway){
 				$this->qID="piePerc".$this->answer;
 				$vars = array(  'perc' => $this->answer,'showAnswer'=>'no');
 				$this->image= $this->read('estimation/piePercent.php',$vars);
+			}
+			else if ($random<=100){
+				$this->country="howMany";
+				$this->city="howMany";
+				$this->answer=rand(30,300);
+				$this->min=0;
+				$this->max=300;
+				$this->qID="howMany".$this->answer;
+				$vars = array(  'count' => $this->answer,'showAnswer'=>'no');
+				$this->image= $this->read('estimation/howMany.php',$vars);
 			}
 
 	}
@@ -672,6 +684,10 @@ public function loadImage(){
 		if ($this->country=="piePerc"){
 			$vars = array(  'perc' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
 			return $this->read('estimation/piePercent.php',$vars);
+		}
+		if ($this->country=="howMany"){
+			$vars = array(  'count' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
+			return $this->read('estimation/howMany.php',$vars);
 		}
 	}
 	if ($this->type=="pop" || $this->type=="pop" || $this->type=="weather")
