@@ -21,7 +21,7 @@ else
           header('Location: userScreenDecimal.php?perc=no&max=yes&question='.$questionNumber ) ;
   else if ($game->type=="factsPercent")
           header('Location: userScreenDecimal.php?perc=yes&question='.$questionNumber ) ;
-  else if ($game->type=="science" || $game->type=="sports" || $game->type=="entertainment" || $game->type=="factsRand")
+  else if ($game->type=="science" || $game->type=="sports"|| $game->type=="estimation" || $game->type=="entertainment" || $game->type=="factsRand")
           header('Location: userScreenRand.php?question='.$questionNumber ) ;
   else if ($game->type=="WorldTime" || $game->type=="Time")//below is messed up I put 3 for region which is not right
           header('Location: userScreenWorldTime.php?region=3&perc=no&question='.$questionNumber ) ;

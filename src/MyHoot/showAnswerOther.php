@@ -123,9 +123,17 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 
 	<style>
 		body{
+			<?php
+				if(Game::findGame()->type != "estimation" ){
+			?>
 			background-color:black;
 	    background-image: url('<?php echo $theQuestion->loadImage(); ?>');
 			background-attachment : fixed;
+			<?php   }
+			else {    ?>
+			background-color: #ddd;
+			<?php   } ?>
+
 			<?php
 				if(Game::findGame()->type == "age"){
 			?>
@@ -137,6 +145,12 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 			<?php } ?>
 			background-repeat: no-repeat;
 		}
+
+	#rightBarWrap{
+		margin-left:450px;
+		margin-top:200px;
+		position: fixed;
+	}
 	</style>
 
 
@@ -195,6 +209,12 @@ $correctLoc=($allAnswers->correctAns->value-$reg0)/($reg4-$reg0);
 	</div>
 </div>
 
+
+	<?php
+
+		if(Game::findGame()->type  == "estimation")
+			echo '<div id="rightBarWrap">'.$theQuestion->loadImage()."</div>";
+			 ?>
 
 
 

@@ -34,7 +34,7 @@ if ($submit=="Join"){
               header('Location: userScreenDecimal.php?perc=no&max=yes&question='.$questionNumber ) ;
       else if ($game->type=="factsPercent")
               header('Location: userScreenDecimal.php?perc=yes&question='.$questionNumber ) ;
-      else if ($game->type=="science" || $game->type=="sports" || $game->type=="entertainment" || $game->type=="factsRand")
+      else if ($game->type=="science" || $game->type=="sports" || $game->type=="entertainment" || $game->type=="estimation" || $game->type=="factsRand")
               header('Location: userScreenRand.php?question='.$questionNumber ) ;
       else if ($game->type=="WorldTime" || $game->type=="time")//below is messed up I put 3 for region which is not right
               header('Location: userScreenWorldTime.php?region=4&perc=no&question='.$questionNumber ) ;
@@ -58,7 +58,7 @@ if (!isset($_SESSION["game_id"]))
 	<link rel="stylesheet" href="style/waitingScreen.css">
 
 	<script src="scripts/global.js"></script>
-	<script src="scripts/socketScripts.js?ver=4"></script>
+	<script src="scripts/socketScripts.js?ver=5"></script>
 	 <script src="http://gameon.world/scripts/autobahn.min.js"></script>
 
 <style>

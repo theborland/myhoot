@@ -1,5 +1,5 @@
 <?php  //file used just for getQuestion.php
-$whitelist = array('statesCB','numRounds','gsScience','gsSports','gsEntertainment','gsFacts','gsPT','gsPlaces','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
+$whitelist = array('statesCB','numRounds','gsScience','gsSports','gsEntertainment','gsEstimation','gsFacts','gsPT','gsPlaces','gsGeo','gsAge','gsHist','gsPop','gsTemp','gsRand','r_SA','r_EU','r_AF','r_NS','r_SS','r_ME','r_OC','r_NA');
 require 'controller/dbsettings.php';
 //echo print_r($_GET["games"]);
 
@@ -31,7 +31,7 @@ if ($gsGeo=="false" || $gsGeo=="true")
   if ($gsSports=="true")$gamesSelected[]="sports";
   if ($gsEntertainment=="true")$gamesSelected[]="entertainment";
   if ($gsFacts=="true")$gamesSelected[]="facts";
-
+  if ($gsEstimation=="true")$gamesSelected[]="estimation";
   if ($gsGeo=="true"){
     foreach ($gamesSelected as $key)
         if (sizeof($gamesSelected)<=7)

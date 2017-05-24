@@ -76,14 +76,8 @@ $type=Game::findGame()->type;
 
 	<style>
 		body{
-			<?php
-				if($type != "estimation" ){
-			?>
 			background-image:url("<?php echo $theQuestion->getImage() ?>");
-			<?php   }
-			else {    ?>
-			background-color: #ddd;
-			<?php   }
+			<?php
 				if($type == "age" || $type == "entertainment" || $type == "rand"){
 			?>
 			background-size       : contain;
@@ -93,15 +87,6 @@ $type=Game::findGame()->type;
 			background-position   : center;
 			<?php } ?>
 		}
-		<?php
-			if($type == "estimation" ){
-		?>
-		#answersWrap{
-			position:absolute;
-			top:150px;
-		}
-		<?php   }
-		   ?>
 	</style>
 
 </head>
@@ -130,9 +115,6 @@ $type=Game::findGame()->type;
 	<div id="timerContainer">
 		<div id="timer"></div>
 	</div>
-	<?php
-		if($type == "estimation")
-			echo $theQuestion->getImage(); ?>
 	<div id="answersWrap" class="scrollable">
 
 

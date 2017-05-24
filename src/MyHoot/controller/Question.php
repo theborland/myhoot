@@ -39,6 +39,8 @@ class Question
 						$this->getQuestion($type);
 				else if ($type=="time")
 						$this->getTime();
+				else if ($type=="estimation")
+						$this->getEstimation();
 				else if ($type=="facts")
 						$this->getFacts();
 				else
@@ -132,11 +134,12 @@ class Question
 					$question->qID=$row["qID"];
 					$type=$question->type;
 	 				$question->country=$row["wording"];
+					$question->answer=$row["answer"];
 					$question->min=$row["lat"];
 					$question->max=$row["longg"];
 					if (isset($row["active"]) && $row["active"]!=0)
 							$question->answer="waiting";
-					if ($type=="geo" || $type=="pop" || $type=="weather"|| $type=="pt"){
+					if ($type=="geo" || $type=="pop" || $type=="weather"|| $type=="pt" || $type=="estimation"){
 						   $splits=explode(",",$question->country);
 					     $question->country=$splits[1];
 							 $question->city=$splits[0];
@@ -147,7 +150,9 @@ class Question
 	}
 
 	function getLabel(){
-		if ($this->type=="geo" || $this->type=="weather")
+		if ($this->country=="colHt")
+		   return "What is the height of the red bar";
+		else if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
 	//	else if ($this->country=="places," )
 //			return substr($this->country,0);
@@ -271,6 +276,46 @@ function getUnitsAway($distanceAway){
 				}
 		}
 
+
+	}
+
+	function read($file, $vars) {
+	 ob_start();
+	 extract($vars, EXTR_SKIP);
+	 include($file);
+	 $content = ob_get_contents();
+	 ob_end_clean();
+	//  $loc=strrpos($content,"link");
+	//  $img=substr($content,$loc);
+
+	 return $content;
+ }
+
+	function getEstimation(){
+		  //either get a cel age (75% of time )
+			$random=rand(0,100);
+			if ($random<=100){
+				$this->country="colHt";
+				$this->answer=rand(30,1000);
+				$this->min=0;
+				$this->max=1000;
+				$height1=rand(30,1000);
+				$height2=rand(30,1000);
+				while (($height1<$height2*2 && $height2<$height1*2) || $height1<$height2/8 || $height2<$height1/8){
+				  $height1=rand(1,1000);
+				  $height2=rand(1,1000);
+				}
+				$this->city=$height1*$this->answer/$height2;
+				$this->qID="colHt".$this->answer;
+				//die (BASEPATH.)
+				//$url= file_get_contents('controller/estimation/piePercent.php');
+				$vars = array(  'target' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'no');
+				$this->image= $this->read('estimation/columnHeight.php',$vars);
+
+				//die($url);
+				//$this->image=
+			}
+					//$this->getQuestion('entertainment');
 
 	}
 
@@ -610,6 +655,13 @@ public static function loadImageOld($wording,$type){
 public function loadImage(){
 
 	global $conn;
+	if ($this->type=="estimation"){
+		if ($this->country=="colHt"){
+			$vars = array(  'target' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
+			return $this->read('estimation/columnHeight.php',$vars);
+		}
+
+	}
 	if ($this->type=="pop" || $this->type=="pop" || $this->type=="weather")
 		return $this->loadImageOld($this->city.",".$this->country, $this->type);
 	if ($this->type=="places" || $this->type=="things" || $this->type=="people")

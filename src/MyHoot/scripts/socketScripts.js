@@ -112,7 +112,7 @@ function loadWaitingForAnswers(ip,gameID,questionNumber,auto,numUsers,type){
                   window.location.href='userScreenDecimal.php?perc=no&max=yes&question='+data.title.substring(1);
           else if (data.type=="factsPercent")
                   window.location.href='userScreenDecimal.php?perc=yes&question='+data.title.substring(1);
-          else if (data.type=="science" || data.type=="sports" || data.type=="entertainment" || data.type=="factsRand")
+          else if (data.type=="science" || data.type=="sports" || data.type=="entertainment" || data.type=="factsRand" || data.type=="estimation")
                   window.location.href='userScreenRand.php?question='+data.title.substring(1);
           else if (data.type.substring(0,9)=="WorldTime")
                   window.location.href='userScreenWorldTime.php?region='+data.type.substring(9)+'&perc=no&question='+data.title.substring(1);
