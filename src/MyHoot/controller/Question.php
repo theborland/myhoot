@@ -301,7 +301,7 @@ function getUnitsAway($distanceAway){
 
 	function getEstimation(){
 		  //either get a cel age (75% of time )
-			$random=rand(5,5);
+			$random=rand(1,5);
 			if ($random==1){
 				$this->country="colHt";
 				$this->answer=rand(30,1000);
