@@ -150,12 +150,16 @@ class Question
 	}
 
 	function getLabel(){
-		if ($this->country=="colHt")
+		if ($this->country=="percSq")
+			 return "What percent is red";
+	 if ($this->country=="colHt")
 		   return "What is the height of the red bar";
 	 if ($this->country=="piePerc")
 		   return "What is the percent of the red region";
 	 if ($this->country=="howMany")
 		   return "How many dots are there";
+	 if ($this->country=="mapDist")
+			 return "Using the scale shown, how long is the line";
 		else if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
 	//	else if ($this->country=="places," )
@@ -297,8 +301,8 @@ function getUnitsAway($distanceAway){
 
 	function getEstimation(){
 		  //either get a cel age (75% of time )
-			$random=rand(0,100);
-			if ($random<=33){
+			$random=rand(5,5);
+			if ($random==1){
 				$this->country="colHt";
 				$this->answer=rand(30,1000);
 				$this->min=0;
@@ -314,7 +318,7 @@ function getUnitsAway($distanceAway){
 				$vars = array(  'target' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'no');
 				$this->image= $this->read('estimation/columnHeight.php',$vars);
 			}
-			else if ($random<=67){
+			else if ($random==2){
 				$this->country="piePerc";
 				$this->city="piePerc";
 				$this->answer=rand(1,99);
@@ -327,7 +331,7 @@ function getUnitsAway($distanceAway){
 				$vars = array(  'perc' => $this->answer,'showAnswer'=>'no');
 				$this->image= $this->read('estimation/piePercent.php',$vars);
 			}
-			else if ($random<=100){
+			else if ($random==3){
 				$this->country="howMany";
 				$this->city="howMany";
 				$this->answer=rand(30,300);
@@ -336,6 +340,36 @@ function getUnitsAway($distanceAway){
 				$this->qID="howMany".$this->answer;
 				$vars = array(  'count' => $this->answer,'showAnswer'=>'no');
 				$this->image= $this->read('estimation/howMany.php',$vars);
+			}
+			else if ($random==4){
+
+				$target=rand(30,1000);
+
+				$this->country="mapDist";
+				$this->city=rand(1,1000);
+				$this->answer=$target;
+				$this->min=0;
+				$this->max=1000;
+				$this->qID="mapDist".$this->answer;
+				$vars = array( 'target'=>$this->answer, 'rand' => $this->city,'showAnswer'=>'no');
+				$img=$this->read('estimation/mapDistance.php',$vars);
+				$this->image='<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+		    margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
+			}
+			else if ($random==5){
+
+
+				$target=rand(1,99);
+				$this->country="percSq";
+				$this->city=rand(1001,2000);
+				$this->answer=$target;
+				$this->min=0;
+				$this->max=100;
+				$this->qID="percSq".$this->answer;
+				$vars = array( 'targetPercent'=>$this->answer, 'randomFileName' => $this->city,'showAnswer'=>'no');
+				$img=$this->read('estimation/percentSquare.php',$vars);
+				$this->image='<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+		    margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
 			}
 
 	}
@@ -689,6 +723,11 @@ public function loadImage(){
 			$vars = array(  'count' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
 			return $this->read('estimation/howMany.php',$vars);
 		}
+		if ($this->country=="mapDist" || $this->country=="percSq"){
+			return '<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+			margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
+		}
+
 	}
 	if ($this->type=="pop" || $this->type=="pop" || $this->type=="weather")
 		return $this->loadImageOld($this->city.",".$this->country, $this->type);

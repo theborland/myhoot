@@ -1,28 +1,21 @@
 <?php
-header('Content-type:image/png');
-$dimension=600;
+//header('Content-type:image/png');
+$fullPath=dirname(dirname(dirname(__FILE__)));
+
+$dimension=550;
 $target=325;
+
 $width=rand(5,10);
 $image = imagecreate($dimension,$dimension); // (x, y)
 $scaleX=150;
-$scaleXdist=200;
+
 $lineHeight=35;
-$scaleY=585;
+$scaleY=535;
 //imagepng($image);
 
-
- $image = imagecreatetruecolor($dimension,$dimension);
- $map = imagecreatefromjpeg('../../img/map.jpg');
-//
-// // sets background to red
- $white = imagecolorallocate($image, 255,255,255);
-imagefill($image, 0, 0, $white);
-
-
-// Merge the red image onto the PNG image
-imagecopymerge($image,$map,  0, 0, 0, 0, $dimension, $dimension, 75);
-//
 $distance=0;
+$scaleXdist=200;
+$dimension=550;
 while ($distance<200){
   $x1=rand(20,100);
   $y1=rand(50,100);
@@ -43,11 +36,47 @@ while($units*($distance/($scaleXdist/2))<$target)
     //  echo $units;
   }
 }
+
+$hostName = $_SERVER['HTTP_HOST'];
+//die ($_SERVER['PHP_SELF']);
+
+ $image = imagecreatetruecolor($dimension,$dimension);
+ $map = imagecreatefromjpeg($fullPath.'/img/map.jpg');
+//
+// // sets background to red
+ $white = imagecolorallocate($image, 255,255,255);
+imagefill($image, 0, 0, $white);
+
+
+// Merge the red image onto the PNG image
+imagecopymerge($image,$map,  0, 0, 0, 0, $dimension, $dimension, 75);
+//
+// $distance=0;
+// while ($distance<200){
+//   $x1=rand(20,100);
+//   $y1=rand(50,100);
+//   $x2=rand(400,($dimension-20));
+//   $y2=rand(50,($dimension-200));
+//   $distance=sqrt(pow($x1-$x2,2)+pow($y1-$y2,2));
+// }
+// $units=1;
+// while($units*($distance/($scaleXdist/2))<$target)
+// {
+//   // echo $units;
+//   if ($scaleXdist>130)
+//      $scaleXdist-=10;
+//   else{
+//      $scaleXdist=400;
+//      if ($units==1 || $units==10 || $units==100 || $units==5 || $units==50 || $units==500)$units*=2;
+//      else $units*=2.5;
+//     //  echo $units;
+//   }
+// }
 //echo $distance." ".$scaleXdist ." ";
 //echo $target . " " . $units;
 
 
-$pin = imagecreatefrompng('../../img/map-pin2.png');
+$pin = imagecreatefrompng($fullPath.'/img/map-pin2.png');
 //$scale = imagecreatefrompng('img/map-scale.png');
 
 $black = imagecolorallocate($pin, 0,0,0);
@@ -57,12 +86,12 @@ imagecopymerge_alpha($image, $pin, $x2-5,$y2-35, 0, 0, 20 ,35,100);
 
 $white = imagecolorallocate($image, 255,255,255);
 
-imagefilledrectangle($image, 0, 500, $dimension,$dimension, $white);
+imagefilledrectangle($image, 0, 450, $dimension,$dimension, $white);
 
 //imagecopymerge_alpha($image, $scale, $dimension-300,$dimension-50, 0, 0, 251 ,43,100);
 
 // Set Path to Font File
-$font ='../../fonts/Capriola-Regular.ttf';
+$font =$fullPath.'/fonts/Capriola-Regular.ttf';
 
 
 
@@ -85,11 +114,12 @@ imagettftext($image, 25, 0, $scaleX+$scaleXdist-10, $scaleY-$lineHeight-5, $blac
 // imagettftext($image, 25, 0, 20, $scaleY-$lineHeight-50, $black, $font, $distance);
 // imagettftext($image, 25, 0, 20, $scaleY-$lineHeight-100, $black, $font, $scaleXdist);
 
- imagepng($image);
+//imagepng($image,$fullPath."/controller/estimation/tmp/2.png");
+ imagepng($image,$fullPath."/controller/estimation/tmp/".$rand.".png");
 // imagedestroy($image);
 // imagedestroy($redimg);
 
-
+//die(dirname(__FILE__));
 
 function imagelinethick($image, $x1, $y1, $x2, $y2, $color, $thick = 1)
 {

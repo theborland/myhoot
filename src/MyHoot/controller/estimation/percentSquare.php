@@ -1,7 +1,10 @@
 <?php
-header('Content-type:image/png');
-$dimension=600;
-$targetPercent=rand(1,99);
+//header('Content-type:image/png');
+$fullPath=dirname(dirname(dirname(__FILE__)));
+
+$dimension=550;
+
+//$targetPercent=rand(1,99);
 $width=rand(5,10);
 $target=round($dimension/$width*$dimension/$width*$targetPercent/100);
 $image = imagecreate($dimension,$dimension); // (x, y)
@@ -26,7 +29,7 @@ foreach($colored as $key=>$var){
   imagefilledrectangle($image, $x, $y, $x+$width, $y+$width, $black);
 
 }
-imagepng($image);
+imagepng($image,$fullPath."/controller/estimation/tmp/".$randomFileName.".png");
 
 class Square{
   var $x;
