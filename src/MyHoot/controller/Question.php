@@ -152,6 +152,8 @@ class Question
 	function getLabel(){
 		if ($this->country=="colHt")
 		   return "What is the height of the red bar";
+	 if ($this->country=="piePerc")
+		   return "What is the percent of the red region";
 		else if ($this->type=="geo" || $this->type=="weather")
 			return $this->city . ", ".$this->country;
 	//	else if ($this->country=="places," )
@@ -294,7 +296,7 @@ function getUnitsAway($distanceAway){
 	function getEstimation(){
 		  //either get a cel age (75% of time )
 			$random=rand(0,100);
-			if ($random<=100){
+			if ($random<=50){
 				$this->country="colHt";
 				$this->answer=rand(30,1000);
 				$this->min=0;
@@ -307,15 +309,22 @@ function getUnitsAway($distanceAway){
 				}
 				$this->city=$height1*$this->answer/$height2;
 				$this->qID="colHt".$this->answer;
-				//die (BASEPATH.)
-				//$url= file_get_contents('controller/estimation/piePercent.php');
 				$vars = array(  'target' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'no');
 				$this->image= $this->read('estimation/columnHeight.php',$vars);
-
-				//die($url);
-				//$this->image=
 			}
-					//$this->getQuestion('entertainment');
+			else if ($random<=100){
+				$this->country="piePerc";
+				$this->city="piePerc";
+				$this->answer=rand(1,99);
+				$this->min=0;
+				$this->max=100;
+				while ($this->answer==50 || $this->answer==25 || $this->answer==75){
+					$this->answer=rand(1,99);
+				}
+				$this->qID="piePerc".$this->answer;
+				$vars = array(  'perc' => $this->answer,'showAnswer'=>'no');
+				$this->image= $this->read('estimation/piePercent.php',$vars);
+			}
 
 	}
 
@@ -660,7 +669,10 @@ public function loadImage(){
 			$vars = array(  'target' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
 			return $this->read('estimation/columnHeight.php',$vars);
 		}
-
+		if ($this->country=="piePerc"){
+			$vars = array(  'perc' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
+			return $this->read('estimation/piePercent.php',$vars);
+		}
 	}
 	if ($this->type=="pop" || $this->type=="pop" || $this->type=="weather")
 		return $this->loadImageOld($this->city.",".$this->country, $this->type);
