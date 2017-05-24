@@ -66,5 +66,5 @@ enableInteractivity : false
   }
   </script>
 
-    <div id="columnchart_values" style="width: 600px; height: 600px;    margin-left: auto;
+    <div id="columnchart_values" style="width: 600px;margin-top:8px;  height: 600px;    margin-left: auto;
     margin-right: auto;"></div>

@@ -32,5 +32,5 @@ chart.draw(data, options);
   }
   </script>
 
-  <div id="piechart" style="width: 600px; height: 500px;margin-left: auto;
+  <div id="piechart" style="width: 600px; margin-top:8px; height: 500px;margin-left: auto;
   margin-right: auto;"></div>

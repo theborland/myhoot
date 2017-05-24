@@ -45,7 +45,7 @@ backgroundColor:'#cedbff',
     </script>
   </head>
   <body>
-    <div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+    <div id="chart_div" style="width: 600px; height: 600px; margin-top:8px;   margin-left: auto;
     margin-right: auto;"></div>
   </body>
 </html>
