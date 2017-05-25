@@ -152,6 +152,8 @@ class Question
 	function getLabel(){
 		if ($this->country=="percSq")
 			 return "What percent is red";
+		if ($this->country=="ellipse")
+			 return "What is circumference of ellipse shown";
 	 if ($this->country=="colHt")
 		   return "What is the height of the red bar";
 	 if ($this->country=="piePerc")
@@ -301,7 +303,7 @@ function getUnitsAway($distanceAway){
 
 	function getEstimation(){
 		  //either get a cel age (75% of time )
-			$random=rand(1,5);
+			$random=rand(6,6);
 			if ($random==1){
 				$this->country="colHt";
 				$this->answer=rand(30,1000);
@@ -368,6 +370,21 @@ function getUnitsAway($distanceAway){
 				$this->qID="percSq".$this->answer;
 				$vars = array( 'targetPercent'=>$this->answer, 'randomFileName' => $this->city,'showAnswer'=>'no');
 				$img=$this->read('estimation/percentSquare.php',$vars);
+				$this->image='<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+		    margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
+			}
+			else if ($random==6){
+
+
+				$target=rand(30,1000);
+				$this->country="ellipse";
+				$this->city=rand(2001,3000);
+				$this->answer=$target;
+				$this->min=0;
+				$this->max=100;
+				$this->qID="ellipse".$this->answer;
+				$vars = array( 'target'=>$this->answer, 'randomFileName' => $this->city,'showAnswer'=>'no');
+				$img=$this->read('estimation/circleSize.php',$vars);
 				$this->image='<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
 		    margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
 			}
@@ -723,7 +740,7 @@ public function loadImage(){
 			$vars = array(  'count' => $this->answer,'scaled'=>$this->city,'showAnswer'=>'yes');
 			return $this->read('estimation/howMany.php',$vars);
 		}
-		if ($this->country=="mapDist" || $this->country=="percSq"){
+		if ($this->country=="mapDist" || $this->country=="percSq" || $this->country=="ellipse"){
 			return '<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
 			margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
 		}

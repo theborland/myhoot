@@ -3,7 +3,7 @@
 $fullPath=dirname(dirname(dirname(__FILE__)));
 
 $dimension=550;
-$target=325;
+//$target=325;
 
 $width=rand(5,10);
 $image = imagecreate($dimension,$dimension); // (x, y)
