@@ -5,6 +5,8 @@ require 'controller/dbsettings.php';
 if (!isset($_SESSION["game_id"]))
   User::findGameID();
 
+
+//<input type="button" value="Share on Facebook!" id="shareOnFB" class="regButton">
  ?>
 
 <!DOCTYPE html>
@@ -58,7 +60,7 @@ if (!isset($_SESSION["game_id"]))
 </div>
 <div id="messageWrap">
 
-<input type="button" value="Share on Facebook!" id="shareOnFB" class="regButton">
+
 <br>
 <div id="surveyWrap">
 	Enjoyed our game or have any suggestions? <a href="https://goo.gl/forms/AYu9FFD7nS26Qwcn2">Give us feedback!</a>
