@@ -9,7 +9,7 @@
 
 	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/form.css">
-	<link rel="stylesheet" href="style/content.css">
+	<link rel="stylesheet" href="style/content.css?ver=1">
 	<script src="http://gameon.world/http://gameon.world/scripts/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
@@ -72,10 +72,23 @@
 			<a href="game.php" id="startQuizButton" class="regButton">Start a Game!</a>
 
 		</div>
-	</div>
 
+  <div id="jqWrap2">
+    <?php
+                  include_once ("controller//dbsettings.php");
+$SQL="SELECT COUNT(id) FROM answers";
+
+  $retid= $conn->query($SQL);
+  $row = $retid->fetch_row();
+  $num= "".$row[0];
+      //$splitstring = str_split($num);
+  for ($i=0; $i<strlen($num); $i++)
+    echo "<font>$num[$i]</font>";
+                  ?> Answers Played
+  </div>
+  </div>
 		<div id="pageFooter">
-			Copyright &copy; 2016 GameOnWorld
+			Copyright &copy; 2017 GameOnWorld
 		</div>
 
 </div>

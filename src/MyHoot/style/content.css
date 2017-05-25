@@ -81,6 +81,31 @@ body{
 	background: rgba(0,0,0,0.3);
 }
 
+#jqWrap2{
+	width: 400px;
+    margin: 20 auto;
+	background: rgba(0,0,0,0.1);
+	border-radius: 10px;
+	padding:10px 30px 20px;
+	color: white;
+    font-size: 30px;
+    font-weight: 100;
+    text-align: center;
+}
+
+#jqWrap2 font{
+	font-size: 30px;
+    color: #FFF;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 25px;
+    height: 45px;
+    margin: 1px 0px;
+    padding: 1px 0px;
+	border: 1px solid #F9F9F9;
+    background-color: #EA6F6F;
+}
 #jqWrap{
 	margin:0px;
 	background: rgba(0,0,0,0.1);
