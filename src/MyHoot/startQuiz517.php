@@ -20,7 +20,7 @@ Game::createGame($replay);
 	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/startQuiz2.css?ver=1">
 	<script src="http://gameon.world/scripts/autobahn.min.js"></script>
-	<script src="scripts/startQuiz3.js"></script>
+	<script src="scripts/startQuiz2.js"></script>
 	<script src="scripts/mapdata.js"></script>
 	<script src="scripts/continentmap.js"></script>
 	<script src="scripts/global.js"></script>
@@ -204,10 +204,6 @@ Game::createGame($replay);
 					<img src="img/entertainment.svg" class="gsImg" alt="">
 					<div class="gsName">ENTERTAINMENT</div>
 				</div>
-				<div class="gsItem" id="gs10">
-					<img src="img/entertainment.svg" class="gsImg" alt="">
-					<div class="gsName">ESTIMATION</div>
-				</div>
 				<!--<div id="showMap" class="regButton" onclick="alert('sup')">Select Regions</div>-->
 			</div>
 
@@ -232,7 +228,6 @@ Game::createGame($replay);
    					<input type="hidden" name="gsScience" id="gsScience" value="false">
 					<input type="hidden" name="gsSports" id="gsSports" value="false">
    					<input type="hidden" name="gsEntertainment" id="gsEntertainment" value="false">
-							<input type="hidden" name="gsEstimation" id="gsEstimation" value="false">
 					<!--regions-->
 					<input type="hidden" name="r_SA" id="sm_state_SA" value="true">
 					<input type="hidden" name="r_NA" id="sm_state_NA" value="true">

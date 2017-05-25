@@ -381,7 +381,7 @@ function getUnitsAway($distanceAway){
 				$this->city=rand(2001,3000);
 				$this->answer=$target;
 				$this->min=0;
-				$this->max=100;
+				$this->max=1000;
 				$this->qID="ellipse".$this->answer;
 				$vars = array( 'target'=>$this->answer, 'randomFileName' => $this->city,'showAnswer'=>'no');
 				$img=$this->read('estimation/circleSize.php',$vars);

@@ -53,10 +53,16 @@ body{
 #menuItemContainer{
 	padding:35px 60px 35px 0px;
 }
+.newText{
+	text-align: left;
+font-size: .7em;
+color: #e2e2e2;
+}
 
 .menuItem{
 	display: inline-block;
 	padding:0px 5px;
+	vertical-align: middle;
 }
 
 .menuLink:link{
@@ -82,7 +88,7 @@ body{
 }
 
 #jqWrap2{
-	width: 400px;
+	width: 90%;
     margin: 20 auto;
 	background: rgba(0,0,0,0.1);
 	border-radius: 10px;
@@ -91,9 +97,10 @@ body{
     font-size: 30px;
     font-weight: 100;
     text-align: center;
+		margin-top: 80px;
 }
 
-#jqWrap2 font{
+#menuItemContainer font{
 	font-size: 30px;
     color: #FFF;
     display: block;
@@ -139,7 +146,7 @@ body{
 	font-weight: 100;
 	color:#fff;
 	margin:auto;
-	margin-top:100px;
+	margin-top:60px;
 	margin-bottom: 30px;
 	width: 70%;
 

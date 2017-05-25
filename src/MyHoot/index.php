@@ -9,8 +9,8 @@
 
 	<link rel="stylesheet" href="style/global.css?ver=1">
 	<link rel="stylesheet" href="style/form.css">
-	<link rel="stylesheet" href="style/content.css?ver=1">
-	<script src="http://gameon.world/http://gameon.world/scripts/autobahn.min.js"></script>
+	<link rel="stylesheet" href="style/content.css?ver=2">
+	<script src="http://gameon.world/scripts/autobahn.min.js"></script>
 	<script src="scripts/startQuiz.js"></script>
 	<script src="scripts/global.js"></script>
 	<script src="scripts/socketScripts.js?ver=1"></script>
@@ -46,7 +46,21 @@
 				<div class="menuItem"><a href="joinQuiz.php" class="menuLink">Play!</a></div>
 				<div class="menuItem"><a href="aboutUs.php" class="menuLink">About</a></div>
 				<div class="menuItem"><a href="contactUs.php" class="menuLink">Contact</a></div>
-			</div>
+        <div class="menuItem"><a href="#" class="menuLink">
+          <?php
+                        include_once ("controller//dbsettings.php");
+      $SQL="SELECT COUNT(id) FROM answers";
+
+        $retid= $conn->query($SQL);
+        $row = $retid->fetch_row();
+        $num= "".$row[0];
+            //$splitstring = str_split($num);
+        for ($i=0; $i<strlen($num); $i++)
+          echo "<font>$num[$i]</font>";
+                        ?> <br>Answers Played
+      </a>  </div>
+
+      </div>
 		</div>
 	</div>
 
@@ -70,22 +84,13 @@
 
 			<div id="welcomeMessage">Starting a game is fast, easy, and doesn't require registration!</div>
 			<a href="game.php" id="startQuizButton" class="regButton">Start a Game!</a>
-
+<div id="jqWrap2">What's new
+  <div class="newText">We have been busy at school (this site is made entirely by a teacher and some of his students), but things are winding down and we are starting to add some new features.
+    We just added some number sense questions - you will see it as estimation.  </div>
+</div>
 		</div>
 
-  <div id="jqWrap2">
-    <?php
-                  include_once ("controller//dbsettings.php");
-$SQL="SELECT COUNT(id) FROM answers";
 
-  $retid= $conn->query($SQL);
-  $row = $retid->fetch_row();
-  $num= "".$row[0];
-      //$splitstring = str_split($num);
-  for ($i=0; $i<strlen($num); $i++)
-    echo "<font>$num[$i]</font>";
-                  ?> Answers Played
-  </div>
   </div>
 		<div id="pageFooter">
 			Copyright &copy; 2017 GameOnWorld
