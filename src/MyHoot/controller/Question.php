@@ -388,6 +388,19 @@ function getUnitsAway($distanceAway){
 				$this->image='<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
 		    margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
 			}
+			else if ($random==7){
+				$target=rand(3,50);
+				$this->country="tri";
+				$this->city=rand(3001,4000);
+				$this->answer=$target;
+				$this->min=0;
+				$this->max=50;
+				$this->qID="rect".$this->answer;
+				$vars = array( 'target'=>$this->answer, 'randomFileName' => $this->city,'showAnswer'=>'no');
+				$img=$this->read('estimation/rectangle.php',$vars);
+				$this->image='<div id="chart_div" style="width: 600px; height: 600px;    margin-left: auto;
+		    margin-right: auto;"><img src="controller/estimation/tmp/'.$this->city.'.png"></div>';
+			}
 
 	}
 

@@ -91,7 +91,7 @@ if ($submit=="Join"){
 
       function timer()
       {
-        window.location.href = "showAnswerOther.php";
+      //  window.location.href = "showAnswerOther.php";
         clearInterval(counter);
         count=33333;
         return;
@@ -134,14 +134,14 @@ if ($submit=="Join"){
         <div id="mainMessageExtra">
           <?php if (is_numeric($place) && $place>0){ ?>You were closer than <?php echo $place ?>% of other people worldwide.
       <?php }  ?>
-      <?php if (is_numeric($avg) && $avg>0){ ?>You last five average is now <?php echo $avg ?>%
+      <?php if (is_numeric($avg) && $avg>0){ ?><br>You last five average is now <b><?php echo $avg ?>%</b>
   <?php }  ?>
       <?php if (substr($avg,0,1)=="~"){
             $splits=explode("~",$avg);
             //print_r($splits);
             $questions=$splits[1];
             $runningAvg=$splits[2];
-        ?>Your avg is <?php echo $runningAvg ?>% of the last  <?php echo $questions ?> games.
+        ?><br>Your avg is <b><?php echo $runningAvg ?>%</b> of the last  <?php echo $questions ?> games.
 <?php }  ?>
     </div>
 
