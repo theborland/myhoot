@@ -1,0 +1,20 @@
+config:
+  target: "https://gameon.world"
+  processor: "./loadTest.js"
+  phases:
+    - duration: 8
+      arrivalRate: 60
+  variables:
+    gameID: "515081303"
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - function: "generateRandomData"
+    - function: "incrementNum"
+    - get:
+        url: "/joinQuiz?game_id={{gameID}}&name={{name}}{{num}}"
+    - log: "Adding user {{name}}{{num}}"
+
+    - think: 10

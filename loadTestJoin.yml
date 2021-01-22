@@ -1,0 +1,25 @@
+config:
+  target: "https://GameOn.World"
+  processor: "./loadTest.js"
+  phases:
+    - duration: 5
+      arrivalRate: 40
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - function: "generateRandomData"
+    - get:
+        url: "/joinQuiz?game_id=406631267&name={{name}}"
+    - think: 3
+    # - post:
+    #     url: "/submitAnswer"
+    #     form:
+    #       name: "{{name}}"
+    #       game_id: "682711134"
+    #       questionNumber: "1"
+    #       user_id: "{{ id }}"
+    #       answer: "{{ answer }}"
+    #       color: "ff0000"
+    - log: "Sent a request to /users with {{ name }}, {{ id  }}, {{ answer }}"

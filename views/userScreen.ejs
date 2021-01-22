@@ -1,0 +1,149 @@
+ <html>
+ <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/global.css">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+     <script src="scripts/socketScripts.js?ver=6.2"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script src="scripts/analyticsTracker.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxvYUgIEMudkpnq1gNAJp-iRTzvHe6xoo"
+  type="text/javascript"></script>
+    <script>
+
+
+    window.setTimeout(function(){
+            window.location.href = "waitingScreen?message=nosubmit";
+        }, 31000);
+
+        var socket = io.connect("<%= socketIP %>");
+        loadWaitingForQuestion('<%= game_id %>');
+
+
+
+
+var map;
+var worldCenter = new google.maps.LatLng(20.6743890, -3.9455); //starting position
+var inputMarker;
+var MY_MAPTYPE_ID = 'custom_style';
+
+function initialize() {
+  var featureOpts = [
+    {
+      elementType: 'labels',
+      mapTypeId: google.maps.MapTypeId.TERRAIN,
+      stylers: [{ visibility: 'off' }]
+    },
+      { featureType: "administrative.province", stylers: [ { visibility: "on" } ] },
+      {  featureType: "administrative.province",elementType: "labels",  stylers: [    { visibility: "off" }
+          ]
+        },
+    { featureType: "road", stylers: [ { visibility: "off" } ] },
+    {
+      featureType: 'water',
+      stylers: [
+        { color: '#57AAC5' }
+      ]
+    }
+
+
+  ];
+
+  var styledMapOptions = {
+    name: 'Custom Style'
+  };
+
+  var mapOptions = {
+    zoom: 3,
+    minZoom: 2,
+    maxZoom:8,
+    center: worldCenter,
+    mapTypeControl: false,
+    streetViewControl: false,
+    mapTypeId: MY_MAPTYPE_ID
+
+
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var styledMapOptions = {
+    name: 'Custom Style'
+  };
+
+  inputMarker = new google.maps.Marker({
+    position: worldCenter,
+    map: map,
+    icon: {
+      path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
+      fillColor: "#<%= color %>",
+        fillOpacity: 1,
+        strokeColor: '#fff',
+        strokeWeight: 0,
+        scale: 1
+        }
+  });
+
+
+  google.maps.event.addListener(map, 'click', function(e) {
+    document.getElementById('lat').value = e.latLng.lat();
+    document.getElementById('long').value = e.latLng.lng();
+    inputMarker.setPosition(e.latLng);
+  });
+  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+
+
+}
+
+function moveMarker(position) {
+  inputMarker.setPosition(position);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+// TEST CODE START
+
+// bounds of the desired area
+// TEST CODE END
+
+
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- <script>
+    var socket = io.connect('http://<?php echo $socketIO ?>');
+      loadWaitingForQuestion('<?php echo $_SESSION["game_id"]; ?>');
+
+      <?php if (isset($_SESSION['JS']) && $_SESSION['JS']!=""){
+          echo $_SESSION['JS'];
+          unset($_SESSION['JS']);
+        }
+      ?>
+    </script> -->
+ </head>
+ <body>
+
+  <div id="overlayWrap">
+    			<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+      <form name="form1" method="post" onsubmit="submit.disabled = true; return true;" action="submitAnswer">
+        <input name="questionNumber" type="hidden" value="<%= qID %>">
+        <input type="hidden" id="lat" name="lat">
+        <input type="hidden" id="long" name="long">
+        <input type="submit" name="submit" id="userMapSubmit" class="regButton" value="Submit!">
+      </form>
+
+  </div>
+
+    <div id="map-canvas"></div>
+ </body>
+ </html>

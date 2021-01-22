@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/form.css">
+    <link rel="stylesheet" href="style/joinQuiz.css">
+	<script src="scripts/analyticsTracker.js"></script>
+		<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="img/favicon/site.webmanifest">
+		<link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
+  <title>Join a Game</title>
+</head>
+<body>
+	<?php include_once("controller/analyticstracking.php") ?>
+	<div id="jqWrap">
+					<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+		<h4 class="formHeader">Join a Game</h4>
+		<form action="waitingScreen">
+			<label for="game_id" class="jqLabel"> GAME ID<%= error=="Bad Game" ? " (Invalid Game Pin)": '' %></label>
+			<input type="number" pattern="[0-9]*" name="game_id" id="game_id" class="jqInput" value="<%= game_id %>"  min="00000" max="99999">
+
+			<label for="name" class="jqLabel">YOUR NAME
+				<%= error=="Bad Username" ? " (That name has been used)": '' %>
+				<%= error=="Reject" ? " (Really, come on.  Grow up.)": '' %>
+				</label>
+			<input type="text" name="name" id="name" value="<%= name %>" class="jqInput"maxlength="20" >
+
+			<Center>
+				<input type="submit" name="submit" value="Join" id="jqJoin" class="regButton">
+				<label class="jqLabel" id="orLabel">OR</label>
+				<a href="game.php" class="regButton" id="startGame">Start a Game</a>
+				<!-- <label class="jqLabel" id="orLabel">OR</label>
+				<a href="single/" class="regButton" id="startGame">World Game</a> -->
+			</Center>
+
+		</form>
+	<div id="footer">
+		Copyright and stuff.
+	</div>
+
+
+</body>
+</html>

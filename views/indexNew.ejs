@@ -1,0 +1,117 @@
+<html>
+
+<head>
+
+	<title>GameOn.World - Online Trivia Game</title>
+
+	<meta name="description" content="GameOn.World is an online, educational trivia game for groups! Starting a game is fast, easy, and doesn't require registration." />
+
+	<link rel="stylesheet" href="style/global.css?ver=2.3">
+	<link rel="stylesheet" href="style/form.css">
+	<link rel="stylesheet" href="style/content.css?ver=2">
+	<script src="scripts/startQuiz.js"></script>
+	<script src="scripts/global.js"></script>
+	<script src="scripts/socketScripts.js?ver=1"></script>
+	<script src="scripts/analyticsTracker.js"></script>
+	<script src="scripts/jquery.js"></script>
+
+	<!-- favicon belwo -->
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+	<link rel="manifest" href="img/favicon/site.webmanifest">
+	<link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+
+	<!-- <script type="text/javascript">
+		window.onload = function(){
+			  if (screen.width <= 800)
+			    window.location = "joinQuizForm";
+			  /*else
+			    window.location = "startQuiz.php";*/
+			//set up clouds
+		}
+</script> -->
+
+</head>
+
+<body>
+	<div id="wholeWrap">
+		<div id="headWrap">
+			<div id="logoWrap">
+				<a href="http://GameOn.World" id="logoLink"><img src="img/logo.svg" id="logo"></a>
+			</div>
+			<div id="menuWrap">
+				<div id="menuItemContainer">
+					<div class="menuItem"><a href="joinQuizForm" class="menuLink">Play!</a></div>
+					<div class="menuItem"><a href="aboutUs.html" class="menuLink">About</a></div>
+					<div class="menuItem"><a href="contactUs" class="menuLink">Contact</a></div>
+					<div class="menuItem"><a href="#" class="menuLink">
+							<% for(var i=0; i<answersToDate.length; i++) {%>
+							<font><%= answersToDate[i] %></font>
+							<% } %>
+							<br>Answers Played
+						</a> </div>
+
+				</div>
+			</div>
+		</div>
+
+		<div id="bodyWrap">
+			<div id="colLeft">
+				<div id="jqWrap">
+					<h4 class="formHeader">Join a Game</h4>
+					<form action="joinQuiz">
+						<label for="game_id" class="jqLabel"> GAME ID </label>
+						<input type="text" name="game_id" id="game_id" class="jqInput" value="" maxlength="5">
+
+						<label for="name" class="jqLabel">YOUR NAME</label>
+						<input type="text" name="name" id="name" class="jqInput" maxlength="20">
+
+						<Center><input type="submit" name="submit" value="Join" id="jqJoin" class="regButton"></Center>
+					</form>
+				</div>
+
+			</div>
+			<div id="colRight">
+
+				<div id="welcomeMessage"><%= remember_token %>Starting a game is fast, easy, and doesn't require registration!</div>
+				<a href="#" id="startQuizButton" class="regButton" onclick="startGame()">Start a Game!</a>
+				<!-- <div id="jqWrap2">Spread the word!
+  <div class="newText">It has been fun for a teacher and his students in Portland,Maine to see GameOn.World being played around the world.
+	<div class="newText">Have your students create questions for GameOn!  They can be about any topic - science/history/sports/geography or anything.  Their name and school will be shown everytime the question is played (some questions get played thousands of times).  <a href="addQuestions.html">Click for more info</a>
+
+		Help us spread the word today - tell your friends to try getting their GameOn!
+		https://docs.google.com/forms/d/e/1FAIpQLSfhsns3Rd6JunppTc9Y1zzSCYuAio_Yfot5eanc1DGTNk3-YQ/viewform?usp=sf_link
+		https://docs.google.com/spreadsheets/d/1MUVYlx7eqq93ew7u9h55g5d2hVsAcSL49OeNOdVFozg/edit#gid=0
+	-->
+				<div id="jqWrap2">It's a big, big world!
+					<div class="newText">Get your GameOn.World and get to know this big planet of ours.
+					</div>
+					<div id="pageFooter">
+						Copyright &copy; 2021 GameOnWorld
+					</div>
+
+				</div>
+</body>
+<script>
+	var id = null;
+	$(window).on("load", function() {
+		$.ajax({
+			url: 'https://users.gameon.world/api/getID',
+			type: 'GET',
+			success: function(result) {
+				id = (result.id);
+
+			}
+		});
+	});
+
+	function startGame() {
+		window.location.href = 'https://gameon.world/gameNew.html?token=' + id;
+	}
+</script>
+
+</html>
